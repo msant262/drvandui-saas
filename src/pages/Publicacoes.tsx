@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { usePageSEO } from '@/hooks/usePageSEO';
+import { Link } from 'react-router-dom';
 import { FileText, Award, BookOpen, ExternalLink, Calendar, Users } from 'lucide-react';
 
 const publicacoes = [
@@ -268,13 +269,13 @@ export function Publicacoes() {
               Estou sempre aberto a novas parcerias em pesquisa e projetos acadêmicos
               na área da saúde.
             </p>
-            <a
-              href="mailto:vandui.santos@gmail.com"
+            <Link
+              to="/contato"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[var(--color-teal)] rounded-xl font-semibold hover:bg-[var(--color-cyan-light)] transition-all"
             >
               Entre em Contato
               <ExternalLink className="w-5 h-5" />
-            </a>
+            </Link>
           </motion.div>
         </div>
       </section>

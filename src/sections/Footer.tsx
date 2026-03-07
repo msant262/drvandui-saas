@@ -1,185 +1,115 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { HeartPulse, MapPin, Phone, Mail, Linkedin } from 'lucide-react';
+import { HeartPulse, MapPin, Phone, Mail, Linkedin, MessageCircle } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer style={{ backgroundColor: 'var(--color-teal)' }} className="text-white">
-      {/* Main Footer */}
-      <div className="section-padding py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-1"
-          >
-            <Link to="/" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center">
-                <HeartPulse className="w-6 h-6" style={{ color: 'var(--color-teal)' }} />
+
+      {/* Linha principal — totalmente horizontal */}
+      <div className="section-padding py-6">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-0 justify-between">
+
+          {/* Brand + redes sociais */}
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <Link to="/" className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
+                <HeartPulse className="w-4 h-4" style={{ color: 'var(--color-teal)' }} />
               </div>
               <div>
-                <h3
-                  className="font-bold text-lg leading-tight"
-                  style={{ fontFamily: 'Poppins, sans-serif' }}
-                >
+                <span className="font-bold text-sm block leading-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
                   Dr. Vandui
-                </h3>
-                <p className="text-xs text-white/70">Cardiologia & UTI</p>
+                </span>
+                <span className="text-[10px] text-white/60 leading-tight">Cardiologia &amp; UTI</span>
               </div>
             </Link>
-            <p className="text-white/80 text-sm leading-relaxed mb-6">
-              Médico cardiologista dedicado ao cuidado técnico e humano de
-              excelência, sempre pautado nas melhores evidências científicas.
-            </p>
+            {/* Redes sociais ao lado do logo */}
+            <div className="flex items-center gap-1.5">
+              <a
+                href="https://www.linkedin.com/in/vandui-santos-181225137/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn do Dr. Vandui"
+                className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#0A66C2] transition-colors"
+              >
+                <Linkedin className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp do Dr. Vandui"
+                className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] transition-colors"
+              >
+                <MessageCircle className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Links de navegação — centro */}
+          <nav className="flex flex-wrap items-center gap-x-5 gap-y-1.5 lg:mx-8">
+            {[
+              { path: '/', label: 'Início' },
+              { path: '/perfil', label: 'Perfil' },
+              { path: '/especialidades', label: 'Especialidades' },
+              { path: '/publicacoes', label: 'Publicações' },
+              { path: '/pesquisas', label: 'Pesquisas' },
+              { path: '/eventos', label: 'Eventos' },
+              { path: '/contato', label: 'Contato' },
+            ].map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="text-white/70 hover:text-white transition-colors text-xs"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Contato + redes — direita */}
+          <div className="flex flex-wrap items-center gap-4 flex-shrink-0">
+            {/* Telefone */}
             <a
-              href="https://www.linkedin.com/in/vandui-santos-181225137/"
+              href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+              className="flex items-center gap-1.5 text-white/70 hover:text-white transition-colors text-xs"
             >
-              <Linkedin className="w-5 h-5" />
+              <Phone className="w-3.5 h-3.5 flex-shrink-0" style={{ color: 'var(--color-emerald)' }} />
+              (11) 9 7617-0971
             </a>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <h4
-              className="font-semibold text-lg mb-6"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
+            {/* E-mail */}
+            <a
+              href="mailto:contato@drvandui.com.br"
+              className="flex items-center gap-1.5 text-white/70 hover:text-white transition-colors text-xs"
             >
-              Links Rápidos
-            </h4>
-            <ul className="space-y-3">
-              {[
-                { path: '/', label: 'Início' },
-                { path: '/perfil', label: 'Perfil Profissional' },
-                { path: '/especialidades', label: 'Especialidades' },
-                { path: '/publicacoes', label: 'Publicações' },
-                { path: '/pesquisas', label: 'Pesquisas' },
-                { path: '/eventos', label: 'Eventos' },
-                { path: '/contato', label: 'Contato' },
-              ].map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-white/80 hover:text-white transition-colors text-sm"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+              <Mail className="w-3.5 h-3.5 flex-shrink-0" style={{ color: 'var(--color-emerald)' }} />
+              contato@drvandui.com.br
+            </a>
+            {/* Localização */}
+            <span className="hidden xl:flex items-center gap-1.5 text-white/60 text-xs">
+              <MapPin className="w-3.5 h-3.5 flex-shrink-0" style={{ color: 'var(--color-emerald)' }} />
+              Santos · Santo André · Vila Mariana
+            </span>
 
-          {/* Especialidades */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h4
-              className="font-semibold text-lg mb-6"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
-            >
-              Especialidades
-            </h4>
-            <ul className="space-y-3">
-              {[
-                'Cardiologia',
-                'Terapia Intensiva',
-                'Emergências Médicas',
-                'Clínica Médica',
-              ].map((item) => (
-                <li key={item}>
-                  <span className="text-white/80 text-sm">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <h4
-              className="font-semibold text-lg mb-6"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
-            >
-              Contato
-            </h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--color-emerald)' }} />
-                <span className="text-white/80 text-sm">
-                  São Paulo e Região
-                  <br />
-                  Santos, Santo André, Vila Mariana
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-emerald)' }} />
-                <a
-                  href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors text-sm"
-                >
-                  (11) 9 7617-0971
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 flex-shrink-0" style={{ color: 'var(--color-emerald)' }} />
-                <a
-                  href="mailto:contato@drvandui.com.br"
-                  className="text-white/80 hover:text-white transition-colors text-sm"
-                >
-                  contato@drvandui.com.br
-                </a>
-              </li>
-            </ul>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="section-padding py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-white/60 text-sm text-center md:text-left">
-              &copy; {currentYear} Dr. Vandui da Silva dos Santos. Todos os
-              direitos reservados.
-            </p>
-            <div className="flex items-center gap-6">
-              <Link
-                to="/"
-                className="text-white/60 hover:text-white transition-colors text-sm"
-              >
-                Política de Privacidade
-              </Link>
-              <Link
-                to="/"
-                className="text-white/60 hover:text-white transition-colors text-sm"
-              >
-                Termos de Uso
-              </Link>
-            </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom bar mínima */}
+      <div className="border-t border-white/10">
+        <div className="section-padding py-3 flex flex-col sm:flex-row items-center justify-between gap-1">
+          <p className="text-white/40 text-[11px]">
+            &copy; {currentYear} Dr. Vandui da Silva dos Santos · CRM-SP
+          </p>
+          <p className="text-white/30 text-[11px]">
+            Cardiologista · Terapia Intensiva · Emergências Médicas
+          </p>
+        </div>
+      </div>
+
     </footer>
   );
 }
