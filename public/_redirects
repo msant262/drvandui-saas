@@ -1,1 +1,2 @@
-/*    /index.html   200
+# SPA routing configurado via wrangler.toml (not_found_handling = "single-page-application")
+# Este arquivo foi mantido vazio para evitar conflito com o Cloudflare Workers
