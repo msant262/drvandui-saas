@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Nova Paleta de Cores - Baseada na imagem */
+    --mint: 142 52% 94%;
+    --emerald: 168 76% 31%;
+    --teal: 186 75% 23%;
+    --cyan-light: 189 52% 85%;
+    --white-blue: 195 33% 97%;
+    
+    /* Cores principais */
+    --primary: 186 75% 23%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 168 76% 31%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 189 52% 85%;
+    --accent-foreground: 186 75% 23%;
+    
+    /* Cores de fundo */
+    --background: 195 33% 97%;
+    --foreground: 186 75% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 186 75% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 186 75% 18%;
+    
+    /* Cores de estado */
+    --muted: 142 52% 94%;
+    --muted-foreground: 186 30% 40%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 189 30% 85%;
+    --input: 189 30% 85%;
+    --ring: 186 75% 23%;
+    --radius: 0.75rem;
+    
+    /* Cores customizadas para uso direto */
+    --color-mint: #E8F5E9;
+    --color-emerald: #0D9488;
+    --color-teal: #0E5A6A;
+    --color-cyan-light: #C5E8F0;
+    --color-white-blue: #F0F9FA;
+    --color-deep-teal: #09404A;
+    --color-title-contrast: #E0F7FA; /* Ciano claro para alto contraste em fundos escuros */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-white-blue);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-teal);
+  }
+}
+
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, var(--color-teal) 0%, var(--color-emerald) 100%);
+  }
+  
+  .bg-gradient-teal {
+    background: linear-gradient(135deg, var(--color-deep-teal) 0%, var(--color-teal) 100%);
+  }
+  
+  .bg-gradient-emerald {
+    background: linear-gradient(135deg, var(--color-emerald) 0%, #14B8A6 100%);
+  }
+  
+  .bg-gradient-light {
+    background: linear-gradient(180deg, var(--color-cyan-light) 0%, var(--color-white-blue) 100%);
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(14, 90, 106, 0.12);
+  }
+  
+  .btn-primary {
+    @apply px-8 py-4 bg-gradient-teal text-white font-semibold rounded-xl transition-all duration-300;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(14, 90, 106, 0.35);
+  }
+  
+  .btn-emerald {
+    @apply px-8 py-4 bg-gradient-emerald text-white font-semibold rounded-xl transition-all duration-300;
+  }
+  
+  .btn-emerald:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(13, 148, 136, 0.35);
+  }
+  
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24;
+  }
+  
+  .text-title-contrast {
+    color: var(--color-title-contrast);
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-lg bg-white/80;
+  }
+  
+  /* Badge styles */
+  .badge-mint {
+    @apply px-3 py-1 bg-[var(--color-mint)] text-[var(--color-emerald)] rounded-full text-sm font-medium;
+  }
+  
+  .badge-teal {
+    @apply px-3 py-1 bg-[var(--color-cyan-light)] text-[var(--color-teal)] rounded-full text-sm font-medium;
+  }
+  
+  /* Section backgrounds */
+  .section-mint {
+    background-color: var(--color-mint);
+  }
+  
+  .section-cyan {
+    background-color: var(--color-cyan-light);
+  }
+  
+  .section-white {
+    background-color: var(--color-white-blue);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.05);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-white-blue);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-teal);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-deep-teal);
+}
+
+/* Custom selection color */
+::selection {
+  background-color: rgba(14, 90, 106, 0.2);
+  color: inherit;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+}
