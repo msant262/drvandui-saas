@@ -12,20 +12,20 @@ export function Footer() {
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-0 justify-between">
 
           {/* Brand + redes sociais */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-start gap-5 flex-shrink-0">
             <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center flex-shrink-0">
                 <HeartPulse className="w-4 h-4" style={{ color: 'var(--color-teal)' }} />
               </div>
-              <div>
-                <span className="font-bold text-sm block leading-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
+              <div className="flex flex-col leading-none gap-0.5">
+                <span className="font-bold text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
                   Dr. Vandui
                 </span>
-                <span className="text-[10px] text-white/60 leading-tight">Cardiologia &amp; UTI</span>
+                <span className="text-[10px] text-white/60">Cardiologia &amp; UTI</span>
               </div>
             </Link>
-            {/* Redes sociais ao lado do logo */}
-            <div className="flex items-center gap-1.5">
+            {/* Redes sociais — alinhadas ao centro do ícone */}
+            <div className="flex items-center gap-1.5 mt-0.5">
               <a
                 href="https://www.linkedin.com/in/vandui-santos-181225137/"
                 target="_blank"
