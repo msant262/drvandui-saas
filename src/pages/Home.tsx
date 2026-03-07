@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import {
   Heart,
   Activity,
@@ -95,6 +96,15 @@ const academicHighlights = [
 ];
 
 export function Home() {
+  usePageSEO({
+    title: 'Cardiologista em Santos, Santo André e São Paulo',
+    description:
+      'Dr. Vandui da Silva dos Santos — Médico Cardiologista com residência no Instituto Dante Pazzanese. Especialista em Terapia Intensiva, Emergências e Clínica Médica. Agende sua consulta hoje.',
+    canonical: '/',
+    keywords:
+      'cardiologista santos, cardiologista santo andré, cardiologista são paulo, Dr. Vandui, terapia intensiva, emergências médicas, clínica médica, cardiologia',
+  });
+
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--color-white-blue)' }}>
       {/* Hero Section */}
@@ -369,14 +379,14 @@ export function Home() {
                 Dr. Vandui da Silva dos Santos
               </h2>
               <p className="text-[#666] leading-relaxed mb-6">
-                Médico cardiologista, apaixonado por emergências clínicas, cardiológicas e terapia intensiva. 
-                Comprometido em oferecer atendimento técnico e humano de excelência, sempre pautado nas 
+                Médico cardiologista, apaixonado por emergências clínicas, cardiológicas e terapia intensiva.
+                Comprometido em oferecer atendimento técnico e humano de excelência, sempre pautado nas
                 melhores evidências científicas e práticas médicas atuais.
               </p>
               <p className="text-[#666] leading-relaxed mb-8">
-                Forjado por anos de residência em instituições de referência e por ampla experiência no 
-                manejo de pacientes críticos e na execução de procedimentos invasivos, como intubação 
-                orotraqueal, drenagem de tórax e passagem de acesso venoso central. Busco integrar e 
+                Forjado por anos de residência em instituições de referência e por ampla experiência no
+                manejo de pacientes críticos e na execução de procedimentos invasivos, como intubação
+                orotraqueal, drenagem de tórax e passagem de acesso venoso central. Busco integrar e
                 colaborar com equipes de alta performance, dedicadas à melhoria contínua e à excelência assistencial.
               </p>
 

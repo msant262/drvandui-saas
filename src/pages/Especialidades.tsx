@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import { Link } from 'react-router-dom';
 import {
   Heart,
@@ -134,6 +135,15 @@ const specialties = [
 ];
 
 export function Especialidades() {
+  usePageSEO({
+    title: 'Especialidades Médicas — Cardiologia, UTI, Emergências e Clínica Médica',
+    description:
+      'Conheça as especialidades do Dr. Vandui: Cardiologia, Terapia Intensiva (UTI), Emergências Médicas e Clínica Médica. Atendimento especializado e humanizado em São Paulo.',
+    canonical: '/especialidades',
+    keywords:
+      'cardiologia, terapia intensiva, UTI, emergências médicas, clínica médica, especialidades médicas, cardiologista São Paulo',
+  });
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -227,9 +237,8 @@ export function Especialidades() {
           <div className="section-padding">
             <div className="max-w-6xl mx-auto">
               <div
-                className={`grid lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                }`}
+                className={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                  }`}
               >
                 {/* Content */}
                 <motion.div

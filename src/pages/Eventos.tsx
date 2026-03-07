@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import { Calendar, MapPin, Users, Award, Clock, Mic2, BookOpen, Star } from 'lucide-react';
 
 const eventosCoordenacao = [
@@ -94,6 +95,15 @@ const estatisticas = [
 ];
 
 export function Eventos() {
+  usePageSEO({
+    title: 'Eventos e Coordenação Acadêmica — Dr. Vandui',
+    description:
+      'Conheça a participação do Dr. Vandui em eventos acadêmicos: coordenação de simpósios, jornadas de pediatria e congressos médicos. Comprometimento com educação médica contínua.',
+    canonical: '/eventos',
+    keywords:
+      'eventos médicos, simpósios medicina, jornada pediatria, congresso cardiologia, educação médica, Dr. Vandui eventos',
+  });
+
   return (
     <motion.main
       initial={{ opacity: 0 }}

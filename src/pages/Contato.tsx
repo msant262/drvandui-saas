@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import emailjs from '@emailjs/browser';
 import {
   Phone,
@@ -60,6 +61,15 @@ const socialLinks = [
 ];
 
 export function Contato() {
+  usePageSEO({
+    title: 'Contato — Agende sua Consulta com Dr. Vandui',
+    description:
+      'Entre em contato com o Dr. Vandui para agendar uma consulta de Cardiologia, Terapia Intensiva ou Clínica Médica. Atendimento em Santos, Santo André e Vila Mariana. WhatsApp disponível.',
+    canonical: '/contato',
+    keywords:
+      'agendar consulta cardiologista, consulta Dr. Vandui, contato médico santos, contato médico santo andré, agendamento cardiologia',
+  });
+
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -108,10 +118,10 @@ export function Contato() {
       );
 
       await Promise.all([paraMim, paraCliente]);
-      
+
       setIsSubmitted(true);
       setFormData({ name: '', email: '', empresa: '', phone: '', message: '' });
-      
+
       // Reset após 5 segundos
       setTimeout(() => {
         setIsSubmitted(false);

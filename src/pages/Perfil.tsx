@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import {
   GraduationCap,
   Briefcase,
@@ -150,6 +151,16 @@ const systems = [
 ];
 
 export function Perfil() {
+  usePageSEO({
+    title: 'Perfil Profissional — Dr. Vandui da Silva dos Santos',
+    description:
+      'Conheça o currículo completo do Dr. Vandui: Cardiologista com residência no Dante Pazzanese, experiência em UTI, Emergências e Clínica Médica. Premiações e publicações científicas.',
+    canonical: '/perfil',
+    ogType: 'profile',
+    keywords:
+      'currículo médico, Dr. Vandui currículo, cardiologista Dante Pazzanese, médico UTI, médico emergências, residência cardiologia',
+  });
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
@@ -234,43 +245,43 @@ export function Perfil() {
                     </h2>
                   </div>
                   <div className="space-y-4 text-[#666] leading-relaxed">
-                <p>
-                  Nascido em São Bernardo do Campo, estudante de{' '}
-                  <strong className="text-[var(--color-teal)]">Escola Pública</strong>,
-                  sempre tive o sonho de cursar{' '}
-                  <strong className="text-[var(--color-teal)]">MEDICINA</strong>.
-                  Com muito esforço e ajuda dos meus pais, passei no vestibular
-                  para{' '}
-                  <strong className="text-[var(--color-teal)]">
-                    7 universidades Públicas
-                  </strong>
-                  , da qual escolhi a{' '}
-                  <strong className="text-[var(--color-teal)]">
-                    UFTM (Universidade Federal do Triângulo Mineiro)
-                  </strong>
-                  .
-                </p>
-                <p>
-                  Durante o curso recebi{' '}
-                  <strong className="text-[var(--color-emerald)]">
-                    diversas premiações
-                  </strong>
-                  , publiquei diversos artigos e tive a oportunidade de realizar
-                  um ótimo internato com excelentes instrutores, sempre me
-                  dedicando ao máximo.
-                </p>
-                <p>
-                  <strong className="text-[var(--color-teal)]">Médico cardiologista</strong>, apaixonado por emergências clínicas, cardiológicas e terapia intensiva. 
-                  Comprometido em oferecer atendimento técnico e humano de excelência, sempre pautado nas 
-                  melhores evidências científicas e práticas médicas atuais.
-                </p>
-                <p>
-                  Forjado por anos de residência em instituições de referência e por ampla experiência no 
-                  manejo de pacientes críticos e na execução de procedimentos invasivos, como{' '}
-                  <em>intubação orotraqueal, drenagem de tórax e passagem de acesso venoso central</em>. 
-                  Busco integrar e colaborar com equipes de alta performance, dedicadas à melhoria contínua e à excelência assistencial.
-                </p>
-              </div>
+                    <p>
+                      Nascido em São Bernardo do Campo, estudante de{' '}
+                      <strong className="text-[var(--color-teal)]">Escola Pública</strong>,
+                      sempre tive o sonho de cursar{' '}
+                      <strong className="text-[var(--color-teal)]">MEDICINA</strong>.
+                      Com muito esforço e ajuda dos meus pais, passei no vestibular
+                      para{' '}
+                      <strong className="text-[var(--color-teal)]">
+                        7 universidades Públicas
+                      </strong>
+                      , da qual escolhi a{' '}
+                      <strong className="text-[var(--color-teal)]">
+                        UFTM (Universidade Federal do Triângulo Mineiro)
+                      </strong>
+                      .
+                    </p>
+                    <p>
+                      Durante o curso recebi{' '}
+                      <strong className="text-[var(--color-emerald)]">
+                        diversas premiações
+                      </strong>
+                      , publiquei diversos artigos e tive a oportunidade de realizar
+                      um ótimo internato com excelentes instrutores, sempre me
+                      dedicando ao máximo.
+                    </p>
+                    <p>
+                      <strong className="text-[var(--color-teal)]">Médico cardiologista</strong>, apaixonado por emergências clínicas, cardiológicas e terapia intensiva.
+                      Comprometido em oferecer atendimento técnico e humano de excelência, sempre pautado nas
+                      melhores evidências científicas e práticas médicas atuais.
+                    </p>
+                    <p>
+                      Forjado por anos de residência em instituições de referência e por ampla experiência no
+                      manejo de pacientes críticos e na execução de procedimentos invasivos, como{' '}
+                      <em>intubação orotraqueal, drenagem de tórax e passagem de acesso venoso central</em>.
+                      Busco integrar e colaborar com equipes de alta performance, dedicadas à melhoria contínua e à excelência assistencial.
+                    </p>
+                  </div>
                 </div>
                 {/* Foto */}
                 <div className="hidden lg:block">

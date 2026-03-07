@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import { FileText, Award, BookOpen, ExternalLink, Calendar, Users } from 'lucide-react';
 
 const publicacoes = [
@@ -83,6 +84,15 @@ const estatisticas = [
 ];
 
 export function Publicacoes() {
+  usePageSEO({
+    title: 'Publicações Científicas — Trabalhos Acadêmicos Dr. Vandui',
+    description:
+      'Confira as publicações e trabalhos científicos do Dr. Vandui da Silva dos Santos: 7+ trabalhos em congressos de pediatria, cardiologia e terapia intensiva, com 2 premiações.',
+    canonical: '/publicacoes',
+    keywords:
+      'publicações médicas, trabalhos científicos medicina, artigos cardiologia, pesquisa médica, Dr. Vandui publicações',
+  });
+
   return (
     <motion.main
       initial={{ opacity: 0 }}

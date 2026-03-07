@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { usePageSEO } from '@/hooks/usePageSEO';
 import { FlaskConical, GraduationCap, Award, Calendar, Users, BookOpen, Microscope, Target } from 'lucide-react';
 
 const monitorias = [
@@ -68,6 +69,15 @@ const areasPesquisa = [
 ];
 
 export function Pesquisas() {
+  usePageSEO({
+    title: 'Pesquisas e Ensino — Atividade Científica Dr. Vandui',
+    description:
+      'Projeto de pesquisa em UTI Neonatal, monitorias acadêmicas e áreas de interesse científico do Dr. Vandui da Silva dos Santos. Competições premiadas e formação acadêmica na UFTM.',
+    canonical: '/pesquisas',
+    keywords:
+      'pesquisa UTI neonatal, monitoria medicina, ciência médica, pesquisa cardiologia, UFTM medicina, Dr. Vandui pesquisa',
+  });
+
   return (
     <motion.main
       initial={{ opacity: 0 }}
