@@ -3,12 +3,12 @@ import { usePageSEO } from '@/hooks/usePageSEO';
 import { Link } from 'react-router-dom';
 import {
   Heart,
-  Siren,
-  Monitor,
   Stethoscope,
   ArrowRight,
   CheckCircle2,
   Phone,
+  Shield,
+  TrendingUp,
 } from 'lucide-react';
 
 const specialties = [
@@ -16,9 +16,11 @@ const specialties = [
     id: 'cardiologia',
     icon: Heart,
     title: 'Cardiologia',
-    subtitle: 'Cuidado completo do coração',
+    subtitle: 'Cuidado completo e especializado do coração',
     description:
-      'A cardiologia é a especialidade médica dedicada ao diagnóstico, tratamento e prevenção de doenças do coração e do sistema cardiovascular. Como cardiologista formado no renomado Instituto Dante Pazzanese de Cardiologia, ofereço atendimento especializado com as mais modernas técnicas e protocolos.',
+      'A Cardiologia é a especialidade médica dedicada ao diagnóstico, tratamento e prevenção de doenças do coração e do sistema cardiovascular. Como cardiologista formado no renomado Instituto Dante Pazzanese de Cardiologia — uma das maiores referências do Brasil — ofereço atendimento especializado que alia tecnologia de ponta, medicina baseada em evidências e, acima de tudo, cuidado humano.',
+    detailText:
+      'Sei dos medos que um diagnóstico cardíaco traz. Por isso, aqui você não é apenas um paciente: é um parceiro de jornada. Juntos vamos entender sua condição, construir um plano de tratamento personalizado e garantir qualidade de vida duradoura.',
     image: '/especialidade-cardiologia.png',
     bgColor: 'bg-rose-50',
     borderColor: 'border-rose-400',
@@ -29,86 +31,60 @@ const specialties = [
       'Tratamento de hipertensão arterial',
       'Manejo de insuficiência cardíaca',
       'Tratamento de arritmias',
-      'Prevenção cardiovascular',
-      'Reabilitação cardíaca',
+      'Prevenção cardiovascular primária e secundária',
       'Acompanhamento pós-infarto',
       'Controle de colesterol e triglicerídeos',
+      'Avaliação de risco cardiológico',
     ],
     procedures: [
       'Eletrocardiograma (ECG)',
       'Holter 24h',
-      'Mapa (Monitorização Ambulatorial de Pressão Arterial)',
-      'Teste ergométrico',
+      'MAPA (Monitorização Ambulatorial de Pressão Arterial)',
+      'Teste Ergométrico',
       'Ecocardiograma',
     ],
   },
   {
-    id: 'emergencias',
-    icon: Siren,
-    title: 'Emergências Médicas',
-    subtitle: 'Atendimento ágil em situações críticas',
+    id: 'prevencao',
+    icon: Shield,
+    title: 'Prevenção Cardiovascular',
+    subtitle: 'Cuide do coração antes que o problema apareça',
     description:
-      'O atendimento de emergências médicas requer rápida avaliação, decisões precisas e execução imediata de protocolos estabelecidos. Com anos de experiência em prontos-socorros e UPAs, estou preparado para lidar com as mais diversas situações de urgência.',
-    image: '/especialidade-emergencias.png',
-    bgColor: 'bg-amber-50',
-    borderColor: 'border-amber-400',
-    iconBgColor: 'bg-amber-100',
-    iconColor: 'text-amber-600',
+      'A melhor estratégia contra doenças do coração é a prevenção. Com uma avaliação completa do seu risco cardiovascular — incluindo histórico familiar, estilo de vida, exames laboratoriais e funcionais — traçamos juntos um plano de ação para manter seu coração saudável por muitos anos.',
+    detailText:
+      'Muitas doenças cardíacas são silenciosas e evoluem sem sintomas por anos. A consulta preventiva pode identificar riscos antes que eles se tornem problemas graves.',
+    image: '/especialidade-prevencao.png',
+    bgColor: 'bg-blue-50',
+    borderColor: 'border-blue-400',
+    iconBgColor: 'bg-blue-100',
+    iconColor: 'text-blue-600',
     features: [
-      'Atendimento de urgências cardiovasculares',
-      'Manejo de emergências clínicas',
-      'Suporte avançado de vida (ACLS)',
-      'Ressuscitação cardiopulmonar',
-      'Estabilização de pacientes críticos',
-      'Protocolos de emergência padronizados',
-      'Coordenação com equipe multidisciplinar',
-      'Decisão rápida em situações de risco',
+      'Avaliação de risco cardiovascular global',
+      'Controle de colesterol e triglicerídeos',
+      'Prevenção do infarto do miocárdio',
+      'Prevenção do AVC',
+      'Orientação nutricional e de estilo de vida',
+      'Acompanhamento de pacientes assintomáticos',
+      'Rastreio de doenças silenciosas',
+      'Checkup cardiológico completo',
     ],
     procedures: [
-      'Intubação orotraqueal',
-      'Acesso venoso central',
-      'Drenagem de tórax',
-      'Cardioversão elétrica',
-      'Procedimentos de emergência',
-    ],
-  },
-  {
-    id: 'uti',
-    icon: Monitor,
-    title: 'Terapia Intensiva',
-    subtitle: 'Manejo de pacientes críticos',
-    description:
-      'A Terapia Intensiva (UTI) é dedicada ao cuidado de pacientes em estado crítico que necessitam de monitoramento contínuo e suporte avançado de órgãos e sistemas. Ofereço manejo completo baseado nas melhores evidências científicas.',
-    image: '/especialidade-uti.png',
-    bgColor: 'bg-cyan-50',
-    borderColor: 'border-cyan-400',
-    iconBgColor: 'bg-cyan-100',
-    iconColor: 'text-cyan-600',
-    features: [
-      'Monitoramento hemodinâmico avançado',
-      'Ventilação mecânica invasiva e não-invasiva',
-      'Manejo de sepse e choque',
-      'Suporte renal substitutivo',
-      'Nutrição enteral e parenteral',
-      'Sedação e analgesia em UTI',
-      'Prevenção de complicações',
-      'Cuidado paliativo em UTI',
-    ],
-    procedures: [
-      'Intubação orotraqueal',
-      'Traqueostomia',
-      'Acesso venoso central',
-      'Cateterismo de artéria pulmonar',
-      'Punção lombar',
+      'Eletrocardiograma (ECG)',
+      'Teste Ergométrico',
+      'Avaliação laboratorial completa',
+      'Ecocardiograma',
+      'MAPA (Holter de pressão)',
     ],
   },
   {
     id: 'clinica',
     icon: Stethoscope,
     title: 'Clínica Médica',
-    subtitle: 'Cuidado integral da saúde adulta',
+    subtitle: 'Cuidado integral para sua saúde adulta',
     description:
-      'A Clínica Médica é a base da medicina interna, oferecendo cuidado integral ao paciente adulto. Com formação sólida em clínica médica durante a residência, proporciono atendimento abrangente e humanizado.',
+      'A Clínica Médica é a base da medicina interna: uma especialidade que enxerga o paciente como um todo, e não apenas seus sintomas isolados. Com residência sólida em Clínica Médica pelo Hospital Ipiranga, ofereço acompanhamento completo e humanizado para adultos, com ênfase em doenças crônicas e no envelhecimento com qualidade.',
+    detailText:
+      'Gerenciar doenças crônicas exige constância, planejamento e uma relação de confiança entre médico e paciente. Aqui você encontra isso: presença, escuta e um plano de cuidados que evolui junto com você.',
     image: '/especialidade-clinica.png',
     bgColor: 'bg-emerald-50',
     borderColor: 'border-emerald-400',
@@ -116,32 +92,64 @@ const specialties = [
     iconColor: 'text-emerald-600',
     features: [
       'Avaliação clínica completa',
-      'Manejo de doenças crônicas',
-      'Diagnóstico diferencial',
-      'Prevenção de doenças',
-      'Acompanhamento de pacientes complexos',
-      'Coordenação de cuidados',
+      'Manejo de diabetes mellitus',
+      'Controle de hipertensão arterial',
+      'Acompanhamento de doenças crônicas',
+      'Medicina do envelhecimento saudável',
+      'Diagnóstico diferencial complexo',
+      'Encaminhamentos e coordenação de cuidados',
       'Medicina baseada em evidências',
-      'Atendimento humanizado',
     ],
     procedures: [
       'Consulta médica completa',
       'Avaliação pré-operatória',
       'Acompanhamento ambulatorial',
-      'Exames laboratoriais',
+      'Solicitação de exames dirigidos',
       'Encaminhamentos especializados',
+    ],
+  },
+  {
+    id: 'cronicas',
+    icon: TrendingUp,
+    title: 'Doenças Crônicas',
+    subtitle: 'Envelhecimento com saúde e qualidade de vida',
+    description:
+      'Doenças crônicas como hipertensão, diabetes e dislipidemia afetam milhões de brasileiros e exigem acompanhamento contínuo, personalizado e humanizado. Meu foco é garantir que essas condições sejam bem controladas, prevenindo complicações e assegurando que você viva com mais energia, autonomia e bem-estar.',
+    detailText:
+      'Conviver com uma doença crônica não significa abrir mão de qualidade de vida. Com o manejo correto, é possível viver bem, com mais disposição e segurança — e é isso que buscamos juntos.',
+    image: '/especialidade-cronicas.png',
+    bgColor: 'bg-violet-50',
+    borderColor: 'border-violet-400',
+    iconBgColor: 'bg-violet-100',
+    iconColor: 'text-violet-600',
+    features: [
+      'Controle de diabetes tipo 1 e 2',
+      'Manejo da hipertensão arterial sistêmica',
+      'Tratamento de dislipidemia',
+      'Prevenção de complicações crônicas',
+      'Orientações para estilo de vida saudável',
+      'Acompanhamento de longo prazo',
+      'Ajuste individualizado de medicamentos',
+      'Suporte ao paciente e família',
+    ],
+    procedures: [
+      'Consulta periódica de acompanhamento',
+      'Monitoramento de glicemia e HbA1c',
+      'Avaliação de órgão-alvo',
+      'MAPA para controle pressórico',
+      'Avaliação laboratorial periódica',
     ],
   },
 ];
 
 export function Especialidades() {
   usePageSEO({
-    title: 'Especialidades Médicas — Cardiologia, UTI, Emergências e Clínica Médica',
+    title: 'Especialidades — Cardiologia e Clínica Médica | Dr. Vandui',
     description:
-      'Conheça as especialidades do Dr. Vandui: Cardiologia, Terapia Intensiva (UTI), Emergências Médicas e Clínica Médica. Atendimento especializado e humanizado em São Paulo.',
+      'Conheça as especialidades do Dr. Vandui: Cardiologia, Prevenção Cardiovascular, Clínica Médica e Doenças Crônicas. Atendimento humanizado e especializado em Santos, Santo André e São Paulo.',
     canonical: '/especialidades',
     keywords:
-      'cardiologia, terapia intensiva, UTI, emergências médicas, clínica médica, especialidades médicas, cardiologista São Paulo',
+      'cardiologia, prevenção cardiovascular, clínica médica, doenças crônicas, hipertensão, diabetes, cardiologista são paulo, Dr. Vandui especialidades',
   });
 
   return (
@@ -180,9 +188,7 @@ export function Especialidades() {
                 Especialidades Médicas
               </h1>
               <p className="text-xl max-w-2xl mx-auto" style={{ color: 'rgba(224, 247, 250, 0.9)' }}>
-                Ofereço atendimento especializado nas principais áreas da
-                medicina cardiovascular e terapia intensiva, com foco em
-                excelência técnica e humanização.
+                Foco em Cardiologia e Clínica Médica — cuidado especializado, humano e baseado nas melhores evidências científicas para você viver bem por muito mais tempo.
               </p>
             </motion.div>
           </div>
@@ -270,9 +276,15 @@ export function Especialidades() {
                     {specialty.subtitle}
                   </h2>
 
-                  <p className="text-[#666] leading-relaxed mb-8">
+                  <p className="text-[#666] leading-relaxed mb-4">
                     {specialty.description}
                   </p>
+
+                  {specialty.detailText && (
+                    <p className="text-[#666] leading-relaxed mb-8 italic border-l-4 pl-4" style={{ borderColor: 'var(--color-emerald)' }}>
+                      {specialty.detailText}
+                    </p>
+                  )}
 
                   {/* Features */}
                   <div className="mb-8">
@@ -308,7 +320,7 @@ export function Especialidades() {
                       className="text-lg font-semibold mb-4"
                       style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
                     >
-                      Procedimentos
+                      Procedimentos e Exames
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {specialty.procedures.map((procedure, pIndex) => (
@@ -386,8 +398,7 @@ export function Especialidades() {
               Pronto para cuidar da sua saúde?
             </h2>
             <p className="text-xl mb-8" style={{ color: 'rgba(224, 247, 250, 0.9)' }}>
-              Agende sua consulta e tenha acesso a um atendimento especializado,
-              humanizado e baseado nas melhores evidências científicas.
+              Aqui você é tratado com empatia e excelência científica — agende sua consulta e sinta-se parte de uma jornada personalizada para um coração saudável.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a

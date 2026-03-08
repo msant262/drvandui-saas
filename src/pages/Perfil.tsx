@@ -11,7 +11,6 @@ import {
   Heart,
   Star,
   BookOpen,
-  Trophy,
 } from 'lucide-react';
 
 const education = [
@@ -115,21 +114,6 @@ const certifications = [
   },
 ];
 
-const premios = [
-  {
-    titulo: 'Melhor Trabalho',
-    evento: '3ª Jornada Integrada de Ensino, Pesquisa e Extensão da UFTM',
-    ano: '2017',
-    trabalho: 'Análise de Parâmetros Clínicos e Laboratoriais Relacionados à Atopia em Crianças',
-  },
-  {
-    titulo: 'Melhor Trabalho',
-    evento: '26ª Jornada de Pediatria da Sociedade Regional de Pediatria Vale do Rio Grande',
-    ano: '2019',
-    trabalho: 'Efetividade do Trabalho de Equipe Multidisciplinar na Redução de Reinternações de Prematuros',
-  },
-];
-
 const skills = [
   'Manejo de pacientes críticos',
   'Procedimentos invasivos',
@@ -152,13 +136,13 @@ const systems = [
 
 export function Perfil() {
   usePageSEO({
-    title: 'Perfil Profissional — Dr. Vandui da Silva dos Santos',
+    title: 'Perfil Profissional — Dr. Vandui da Silva dos Santos | Cardiologista',
     description:
-      'Conheça o currículo completo do Dr. Vandui: Cardiologista com residência no Dante Pazzanese, experiência em UTI, Emergências e Clínica Médica. Premiações e publicações científicas.',
+      'Conheça o currículo completo do Dr. Vandui: Cardiologista com residência no Dante Pazzanese, especialista em Cardiologia e Clínica Médica. Atendimento humanizado focado no paciente.',
     canonical: '/perfil',
     ogType: 'profile',
     keywords:
-      'currículo médico, Dr. Vandui currículo, cardiologista Dante Pazzanese, médico UTI, médico emergências, residência cardiologia',
+      'currículo médico, Dr. Vandui currículo, cardiologista Dante Pazzanese, clínica médica, residência cardiologia, cardiologista são paulo',
   });
 
   return (
@@ -197,18 +181,18 @@ export function Perfil() {
                 Dr. Vandui da Silva dos Santos
               </h1>
               <p className="text-xl mb-8" style={{ color: 'rgba(224, 247, 250, 0.9)' }}>
-                Médico Cardiologista | Terapia Intensiva | Emergências Médicas
+                Médico Cardiologista | Cardiologia & Clínica Médica
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm">
-                <span className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+                <span className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full" style={{ color: 'var(--color-title-contrast)' }}>
                   <Calendar className="w-4 h-4" />
                   31 anos
                 </span>
-                <span className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+                <span className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full" style={{ color: 'var(--color-title-contrast)' }}>
                   <MapPin className="w-4 h-4" />
                   São Bernardo do Campo, SP
                 </span>
-                <span className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+                <span className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full" style={{ color: 'var(--color-title-contrast)' }}>
                   <Award className="w-4 h-4" />
                   CRM-SP
                 </span>
@@ -221,7 +205,9 @@ export function Perfil() {
       {/* História Pessoal */}
       <section className="py-16 bg-white">
         <div className="section-padding">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto space-y-8">
+
+            {/* Bloco 1 — Minha História */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -231,7 +217,6 @@ export function Perfil() {
               style={{ backgroundColor: 'var(--color-mint)' }}
             >
               <div className="grid lg:grid-cols-2 gap-8 items-center">
-                {/* Texto */}
                 <div>
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 bg-[var(--color-emerald)] rounded-xl flex items-center justify-center">
@@ -244,46 +229,22 @@ export function Perfil() {
                       Minha História
                     </h2>
                   </div>
-                  <div className="space-y-4 text-[#666] leading-relaxed">
+                  <div className="space-y-4 text-[#555] leading-relaxed">
                     <p>
-                      Nascido em São Bernardo do Campo, estudante de{' '}
-                      <strong className="text-[var(--color-teal)]">Escola Pública</strong>,
-                      sempre tive o sonho de cursar{' '}
-                      <strong className="text-[var(--color-teal)]">MEDICINA</strong>.
-                      Com muito esforço e ajuda dos meus pais, passei no vestibular
-                      para{' '}
-                      <strong className="text-[var(--color-teal)]">
-                        7 universidades Públicas
-                      </strong>
-                      , da qual escolhi a{' '}
-                      <strong className="text-[var(--color-teal)]">
-                        UFTM (Universidade Federal do Triângulo Mineiro)
-                      </strong>
-                      .
+                      Escolhi a medicina por um desejo profundo de{' '}
+                      <strong className="text-[var(--color-teal)]">cuidar das pessoas</strong>,
+                      promovendo qualidade de vida e sentindo que faço diferença real na trajetória de cada paciente.
                     </p>
                     <p>
-                      Durante o curso recebi{' '}
-                      <strong className="text-[var(--color-emerald)]">
-                        diversas premiações
-                      </strong>
-                      , publiquei diversos artigos e tive a oportunidade de realizar
-                      um ótimo internato com excelentes instrutores, sempre me
-                      dedicando ao máximo.
-                    </p>
-                    <p>
-                      <strong className="text-[var(--color-teal)]">Médico cardiologista</strong>, apaixonado por emergências clínicas, cardiológicas e terapia intensiva.
-                      Comprometido em oferecer atendimento técnico e humano de excelência, sempre pautado nas
-                      melhores evidências científicas e práticas médicas atuais.
-                    </p>
-                    <p>
-                      Forjado por anos de residência em instituições de referência e por ampla experiência no
-                      manejo de pacientes críticos e na execução de procedimentos invasivos, como{' '}
-                      <em>intubação orotraqueal, drenagem de tórax e passagem de acesso venoso central</em>.
-                      Busco integrar e colaborar com equipes de alta performance, dedicadas à melhoria contínua e à excelência assistencial.
+                      Como cardiologista, conheço os medos que um{' '}
+                      <strong className="text-[var(--color-teal)]">diagnóstico cardiológico</strong>{' '}
+                      traz, os desafios que ele impõe — muitas vezes um dos momentos mais difíceis da vida.
+                      Me preparei em{' '}
+                      <strong className="text-[var(--color-teal)]">instituições de referência</strong>{' '}
+                      e tenho certeza que posso te ajudar a passar por esse desafio.
                     </p>
                   </div>
                 </div>
-                {/* Foto */}
                 <div className="hidden lg:block">
                   <img
                     src="/perfil-doctor.jpg"
@@ -293,70 +254,77 @@ export function Perfil() {
                 </div>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
 
-      {/* Premiações */}
-      <section className="py-16" style={{ backgroundColor: 'var(--color-white-blue)' }}>
-        <div className="section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-emerald)] text-white rounded-full text-sm font-medium mb-4">
-              <Trophy className="w-4 h-4" />
-              Reconhecimentos
-            </div>
-            <h2
-              className="text-3xl sm:text-4xl font-bold text-[var(--color-teal)]"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
+            {/* Bloco 2 — O Que Me Diferencia */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="rounded-3xl p-8 md:p-10 text-white"
+              style={{ backgroundColor: 'var(--color-teal)' }}
             >
-              Premiações
-            </h2>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
-            {premios.map((premio, index) => (
-              <motion.div
-                key={premio.titulo + premio.ano}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow border-l-4 border-[var(--color-emerald)]"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-[var(--color-mint)] rounded-xl flex items-center justify-center">
-                    <Star className="w-6 h-6 text-[var(--color-emerald)]" />
-                  </div>
-                  <div>
-                    <span className="px-3 py-1 bg-[var(--color-emerald)] text-white rounded-full text-xs font-medium">
-                      {premio.ano}
-                    </span>
-                  </div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Star className="w-6 h-6 text-white" />
                 </div>
-                <h3
-                  className="text-lg font-semibold text-[var(--color-teal)] mb-2"
+                <h2
+                  className="text-2xl font-bold text-white"
                   style={{ fontFamily: 'Poppins, sans-serif' }}
                 >
-                  {premio.titulo}
-                </h3>
-                <p className="text-sm text-[var(--color-emerald)] font-medium mb-2">
-                  {premio.evento}
-                </p>
-                <p className="text-sm text-[#666]">{premio.trabalho}</p>
-              </motion.div>
-            ))}
+                  O Que Me Diferencia
+                </h2>
+              </div>
+              <p className="text-white/90 leading-relaxed mb-3 text-base">
+                No meu DNA está o cuidado integral e humano, quem me conhece sabe: Vejo meus pacientes
+                como parceiros, somos um time. Quem me conhece, sabe:{' '}
+                <em className="text-white font-semibold">&ldquo;Esse é o meu cardiologista!&rdquo;</em>
+              </p>
+              <p className="text-white/80 leading-relaxed mb-8">
+                Foco em gerenciar envelhecimento, doenças crônicas cardíacas, garantindo acolhimento,
+                tratamento eficaz e qualidade de vida duradoura.
+              </p>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-white/10 rounded-2xl p-5">
+                  <Heart className="w-8 h-8 mb-3 text-white" />
+                  <h3 className="font-semibold mb-2 text-white" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    Parceiros de Jornada
+                  </h3>
+                  <p className="text-white/80 text-sm leading-relaxed">
+                    Vejo meus pacientes como parceiros — somos um time. Aqui você não é um número, é
+                    tratado com atenção real e escuta ativa.
+                  </p>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-5">
+                  <Stethoscope className="w-8 h-8 mb-3 text-white" />
+                  <h3 className="font-semibold mb-2 text-white" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    Foco no Que Importa
+                  </h3>
+                  <p className="text-white/80 text-sm leading-relaxed">
+                    Foco em gerenciar envelhecimento e doenças crônicas cardíacas, garantindo acolhimento,
+                    tratamento eficaz e qualidade de vida duradoura.
+                  </p>
+                </div>
+                <div className="bg-white/10 rounded-2xl p-5">
+                  <Award className="w-8 h-8 mb-3 text-white" />
+                  <h3 className="font-semibold mb-2 text-white" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    Formação de Referência
+                  </h3>
+                  <p className="text-white/80 text-sm leading-relaxed">
+                    Residência no renomado Instituto Dante Pazzanese de Cardiologia, prática baseada nas
+                    melhores evidências científicas atuais.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+
           </div>
         </div>
       </section>
 
       {/* Education Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16" style={{ backgroundColor: 'var(--color-white-blue)' }}>
         <div className="section-padding">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -384,43 +352,26 @@ export function Perfil() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg transition-shadow"
-                style={{ backgroundColor: 'var(--color-white-blue)' }}
+                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
               >
-                <div className="flex items-start gap-5">
-                  <div
-                    className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: 'var(--color-cyan-light)' }}
-                  >
-                    <item.icon className="w-7 h-7 text-[var(--color-teal)]" />
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 bg-[var(--color-mint)] rounded-xl flex items-center justify-center flex-shrink-0">
+                    <item.icon className="w-7 h-7 text-[var(--color-emerald)]" />
                   </div>
                   <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-3 mb-2">
+                    <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
                       <h3
-                        className="text-xl font-semibold text-[var(--color-teal)]"
+                        className="text-lg font-semibold text-[var(--color-teal)]"
                         style={{ fontFamily: 'Poppins, sans-serif' }}
                       >
                         {item.degree}
                       </h3>
-                      <span
-                        className="px-3 py-1 rounded-full text-sm font-medium"
-                        style={{
-                          backgroundColor: 'var(--color-mint)',
-                          color: 'var(--color-emerald)',
-                        }}
-                      >
+                      <span className="px-3 py-1 bg-[var(--color-mint)] text-[var(--color-emerald)] rounded-full text-xs font-medium whitespace-nowrap">
                         {item.period}
                       </span>
                     </div>
-                    <p
-                      className="font-medium mb-2"
-                      style={{ color: 'var(--color-emerald)' }}
-                    >
-                      {item.institution}
-                    </p>
-                    <p className="text-[#666] text-sm leading-relaxed">
-                      {item.description}
-                    </p>
+                    <p className="text-[var(--color-emerald)] font-medium text-sm mb-2">{item.institution}</p>
+                    <p className="text-[#666] text-sm leading-relaxed">{item.description}</p>
                   </div>
                 </div>
               </motion.div>
@@ -430,99 +381,6 @@ export function Perfil() {
       </section>
 
       {/* Experience Section */}
-      <section className="py-16" style={{ backgroundColor: 'var(--color-white-blue)' }}>
-        <div className="section-padding">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <span
-              className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4"
-              style={{
-                backgroundColor: 'var(--color-cyan-light)',
-                color: 'var(--color-teal)',
-              }}
-            >
-              Experiência Profissional
-            </span>
-            <h2
-              className="text-3xl sm:text-4xl font-bold text-[var(--color-teal)]"
-              style={{ fontFamily: 'Poppins, sans-serif' }}
-            >
-              Histórico de Atuação
-            </h2>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline Line */}
-              <div
-                className="absolute left-7 top-0 bottom-0 w-0.5"
-                style={{ backgroundColor: 'var(--color-cyan-light)' }}
-              />
-
-              <div className="space-y-8">
-                {experience.map((item, index) => (
-                  <motion.div
-                    key={`${item.company}-${item.period}`}
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className="relative flex items-start gap-6"
-                  >
-                    {/* Timeline Dot */}
-                    <div
-                      className="relative z-10 w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg"
-                      style={{ backgroundColor: 'var(--color-teal)' }}
-                    >
-                      <Briefcase className="w-6 h-6 text-white" />
-                    </div>
-
-                    {/* Content */}
-                    <div
-                      className="flex-1 rounded-2xl p-6"
-                      style={{ backgroundColor: 'white' }}
-                    >
-                      <div className="flex flex-wrap items-center gap-3 mb-2">
-                        <h3
-                          className="text-lg font-semibold text-[var(--color-teal)]"
-                          style={{ fontFamily: 'Poppins, sans-serif' }}
-                        >
-                          {item.role}
-                        </h3>
-                        <span
-                          className="px-3 py-1 rounded-full text-xs font-medium"
-                          style={{
-                            backgroundColor: 'var(--color-mint)',
-                            color: 'var(--color-emerald)',
-                          }}
-                        >
-                          {item.period}
-                        </span>
-                      </div>
-                      <p
-                        className="font-medium text-sm mb-2"
-                        style={{ color: 'var(--color-emerald)' }}
-                      >
-                        {item.company}
-                      </p>
-                      <p className="text-[#666] text-sm leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications Section */}
       <section className="py-16 bg-white">
         <div className="section-padding">
           <motion.div
@@ -532,53 +390,45 @@ export function Perfil() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <span
-              className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4"
-              style={{
-                backgroundColor: 'var(--color-mint)',
-                color: 'var(--color-emerald)',
-              }}
-            >
-              Certificações
+            <span className="inline-block px-4 py-2 bg-[var(--color-mint)] text-[var(--color-emerald)] rounded-full text-sm font-medium mb-4">
+              Experiência Profissional
             </span>
             <h2
               className="text-3xl sm:text-4xl font-bold text-[var(--color-teal)]"
               style={{ fontFamily: 'Poppins, sans-serif' }}
             >
-              Formação Complementar
+              Atuação Clínica
             </h2>
           </motion.div>
 
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
-            {certifications.map((cert, index) => (
+          <div className="max-w-4xl mx-auto space-y-4">
+            {experience.map((item, index) => (
               <motion.div
-                key={cert.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                key={item.role + item.company}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
+                transition={{ duration: 0.4, delay: index * 0.07 }}
+                className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border-l-4 border-[var(--color-teal)]"
                 style={{ backgroundColor: 'var(--color-white-blue)' }}
               >
-                <div className="flex items-start gap-4">
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: 'var(--color-cyan-light)' }}
-                  >
-                    <Award className="w-6 h-6 text-[var(--color-teal)]" />
-                  </div>
+                <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <h3
-                      className="font-semibold text-[var(--color-teal)] mb-1"
-                      style={{ fontFamily: 'Poppins, sans-serif' }}
-                    >
-                      {cert.name}
-                    </h3>
-                    <p className="text-sm" style={{ color: 'var(--color-emerald)' }}>
-                      {cert.institution}
-                    </p>
-                    <p className="text-sm text-[#666]">{cert.date}</p>
+                    <div className="flex items-center gap-2 mb-1">
+                      <Briefcase className="w-4 h-4 text-[var(--color-teal)]" />
+                      <h3
+                        className="font-semibold text-[var(--color-teal)]"
+                        style={{ fontFamily: 'Poppins, sans-serif' }}
+                      >
+                        {item.role}
+                      </h3>
+                    </div>
+                    <p className="text-[var(--color-emerald)] text-sm font-medium mb-1">{item.company}</p>
+                    <p className="text-[#666] text-sm">{item.description}</p>
                   </div>
+                  <span className="px-3 py-1 bg-white text-[var(--color-teal)] rounded-full text-xs font-medium whitespace-nowrap border border-[var(--color-mint)]">
+                    {item.period}
+                  </span>
                 </div>
               </motion.div>
             ))}
@@ -586,111 +436,151 @@ export function Perfil() {
         </div>
       </section>
 
-      {/* Skills Section */}
+      {/* Certifications Section */}
       <section className="py-16" style={{ backgroundColor: 'var(--color-white-blue)' }}>
         <div className="section-padding">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <span className="inline-block px-4 py-2 bg-[var(--color-mint)] text-[var(--color-emerald)] rounded-full text-sm font-medium mb-4">
+              Capacitações
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-bold text-[var(--color-teal)]"
+              style={{ fontFamily: 'Poppins, sans-serif' }}
             >
-              <span
-                className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4"
-                style={{
-                  backgroundColor: 'var(--color-cyan-light)',
-                  color: 'var(--color-teal)',
-                }}
-              >
-                Competências
-              </span>
-              <h2
-                className="text-3xl sm:text-4xl font-bold text-[var(--color-teal)]"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
-              >
-                Habilidades Técnicas
-              </h2>
-            </motion.div>
+              Certificações
+            </h2>
+          </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Clinical Skills */}
+          <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
+            {certifications.map((cert, index) => (
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={cert.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-2xl p-8"
-                style={{ backgroundColor: 'white' }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow text-center"
               >
+                <div className="w-12 h-12 bg-[var(--color-mint)] rounded-xl flex items-center justify-center mx-auto mb-4">
+                  <Award className="w-6 h-6 text-[var(--color-emerald)]" />
+                </div>
                 <h3
-                  className="text-xl font-semibold text-[var(--color-teal)] mb-6"
+                  className="font-semibold text-[var(--color-teal)] mb-2 text-sm"
                   style={{ fontFamily: 'Poppins, sans-serif' }}
                 >
-                  Habilidades Clínicas
+                  {cert.name}
                 </h3>
-                <div className="space-y-3">
-                  {skills.map((skill, index) => (
-                    <motion.div
-                      key={skill}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: index * 0.05 }}
-                      className="flex items-center gap-3"
-                    >
-                      <CheckCircle2
-                        className="w-5 h-5 flex-shrink-0"
-                        style={{ color: 'var(--color-emerald)' }}
-                      />
-                      <span className="text-[#666]">{skill}</span>
-                    </motion.div>
-                  ))}
-                </div>
+                <p className="text-[var(--color-emerald)] text-xs font-medium mb-1">{cert.institution}</p>
+                <p className="text-[#888] text-xs">{cert.date}</p>
               </motion.div>
-
-              {/* Systems */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-2xl p-8"
-                style={{ backgroundColor: 'white' }}
-              >
-                <h3
-                  className="text-xl font-semibold text-[var(--color-teal)] mb-6"
-                  style={{ fontFamily: 'Poppins, sans-serif' }}
-                >
-                  Sistemas e Informática
-                </h3>
-                <p className="text-[#666] mb-4">
-                  Domínio básico dos principais sistemas hospitalares:
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {systems.map((system, index) => (
-                    <motion.span
-                      key={system}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.3, delay: index * 0.05 }}
-                      className="px-4 py-2 rounded-lg text-sm font-medium shadow-sm"
-                      style={{
-                        backgroundColor: 'var(--color-cyan-light)',
-                        color: 'var(--color-teal)',
-                      }}
-                    >
-                      {system}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Skills & Systems Section */}
+      <section className="py-16 bg-white">
+        <div className="section-padding">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <span className="inline-block px-4 py-2 bg-[var(--color-mint)] text-[var(--color-emerald)] rounded-full text-sm font-medium mb-4">
+              Competências
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-bold text-[var(--color-teal)]"
+              style={{ fontFamily: 'Poppins, sans-serif' }}
+            >
+              Habilidades & Sistemas
+            </h2>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            {/* Skills */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-2xl p-8 bg-white shadow-sm"
+            >
+              <h3
+                className="text-xl font-semibold text-[var(--color-teal)] mb-6"
+                style={{ fontFamily: 'Poppins, sans-serif' }}
+              >
+                Habilidades Clínicas
+              </h3>
+              <div className="space-y-3">
+                {skills.map((skill, index) => (
+                  <motion.div
+                    key={skill}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="flex items-center gap-3"
+                  >
+                    <CheckCircle2
+                      className="w-5 h-5 flex-shrink-0"
+                      style={{ color: 'var(--color-emerald)' }}
+                    />
+                    <span className="text-[#666]">{skill}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Systems */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="rounded-2xl p-8"
+              style={{ backgroundColor: 'white' }}
+            >
+              <h3
+                className="text-xl font-semibold text-[var(--color-teal)] mb-6"
+                style={{ fontFamily: 'Poppins, sans-serif' }}
+              >
+                Sistemas e Informática
+              </h3>
+              <p className="text-[#666] mb-4">
+                Domínio básico dos principais sistemas hospitalares:
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {systems.map((system, index) => (
+                  <motion.span
+                    key={system}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: index * 0.07 }}
+                    className="px-4 py-2 rounded-lg text-sm font-medium shadow-sm"
+                    style={{
+                      backgroundColor: 'var(--color-cyan-light)',
+                      color: 'var(--color-teal)',
+                    }}
+                  >
+                    {system}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
     </motion.main>
   );
 }

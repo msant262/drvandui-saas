@@ -7,9 +7,6 @@ const navLinks = [
   { path: '/', label: 'Início' },
   { path: '/perfil', label: 'Perfil' },
   { path: '/especialidades', label: 'Especialidades' },
-  { path: '/publicacoes', label: 'Publicações' },
-  { path: '/pesquisas', label: 'Pesquisas' },
-  { path: '/eventos', label: 'Eventos' },
   { path: '/contato', label: 'Contato' },
 ];
 
@@ -42,11 +39,10 @@ export function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          useScrolledStyle
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${useScrolledStyle
             ? 'bg-white/95 backdrop-blur-lg shadow-lg py-3'
             : 'bg-transparent py-6'
-        }`}
+          }`}
       >
         <div className="w-full section-padding">
           <div className="flex items-center justify-between">
@@ -54,31 +50,27 @@ export function Navigation() {
             <Link to="/" className="flex items-center gap-3 group">
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${
-                  useScrolledStyle ? 'bg-[var(--color-teal)]' : 'bg-white'
-                }`}
+                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${useScrolledStyle ? 'bg-[var(--color-teal)]' : 'bg-white'
+                  }`}
               >
                 <HeartPulse
-                  className={`w-6 h-6 transition-colors ${
-                    useScrolledStyle ? 'text-white' : 'text-[var(--color-teal)]'
-                  }`}
+                  className={`w-6 h-6 transition-colors ${useScrolledStyle ? 'text-white' : 'text-[var(--color-teal)]'
+                    }`}
                 />
               </motion.div>
               <div className="hidden sm:block">
                 <h1
-                  className={`font-bold text-lg leading-tight transition-colors ${
-                    useScrolledStyle ? 'text-[var(--color-teal)]' : 'text-white'
-                  }`}
+                  className={`font-bold text-lg leading-tight transition-colors ${useScrolledStyle ? 'text-[var(--color-teal)]' : 'text-white'
+                    }`}
                   style={{ fontFamily: 'Poppins, sans-serif' }}
                 >
                   Dr. Vandui
                 </h1>
                 <p
-                  className={`text-xs transition-colors ${
-                    useScrolledStyle ? 'text-[var(--color-emerald)]' : 'text-white/80'
-                  }`}
+                  className={`text-xs transition-colors ${useScrolledStyle ? 'text-[var(--color-emerald)]' : 'text-white/80'
+                    }`}
                 >
-                  Cardiologia & UTI
+                  Cardiologia & Clínica Médica
                 </p>
               </div>
             </Link>
@@ -89,22 +81,20 @@ export function Navigation() {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative px-3 py-2 text-sm font-medium transition-colors rounded-full ${
-                    location.pathname === link.path
+                  className={`relative px-3 py-2 text-sm font-medium transition-colors rounded-full ${location.pathname === link.path
                       ? useScrolledStyle
                         ? 'text-[var(--color-teal)]'
                         : 'text-white'
                       : useScrolledStyle
-                      ? 'text-[#666] hover:text-[var(--color-teal)]'
-                      : 'text-white/80 hover:text-white'
-                  }`}
+                        ? 'text-[#666] hover:text-[var(--color-teal)]'
+                        : 'text-white/80 hover:text-white'
+                    }`}
                 >
                   {location.pathname === link.path && (
                     <motion.span
                       layoutId="navIndicator"
-                      className={`absolute inset-0 rounded-full ${
-                        useScrolledStyle ? 'bg-[var(--color-cyan-light)]' : 'bg-white/20'
-                      }`}
+                      className={`absolute inset-0 rounded-full ${useScrolledStyle ? 'bg-[var(--color-cyan-light)]' : 'bg-white/20'
+                        }`}
                       transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                     />
                   )}
@@ -119,11 +109,10 @@ export function Navigation() {
                 href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all ${
-                  useScrolledStyle
+                className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all ${useScrolledStyle
                     ? 'bg-[var(--color-emerald)] text-white hover:bg-[var(--color-teal)]'
                     : 'bg-white text-[var(--color-teal)] hover:bg-[var(--color-cyan-light)]'
-                }`}
+                  }`}
               >
                 <Phone className="w-4 h-4" />
                 Agendar
@@ -133,11 +122,10 @@ export function Navigation() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-xl transition-colors ${
-                useScrolledStyle
+              className={`lg:hidden p-2 rounded-xl transition-colors ${useScrolledStyle
                   ? 'text-[var(--color-teal)] hover:bg-gray-100'
                   : 'text-white hover:bg-white/20'
-              }`}
+                }`}
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -193,11 +181,10 @@ export function Navigation() {
                       <Link
                         to={link.path}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors ${
-                          location.pathname === link.path
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors ${location.pathname === link.path
                             ? 'bg-[var(--color-cyan-light)] text-[var(--color-teal)]'
                             : 'text-[#666] hover:bg-gray-100 hover:text-[var(--color-teal)]'
-                        }`}
+                          }`}
                       >
                         {link.label}
                       </Link>

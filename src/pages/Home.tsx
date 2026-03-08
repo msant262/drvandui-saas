@@ -2,242 +2,326 @@ import { Link } from 'react-router-dom';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import {
   Heart,
-  Activity,
   Stethoscope,
-  Siren,
-  Monitor,
   ArrowRight,
   Award,
   Users,
   Building2,
   Phone,
-  Calendar,
-  Clock,
   Shield,
-  BookOpen,
-  Trophy,
+  HeartHandshake,
+  TrendingUp,
   FlaskConical,
+  Microscope,
+  BookOpen,
+  Activity,
+  Zap,
+  HeartPulse,
+  Pill,
+  TestTubes,
+  ActivitySquare,
+  CheckCircle2,
+  Apple,
+  Dumbbell,
+  Moon,
+  CigaretteOff,
+  AlertTriangle,
+  Wind,
+  Brain,
+  Globe,
+  Trophy,
+  ShieldCheck,
 } from 'lucide-react';
 
 const stats = [
   { icon: Award, value: '10+', label: 'Anos de Experiência' },
   { icon: Users, value: '5000+', label: 'Pacientes Atendidos' },
-  { icon: Building2, value: 'Dante', label: 'Formação Pazzanese' },
 ];
 
 const services = [
   {
     icon: Heart,
     title: 'Cardiologia',
-    description:
-      'Diagnóstico e tratamento especializado de doenças cardiovasculares com as mais modernas técnicas.',
+    description: 'Diagnóstico e tratamento de arritmias, insuficiência cardíaca e pós-infarto.',
     color: 'from-rose-500 to-pink-600',
+    highlight: true,
   },
   {
-    icon: Siren,
-    title: 'Emergências',
-    description:
-      'Atendimento ágil e eficiente em situações críticas, com protocolos internacionais avançados.',
-    color: 'from-amber-500 to-orange-600',
-  },
-  {
-    icon: Monitor,
-    title: 'UTI',
-    description:
-      'Manejo completo de pacientes críticos em unidade de terapia intensiva com monitoramento contínuo.',
-    color: 'from-cyan-500 to-blue-600',
+    icon: Shield,
+    title: 'Prevenção Cardiovascular',
+    description: 'Controle de colesterol, triglicerídeos e estratificação de risco a longo prazo.',
+    color: 'from-blue-500 to-indigo-600',
+    highlight: false,
   },
   {
     icon: Stethoscope,
     title: 'Clínica Médica',
-    description:
-      'Cuidado integral da saúde adulta, com foco em prevenção e tratamento de doenças complexas.',
+    description: 'Foco no paciente adulto, integrando saúde global e longevidade sustentável.',
     color: 'from-emerald-500 to-teal-600',
+    highlight: false,
+  },
+  {
+    icon: TrendingUp,
+    title: 'Doenças Crônicas',
+    description: 'Manejo intensivo de diabetes, hipertensão e dislipidemia com precisão técnica.',
+    color: 'from-violet-500 to-purple-600',
+    highlight: false,
   },
 ];
 
 const differentials = [
   {
-    icon: Award,
-    title: 'Formação de Excelência',
-    description: 'Residência no renomado Instituto Dante Pazzanese de Cardiologia',
+    icon: HeartHandshake,
+    title: 'Você é Meu Parceiro',
+    description: 'Aqui você não é um número. A base do tratamento é a escuta ativa.',
   },
   {
-    icon: Clock,
-    title: 'Atendimento Humanizado',
-    description: 'Compromisso com o cuidado técnico e humano de excelência',
+    icon: Award,
+    title: 'Formação de Excelência',
+    description: 'Instituto Dante Pazzanese de Cardiologia, referência absoluta na América Latina.',
   },
   {
     icon: Shield,
-    title: 'Evidências Científicas',
-    description: 'Prática baseada nas mais recentes evidências científicas',
+    title: 'Ciência + Empatia',
+    description: 'Condutas 100% atualizadas pelas diretrizes de 2025/2026 com base humana.',
   },
 ];
 
-const academicHighlights = [
+const brazilStats = [
+  { value: '90s', label: '1 Morte a cada', sub: 'Lidamos com a principal causa de mortalidade', color: 'from-orange-500 to-red-600', icon: HeartPulse },
+  { value: '400 Mil', label: 'Óbitos / ano', sub: 'Por doenças cardiovasculares', color: 'from-rose-500 to-pink-600', icon: Activity },
+  { value: '38 Milhões', label: 'De Hipertensos', sub: 'Grande parte sem o controle adequado', color: 'from-blue-500 to-indigo-600', icon: ActivitySquare },
+  { value: '30%', label: 'Mortes no País', sub: 'Decorrem de eventos médicos do coração', color: 'from-emerald-500 to-teal-600', icon: Globe },
+  { value: '14 Milhões', label: 'Com Colesterol Alto', sub: 'Maioria silenciosa e não diagnosticada', color: 'from-violet-500 to-purple-600', icon: TestTubes },
+  { value: '80%', label: 'São Preveníveis', sub: 'Com medicina do estilo de vida e diagnóstico', color: 'from-[#09404A] to-[var(--color-teal)]', icon: ShieldCheck },
+];
+
+const warningSigns = [
   {
-    icon: BookOpen,
-    title: 'Publicações',
-    description: '7+ trabalhos científicos publicados em congressos',
-    link: '/publicacoes',
+    icon: AlertTriangle,
+    title: 'Dor no Peito',
+    description: 'Sensação de aperto, peso ou queimação que pode irradiar para o pescoço ou braço.',
+    color: 'from-rose-500 to-pink-600',
   },
   {
-    icon: Trophy,
-    title: 'Premiações',
-    description: '2 prêmios por melhores trabalhos acadêmicos',
-    link: '/perfil',
+    icon: Wind,
+    title: 'Falta de Ar',
+    description: 'Cansaço extremo ou dificuldade para respirar em repouso ou após pequenos esforços.',
+    color: 'from-blue-500 to-indigo-600',
+  },
+  {
+    icon: Activity,
+    title: 'Palpitações',
+    description: 'Coração acelerado severamente, batimentos irregulares ou sensação de falhas no peito.',
+    color: 'from-violet-500 to-purple-600',
+  },
+  {
+    icon: Brain,
+    title: 'Desmaios',
+    description: 'Perda súbita de consciência, fraqueza severa ou escurecimento da visão inexplicados.',
+    color: 'from-orange-500 to-red-500',
+  }
+];
+
+const healthyHabits = [
+  {
+    icon: Apple,
+    title: 'Alimentação Balanceada',
+    description: 'Priorize os vegetais in natura e evite os ultraprocessados para reduzir o sódio.',
+  },
+  {
+    icon: Dumbbell,
+    title: 'Exercício Regular',
+    description: 'Cerca de 150 minutos semanais de atividade fortalecem bastante seu músculo cardíaco.',
+  },
+  {
+    icon: Moon,
+    title: 'Sono de Qualidade',
+    description: 'Aproximadamente 7 a 8 horas de repouso vitais para regular a sua pressão arterial.',
+  },
+  {
+    icon: CigaretteOff,
+    title: 'Atenção aos Vícios',
+    description: 'O tabagismo e o álcool em excesso são os maiores adversários dos seus vasos sanguíneos.',
+  }
+];
+
+const institutions = [
+  {
+    name: 'Instituto Dante Pazzanese',
+    role: 'Residência em Cardiologia',
+    period: '2024 – 2026',
+    highlight: 'Um dos maiores centros de cardiologia da América Latina, focado em alta complexidade e pesquisa de ponta.',
+    badge: 'Referência',
+    stats: ['+ de 350 leitos', '40.000+ cirurgias/ano'],
+    color: 'from-rose-500 to-pink-600',
+  },
+];
+
+const research2025 = [
+  {
+    icon: Microscope,
+    year: '2025',
+    title: 'Diretrizes de Hipertensão',
+    summary: 'Novo alvo < 130/80 mmHg reduz de 30% em eventos maiores.',
+    source: 'ACC / AHA',
+    tagColor: 'bg-blue-100 text-blue-700',
   },
   {
     icon: FlaskConical,
-    title: 'Pesquisa',
-    description: 'Projeto de pesquisa em UTI Neonatal',
-    link: '/pesquisas',
+    year: '2025',
+    title: 'GLP-1 e Prevenção',
+    summary: 'Agonistas de GLP-1 reduzem risco cardíaco independentemente de DM2.',
+    source: 'ESC / SBC',
+    tagColor: 'bg-emerald-100 text-emerald-700',
+  },
+  {
+    icon: BookOpen,
+    year: '2026',
+    title: 'IA no Eletrocardiograma',
+    summary: 'Predição de fibrilação atrial e disfunção silenciosa com 90% de taxa de acerto.',
+    source: 'NEJM / Lancet',
+    tagColor: 'bg-violet-100 text-violet-700',
+  },
+  {
+    icon: Heart,
+    year: '2025',
+    title: 'Síndrome Cardiorrenal',
+    summary: 'Uso de iSGLT2 como primeira linha na disfunção conjunta de coração e rins.',
+    source: 'SBC / SBD',
+    tagColor: 'bg-rose-100 text-rose-700',
   },
 ];
 
 export function Home() {
   usePageSEO({
-    title: 'Cardiologista em Santos, Santo André e São Paulo',
+    title: 'Cardiologista em Santos, Santo André e São Paulo — Dr. Vandui',
     description:
-      'Dr. Vandui da Silva dos Santos — Médico Cardiologista com residência no Instituto Dante Pazzanese. Especialista em Terapia Intensiva, Emergências e Clínica Médica. Agende sua consulta hoje.',
+      'Dr. Vandui da Silva dos Santos — Médico Cardiologista com residência no Instituto Dante Pazzanese. Atendimento humanizado focado em Cardiologia e Clínica Médica. Agende sua consulta hoje.',
     canonical: '/',
     keywords:
-      'cardiologista santos, cardiologista santo andré, cardiologista são paulo, Dr. Vandui, terapia intensiva, emergências médicas, clínica médica, cardiologia',
+      'cardiologista santos, cardiologista santo andré, cardiologista são paulo, Dr. Vandui, clínica médica, prevenção cardiovascular, cardiologia, doenças crônicas',
   });
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: 'var(--color-white-blue)' }}>
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-teal" />
 
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div
-            className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] rounded-full bg-white/10"
-            style={{ animation: 'pulse 8s ease-in-out infinite' }}
-          />
-          <div
-            className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] rounded-full bg-white/10"
-            style={{ animation: 'pulse 10s ease-in-out infinite reverse' }}
-          />
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                               linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-              backgroundSize: '50px 50px',
-            }}
-          />
+      {/* ── SUPER HERO (Premium 2026) ── */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#0a192f]">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#041a1f] via-[#09404a] to-[#041a1f]" />
+
+        {/* Orbs de fundo Premium */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute -top-[20%] -right-[10%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-b from-[#14b8a6]/20 to-transparent blur-[120px] mix-blend-screen opacity-60 animate-pulse-slow" />
+          <div className="absolute -bottom-[20%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-t from-[#0ea5e9]/20 to-transparent blur-[100px] mix-blend-screen opacity-40" />
         </div>
 
-        <div className="relative w-full section-padding py-32 lg:py-0">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Content */}
-            <div className="text-white">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">
-                <Activity className="w-4 h-4" style={{ color: 'var(--color-emerald)' }} />
-                <span className="text-sm font-medium">Cuidando do seu coração</span>
+        {/* Grade de fundo */}
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: `linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+
+        <div className="section-padding relative w-full z-10 pt-32 pb-20">
+          <div className="max-w-[1400px] mx-auto grid lg:grid-cols-12 gap-12 lg:gap-0 items-center">
+
+            {/* Esquerda */}
+            <div className="lg:col-span-6">
+              <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full text-sm font-semibold mb-8 bg-white/5 border border-white/10 backdrop-blur-md shadow-2xl">
+                <span className="flex h-2.5 w-2.5 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span className="text-white/90 tracking-wide">Excelência em Cardiologia</span>
               </div>
 
-              <h1
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-4 text-title-contrast"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
-              >
+              <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold mb-6 text-white leading-[1.05] tracking-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 Dr. Vandui
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-cyan-300 mt-2">
+                  Medicina de Alto Padrão.
+                </span>
               </h1>
 
-              <p
-                className="text-xl sm:text-2xl mb-6 text-title-contrast"
-                style={{ fontFamily: 'Poppins, sans-serif' }}
-              >
-                Cardiologia & Terapia Intensiva
+              <p className="text-xl sm:text-2xl font-light mb-8 text-white/80 max-w-2xl leading-relaxed">
+                Mais do que tratar doenças, meu foco é mapear seu risco e blindar sua saúde cardiovascular para garantir longevidade com qualidade de vida.
               </p>
 
-              <p className="text-lg mb-8 max-w-xl leading-relaxed" style={{ color: 'rgba(224, 247, 250, 0.85)' }}>
-                Atendimento técnico e humano de excelência, pautado nas melhores
-                evidências científicas e práticas médicas atuais.
-              </p>
-
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-5 mt-10">
                 <a
                   href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white rounded-xl font-semibold transition-all hover:scale-105 hover:shadow-xl"
-                  style={{ color: 'var(--color-teal)' }}
+                  className="group relative inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-bold bg-white text-[var(--color-teal)] overflow-hidden transition-all hover:scale-[1.02] shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.25)] text-lg"
                 >
-                  <Calendar className="w-5 h-5" />
-                  Agendar Consulta
+                  <Phone className="w-5 h-5 transition-transform group-hover:rotate-12" />
+                  Agendar Rastreio
                 </a>
                 <Link
                   to="/perfil"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-semibold hover:bg-white/20 transition-all"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-semibold bg-white/5 border border-white/10 backdrop-blur-md text-white hover:bg-white/10 transition-all text-lg"
                 >
-                  Conhecer Perfil
+                  Conhecer o Especialista
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/20">
-                {stats.map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <stat.icon className="w-6 h-6 mx-auto mb-2" style={{ color: 'var(--color-emerald)' }} />
-                    <div
-                      className="text-2xl sm:text-3xl font-bold"
-                      style={{ fontFamily: 'Poppins, sans-serif' }}
-                    >
-                      {stat.value}
+              {/* Stats Bar Hero */}
+              <div className="flex flex-wrap items-center gap-0 mt-16 w-full max-w-2xl rounded-[1.5rem] bg-white/5 border border-white/10 backdrop-blur-md overflow-hidden">
+                {stats.map((s, i) => (
+                  <div
+                    key={s.label}
+                    className={`flex-1 min-w-[130px] px-8 py-6 text-center sm:text-left ${i < stats.length - 1 ? 'border-b sm:border-b-0 sm:border-r border-white/10' : ''
+                      }`}
+                  >
+                    <div className="text-4xl font-bold text-white leading-none mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                      {s.value}
                     </div>
-                    <div className="text-xs sm:text-sm text-white/70 mt-1">{stat.label}</div>
+                    <div className="text-[11px] uppercase tracking-wider text-emerald-300 font-bold">
+                      {s.label}
+                    </div>
                   </div>
                 ))}
+                {/* Instituição */}
+                <div className="flex-1 min-w-[160px] px-8 py-6 text-center sm:text-left border-t sm:border-t-0 sm:border-l border-white/10">
+                  <div className="text-xl font-bold text-white leading-snug mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    Dante<br />Pazzanese
+                  </div>
+                  <div className="text-[11px] uppercase tracking-wider text-emerald-300 font-bold">Formação</div>
+                </div>
               </div>
             </div>
 
-            {/* Right Content - Image */}
-            <div className="relative hidden md:block">
-              <div className="relative">
-                <div className="relative z-10" style={{ animation: 'float 6s ease-in-out infinite' }}>
-                  <img
-                    src="/hero-doctor.jpg"
-                    alt="Dr. Vandui"
-                    className="w-full max-w-lg mx-auto rounded-3xl shadow-2xl"
-                  />
-                  {/* Floating Badge */}
-                  <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl">
-                    <div className="flex items-center gap-3">
-                      <div
-                        className="w-12 h-12 rounded-xl flex items-center justify-center"
-                        style={{ backgroundColor: 'var(--color-mint)' }}
-                      >
-                        <Award className="w-6 h-6" style={{ color: 'var(--color-emerald)' }} />
-                      </div>
-                      <div>
-                        <p className="text-sm text-[#666]">Formação</p>
-                        <p
-                          className="font-semibold"
-                          style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
-                        >
-                          Dante Pazzanese
-                        </p>
-                      </div>
-                    </div>
+            {/* Direita - Imagem */}
+            <div className="lg:col-span-5 lg:col-start-8 relative mt-20 lg:mt-0">
+              <div className="relative animate-float z-20 w-full max-w-[22rem] lg:max-w-md mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 rounded-[40px] blur-2xl transform scale-110" />
+                <img
+                  src="/hero-doctor.jpg"
+                  alt="Dr. Vandui"
+                  className="relative w-full rounded-[40px] shadow-2xl border border-white/10"
+                />
+
+                {/* Badge Premium */}
+                <div className="absolute -bottom-8 -left-4 sm:-left-12 bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-3xl shadow-2xl flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center shadow-inner flex-shrink-0">
+                    <Trophy className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-emerald-200 font-bold uppercase tracking-wider mb-1">Destaque</p>
+                    <p className="font-bold text-white text-sm sm:text-base lg:text-lg leading-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                      Instituto Dante<br />Pazzanese
+                    </p>
                   </div>
                 </div>
-
-                {/* Decorative Circles */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border-2 border-white/10 rounded-full" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] border border-white/5 rounded-full" />
               </div>
+
+              {/* Rings Decorativos */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] border opacity-20 border-white rounded-full z-0 pointer-events-none" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] border opacity-10 border-white rounded-full z-0 border-dashed pointer-events-none" />
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* ── ESPECIALIDADES (Professional Premium) ── */}
       <section className="py-24" style={{ backgroundColor: 'var(--color-white-blue)' }}>
         <div className="section-padding">
           <div className="text-center mb-16">
@@ -254,31 +338,23 @@ export function Home() {
               Especialidades Médicas
             </h2>
             <p className="text-lg text-[#666] max-w-2xl mx-auto">
-              Ofereço atendimento especializado nas principais áreas da medicina
-              cardiovascular e terapia intensiva.
+              Foco em gerenciar o envelhecimento, doenças crônicas cardíacas e garantir acolhimento integrado,
+              tratamento eficaz e qualidade de vida duradoura.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service) => (
               <Link key={service.title} to="/especialidades">
-                <div className="group bg-white rounded-2xl p-6 h-full card-hover cursor-pointer">
-                  <div
-                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}
-                  >
+                <div className={`bg-white rounded-[24px] p-8 h-full transition-all duration-300 hover:-translate-y-2 hover:shadow-xl shadow-sm border border-gray-100 ${service.highlight ? 'ring-2 ring-rose-400' : ''}`}>
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 shadow-md`}>
                     <service.icon className="w-7 h-7 text-white" />
                   </div>
-                  <h3
-                    className="text-xl font-semibold mb-3"
-                    style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
-                  >
+                  <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
                     {service.title}
                   </h3>
-                  <p className="text-[#666] text-sm leading-relaxed">{service.description}</p>
-                  <div
-                    className="flex items-center gap-2 mt-5 font-medium text-sm group-hover:gap-3 transition-all"
-                    style={{ color: 'var(--color-teal)' }}
-                  >
+                  <p className="text-[#666] text-[15px] leading-relaxed mb-6">{service.description}</p>
+                  <div className="flex items-center gap-2 mt-auto font-medium text-sm" style={{ color: 'var(--color-teal)' }}>
                     Saiba mais
                     <ArrowRight className="w-4 h-4" />
                   </div>
@@ -289,181 +365,429 @@ export function Home() {
         </div>
       </section>
 
-      {/* Academic Highlights Section */}
+      {/* ── CARDIOLOGIA NO BRASIL (Estatísticas Impactantes) ── */}
       <section className="py-24 bg-white">
         <div className="section-padding">
-          <div className="text-center mb-16">
-            <span
-              className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4"
-              style={{ backgroundColor: 'var(--color-cyan-light)', color: 'var(--color-teal)' }}
-            >
-              Produção Acadêmica
-            </span>
-            <h2
-              className="text-4xl sm:text-5xl font-bold mb-4"
-              style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
-            >
-              Destaques Acadêmicos
-            </h2>
-            <p className="text-lg text-[#666] max-w-2xl mx-auto">
-              Compromisso com a ciência, pesquisa e educação médica.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {academicHighlights.map((item) => (
-              <Link key={item.title} to={item.link}>
-                <div
-                  className="rounded-2xl p-6 text-center card-hover cursor-pointer h-full"
-                  style={{ backgroundColor: 'var(--color-white-blue)' }}
-                >
-                  <div
-                    className="w-14 h-14 mx-auto rounded-xl flex items-center justify-center mb-4"
-                    style={{ backgroundColor: 'var(--color-mint)' }}
-                  >
-                    <item.icon className="w-7 h-7" style={{ color: 'var(--color-emerald)' }} />
-                  </div>
-                  <h3
-                    className="text-lg font-semibold mb-2"
-                    style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
-                  >
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-[#666]">{item.description}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* About Preview Section */}
-      <section className="py-24" style={{ backgroundColor: 'var(--color-white-blue)' }}>
-        <div className="section-padding">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Image */}
-            <div className="relative">
-              <div className="relative">
-                <img
-                  src="/about-doctor.jpg"
-                  alt="Dr. Vandui"
-                  className="w-full max-w-md mx-auto rounded-3xl shadow-2xl"
-                />
-                {/* Experience Badge */}
-                <div
-                  className="absolute -top-6 -right-6 rounded-2xl p-5 shadow-xl"
-                  style={{ backgroundColor: 'var(--color-teal)' }}
-                >
-                  <div className="text-center text-white">
-                    <div className="text-4xl font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                      10+
-                    </div>
-                    <div className="text-sm text-white/80">Anos de Exp.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
               <span
                 className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4"
                 style={{ backgroundColor: 'var(--color-mint)', color: 'var(--color-emerald)' }}
               >
-                Sobre o Médico
+                Cenário Brasileiro
               </span>
               <h2
-                className="text-4xl sm:text-5xl font-bold mb-6"
+                className="text-4xl sm:text-5xl font-bold mb-4"
                 style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
               >
-                Dr. Vandui da Silva dos Santos
+                A Radiografia do Coração
               </h2>
-              <p className="text-[#666] leading-relaxed mb-6">
-                Médico cardiologista, apaixonado por emergências clínicas, cardiológicas e terapia intensiva.
-                Comprometido em oferecer atendimento técnico e humano de excelência, sempre pautado nas
-                melhores evidências científicas e práticas médicas atuais.
+              <p className="text-lg text-[#666] max-w-2xl mx-auto">
+                No Brasil, as doenças cardiovasculares representam a maior causa de mortalidade.
+                Entender nossa realidade é o primeiro passo para evitarmos que você ou sua família
+                façam parte dessa estatística.
               </p>
-              <p className="text-[#666] leading-relaxed mb-8">
-                Forjado por anos de residência em instituições de referência e por ampla experiência no
-                manejo de pacientes críticos e na execução de procedimentos invasivos, como intubação
-                orotraqueal, drenagem de tórax e passagem de acesso venoso central. Busco integrar e
-                colaborar com equipes de alta performance, dedicadas à melhoria contínua e à excelência assistencial.
-              </p>
+            </div>
 
-              {/* Differentials */}
-              <div className="space-y-4 mb-8">
-                {differentials.map((diff) => (
-                  <div key={diff.title} className="flex items-start gap-4">
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: 'var(--color-mint)' }}
-                    >
-                      <diff.icon className="w-5 h-5" style={{ color: 'var(--color-emerald)' }} />
+            {/* Stats cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {brazilStats.map((s) => (
+                <div key={s.label} className="rounded-3xl overflow-hidden shadow-sm bg-white border border-gray-100 hover:shadow-lg transition-shadow">
+                  <div className={`p-6 sm:p-8 flex items-start gap-5`}>
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center flex-shrink-0 text-white shadow-md`}>
+                      <s.icon className="w-7 h-7" />
                     </div>
                     <div>
-                      <h4
-                        className="font-semibold mb-1"
-                        style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
-                      >
-                        {diff.title}
-                      </h4>
-                      <p className="text-sm text-[#666]">{diff.description}</p>
+                      <div className="text-4xl font-extrabold text-[var(--color-teal)] tracking-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>{s.value}</div>
+                      <div className="text-[15px] font-bold tracking-wide mt-1 text-[var(--color-emerald)] uppercase">{s.label}</div>
+                      <p className="text-[14px] text-[#666] mt-2 leading-relaxed">{s.sub}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-
-              <Link
-                to="/perfil"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-white transition-all hover:scale-105"
-                style={{ backgroundColor: 'var(--color-teal)' }}
-              >
-                Ver Currículo Completo
-                <ArrowRight className="w-5 h-5" />
-              </Link>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-gradient-teal relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
+      {/* ── CONDUTAS E EXAMES (O que trato) ── */}
+      <section className="py-24" style={{ backgroundColor: 'var(--color-white-blue)' }}>
+        <div className="section-padding">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <span
+                className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4"
+                style={{ backgroundColor: 'var(--color-cyan-light)', color: 'var(--color-teal)' }}
+              >
+                Abordagem Clínica
+              </span>
+              <h2
+                className="text-4xl sm:text-5xl font-bold mb-4"
+                style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
+              >
+                Do Diagnóstico ao Controle
+              </h2>
+              <p className="text-lg text-[#666] max-w-2xl mx-auto">
+                Uma estrutura de avaliação completa para mapear, prevenir e reverter qualquer agravo
+                à sua saúde circulatória.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              <div className="bg-white rounded-[32px] p-8 sm:p-10 shadow-xl shadow-gray-100/50">
+                <h3 className="text-2xl font-bold mb-8" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                  Condições Tratadas
+                </h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    { label: 'Hipertensão', icon: Activity },
+                    { label: 'Arritmias', icon: Zap },
+                    { label: 'Insuficiência Cardíaca', icon: HeartPulse },
+                    { label: 'Infarto', icon: Heart },
+                    { label: 'Angina', icon: Pill },
+                    { label: 'Dislipidemia (Colesterol)', icon: TestTubes },
+                    { label: 'Valvopatias', icon: Stethoscope },
+                    { label: 'Fibrilação Atrial', icon: ActivitySquare },
+                  ].map((c) => (
+                    <div key={c.label} className="flex items-center gap-4 bg-[#f0f9fa] rounded-2xl p-4 shadow-sm border border-[var(--color-cyan-light)] transition-transform hover:-translate-y-1">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'white' }}>
+                        <c.icon className="w-5 h-5" style={{ color: 'var(--color-teal)' }} />
+                      </div>
+                      <span className="text-[14px] font-bold" style={{ color: 'var(--color-teal)' }}>{c.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-[#09404A] to-[var(--color-teal)] rounded-[32px] p-8 sm:p-10 shadow-xl overflow-hidden relative">
+                <div className="absolute top-0 right-0 p-12 opacity-10">
+                  <Microscope className="w-48 h-48 text-white" />
+                </div>
+
+                <h3 className="text-2xl font-bold mb-8 text-white relative z-10" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  Exames & Avaliações
+                </h3>
+                <div className="space-y-6 mb-10 relative z-10">
+                  {[
+                    { name: 'Eletrocardiograma (ECG)', desc: 'Avaliação da atividade elétrica em repouso' },
+                    { name: 'Holter 24 horas', desc: 'Monitorização contínua do ritmo por um dia' },
+                    { name: 'MAPA', desc: 'Controle contínuo e ambulatorial da pressão' },
+                    { name: 'Teste Ergométrico', desc: 'Avaliação cardiovascular sob esforço físico' },
+                    { name: 'Ecocardiograma', desc: 'Imagem ultrassonográfica para checar anatomia' },
+                  ].map((e) => (
+                    <div key={e.name} className="flex items-start gap-4">
+                      <CheckCircle2 className="w-6 h-6 flex-shrink-0 mt-0.5 text-emerald-400" />
+                      <div>
+                        <span className="font-bold text-[16px] text-white">{e.name}</span>
+                        <span className="text-[14px] text-white/80 block mt-1">{e.desc}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  to="/especialidades"
+                  className="inline-flex relative z-10 items-center gap-2 px-8 py-5 rounded-2xl font-bold transition-all transform hover:-translate-y-1 shadow-lg w-full justify-center text-lg bg-white text-[var(--color-teal)] hover:bg-gray-50"
+                >
+                  Agendar Rastreio Completo
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SINAIS DE ALERTA ── */}
+      <section className="py-24 bg-white border-t border-gray-100">
+        <div className="section-padding">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4" style={{ backgroundColor: 'var(--color-mint)', color: 'var(--color-emerald)' }}>
+                Fique Atento
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                Sinais de Alerta
+              </h2>
+              <p className="text-lg text-[#666] max-w-2xl mx-auto">
+                No menor sinal destes sintomas, procurar avaliação médica é o caminho mais seguro para um diagnóstico preciso.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {warningSigns.map((sign) => (
+                <div key={sign.title} className="bg-[#f0f9fa] rounded-3xl p-8 border border-[var(--color-cyan-light)] shadow-sm hover:shadow-lg transition-transform hover:-translate-y-2">
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${sign.color} flex items-center justify-center mb-6 shadow-md`}>
+                    <sign.icon className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                    {sign.title}
+                  </h3>
+                  <p className="text-[#666] text-[15px] leading-relaxed mb-6">{sign.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── HÁBITOS SAUDÁVEIS ── */}
+      <section className="py-24" style={{ backgroundColor: 'var(--color-white-blue)' }}>
+        <div className="section-padding">
+          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4" style={{ backgroundColor: 'var(--color-cyan-light)', color: 'var(--color-teal)' }}>
+                Medicina do Estilo de Vida
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-6" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                A prevenção é o<br /> melhor remédio
+              </h2>
+              <p className="text-lg text-[#666] mb-8 leading-relaxed">
+                A saúde cardiovascular começa muito antes do consultório. 80% dos eventos cardíacos prematuros poderiam ser prevenidos integrando pequenas mudanças no seu dia a dia.
+              </p>
+
+              <div className="space-y-6">
+                {healthyHabits.map((habit) => (
+                  <div key={habit.title} className="flex items-start gap-5">
+                    <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-sm border border-gray-100">
+                      <habit.icon className="w-7 h-7 text-[var(--color-emerald)]" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-[var(--color-teal)] text-lg mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>{habit.title}</h4>
+                      <p className="text-[#555] text-[15px] leading-relaxed">{habit.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="lg:w-1/2 relative">
+              <div className="absolute inset-0 bg-gradient-teal rounded-[32px] transform -rotate-[4deg] scale-105 opacity-80 shadow-2xl" />
+              <div className="relative bg-white p-2 rounded-[32px] shadow-lg border border-gray-100">
+                <img
+                  src="https://images.unsplash.com/photo-1542385151-efd9000785a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="Hábitos Saudáveis"
+                  className="w-full rounded-[28px] object-cover aspect-[4/5] opacity-90 hover:opacity-100 transition-opacity"
+                />
+                <div className="absolute top-8 -left-8 bg-white py-4 px-6 rounded-2xl shadow-xl flex items-center gap-4 border border-gray-100">
+                  <div className="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center">
+                    <Heart className="w-6 h-6 text-rose-500" />
+                  </div>
+                  <div>
+                    <div className="font-extrabold text-[#222]" style={{ fontFamily: 'Poppins, sans-serif' }}>-80% Risco</div>
+                    <div className="text-[10px] font-bold text-[#888] uppercase tracking-widest mt-1">Eventos Prematuros</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FORMAÇÃO & PESQUISA ── */}
+      <section className="py-24" style={{ backgroundColor: 'var(--color-white-blue)' }}>
+        <div className="section-padding">
+          <div className="max-w-6xl mx-auto">
+
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4" style={{ backgroundColor: 'var(--color-cyan-light)', color: 'var(--color-teal)' }}>
+                Trajetória e Atualização
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                Formação e Ciência
+              </h2>
+            </div>
+
+            <div className="grid xl:grid-cols-2 gap-12">
+
+              {/* Formação */}
+              <div>
+                <h3 className="text-2xl font-bold mb-8 flex items-center gap-3" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                  <Building2 className="w-6 h-6 text-[var(--color-emerald)]" />
+                  Instituição
+                </h3>
+
+                <div className="space-y-6">
+                  {institutions.map((inst) => (
+                    <div key={inst.name} className="bg-white rounded-[24px] p-8 shadow-sm border border-gray-50 flex flex-col sm:flex-row gap-6 hover:shadow-md transition-shadow">
+                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${inst.color} flex items-center justify-center flex-shrink-0 shadow-sm`}>
+                        <Award className="w-8 h-8 text-white" />
+                      </div>
+                      <div>
+                        <span className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 uppercase tracking-wide" style={{ backgroundColor: 'var(--color-mint)', color: 'var(--color-emerald)' }}>
+                          {inst.badge}
+                        </span>
+                        <h4 className="text-xl font-bold mb-1" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>{inst.name}</h4>
+                        <p className="text-sm font-bold text-[var(--color-emerald)] mb-3">{inst.role} · {inst.period}</p>
+                        <p className="text-[#555] text-[15px] leading-relaxed mb-4">{inst.highlight}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {inst.stats?.map(stat => (
+                            <span key={stat} className="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-[#f0f9fa] text-[var(--color-teal)] rounded-lg border border-[var(--color-cyan-light)]">
+                              {stat}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Atualização CIÊNCIA */}
+              <div>
+                <h3 className="text-2xl font-bold mb-8 flex items-center gap-3" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                  <TrendingUp className="w-6 h-6 text-[var(--color-emerald)]" />
+                  Atualidades Científicas
+                </h3>
+
+                <div className="space-y-4">
+                  {research2025.map((r) => (
+                    <div key={r.title} className="bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex items-start gap-5">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-cyan-light)' }}>
+                        <r.icon className="w-6 h-6" style={{ color: 'var(--color-teal)' }} />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md ${r.tagColor}`}>{r.source}</span>
+                          <span className="text-xs text-[#888] font-bold">{r.year}</span>
+                        </div>
+                        <h4 className="text-[16px] font-bold text-[#222] mb-2" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>{r.title}</h4>
+                        <p className="text-[14px] text-[#555] leading-relaxed">{r.summary}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── POR QUE ME ESCOLHER ── */}
+      <section className="py-20 bg-white">
+        <div className="section-padding">
+          <div className="max-w-6xl mx-auto">
+
+            {/* Título centrado no topo */}
+            <div className="text-center mb-10">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-3" style={{ backgroundColor: 'var(--color-mint)', color: 'var(--color-emerald)' }}>
+                Diferenciais
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                Um cardiologista que cuida de verdade
+              </h2>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+
+              {/* Foto — primeiro no DOM → primeiro no mobile naturalmente */}
+              <div className="relative w-full">
+                {/* Frame decorativo teal */}
+                <div
+                  className="absolute inset-0 rounded-[2rem] border-2"
+                  style={{ borderColor: 'var(--color-teal)', transform: 'translate(10px, 10px)', opacity: 0.3 }}
+                />
+                <img
+                  src="/about-doctor.jpg"
+                  alt="Dr. Vandui"
+                  className="relative w-full rounded-[2rem] shadow-xl object-cover aspect-[4/5]"
+                />
+                {/* Badge 10+ no canto inferior direito */}
+                <div className="absolute -bottom-5 right-6 bg-white py-3 px-5 rounded-2xl shadow-xl flex items-center gap-3 border border-gray-100">
+                  <div className="text-3xl font-extrabold" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>10+</div>
+                  <div className="text-[11px] font-bold text-[#888] uppercase tracking-wider leading-tight">Anos de<br />Experiência</div>
+                </div>
+              </div>
+
+              {/* Texto e lista de diferenciais */}
+              <div className="mt-8 lg:mt-0">
+                <p className="text-[16px] text-[#555] leading-relaxed mb-3">
+                  Escolhi a medicina por um desejo profundo de cuidar das pessoas — promovendo qualidade de vida e fazendo diferença real na trajetória de cada paciente.
+                </p>
+                <p className="text-[16px] text-[#555] leading-relaxed mb-7 pb-7 border-b border-gray-100">
+                  Como cardiologista, conheço os medos que um diagnóstico cardíaco traz. Me preparei nas melhores instituições para estar ao seu lado nesses momentos.{' '}
+                  <span className="font-semibold" style={{ color: 'var(--color-teal)' }}>Vejo meus pacientes como parceiros — somos um time.</span>
+                </p>
+
+                {/* Lista editorial — sem cards coloridos */}
+                <div className="divide-y divide-gray-100">
+                  {differentials.map((diff) => (
+                    <div
+                      key={diff.title}
+                      className="group flex items-start gap-4 py-4 hover:bg-gray-50 -mx-3 px-3 rounded-xl transition-colors duration-150"
+                    >
+                      <div
+                        className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center mt-0.5 group-hover:scale-105 transition-transform"
+                        style={{ backgroundColor: 'var(--color-cyan-light)' }}
+                      >
+                        <diff.icon className="w-5 h-5" style={{ color: 'var(--color-teal)' }} />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-[15px] mb-0.5" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                          {diff.title}
+                        </h4>
+                        <p className="text-[#666] text-sm leading-relaxed">{diff.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8">
+                  <Link
+                    to="/perfil"
+                    className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-white transition-all hover:-translate-y-1 hover:shadow-xl text-[16px]"
+                    style={{ backgroundColor: 'var(--color-teal)' }}
+                  >
+                    Conhecer Minha História
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── MINHA PROMESSA / CTA ── */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-teal" />
+        <div className="absolute inset-0 opacity-[0.05]">
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+              backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
               backgroundSize: '40px 40px',
             }}
           />
         </div>
         <div className="section-padding relative">
-          <div className="max-w-3xl mx-auto text-center">
-            <Heart className="w-16 h-16 mx-auto mb-6" style={{ color: 'var(--color-title-contrast)' }} />
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 backdrop-blur-md mb-8">
+              <Heart className="w-10 h-10 text-white" />
+            </div>
             <h2
-              className="text-4xl sm:text-5xl font-bold mb-6 text-title-contrast"
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-8 text-title-contrast tracking-tight leading-tight"
               style={{ fontFamily: 'Poppins, sans-serif' }}
             >
-              Cuide do seu coração com quem entende do assunto
+              Aqui, você é tratado com empatia e excelência científica
             </h2>
-            <p className="text-xl mb-8 leading-relaxed" style={{ color: 'rgba(224, 247, 250, 0.85)' }}>
-              Agende sua consulta hoje mesmo e dê o primeiro passo para uma vida
-              mais saudável. Atendimento personalizado e humanizado.
+            <p className="text-xl sm:text-2xl mb-12 font-light" style={{ color: 'rgba(224, 247, 250, 0.9)' }}>
+              Agende sua consulta e faça parte de uma jornada personalizada para um coração saudável.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-5">
               <a
                 href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white rounded-xl font-semibold transition-all hover:scale-105"
+                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white rounded-2xl font-bold transition-all hover:-translate-y-1 hover:shadow-2xl text-[16px]"
                 style={{ color: 'var(--color-teal)' }}
               >
-                <Phone className="w-5 h-5" />
+                <Phone className="w-6 h-6" />
                 Agendar por WhatsApp
               </a>
               <Link
                 to="/contato"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-semibold hover:bg-white/20 transition-all"
+                className="inline-flex items-center justify-center gap-3 px-10 py-5 border border-white/30 backdrop-blur-md text-white rounded-2xl font-semibold hover:bg-white/10 transition-all text-[16px]"
               >
                 Outras Formas de Contato
               </Link>

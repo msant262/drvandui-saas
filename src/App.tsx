@@ -6,9 +6,6 @@ import { Home } from './pages/Home';
 import { Perfil } from './pages/Perfil';
 import { Especialidades } from './pages/Especialidades';
 import { Contato } from './pages/Contato';
-import { Publicacoes } from './pages/Publicacoes';
-import { Eventos } from './pages/Eventos';
-import { Pesquisas } from './pages/Pesquisas';
 import { ScrollUpButton } from './components/ScrollUpButton';
 import './App.css';
 
@@ -37,9 +34,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/especialidades" element={<Especialidades />} />
-          <Route path="/publicacoes" element={<Publicacoes />} />
-          <Route path="/eventos" element={<Eventos />} />
-          <Route path="/pesquisas" element={<Pesquisas />} />
           <Route path="/contato" element={<Contato />} />
         </Routes>
         <Footer />

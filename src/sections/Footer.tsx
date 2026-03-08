@@ -21,7 +21,7 @@ export function Footer() {
                 <span className="font-bold text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
                   Dr. Vandui
                 </span>
-                <span className="text-[10px] text-white/60">Cardiologia &amp; UTI</span>
+                <span className="text-[10px] text-white/60">Cardiologia & Clínica Médica</span>
               </div>
             </Link>
             {/* Redes sociais — alinhadas ao centro do ícone */}
@@ -53,9 +53,6 @@ export function Footer() {
               { path: '/', label: 'Início' },
               { path: '/perfil', label: 'Perfil' },
               { path: '/especialidades', label: 'Especialidades' },
-              { path: '/publicacoes', label: 'Publicações' },
-              { path: '/pesquisas', label: 'Pesquisas' },
-              { path: '/eventos', label: 'Eventos' },
               { path: '/contato', label: 'Contato' },
             ].map((link) => (
               <Link
@@ -105,7 +102,7 @@ export function Footer() {
             &copy; {currentYear} Dr. Vandui da Silva dos Santos · CRM-SP
           </p>
           <p className="text-white/30 text-[11px]">
-            Cardiologista · Terapia Intensiva · Emergências Médicas
+            Cardiologista · Clínica Médica · São Paulo
           </p>
         </div>
       </div>
