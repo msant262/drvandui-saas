@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { Navigation } from './sections/Navigation';
 import { Footer } from './sections/Footer';
 import { Home } from './pages/Home';
-import { Perfil } from './pages/Perfil';
 import { Especialidades } from './pages/Especialidades';
 import { Contato } from './pages/Contato';
 import { ScrollUpButton } from './components/ScrollUpButton';
@@ -32,7 +31,6 @@ function App() {
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/perfil" element={<Perfil />} />
           <Route path="/especialidades" element={<Especialidades />} />
           <Route path="/contato" element={<Contato />} />
         </Routes>

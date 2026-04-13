@@ -5,7 +5,6 @@ import { Menu, X, HeartPulse, Phone } from 'lucide-react';
 
 const navLinks = [
   { path: '/', label: 'Início' },
-  { path: '/perfil', label: 'Perfil' },
   { path: '/especialidades', label: 'Especialidades' },
   { path: '/contato', label: 'Contato' },
 ];
