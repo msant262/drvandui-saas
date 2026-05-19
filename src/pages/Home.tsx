@@ -56,7 +56,7 @@ const services = [
   {
     icon: Stethoscope,
     title: 'Clínica Médica',
-    description: 'Foco no paciente adulto, integrando saúde global e longevidade sustentável.',
+    description: 'Cuidado integral do paciente adulto, com foco em prevenção e manejo de doenças do dia a dia.',
     color: 'from-emerald-500 to-teal-600',
     highlight: false,
   },
@@ -72,7 +72,7 @@ const services = [
 const differentials = [
   {
     icon: HeartHandshake,
-    title: 'Você é Meu Parceiro',
+    title: 'Tratamento como parceria',
     description: 'Aqui você não é um número. A base do tratamento é a escuta ativa.',
   },
   {
@@ -83,17 +83,17 @@ const differentials = [
   {
     icon: Shield,
     title: 'Ciência + Empatia',
-    description: 'Condutas 100% atualizadas pelas diretrizes de 2025/2026 com base humana.',
+    description: 'Condutas alinhadas às diretrizes mais recentes (SBC/AHA 2025–2026), aplicadas com escuta e empatia.',
   },
 ];
 
 const brazilStats = [
-  { value: '90s', label: '1 Morte a cada', sub: 'Lidamos com a principal causa de mortalidade', color: 'from-orange-500 to-red-600', icon: HeartPulse },
-  { value: '400 Mil', label: 'Óbitos / ano', sub: 'Por doenças cardiovasculares', color: 'from-rose-500 to-pink-600', icon: Activity },
-  { value: '38 Milhões', label: 'De Hipertensos', sub: 'Grande parte sem o controle adequado', color: 'from-blue-500 to-indigo-600', icon: ActivitySquare },
-  { value: '30%', label: 'Mortes no País', sub: 'Decorrem de eventos médicos do coração', color: 'from-emerald-500 to-teal-600', icon: Globe },
-  { value: '14 Milhões', label: 'Com Colesterol Alto', sub: 'Maioria silenciosa e não diagnosticada', color: 'from-violet-500 to-purple-600', icon: TestTubes },
-  { value: '80%', label: 'São Preveníveis', sub: 'Com medicina do estilo de vida e diagnóstico', color: 'from-[#09404A] to-[var(--color-teal)]', icon: ShieldCheck },
+  { value: 'A cada 90s', label: '1 Morte no Brasil', sub: 'Por doença cardiovascular — a principal causa de mortalidade', color: 'from-orange-500 to-red-600', icon: HeartPulse },
+  { value: '400 mil', label: 'Óbitos / ano', sub: 'Por doenças cardiovasculares', color: 'from-rose-500 to-pink-600', icon: Activity },
+  { value: '38 milhões', label: 'De Hipertensos', sub: 'Grande parte sem controle adequado da pressão', color: 'from-blue-500 to-indigo-600', icon: ActivitySquare },
+  { value: '30%', label: 'Das Mortes no País', sub: 'São causadas por doenças cardiovasculares', color: 'from-emerald-500 to-teal-600', icon: Globe },
+  { value: '14 milhões', label: 'Com Colesterol Alto', sub: 'Maioria silenciosa e não diagnosticada', color: 'from-violet-500 to-purple-600', icon: TestTubes },
+  { value: '80%', label: 'São Preveníveis', sub: 'Com hábitos saudáveis e diagnóstico precoce', color: 'from-[#09404A] to-[var(--color-teal)]', icon: ShieldCheck },
 ];
 
 const warningSigns = [
@@ -112,7 +112,7 @@ const warningSigns = [
   {
     icon: Activity,
     title: 'Palpitações',
-    description: 'Coração acelerado severamente, batimentos irregulares ou sensação de falhas no peito.',
+    description: 'Batimentos acelerados, irregulares ou sensação de falhas no peito.',
     color: 'from-violet-500 to-purple-600',
   },
   {
@@ -132,17 +132,17 @@ const healthyHabits = [
   {
     icon: Dumbbell,
     title: 'Exercício Regular',
-    description: 'Cerca de 150 minutos semanais de atividade fortalecem bastante seu músculo cardíaco.',
+    description: '150 minutos semanais de atividade fortalecem o seu músculo cardíaco.',
   },
   {
     icon: Moon,
     title: 'Sono de Qualidade',
-    description: 'Aproximadamente 7 a 8 horas de repouso vitais para regular a sua pressão arterial.',
+    description: 'De 7 a 8 horas de sono ajudam a regular a sua pressão arterial.',
   },
   {
     icon: CigaretteOff,
     title: 'Atenção aos Vícios',
-    description: 'O tabagismo e o álcool em excesso são os maiores adversários dos seus vasos sanguíneos.',
+    description: 'O tabagismo e o álcool em excesso prejudicam diretamente seus vasos sanguíneos.',
   }
 ];
 
@@ -195,7 +195,7 @@ const research2025 = [
 
 export function Home() {
   usePageSEO({
-    title: 'Cardiologista em Santos, Santo André e São Paulo — Dr. Vandui',
+    title: 'Cardiologista em Santos, Santo André e Vila Mariana — Dr. Vandui',
     description:
       'Dr. Vandui da Silva dos Santos — Médico Cardiologista com residência no Instituto Dante Pazzanese. Atendimento humanizado focado em Cardiologia e Clínica Médica. Agende sua consulta hoje.',
     canonical: '/',
@@ -232,15 +232,17 @@ export function Home() {
                 <span className="text-white/90 tracking-wide">Excelência em Cardiologia</span>
               </div>
 
-              <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-bold mb-6 text-white leading-[1.05] tracking-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                Dr. Vandui
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-cyan-300 mt-2">
-                  Medicina de Alto Padrão.
+              <h1 className="font-bold mb-5 text-white leading-[1.02] tracking-tight" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                <span className="block text-6xl sm:text-7xl lg:text-[6.5rem]">
+                  Dr. Vandui
+                </span>
+                <span className="block text-3xl sm:text-4xl lg:text-[2.5rem] font-semibold mt-5 text-emerald-200/95 tracking-wide">
+                  Cardiologista · Santos, Santo André e Vila Mariana
                 </span>
               </h1>
 
               <p className="text-xl sm:text-2xl font-light mb-8 text-white/80 max-w-2xl leading-relaxed">
-                Mais do que tratar doenças, meu foco é mapear seu risco e blindar sua saúde cardiovascular para garantir longevidade com qualidade de vida.
+                Cardiologia e Clínica Médica com diagnóstico preciso, prevenção real e acompanhamento próximo — em todas as fases da vida.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-5 mt-10">
@@ -251,13 +253,13 @@ export function Home() {
                   className="group relative inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-bold bg-white text-[var(--color-teal)] overflow-hidden transition-all hover:scale-[1.02] shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.25)] text-lg"
                 >
                   <Phone className="w-5 h-5 transition-transform group-hover:rotate-12" />
-                  Agendar Rastreio
+                  Agendar Consulta
                 </a>
                 <Link
-                  to="/perfil"
+                  to="/especialidades"
                   className="inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-semibold bg-white/5 border border-white/10 backdrop-blur-md text-white hover:bg-white/10 transition-all text-lg"
                 >
-                  Conhecer o Especialista
+                  Conhecer Especialidades
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -294,7 +296,7 @@ export function Home() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 rounded-[40px] blur-2xl transform scale-110" />
                 <img
                   src="/hero-doctor.jpg"
-                  alt="Dr. Vandui"
+                  alt="Dr. Vandui da Silva dos Santos — Cardiologista em Santos, Santo André e Vila Mariana"
                   className="relative w-full rounded-[40px] shadow-2xl border border-white/10"
                 />
 
@@ -338,8 +340,7 @@ export function Home() {
               Especialidades Médicas
             </h2>
             <p className="text-lg text-[#666] max-w-2xl mx-auto">
-              Foco em gerenciar o envelhecimento, doenças crônicas cardíacas e garantir acolhimento integrado,
-              tratamento eficaz e qualidade de vida duradoura.
+              Foco em prevenção, doenças crônicas e acompanhamento contínuo, com olhar no envelhecimento saudável.
             </p>
           </div>
 
@@ -383,9 +384,7 @@ export function Home() {
                 A Radiografia do Coração
               </h2>
               <p className="text-lg text-[#666] max-w-2xl mx-auto">
-                No Brasil, as doenças cardiovasculares representam a maior causa de mortalidade.
-                Entender nossa realidade é o primeiro passo para evitarmos que você ou sua família
-                façam parte dessa estatística.
+                As doenças cardiovasculares são a principal causa de morte no Brasil. Conhecer esses números é o primeiro passo para não fazer parte da estatística.
               </p>
             </div>
 
@@ -406,6 +405,9 @@ export function Home() {
                 </div>
               ))}
             </div>
+            <p className="text-xs text-[#888] text-center mt-8 italic">
+              Fontes: Sociedade Brasileira de Cardiologia (SBC) e DATASUS.
+            </p>
           </div>
         </div>
       </section>
@@ -488,7 +490,7 @@ export function Home() {
                   to="/especialidades"
                   className="inline-flex relative z-10 items-center gap-2 px-8 py-5 rounded-2xl font-bold transition-all transform hover:-translate-y-1 shadow-lg w-full justify-center text-lg bg-white text-[var(--color-teal)] hover:bg-gray-50"
                 >
-                  Agendar Rastreio Completo
+                  Agendar Avaliação Completa
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -509,7 +511,7 @@ export function Home() {
                 Sinais de Alerta
               </h2>
               <p className="text-lg text-[#666] max-w-2xl mx-auto">
-                No menor sinal destes sintomas, procurar avaliação médica é o caminho mais seguro para um diagnóstico preciso.
+                Nenhum desses sintomas deve ser ignorado. Procure avaliação médica ao percebê-los.
               </p>
             </div>
 
@@ -542,7 +544,7 @@ export function Home() {
                 A prevenção é o<br /> melhor remédio
               </h2>
               <p className="text-lg text-[#666] mb-8 leading-relaxed">
-                A saúde cardiovascular começa muito antes do consultório. 80% dos eventos cardíacos prematuros poderiam ser prevenidos integrando pequenas mudanças no seu dia a dia.
+                A saúde cardiovascular começa muito antes do consultório. Cerca de 80% dos eventos cardíacos prematuros podem ser prevenidos com pequenas mudanças no dia a dia.
               </p>
 
               <div className="space-y-6">
@@ -564,7 +566,8 @@ export function Home() {
               <div className="relative bg-white p-2 rounded-[32px] shadow-lg border border-gray-100">
                 <img
                   src="https://images.unsplash.com/photo-1542385151-efd9000785a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                  alt="Hábitos Saudáveis"
+                  alt="Hábitos saudáveis para a saúde cardiovascular — alimentação, exercício e sono"
+                  loading="lazy"
                   className="w-full rounded-[28px] object-cover aspect-[4/5] opacity-90 hover:opacity-100 transition-opacity"
                 />
                 <div className="absolute top-8 -left-8 bg-white py-4 px-6 rounded-2xl shadow-xl flex items-center gap-4 border border-gray-100">
@@ -572,8 +575,8 @@ export function Home() {
                     <Heart className="w-6 h-6 text-rose-500" />
                   </div>
                   <div>
-                    <div className="font-extrabold text-[#222]" style={{ fontFamily: 'Poppins, sans-serif' }}>-80% Risco</div>
-                    <div className="text-[10px] font-bold text-[#888] uppercase tracking-widest mt-1">Eventos Prematuros</div>
+                    <div className="font-extrabold text-[#222]" style={{ fontFamily: 'Poppins, sans-serif' }}>-80%</div>
+                    <div className="text-[10px] font-bold text-[#888] uppercase tracking-widest mt-1">De redução do risco</div>
                   </div>
                 </div>
               </div>
@@ -687,8 +690,8 @@ export function Home() {
                   style={{ borderColor: 'var(--color-teal)', transform: 'translate(10px, 10px)', opacity: 0.3 }}
                 />
                 <img
-                  src="/about-doctor.jpg"
-                  alt="Dr. Vandui"
+                  src="/formal.jpg"
+                  alt="Dr. Vandui — Cardiologista formado pelo Instituto Dante Pazzanese de Cardiologia"
                   className="relative w-full rounded-[2rem] shadow-xl object-cover aspect-[4/5]"
                 />
                 {/* Badge 10+ no canto inferior direito */}
@@ -733,11 +736,11 @@ export function Home() {
 
                 <div className="mt-8">
                   <Link
-                    to="/perfil"
+                    to="/especialidades"
                     className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-bold text-white transition-all hover:-translate-y-1 hover:shadow-xl text-[16px]"
                     style={{ backgroundColor: 'var(--color-teal)' }}
                   >
-                    Conhecer Minha História
+                    Ver Minhas Especialidades
                     <ArrowRight className="w-5 h-5" />
                   </Link>
                 </div>
@@ -772,7 +775,7 @@ export function Home() {
               Aqui, você é tratado com empatia e excelência científica
             </h2>
             <p className="text-xl sm:text-2xl mb-12 font-light" style={{ color: 'rgba(224, 247, 250, 0.9)' }}>
-              Agende sua consulta e faça parte de uma jornada personalizada para um coração saudável.
+              Agende sua consulta e comece uma jornada personalizada para um coração saudável.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-5">
               <a
@@ -783,7 +786,7 @@ export function Home() {
                 style={{ color: 'var(--color-teal)' }}
               >
                 <Phone className="w-6 h-6" />
-                Agendar por WhatsApp
+                Agendar Consulta
               </a>
               <Link
                 to="/contato"

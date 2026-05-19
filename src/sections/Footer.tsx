@@ -51,7 +51,6 @@ export function Footer() {
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-1.5 lg:mx-8">
             {[
               { path: '/', label: 'Início' },
-              { path: '/perfil', label: 'Perfil' },
               { path: '/especialidades', label: 'Especialidades' },
               { path: '/contato', label: 'Contato' },
             ].map((link) => (
@@ -102,7 +101,7 @@ export function Footer() {
             &copy; {currentYear} Dr. Vandui da Silva dos Santos · CRM-SP
           </p>
           <p className="text-white/30 text-[11px]">
-            Cardiologista · Clínica Médica · São Paulo
+            Cardiologista em Santos, Santo André e Vila Mariana
           </p>
         </div>
       </div>

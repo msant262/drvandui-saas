@@ -11,7 +11,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://www.drvandui.com.br';
-const DEFAULT_OG_IMAGE = `${BASE_URL}/hero-doctor.jpg`;
+const DEFAULT_OG_IMAGE = `${BASE_URL}/og-cover.svg`;
 
 export function usePageSEO({
     title,
@@ -23,7 +23,7 @@ export function usePageSEO({
     noIndex = false,
 }: SEOProps) {
     useEffect(() => {
-        const fullTitle = `${title} | Dr. Vandui - Cardiologista`;
+        const fullTitle = `${title} | Dr. Vandui — Cardiologista em Santos, Santo André e Vila Mariana`;
 
         // Título
         document.title = fullTitle;
@@ -73,8 +73,8 @@ export function usePageSEO({
         setMeta('meta[property="og:image"]', ogImage);
         setMeta('meta[property="og:image:width"]', '1200');
         setMeta('meta[property="og:image:height"]', '630');
-        setMeta('meta[property="og:image:alt"]', `Dr. Vandui - Cardiologista`);
-        setMeta('meta[property="og:site_name"]', 'Dr. Vandui - Cardiologista');
+        setMeta('meta[property="og:image:alt"]', 'Dr. Vandui — Cardiologista em Santos, Santo André e Vila Mariana');
+        setMeta('meta[property="og:site_name"]', 'Dr. Vandui — Cardiologista');
         setMeta('meta[property="og:locale"]', 'pt_BR');
 
         // Twitter Card

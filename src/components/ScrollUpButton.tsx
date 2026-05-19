@@ -23,8 +23,8 @@ export function ScrollUpButton() {
       aria-label="Voltar ao topo"
       style={{
         position: 'fixed',
-        bottom: '2rem',
-        right: '2rem',
+        bottom: '8.5rem',
+        right: '1.5rem',
         zIndex: 9999,
         width: '3rem',
         height: '3rem',

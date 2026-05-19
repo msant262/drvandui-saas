@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { Especialidades } from './pages/Especialidades';
 import { Contato } from './pages/Contato';
 import { ScrollUpButton } from './components/ScrollUpButton';
+import { OnelivFloatingCTA } from './components/OnelivFloatingCTA';
 import './App.css';
 
 // Componente para fazer scroll ao topo quando a rota muda
@@ -36,6 +37,7 @@ function App() {
         </Routes>
         <Footer />
         <ScrollUpButton />
+        <OnelivFloatingCTA />
       </div>
     </Router>
   );

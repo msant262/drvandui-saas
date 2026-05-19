@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { Link } from 'react-router-dom';
@@ -18,9 +19,9 @@ const specialties = [
     title: 'Cardiologia',
     subtitle: 'Cuidado completo e especializado do coração',
     description:
-      'A Cardiologia é a especialidade médica dedicada ao diagnóstico, tratamento e prevenção de doenças do coração e do sistema cardiovascular. Como cardiologista formado no renomado Instituto Dante Pazzanese de Cardiologia — uma das maiores referências do Brasil — ofereço atendimento especializado que alia tecnologia de ponta, medicina baseada em evidências e, acima de tudo, cuidado humano.',
+      'A Cardiologia cuida do diagnóstico, tratamento e prevenção das doenças do coração e do sistema cardiovascular. Como cardiologista formado no Instituto Dante Pazzanese — referência nacional — ofereço atendimento que une medicina baseada em evidências, tecnologia de ponta e cuidado humano.',
     detailText:
-      'Sei dos medos que um diagnóstico cardíaco traz. Por isso, aqui você não é apenas um paciente: é um parceiro de jornada. Juntos vamos entender sua condição, construir um plano de tratamento personalizado e garantir qualidade de vida duradoura.',
+      'Sei dos medos que um diagnóstico cardíaco traz. Aqui você não é apenas um paciente: é um parceiro de jornada. Juntos vamos entender sua condição, construir um plano personalizado e cuidar da sua qualidade de vida a longo prazo.',
     image: '/especialidade-cardiologia.png',
     bgColor: 'bg-rose-50',
     borderColor: 'border-rose-400',
@@ -50,9 +51,9 @@ const specialties = [
     title: 'Prevenção Cardiovascular',
     subtitle: 'Cuide do coração antes que o problema apareça',
     description:
-      'A melhor estratégia contra doenças do coração é a prevenção. Com uma avaliação completa do seu risco cardiovascular — incluindo histórico familiar, estilo de vida, exames laboratoriais e funcionais — traçamos juntos um plano de ação para manter seu coração saudável por muitos anos.',
+      'A melhor estratégia contra as doenças do coração é a prevenção. A partir de uma avaliação completa do seu risco cardiovascular — histórico familiar, estilo de vida e exames laboratoriais e funcionais — traçamos juntos um plano para manter seu coração saudável por muitos anos.',
     detailText:
-      'Muitas doenças cardíacas são silenciosas e evoluem sem sintomas por anos. A consulta preventiva pode identificar riscos antes que eles se tornem problemas graves.',
+      'Muitas doenças cardíacas são silenciosas e evoluem sem sintomas por anos. Uma consulta preventiva identifica riscos antes que eles se tornem problemas graves.',
     image: '/especialidade-prevencao.png',
     bgColor: 'bg-blue-50',
     borderColor: 'border-blue-400',
@@ -82,9 +83,9 @@ const specialties = [
     title: 'Clínica Médica',
     subtitle: 'Cuidado integral para sua saúde adulta',
     description:
-      'A Clínica Médica é a base da medicina interna: uma especialidade que enxerga o paciente como um todo, e não apenas seus sintomas isolados. Com residência sólida em Clínica Médica pelo Hospital Ipiranga, ofereço acompanhamento completo e humanizado para adultos, com ênfase em doenças crônicas e no envelhecimento com qualidade.',
+      'A Clínica Médica é a base da medicina interna: olha o paciente como um todo, e não apenas seus sintomas isolados. Com residência em Clínica Médica pelo Hospital Ipiranga, ofereço acompanhamento completo para adultos, com ênfase em doenças crônicas e envelhecimento com qualidade.',
     detailText:
-      'Gerenciar doenças crônicas exige constância, planejamento e uma relação de confiança entre médico e paciente. Aqui você encontra isso: presença, escuta e um plano de cuidados que evolui junto com você.',
+      'Cuidar de doenças crônicas exige constância, planejamento e confiança entre médico e paciente. Aqui você encontra isso: presença, escuta e um plano de cuidados que evolui junto com você.',
     image: '/especialidade-clinica.png',
     bgColor: 'bg-emerald-50',
     borderColor: 'border-emerald-400',
@@ -114,9 +115,9 @@ const specialties = [
     title: 'Doenças Crônicas',
     subtitle: 'Envelhecimento com saúde e qualidade de vida',
     description:
-      'Doenças crônicas como hipertensão, diabetes e dislipidemia afetam milhões de brasileiros e exigem acompanhamento contínuo, personalizado e humanizado. Meu foco é garantir que essas condições sejam bem controladas, prevenindo complicações e assegurando que você viva com mais energia, autonomia e bem-estar.',
+      'Doenças crônicas como hipertensão, diabetes e colesterol alto afetam milhões de brasileiros e exigem acompanhamento contínuo e personalizado. Meu foco é manter essas condições sob controle, prevenindo complicações para que você viva com mais energia, autonomia e bem-estar.',
     detailText:
-      'Conviver com uma doença crônica não significa abrir mão de qualidade de vida. Com o manejo correto, é possível viver bem, com mais disposição e segurança — e é isso que buscamos juntos.',
+      'Conviver com uma doença crônica não significa abrir mão de qualidade de vida. Com o tratamento correto, é possível viver bem, com mais disposição e segurança — e é isso que buscamos juntos.',
     image: '/especialidade-cronicas.png',
     bgColor: 'bg-violet-50',
     borderColor: 'border-violet-400',
@@ -144,13 +145,30 @@ const specialties = [
 
 export function Especialidades() {
   usePageSEO({
-    title: 'Especialidades — Cardiologia e Clínica Médica | Dr. Vandui',
+    title: 'Especialidades — Cardiologia e Clínica Médica em Santos, Santo André e Vila Mariana',
     description:
-      'Conheça as especialidades do Dr. Vandui: Cardiologia, Prevenção Cardiovascular, Clínica Médica e Doenças Crônicas. Atendimento humanizado e especializado em Santos, Santo André e São Paulo.',
+      'Cardiologia, Prevenção Cardiovascular, Clínica Médica e manejo de Doenças Crônicas com Dr. Vandui. Atendimento em Santos, Santo André e Vila Mariana.',
     canonical: '/especialidades',
     keywords:
-      'cardiologia, prevenção cardiovascular, clínica médica, doenças crônicas, hipertensão, diabetes, cardiologista são paulo, Dr. Vandui especialidades',
+      'cardiologia santos, cardiologia santo andré, cardiologia vila mariana, prevenção cardiovascular, clínica médica, doenças crônicas, hipertensão, holter, MAPA, ecocardiograma',
   });
+
+  useEffect(() => {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
+        { '@type': 'ListItem', position: 2, name: 'Especialidades', item: 'https://www.drvandui.com.br/especialidades' },
+      ],
+    };
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.dataset.injected = 'especialidades';
+    s.text = JSON.stringify(schema);
+    document.head.appendChild(s);
+    return () => { s.remove(); };
+  }, []);
 
   return (
     <motion.main
@@ -185,10 +203,10 @@ export function Especialidades() {
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-title-contrast"
                 style={{ fontFamily: 'Poppins, sans-serif' }}
               >
-                Especialidades Médicas
+                Cardiologia e Clínica Médica
               </h1>
               <p className="text-xl max-w-2xl mx-auto" style={{ color: 'rgba(224, 247, 250, 0.9)' }}>
-                Foco em Cardiologia e Clínica Médica — cuidado especializado, humano e baseado nas melhores evidências científicas para você viver bem por muito mais tempo.
+                Cardiologia e Clínica Médica com base em evidências e atendimento próximo — para você viver bem por muito mais tempo.
               </p>
             </motion.div>
           </div>
@@ -360,7 +378,8 @@ export function Especialidades() {
                   <div className={`relative w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 ${specialty.borderColor}`}>
                     <img
                       src={specialty.image}
-                      alt={specialty.title}
+                      alt={`${specialty.title} — Dr. Vandui, Cardiologista em Santos, Santo André e Vila Mariana`}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -398,7 +417,7 @@ export function Especialidades() {
               Pronto para cuidar da sua saúde?
             </h2>
             <p className="text-xl mb-8" style={{ color: 'rgba(224, 247, 250, 0.9)' }}>
-              Aqui você é tratado com empatia e excelência científica — agende sua consulta e sinta-se parte de uma jornada personalizada para um coração saudável.
+              Aqui você é tratado com empatia e excelência científica. Agende sua consulta e comece uma jornada personalizada para um coração saudável.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
@@ -409,7 +428,7 @@ export function Especialidades() {
                 style={{ color: 'var(--color-teal)' }}
               >
                 <Phone className="w-5 h-5" />
-                Agendar por WhatsApp
+                Agendar Consulta
               </a>
               <Link
                 to="/contato"

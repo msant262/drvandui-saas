@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import emailjs from '@emailjs/browser';
@@ -12,13 +12,29 @@ import {
   CheckCircle2,
   Building2,
   ExternalLink,
+  Calendar,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 
-const enderecos = [
+const WHATSAPP_URL =
+  'https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta.';
+
+type BookingCTA =
+  | { type: 'oneliv'; href: string; label: string }
+  | { type: 'whatsapp'; href: string; label: string };
+
+const enderecos: Array<{
+  cidade: string;
+  endereco: string;
+  bairro: string;
+  cep: string;
+  mapLink: string;
+  mapEmbed: string;
+  cta: BookingCTA;
+}> = [
   {
     cidade: 'Santos',
     endereco: 'Av. Ana Costa, 228 - 20º e 21° pavimentos',
@@ -26,6 +42,11 @@ const enderecos = [
     cep: '11060-003',
     mapLink: 'https://www.google.com/maps/search/?api=1&query=Av.+Ana+Costa,+228,+Gonzaga,+Santos+-+SP',
     mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3645.1234567890123!2d-46.3333!3d-23.9667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce1e3e3e3e3e3e%3A0x3e3e3e3e3e3e3e3e!2sAv.+Ana+Costa%2C+228+-+Gonzaga%2C+Santos+-+SP!5e0!3m2!1spt-BR!2sbr!4v1234567890123',
+    cta: {
+      type: 'whatsapp',
+      href: WHATSAPP_URL,
+      label: 'Agendar pelo WhatsApp',
+    },
   },
   {
     cidade: 'Santo André',
@@ -34,6 +55,11 @@ const enderecos = [
     cep: '09040-011',
     mapLink: 'https://www.google.com/maps/search/?api=1&query=Av.+Portugal,+1285,+Centro,+Santo+André+-+SP',
     mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.1234567890123!2d-46.5333!3d-23.6667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce1e3e3e3e3e3e%3A0x3e3e3e3e3e3e3e3e!2sAv.+Portugal%2C+1285+-+Centro%2C+Santo+Andr%C3%A9+-+SP!5e0!3m2!1spt-BR!2sbr!4v1234567890123',
+    cta: {
+      type: 'oneliv',
+      href: 'https://oneliv.com.br/profissional/vandui-santos?slug_unidade_selecionada=santo-andre',
+      label: 'Agendar online (Santo André)',
+    },
   },
   {
     cidade: 'Vila Mariana',
@@ -42,6 +68,34 @@ const enderecos = [
     cep: '04035-001',
     mapLink: 'https://www.google.com/maps/search/?api=1&query=R.+Domingos+de+Morais,+2781,+Vila+Mariana,+São+Paulo+-+SP',
     mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.1234567890123!2d-46.6333!3d-23.5833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce1e3e3e3e3e3e%3A0x3e3e3e3e3e3e3e3e!2sR.+Domingos+de+Morais%2C+2781+-+Vila+Mariana%2C+S%C3%A3o+Paulo+-+SP!5e0!3m2!1spt-BR!2sbr!4v1234567890123',
+    cta: {
+      type: 'oneliv',
+      href: 'https://oneliv.com.br/profissional/vandui-santos?slug_unidade_selecionada=vila-mariana',
+      label: 'Agendar online (Vila Mariana)',
+    },
+  },
+];
+
+const faqs = [
+  {
+    question: 'Como posso agendar uma consulta?',
+    answer:
+      'Você pode agendar sua consulta pelo WhatsApp (11) 9 7617-0971, por e-mail (contato@drvandui.com.br) ou preenchendo o formulário de contato nesta página.',
+  },
+  {
+    question: 'Quais convênios são aceitos?',
+    answer:
+      'Atendo consultas particulares e os principais convênios. Envie uma mensagem informando seu plano para confirmação.',
+  },
+  {
+    question: 'Qual o tempo médio de espera para consulta?',
+    answer:
+      'O tempo de espera varia conforme a demanda, mas em geral conseguimos agendar consultas dentro de 1-2 semanas.',
+  },
+  {
+    question: 'O atendimento é presencial ou online?',
+    answer:
+      'Ofereço ambas as modalidades. A consulta online é ideal para acompanhamentos e esclarecimento de dúvidas.',
   },
 ];
 
@@ -62,13 +116,48 @@ const socialLinks = [
 
 export function Contato() {
   usePageSEO({
-    title: 'Contato — Agende sua Consulta com Dr. Vandui',
+    title: 'Contato — Cardiologista em Santos, Santo André e Vila Mariana',
     description:
-      'Entre em contato com o Dr. Vandui para agendar uma consulta de Cardiologia, Terapia Intensiva ou Clínica Médica. Atendimento em Santos, Santo André e Vila Mariana. WhatsApp disponível.',
+      'Agende sua consulta com o Dr. Vandui — Cardiologia, Prevenção Cardiovascular e Clínica Médica em Santos, Santo André e Vila Mariana. WhatsApp e agendamento online.',
     canonical: '/contato',
     keywords:
-      'agendar consulta cardiologista, consulta Dr. Vandui, contato médico santos, contato médico santo andré, agendamento cardiologia',
+      'agendar consulta cardiologista, cardiologista santos, cardiologista santo andré, cardiologista vila mariana, contato Dr. Vandui',
   });
+
+  useEffect(() => {
+    const schemas = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map(f => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: { '@type': 'Answer', text: f.answer },
+        })),
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
+          { '@type': 'ListItem', position: 2, name: 'Contato', item: 'https://www.drvandui.com.br/contato' },
+        ],
+      },
+    ];
+
+    const nodes = schemas.map(schema => {
+      const s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.dataset.injected = 'contato';
+      s.text = JSON.stringify(schema);
+      document.head.appendChild(s);
+      return s;
+    });
+
+    return () => {
+      nodes.forEach(n => n.remove());
+    };
+  }, []);
 
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
@@ -179,8 +268,7 @@ export function Contato() {
                 Entre em Contato
               </h1>
               <p className="text-xl max-w-2xl mx-auto" style={{ color: 'rgba(224, 247, 250, 0.9)' }}>
-                Estou à disposição para atender suas necessidades. Entre em
-                contato para agendar uma consulta ou tirar suas dúvidas.
+                Tire suas dúvidas ou agende uma consulta — atendimento em Santos, Santo André e Vila Mariana.
               </p>
             </motion.div>
           </div>
@@ -212,7 +300,7 @@ export function Contato() {
                 Telefone / WhatsApp
               </h3>
               <p className="font-medium" style={{ color: 'var(--color-teal)' }}>(11) 9 7617-0971</p>
-              <p className="text-[#666] text-sm">Disponível para agendamentos</p>
+              <p className="text-[#666] text-sm">Atendimento por mensagem</p>
               <a
                 href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
                 target="_blank"
@@ -305,7 +393,7 @@ export function Contato() {
                 className="text-3xl sm:text-4xl font-bold"
                 style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
               >
-                Fale Comigo
+                Formulário de Contato
               </h2>
               <p className="text-[#666] mt-4">
                 Preencha o formulário abaixo e retornarei o mais breve possível.
@@ -569,6 +657,25 @@ export function Contato() {
                       <p>CEP: {endereco.cep}</p>
                     </div>
                     <a
+                      href={endereco.cta.href}
+                      target="_blank"
+                      rel={endereco.cta.type === 'oneliv' ? 'nofollow noopener noreferrer' : 'noopener noreferrer'}
+                      className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-white text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg mb-3"
+                      style={{
+                        backgroundColor:
+                          endereco.cta.type === 'whatsapp'
+                            ? '#25D366'
+                            : 'var(--color-teal)',
+                      }}
+                    >
+                      {endereco.cta.type === 'whatsapp' ? (
+                        <MessageCircle className="w-4 h-4" />
+                      ) : (
+                        <Calendar className="w-4 h-4" />
+                      )}
+                      {endereco.cta.label}
+                    </a>
+                    <a
                       href={endereco.mapLink}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -611,28 +718,7 @@ export function Contato() {
           </motion.div>
 
           <div className="max-w-3xl mx-auto space-y-4">
-            {[
-              {
-                question: 'Como posso agendar uma consulta?',
-                answer:
-                  'Você pode agendar sua consulta pelo WhatsApp (11) 9 7617-0971, por e-mail (contato@drvandui.com.br) ou preenchendo o formulário de contato nesta página.',
-              },
-              {
-                question: 'Quais convênios são aceitos?',
-                answer:
-                  'Atendo particulares e diversos convênios. Entre em contato para verificar se seu plano de saúde é aceito.',
-              },
-              {
-                question: 'Qual o tempo médio de espera para consulta?',
-                answer:
-                  'O tempo de espera varia conforme a demanda, mas em geral conseguimos agendar consultas dentro de 1-2 semanas.',
-              },
-              {
-                question: 'O atendimento é presencial ou online?',
-                answer:
-                  'Ofereço ambas as modalidades. A consulta online é ideal para acompanhamentos e esclarecimento de dúvidas.',
-              },
-            ].map((faq, index) => (
+            {faqs.map((faq, index) => (
               <motion.div
                 key={faq.question}
                 initial={{ opacity: 0, y: 20 }}

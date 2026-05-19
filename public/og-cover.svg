@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#041a1f"/>
+      <stop offset="50%" stop-color="#09404a"/>
+      <stop offset="100%" stop-color="#0E5A6A"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#14b8a6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="980" cy="120" r="280" fill="url(#orb)"/>
+  <circle cx="160" cy="540" r="220" fill="url(#orb)" opacity="0.6"/>
+
+  <!-- Badge -->
+  <g transform="translate(80, 90)">
+    <rect width="280" height="44" rx="22" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.15)"/>
+    <circle cx="24" cy="22" r="6" fill="#34d399"/>
+    <text x="44" y="29" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" fill="rgba(255,255,255,0.9)" letter-spacing="0.5">Excelência em Cardiologia</text>
+  </g>
+
+  <!-- Heading -->
+  <text x="80" y="240" font-family="Poppins, Inter, sans-serif" font-size="92" font-weight="700" fill="#ffffff" letter-spacing="-2">Dr. Vandui</text>
+  <text x="80" y="320" font-family="Poppins, Inter, sans-serif" font-size="44" font-weight="600" fill="#7dd3fc">Cardiologia &amp; Clínica Médica</text>
+
+  <!-- Subline -->
+  <text x="80" y="400" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="400" fill="rgba(255,255,255,0.85)">Cardiologista em Santos, Santo André e Vila Mariana</text>
+  <text x="80" y="438" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="400" fill="rgba(255,255,255,0.65)">Residência no Instituto Dante Pazzanese de Cardiologia</text>
+
+  <!-- Heart pulse icon (canto direito) -->
+  <g transform="translate(940, 360)" stroke="#34d399" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M150 30c12-12 25-26 25-46A45 45 0 0 0 130 -61c-14 0-24 4-37 16-13-12-22-16-37-16A45 45 0 0 0 11 -16c0 20 13 34 25 46l57 57Z" transform="translate(0, 60) scale(1.2)" stroke-width="5"/>
+    <path d="M26 99H80l4-8 16 36 16-56 12 28h43" transform="translate(0, 60) scale(1.2)" stroke-width="5"/>
+  </g>
+
+  <!-- Footer -->
+  <line x1="80" y1="540" x2="1120" y2="540" stroke="rgba(255,255,255,0.12)"/>
+  <text x="80" y="580" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" fill="rgba(255,255,255,0.75)">drvandui.com.br</text>
+  <text x="1120" y="580" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" fill="rgba(255,255,255,0.75)">CRM-SP · Cardiologia</text>
+</svg>
