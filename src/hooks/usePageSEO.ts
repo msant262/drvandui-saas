@@ -11,7 +11,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://www.drvandui.com.br';
-const DEFAULT_OG_IMAGE = `${BASE_URL}/og-cover.svg`;
+const DEFAULT_OG_IMAGE = `${BASE_URL}/og-cover.png`;
 
 export function usePageSEO({
     title,
