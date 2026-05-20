@@ -280,13 +280,16 @@ export function Home() {
                 href="https://instagram.com/vanduisantos.cardio"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Instagram do Dr. Vandui"
-                className="inline-flex items-center gap-2.5 mt-6 text-white/70 hover:text-white transition-colors text-sm font-medium group"
+                aria-label="Instagram do Dr. Vandui — @vanduisantos.cardio"
+                className="group mt-6 inline-flex items-center gap-3 px-5 py-3 sm:py-2.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 backdrop-blur-md text-white transition-all w-full sm:w-auto justify-center sm:justify-start"
               >
-                <span className="w-9 h-9 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                  <Instagram className="w-4 h-4" />
+                <span className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#f58529] via-[#dd2a7b] to-[#8134af] flex items-center justify-center shadow-lg shadow-pink-500/30 group-hover:scale-105 transition-transform">
+                  <Instagram className="w-4 h-4 text-white" />
                 </span>
-                @vanduisantos.cardio
+                <span className="flex flex-col text-left leading-tight">
+                  <span className="text-[11px] uppercase tracking-wider text-white/60 font-semibold">Siga no Instagram</span>
+                  <span className="text-sm font-semibold">@vanduisantos.cardio</span>
+                </span>
               </a>
 
               {/* Stats Bar Hero */}
@@ -826,12 +829,15 @@ export function Home() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram do Dr. Vandui — @vanduisantos.cardio"
-              className="inline-flex items-center gap-2.5 mt-10 text-white/80 hover:text-white transition-colors text-sm font-medium group"
+              className="group mt-10 inline-flex items-center gap-3 px-5 py-3 sm:py-2.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 backdrop-blur-md text-white transition-all"
             >
-              <span className="w-9 h-9 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-gradient-to-tr group-hover:from-[#f58529] group-hover:via-[#dd2a7b] group-hover:to-[#8134af] group-hover:border-transparent transition-all">
-                <Instagram className="w-4 h-4" />
+              <span className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#f58529] via-[#dd2a7b] to-[#8134af] flex items-center justify-center shadow-lg shadow-pink-500/30 group-hover:scale-105 transition-transform">
+                <Instagram className="w-4 h-4 text-white" />
               </span>
-              Siga no Instagram · @vanduisantos.cardio
+              <span className="flex flex-col text-left leading-tight">
+                <span className="text-[11px] uppercase tracking-wider text-white/60 font-semibold">Siga no Instagram</span>
+                <span className="text-sm font-semibold">@vanduisantos.cardio</span>
+              </span>
             </a>
           </div>
         </div>
