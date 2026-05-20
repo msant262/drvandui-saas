@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, HeartPulse, Phone, Instagram } from 'lucide-react';
+import { Menu, X, HeartPulse, Phone, Instagram, CalendarDays, MessageCircle, ArrowRight } from 'lucide-react';
 
 const navLinks = [
   { path: '/', label: 'Início' },
@@ -205,15 +205,33 @@ export function Navigation() {
                 </nav>
                 <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">
                   <a
+                    href="https://oneliv.com.br/profissional/vandui-santos"
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-[var(--color-teal)] text-white rounded-xl font-semibold hover:bg-[var(--color-emerald)] transition-colors shadow-md"
+                  >
+                    <CalendarDays className="w-5 h-5" />
+                    Agendar Consulta
+                  </a>
+                  <a
                     href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-[var(--color-emerald)] text-white rounded-xl font-medium hover:bg-[var(--color-teal)] transition-colors"
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-[#25D366] text-white rounded-xl font-semibold hover:bg-[#1ebe57] transition-colors"
                   >
-                    <Phone className="w-5 h-5" />
-                    Agendar Consulta
+                    <MessageCircle className="w-5 h-5" />
+                    WhatsApp
                   </a>
+                  <Link
+                    to="/contato"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 border border-[var(--color-teal)]/30 text-[var(--color-teal)] rounded-xl font-semibold hover:bg-[var(--color-cyan-light)] transition-colors"
+                  >
+                    Outras Formas
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                   <a
                     href="https://instagram.com/vanduisantos.cardio"
                     target="_blank"

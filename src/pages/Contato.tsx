@@ -70,33 +70,43 @@ const enderecos: Array<{
     mapLink: 'https://www.google.com/maps/search/?api=1&query=R.+Domingos+de+Morais,+2781,+Vila+Mariana,+São+Paulo+-+SP',
     mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.1234567890123!2d-46.6333!3d-23.5833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce1e3e3e3e3e3e%3A0x3e3e3e3e3e3e3e3e!2sR.+Domingos+de+Morais%2C+2781+-+Vila+Mariana%2C+S%C3%A3o+Paulo+-+SP!5e0!3m2!1spt-BR!2sbr!4v1234567890123',
     cta: {
-      type: 'oneliv',
-      href: 'https://oneliv.com.br/profissional/vandui-santos?slug_unidade_selecionada=vila-mariana',
-      label: 'Agendar online (Vila Mariana)',
+      type: 'whatsapp',
+      href: 'https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta%20na%20unidade%20Vila%20Mariana.',
+      label: 'Agendar via WhatsApp',
     },
   },
 ];
 
 const faqs = [
   {
-    question: 'Como posso agendar uma consulta?',
-    answer:
-      'Você pode agendar sua consulta pelo WhatsApp (11) 9 7617-0971, por e-mail (contato@drvandui.com.br) ou preenchendo o formulário de contato nesta página.',
-  },
-  {
     question: 'Quais convênios são aceitos?',
     answer:
-      'Atendo consultas particulares e os principais convênios. Envie uma mensagem informando seu plano para confirmação.',
+      'O atendimento é exclusivamente particular — opção que me permite dedicar o tempo necessário a cada paciente, com consultas mais longas, escuta atenta e acompanhamento próximo. Emito recibo médico detalhado para que você solicite reembolso ao seu plano de saúde (conforme as regras da sua operadora) e para dedução no Imposto de Renda como despesa médica.',
   },
   {
-    question: 'Qual o tempo médio de espera para consulta?',
+    question: 'Como posso agendar uma consulta?',
     answer:
-      'O tempo de espera varia conforme a demanda, mas em geral conseguimos agendar consultas dentro de 1-2 semanas.',
+      'O agendamento online está disponível para Santos e Santo André pela plataforma Oneliv (link nos cards acima). Para Vila Mariana e para qualquer dúvida sobre horários, valores ou primeira consulta, fale comigo pelo WhatsApp (11) 9 7617-0971 — costumo responder pessoalmente em até algumas horas no horário comercial.',
   },
   {
-    question: 'O atendimento é presencial ou online?',
+    question: 'Qual a diferença entre consulta presencial e teleconsulta?',
     answer:
-      'Ofereço ambas as modalidades. A consulta online é ideal para acompanhamentos e esclarecimento de dúvidas.',
+      'A primeira consulta é sempre presencial, pois inclui exame físico completo (ausculta cardíaca, aferição de pressão e medidas antropométricas) — etapas essenciais para um diagnóstico cardiológico seguro. As teleconsultas ficam reservadas para retornos, ajuste de medicação, revisão de exames e acompanhamento de pacientes já conhecidos.',
+  },
+  {
+    question: 'Quanto tempo dura a consulta e o que devo levar?',
+    answer:
+      'A primeira consulta dura cerca de 50 a 60 minutos e inclui anamnese detalhada, exame físico e plano terapêutico individualizado. Leve documento com foto, lista atualizada de medicamentos em uso (com doses), exames recentes (sangue, eletrocardiograma, ecocardiograma, holter, MAPA, teste ergométrico — o que tiver) e relatórios de outros médicos que acompanham você.',
+  },
+  {
+    question: 'Em quanto tempo consigo uma vaga?',
+    answer:
+      'Procuro manter agenda ágil, com vagas geralmente disponíveis em 1 a 2 semanas. Para casos urgentes ou sintomas agudos (dor torácica, falta de ar súbita, palpitações intensas), envie uma mensagem pelo WhatsApp informando a situação — busco abrir um horário o quanto antes.',
+  },
+  {
+    question: 'O recibo serve para reembolso do plano de saúde?',
+    answer:
+      'Sim. Emito recibo médico com CRM, CPF, descrição do serviço e CID quando indicado — documento aceito pela maioria dos convênios para reembolso parcial conforme o seu plano. Cada operadora tem suas próprias regras de valor reembolsado e prazo de envio; consulte seu plano para os detalhes.',
   },
 ];
 
