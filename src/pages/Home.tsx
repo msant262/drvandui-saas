@@ -820,6 +820,19 @@ export function Home() {
                 Outras Formas de Contato
               </Link>
             </div>
+
+            <a
+              href="https://instagram.com/vanduisantos.cardio"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram do Dr. Vandui — @vanduisantos.cardio"
+              className="inline-flex items-center gap-2.5 mt-10 text-white/80 hover:text-white transition-colors text-sm font-medium group"
+            >
+              <span className="w-9 h-9 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-gradient-to-tr group-hover:from-[#f58529] group-hover:via-[#dd2a7b] group-hover:to-[#8134af] group-hover:border-transparent transition-all">
+                <Instagram className="w-4 h-4" />
+              </span>
+              Siga no Instagram · @vanduisantos.cardio
+            </a>
           </div>
         </div>
       </section>
