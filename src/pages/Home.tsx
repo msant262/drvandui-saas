@@ -281,7 +281,7 @@ export function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram do Dr. Vandui — @vanduisantos.cardio"
-                className="group mt-6 flex w-fit items-center gap-3 pl-1.5 pr-5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 backdrop-blur-md text-white transition-all"
+                className="group mt-6 mx-auto lg:mx-0 flex w-fit items-center gap-3 pl-1.5 pr-5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/20 backdrop-blur-md text-white transition-all"
               >
                 <span className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#f58529] via-[#dd2a7b] to-[#8134af] flex items-center justify-center shadow-md shadow-pink-500/30 group-hover:scale-105 transition-transform shrink-0">
                   <Instagram className="w-4 h-4 text-white" />
