@@ -7,7 +7,6 @@ import {
   Award,
   Users,
   Building2,
-  Phone,
   CalendarDays,
   MessageCircle,
   Instagram,
@@ -807,20 +806,29 @@ export function Home() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-5">
               <a
+                href="https://oneliv.com.br/profissional/vandui-santos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center justify-center gap-3 px-8 py-5 bg-white rounded-2xl font-bold transition-all hover:-translate-y-1 hover:shadow-2xl text-[16px]"
+                style={{ color: 'var(--color-teal)' }}
+              >
+                <CalendarDays className="w-6 h-6 transition-transform group-hover:rotate-12" />
+                Agendar Consulta
+              </a>
+              <a
                 href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-white rounded-2xl font-bold transition-all hover:-translate-y-1 hover:shadow-2xl text-[16px]"
-                style={{ color: 'var(--color-teal)' }}
+                className="group inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-semibold bg-[#25D366] text-white hover:bg-[#1ebe57] transition-all text-[16px] shadow-[0_0_40px_rgba(37,211,102,0.25)] hover:shadow-[0_0_60px_rgba(37,211,102,0.4)]"
               >
-                <Phone className="w-6 h-6" />
-                Agendar Consulta
+                <MessageCircle className="w-6 h-6 transition-transform group-hover:rotate-12" />
+                WhatsApp
               </a>
               <Link
                 to="/contato"
-                className="inline-flex items-center justify-center gap-3 px-10 py-5 border border-white/30 backdrop-blur-md text-white rounded-2xl font-semibold hover:bg-white/10 transition-all text-[16px]"
+                className="inline-flex items-center justify-center gap-3 px-8 py-5 border border-white/30 backdrop-blur-md text-white rounded-2xl font-semibold hover:bg-white/10 transition-all text-[16px]"
               >
-                Outras Formas de Contato
+                Outras Formas
               </Link>
             </div>
 
