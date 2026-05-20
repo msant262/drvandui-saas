@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { HeartPulse, MapPin, Phone, Mail, Linkedin, MessageCircle } from 'lucide-react';
+import { HeartPulse, MapPin, Phone, Mail, Linkedin, MessageCircle, Instagram } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -43,6 +43,15 @@ export function Footer() {
                 className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] transition-colors"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href="https://instagram.com/vanduisantos.cardio"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram do Dr. Vandui"
+                className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#f58529] hover:via-[#dd2a7b] hover:to-[#8134af] transition-colors"
+              >
+                <Instagram className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>

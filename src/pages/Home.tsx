@@ -8,6 +8,9 @@ import {
   Users,
   Building2,
   Phone,
+  CalendarDays,
+  MessageCircle,
+  Instagram,
   Shield,
   HeartHandshake,
   TrendingUp,
@@ -247,13 +250,22 @@ export function Home() {
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-5 mt-10">
                 <a
-                  href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
+                  href="https://oneliv.com.br/profissional/vandui-santos"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-bold bg-white text-[var(--color-teal)] overflow-hidden transition-all hover:scale-[1.02] shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.25)] text-lg"
                 >
-                  <Phone className="w-5 h-5 transition-transform group-hover:rotate-12" />
+                  <CalendarDays className="w-5 h-5 transition-transform group-hover:rotate-12" />
                   Agendar Consulta
+                </a>
+                <a
+                  href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-semibold bg-[#25D366] text-white hover:bg-[#1ebe57] transition-all text-lg shadow-[0_0_40px_rgba(37,211,102,0.25)] hover:shadow-[0_0_60px_rgba(37,211,102,0.4)]"
+                >
+                  <MessageCircle className="w-5 h-5 transition-transform group-hover:rotate-12" />
+                  Dúvidas
                 </a>
                 <Link
                   to="/especialidades"
@@ -263,6 +275,19 @@ export function Home() {
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
+
+              <a
+                href="https://instagram.com/vanduisantos.cardio"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram do Dr. Vandui"
+                className="inline-flex items-center gap-2.5 mt-6 text-white/70 hover:text-white transition-colors text-sm font-medium group"
+              >
+                <span className="w-9 h-9 rounded-full bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                  <Instagram className="w-4 h-4" />
+                </span>
+                @vanduisantos.cardio
+              </a>
 
               {/* Stats Bar Hero */}
               <div className="flex flex-wrap items-center gap-0 mt-16 w-full max-w-2xl rounded-[1.5rem] bg-white/5 border border-white/10 backdrop-blur-md overflow-hidden">
