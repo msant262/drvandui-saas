@@ -9,6 +9,7 @@ import {
   Send,
   MessageCircle,
   Linkedin,
+  Instagram,
   CheckCircle2,
   Building2,
   ExternalLink,
@@ -105,6 +106,12 @@ const socialLinks = [
     label: 'WhatsApp',
     href: 'https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta.',
     color: 'bg-green-500',
+  },
+  {
+    icon: Instagram,
+    label: '@vanduisantos.cardio',
+    href: 'https://instagram.com/vanduisantos.cardio',
+    color: 'bg-gradient-to-tr from-[#f58529] via-[#dd2a7b] to-[#8134af]',
   },
   {
     icon: Linkedin,

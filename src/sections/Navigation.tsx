@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, HeartPulse, Phone } from 'lucide-react';
+import { Menu, X, HeartPulse, Phone, Instagram } from 'lucide-react';
 
 const navLinks = [
   { path: '/', label: 'Início' },
@@ -103,7 +103,20 @@ export function Navigation() {
             </nav>
 
             {/* CTA Button */}
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-3">
+              <a
+                href="https://instagram.com/vanduisantos.cardio"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram do Dr. Vandui — @vanduisantos.cardio"
+                title="@vanduisantos.cardio"
+                className={`w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-105 ${useScrolledStyle
+                    ? 'bg-[var(--color-cyan-light)] text-[var(--color-teal)] hover:bg-gradient-to-tr hover:from-[#f58529] hover:via-[#dd2a7b] hover:to-[#8134af] hover:text-white'
+                    : 'bg-white/10 text-white border border-white/20 backdrop-blur-md hover:bg-gradient-to-tr hover:from-[#f58529] hover:via-[#dd2a7b] hover:to-[#8134af] hover:border-transparent'
+                  }`}
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
               <a
                 href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
                 target="_blank"
@@ -190,7 +203,7 @@ export function Navigation() {
                     </motion.div>
                   ))}
                 </nav>
-                <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">
                   <a
                     href="https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta."
                     target="_blank"
@@ -200,6 +213,16 @@ export function Navigation() {
                   >
                     <Phone className="w-5 h-5" />
                     Agendar Consulta
+                  </a>
+                  <a
+                    href="https://instagram.com/vanduisantos.cardio"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-xl font-medium text-white transition-opacity hover:opacity-90 bg-gradient-to-tr from-[#f58529] via-[#dd2a7b] to-[#8134af]"
+                  >
+                    <Instagram className="w-5 h-5" />
+                    @vanduisantos.cardio
                   </a>
                 </div>
               </div>
