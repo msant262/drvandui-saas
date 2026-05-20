@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import emailjs from '@emailjs/browser';
 import {
@@ -14,14 +14,12 @@ import {
   Building2,
   ExternalLink,
   Calendar,
+  ChevronDown,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-
-const WHATSAPP_URL =
-  'https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta.';
 
 type BookingCTA =
   | { type: 'oneliv'; href: string; label: string }
@@ -45,8 +43,8 @@ const enderecos: Array<{
     mapEmbed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3645.1234567890123!2d-46.3333!3d-23.9667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce1e3e3e3e3e3e%3A0x3e3e3e3e3e3e3e3e!2sAv.+Ana+Costa%2C+228+-+Gonzaga%2C+Santos+-+SP!5e0!3m2!1spt-BR!2sbr!4v1234567890123',
     cta: {
       type: 'whatsapp',
-      href: WHATSAPP_URL,
-      label: 'Agendar pelo WhatsApp',
+      href: 'https://wa.me/5511976170971?text=Ol%C3%A1%20Dr.%20Vandui%2C%20gostaria%20de%20agendar%20uma%20consulta%20na%20unidade%20Santos.',
+      label: 'Agendar via WhatsApp',
     },
   },
   {
@@ -86,7 +84,7 @@ const faqs = [
   {
     question: 'Como posso agendar uma consulta?',
     answer:
-      'O agendamento online está disponível para Santos e Santo André pela plataforma Oneliv (link nos cards acima). Para Vila Mariana e para qualquer dúvida sobre horários, valores ou primeira consulta, fale comigo pelo WhatsApp (11) 9 7617-0971 — costumo responder pessoalmente em até algumas horas no horário comercial.',
+      'A unidade de Santo André tem agendamento online pela plataforma Oneliv (botão no card acima). Para as unidades de Santos e Vila Mariana — e para qualquer dúvida sobre horários, valores ou primeira consulta — fale comigo pelo WhatsApp (11) 9 7617-0971. Costumo responder pessoalmente em até algumas horas no horário comercial.',
   },
   {
     question: 'Qual a diferença entre consulta presencial e teleconsulta?',
@@ -187,6 +185,7 @@ export function Contato() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -734,25 +733,51 @@ export function Contato() {
             </h2>
           </motion.div>
 
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={faq.question}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6"
-              >
-                <h3
-                  className="text-lg font-semibold mb-2"
-                  style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
+          <div className="max-w-3xl mx-auto space-y-3">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <motion.div
+                  key={faq.question}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm"
                 >
-                  {faq.question}
-                </h3>
-                <p className="text-[#666]">{faq.answer}</p>
-              </motion.div>
-            ))}
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                    className="w-full flex items-center justify-between gap-4 text-left px-6 py-5 hover:bg-[var(--color-cyan-light)]/40 transition-colors"
+                  >
+                    <h3
+                      className="text-base sm:text-lg font-semibold"
+                      style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}
+                    >
+                      {faq.question}
+                    </h3>
+                    <ChevronDown
+                      className={`w-5 h-5 shrink-0 text-[var(--color-emerald)] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-6 pb-6 text-[#666] leading-relaxed">{faq.answer}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
