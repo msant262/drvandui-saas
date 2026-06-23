@@ -1,2 +1,3 @@
-# SPA routing configurado via wrangler.toml (not_found_handling = "single-page-application")
-# Este arquivo foi mantido vazio para evitar conflito com o Cloudflare Workers
+# Serve prerendered HTML directly (SSG path)
+/especialidades /especialidades/index.html 200
+/contato /contato/index.html 200

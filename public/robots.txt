@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
 
+# Bloquear scraping não-alinhado sem prejudicar indexação orgânica.
+User-agent: Amazonbot
+Disallow: /
+User-agent: Bytespider
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: GPTBot
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: meta-externalagent
+Disallow: /
+
 Sitemap: https://www.drvandui.com.br/sitemap.xml

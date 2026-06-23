@@ -25,10 +25,6 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location]);
-
   // For non-home pages, always use scrolled style
   const useScrolledStyle = !isHome || isScrolled;
 
@@ -46,7 +42,11 @@ export function Navigation() {
         <div className="w-full section-padding">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
+              <Link
+                to="/"
+                className="flex items-center gap-3 group"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${useScrolledStyle ? 'bg-[var(--color-teal)]' : 'bg-white'

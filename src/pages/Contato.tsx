@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import emailjs from '@emailjs/browser';
+import { JsonLdScript } from '@/components/seo/JsonLd';
 import {
   Phone,
   Mail,
@@ -129,6 +130,25 @@ const socialLinks = [
   },
 ];
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
+    { '@type': 'ListItem', position: 2, name: 'Contato', item: 'https://www.drvandui.com.br/contato' },
+  ],
+}
+
 export function Contato() {
   usePageSEO({
     title: 'Contato — Cardiologista em Santos, Santo André e Vila Mariana',
@@ -138,41 +158,6 @@ export function Contato() {
     keywords:
       'agendar consulta cardiologista, cardiologista santos, cardiologista santo andré, cardiologista vila mariana, contato Dr. Vandui',
   });
-
-  useEffect(() => {
-    const schemas = [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: faqs.map(f => ({
-          '@type': 'Question',
-          name: f.question,
-          acceptedAnswer: { '@type': 'Answer', text: f.answer },
-        })),
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
-          { '@type': 'ListItem', position: 2, name: 'Contato', item: 'https://www.drvandui.com.br/contato' },
-        ],
-      },
-    ];
-
-    const nodes = schemas.map(schema => {
-      const s = document.createElement('script');
-      s.type = 'application/ld+json';
-      s.dataset.injected = 'contato';
-      s.text = JSON.stringify(schema);
-      document.head.appendChild(s);
-      return s;
-    });
-
-    return () => {
-      nodes.forEach(n => n.remove());
-    };
-  }, []);
 
   const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
@@ -249,13 +234,16 @@ export function Contato() {
   };
 
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="pt-24"
-    >
+    <>
+      <JsonLdScript id="schema-contato-faq" data={faqSchema} />
+      <JsonLdScript id="schema-contato-breadcrumb" data={breadcrumbSchema} />
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="pt-24"
+      >
       {/* Hero Section */}
       <section className="py-16 bg-gradient-teal relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -781,6 +769,7 @@ export function Contato() {
           </div>
         </div>
       </section>
-    </motion.main>
+      </motion.main>
+    </>
   );
 }

@@ -12,6 +12,7 @@ interface SEOProps {
 
 const BASE_URL = 'https://www.drvandui.com.br';
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-cover.png`;
+const SITE_NAME = 'Dr. Vandui — Cardiologista em Santos, Santo André e Vila Mariana';
 
 export function usePageSEO({
     title,
@@ -23,7 +24,8 @@ export function usePageSEO({
     noIndex = false,
 }: SEOProps) {
     useEffect(() => {
-        const fullTitle = `${title} | Dr. Vandui — Cardiologista em Santos, Santo André e Vila Mariana`;
+    const hasBrandInTitle = /Dr\.?\s*Vandui/i.test(title);
+        const fullTitle = hasBrandInTitle ? title : `${title} | ${SITE_NAME}`;
 
         // Título
         document.title = fullTitle;
@@ -82,6 +84,8 @@ export function usePageSEO({
         setMeta('meta[name="twitter:title"]', fullTitle);
         setMeta('meta[name="twitter:description"]', description);
         setMeta('meta[name="twitter:image"]', ogImage);
+
+        document.dispatchEvent(new Event('dr-vandui-prerender-ready'));
 
         return () => {
             // Restaura título padrão ao desmontar (opcional)

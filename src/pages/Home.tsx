@@ -592,7 +592,7 @@ export function Home() {
               <div className="absolute inset-0 bg-gradient-teal rounded-[32px] transform -rotate-[4deg] scale-105 opacity-80 shadow-2xl" />
               <div className="relative bg-white p-2 rounded-[32px] shadow-lg border border-gray-100">
                 <img
-                  src="https://images.unsplash.com/photo-1542385151-efd9000785a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  src="/photos/habitos-cardiologia.jpg"
                   alt="Hábitos saudáveis para a saúde cardiovascular — alimentação, exercício e sono"
                   loading="lazy"
                   className="w-full rounded-[28px] object-cover aspect-[4/5] opacity-90 hover:opacity-100 transition-opacity"

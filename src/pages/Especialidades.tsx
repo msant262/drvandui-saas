@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { usePageSEO } from '@/hooks/usePageSEO';
 import { Link } from 'react-router-dom';
+import { JsonLdScript } from '@/components/seo/JsonLd';
 import {
   Heart,
   Stethoscope,
@@ -143,6 +143,15 @@ const specialties = [
   },
 ];
 
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
+    { '@type': 'ListItem', position: 2, name: 'Especialidades', item: 'https://www.drvandui.com.br/especialidades' },
+  ],
+}
+
 export function Especialidades() {
   usePageSEO({
     title: 'Especialidades — Cardiologia e Clínica Médica em Santos, Santo André e Vila Mariana',
@@ -153,31 +162,16 @@ export function Especialidades() {
       'cardiologia santos, cardiologia santo andré, cardiologia vila mariana, prevenção cardiovascular, clínica médica, doenças crônicas, hipertensão, holter, MAPA, ecocardiograma',
   });
 
-  useEffect(() => {
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
-        { '@type': 'ListItem', position: 2, name: 'Especialidades', item: 'https://www.drvandui.com.br/especialidades' },
-      ],
-    };
-    const s = document.createElement('script');
-    s.type = 'application/ld+json';
-    s.dataset.injected = 'especialidades';
-    s.text = JSON.stringify(schema);
-    document.head.appendChild(s);
-    return () => { s.remove(); };
-  }, []);
-
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="pt-24"
-    >
+    <>
+      <JsonLdScript id="schema-especialidades-breadcrumb" data={breadcrumbSchema} />
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="pt-24"
+      >
       {/* Hero Section */}
       <section className="py-16 bg-gradient-teal relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -440,6 +434,7 @@ export function Especialidades() {
           </motion.div>
         </div>
       </section>
-    </motion.main>
+      </motion.main>
+    </>
   );
 }
