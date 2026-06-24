@@ -11,6 +11,7 @@ const SEO_LOCAL_PATHS = [
   "/cardiologista-vila-mariana",
 ]
 const SEO_SERVICE_PATHS = [
+  "/consulta-com-cardiologista",
   "/check-up-cardiologico",
   "/risco-cirurgico-cardiologico",
   "/tratamento-hipertensao",
@@ -21,6 +22,10 @@ const SEO_PROFILE_PATHS = [
   "/dr-vandui-cardiologista",
 ]
 const SEO_ANSWER_PATHS = [
+  "/palpitacoes-quando-se-preocupar",
+  "/pressao-alta-quando-procurar-ajuda",
+  "/colesterol-alto-e-risco-cardiaco",
+  "/cardiologista-ou-clinico-geral",
 ]
 const SEO_REDIRECTS = [
   { from: "/eventos", to: "/", status: 301 },
@@ -31,16 +36,11 @@ const SEO_REDIRECTS = [
   { from: "/palpitacoes-arritmia", to: "/palpitacoes-e-arritmias", status: 301 },
   { from: "/dor-no-peito", to: "/dor-no-peito-quando-procurar-ajuda", status: 301 },
   { from: "/dor-no-peito-quando-procurar-cardiologista", to: "/dor-no-peito-quando-procurar-ajuda", status: 301 },
-  { from: "/colesterol-alto-cardiologista", to: "/check-up-cardiologico", status: 301 },
-  { from: "/pressao-alta", to: "/tratamento-hipertensao", status: 301 },
-  { from: "/consulta-com-cardiologista", to: "/contato", status: 301 },
-  { from: "/colesterol-alto", to: "/check-up-cardiologico", status: 301 },
+  { from: "/colesterol-alto-cardiologista", to: "/colesterol-alto-e-risco-cardiaco", status: 301 },
+  { from: "/colesterol-alto", to: "/colesterol-alto-e-risco-cardiaco", status: 301 },
+  { from: "/pressao-alta", to: "/pressao-alta-quando-procurar-ajuda", status: 301 },
   { from: "/prevencao-cardiovascular", to: "/check-up-cardiologico", status: 301 },
   { from: "/clinica-medica", to: "/especialidades", status: 301 },
-  { from: "/palpitacoes-quando-se-preocupar", to: "/palpitacoes-e-arritmias", status: 301 },
-  { from: "/pressao-alta-quando-procurar-ajuda", to: "/tratamento-hipertensao", status: 301 },
-  { from: "/colesterol-alto-e-risco-cardiaco", to: "/check-up-cardiologico", status: 301 },
-  { from: "/cardiologista-ou-clinico-geral", to: "/especialidades", status: 301 },
 ]
 const NON_CANONICAL_PATHS = SEO_REDIRECTS.map(({ from }) => from.replace("/*", ""))
 const SEO_LANDING_PATHS = [...SEO_PROFILE_PATHS, ...SEO_LOCAL_PATHS, ...SEO_SERVICE_PATHS, ...SEO_ANSWER_PATHS]
@@ -386,9 +386,13 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "src/worker.js cacheia redirects canonicos", /Cache-Control["']?\s*:\s*["']public,\s*max-age=86400["']/i.test(worker))
     fail(errors, "src/worker.js canonicaliza /eventos antes dos assets", /pathname\s*===\s*["']\/eventos["'][\s\S]*startsWith\(["']\/eventos\/["']\)/i.test(worker))
     fail(errors, "src/worker.js calcula path canonico antes de redirecionar host", /const\s+canonicalPath\s*=\s*getCanonicalPath\(url\.pathname\)[\s\S]*url\.hostname\s*===\s*ROOT_HOST\s*\|\|\s*canonicalPath\s*!==\s*url\.pathname[\s\S]*redirectToCanonical\(url,\s*canonicalPath,\s*canonicalPath\s*!==\s*url\.pathname\)/i.test(worker))
-    fail(errors, "src/worker.js canonicaliza alias /pressao-alta", /["']\/pressao-alta["']\s*,\s*["']\/tratamento-hipertensao["']/i.test(worker))
+    fail(errors, "src/worker.js canonicaliza alias /pressao-alta", /["']\/pressao-alta["']\s*,\s*["']\/pressao-alta-quando-procurar-ajuda["']/i.test(worker))
     fail(errors, "src/worker.js canonicaliza alias /dor-no-peito", /["']\/dor-no-peito["']\s*,\s*["']\/dor-no-peito-quando-procurar-ajuda["']/i.test(worker))
-    fail(errors, "src/worker.js redireciona paginas rasas para canonicas fortes", /["']\/consulta-com-cardiologista["']\s*,\s*["']\/contato["'][\s\S]*["']\/prevencao-cardiovascular["']\s*,\s*["']\/check-up-cardiologico["']/i.test(worker))
+    fail(
+      errors,
+      "src/worker.js nao redireciona paginas canonicas recriadas",
+      !/["']\/(consulta-com-cardiologista|palpitacoes-quando-se-preocupar|pressao-alta-quando-procurar-ajuda|colesterol-alto-e-risco-cardiaco|cardiologista-ou-clinico-geral)["']\s*,/i.test(worker)
+    )
     fail(errors, "src/worker.js remove query string de URLs canonicas antigas", /url\.search\s*=\s*["']["']/i.test(worker))
     fail(errors, "src/worker.js preserva entrega de assets pelo Cloudflare", /env\.ASSETS\.fetch\(request\)/i.test(worker))
   }
@@ -552,7 +556,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, `${route}: possui conteudo inicial crawlavel`, /data-static-seo-route=|Respostas diretas para pacientes/i.test(html))
     fail(errors, `${route}: possui H1 visivel no HTML inicial`, /<h1>[\s\S]*<\/h1>/i.test(html))
     fail(errors, `${route}: possui bloco AEO de respostas diretas`, /Respostas diretas para pacientes/i.test(html))
-    fail(errors, `${route}: entrega corpo especifico no root estatico`, /<div\s+id=["']root["'][^>]*>[\s\S]*data-static-seo-route=/i.test(html))
+    fail(errors, `${route}: entrega corpo especifico no root prerenderizado`, /<div\s+id=["']root["'][^>]*>[\s\S]*<main[\s\S]*<\/main>/i.test(html))
     fail(errors, `${route}: informa revisão médica e atualização`, /Revisão médica[\s\S]*Última atualização/i.test(html))
     fail(errors, `${route}: reforça orientação de urgência em conteúdo médico`, /Sintomas intensos[\s\S]*serviço de urgência/i.test(html))
     fail(errors, `${route}: linka OneLiv como reforco externo auxiliar`, /https:\/\/oneliv\.com\.br\/profissional\/vandui-santos/i.test(html))
@@ -590,7 +594,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "Páginas locais possuem CTA Abrir no Google Maps", /Abrir no Google Maps/i.test(seoLandingSource))
     fail(errors, "Páginas locais usam URL rastreável do Google Maps", /google\.com\/maps\/search\/\?api=1&query=/i.test(seoLandingSource))
     fail(errors, "Páginas locais anotam clique de mapa para conversão", /data-event=["']click_maps["']/i.test(seoLandingSource))
-    fail(errors, "Páginas locais carregam mapa incorporado com lazy loading", /<iframe[\s\S]*loading=["']lazy["']/i.test(seoLandingSource))
+    fail(errors, "Páginas locais evitam iframe de mapa para proteger performance mobile", !/<iframe/i.test(seoLandingSource))
     fail(errors, "Páginas SEO linkam OneLiv como agendamento e prova social", /oneliv\.com\.br\/profissional\/vandui-santos/i.test(seoLandingSource))
     fail(errors, "Páginas SEO anotam clique de agendamento OneLiv", /data-event=["']click_agendamento["']/i.test(seoLandingSource))
     fail(errors, "Páginas SEO exibem respostas diretas AEO no app", /Respostas diretas para pacientes/i.test(seoLandingSource))

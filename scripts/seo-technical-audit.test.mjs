@@ -185,8 +185,10 @@ function createFixture({ blockAll = false } = {}) {
         "/tratamento-hipertensao",
         "/palpitacoes-e-arritmias",
         "/dor-no-peito-quando-procurar-ajuda",
-        "/colesterol-alto",
-        "/prevencao-cardiovascular",
+        "/palpitacoes-quando-se-preocupar",
+        "/pressao-alta-quando-procurar-ajuda",
+        "/colesterol-alto-e-risco-cardiaco",
+        "/cardiologista-ou-clinico-geral",
       ].includes(route),
     )
       .map(({ route }) => `<li><a href="${route}">${route}</a></li>`)
@@ -233,7 +235,7 @@ function createFixture({ blockAll = false } = {}) {
   })
   writeFileSync(
     path.join(root, "src/pages/SEOLandingPage.tsx"),
-    '<h2>Respostas diretas para pacientes</h2><a href="https://www.google.com/maps/search/?api=1&query=fixture" data-event="click_maps">Abrir no Google Maps</a><a href="https://oneliv.com.br/profissional/vandui-santos" data-event="click_agendamento">OneLiv</a><iframe loading="lazy"></iframe>',
+    '<h2>Respostas diretas para pacientes</h2><a href="https://www.google.com/maps/search/?api=1&query=fixture" data-event="click_maps">Abrir no Google Maps</a><a href="https://oneliv.com.br/profissional/vandui-santos" data-event="click_agendamento">OneLiv</a>',
   )
   writeFileSync(
     path.join(assetsDir, "app.js"),

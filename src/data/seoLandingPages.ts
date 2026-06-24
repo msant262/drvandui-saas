@@ -1,6 +1,6 @@
 export const SITE_BASE_URL = 'https://www.drvandui.com.br'
 
-export type SeoLandingPageKind = 'local' | 'profile' | 'service'
+export type SeoLandingPageKind = 'local' | 'profile' | 'service' | 'answer'
 
 export type SeoLandingPage = {
   slug: string
@@ -561,6 +561,292 @@ export const seoLandingPages: SeoLandingPage[] = [
       },
     ],
     relatedSlugs: ['check-up-cardiologico', 'tratamento-hipertensao', 'cardiologista-em-santo-andre'],
+  },
+  {
+    slug: 'consulta-com-cardiologista',
+    kind: 'service',
+    title: 'Consulta com Cardiologista | Dr. Vandui Santos',
+    description:
+      'Consulta com cardiologista para dor no peito, palpitações, pressão alta, colesterol, check-up, prevenção cardiovascular e risco cirúrgico.',
+    keywords:
+      'consulta com cardiologista, consulta cardiológica, cardiologista particular, agendar cardiologista, Dr Vandui cardiologista',
+    h1: 'Consulta com cardiologista',
+    eyebrow: 'Primeira avaliação cardiológica',
+    intro:
+      'A consulta com cardiologista organiza sintomas, histórico, exames e fatores de risco para definir uma conduta clara, sem transformar toda dúvida em bateria automática de exames.',
+    ctaLabel: 'Agendar consulta cardiológica',
+    whatsappText: 'Olá Dr. Vandui, gostaria de agendar uma consulta com cardiologista.',
+    highlights: authorityProof,
+    sections: [
+      {
+        heading: 'Para quem a consulta é indicada',
+        body:
+          'A avaliação é indicada para adultos com dor no peito, falta de ar, palpitações, pressão alta, colesterol alterado, diabetes, histórico familiar de infarto ou AVC, alterações em exames ou desejo de iniciar prevenção cardiovascular.',
+        bullets: ['Dor no peito ou falta de ar', 'Palpitações ou batimento irregular', 'Pressão alta ou colesterol alterado', 'Histórico familiar de doença cardíaca'],
+      },
+      {
+        heading: 'Como a avaliação é conduzida',
+        body:
+          'A consulta revisa história clínica, sintomas, medicamentos, pressão arterial, exames anteriores e estilo de vida. A partir disso, o médico decide se há necessidade de exames complementares, ajuste de tratamento ou acompanhamento periódico.',
+      },
+      {
+        heading: 'O que levar no dia',
+        body:
+          'Leve exames recentes, lista de remédios, alergias, cirurgias, internações e informações sobre doenças cardíacas na família. Esses dados reduzem ruído e ajudam a consulta a ser mais objetiva.',
+        bullets: ['Exames recentes', 'Lista de medicamentos', 'Histórico familiar', 'Relatórios e pedidos médicos anteriores'],
+      },
+      {
+        heading: 'Quando não esperar consulta',
+        body: emergencyNotice,
+      },
+    ],
+    faqs: [
+      {
+        question: 'Quando devo marcar consulta com cardiologista?',
+        answer:
+          'Quando houver sintomas como dor no peito, falta de ar ou palpitações, fatores de risco como hipertensão, colesterol alto ou diabetes, histórico familiar ou necessidade de prevenção cardiovascular.',
+      },
+      {
+        question: 'Preciso chegar com exames prontos?',
+        answer:
+          'Não necessariamente. Exames anteriores ajudam, mas a indicação de novos exames deve partir da avaliação clínica e do risco individual.',
+      },
+      {
+        question: 'Cardiologista também faz prevenção?',
+        answer:
+          'Sim. A consulta pode ser preventiva para estimar risco cardiovascular, revisar hábitos, acompanhar pressão, colesterol, diabetes e histórico familiar.',
+      },
+    ],
+    relatedSlugs: ['check-up-cardiologico', 'tratamento-hipertensao', 'risco-cirurgico-cardiologico'],
+  },
+  {
+    slug: 'palpitacoes-quando-se-preocupar',
+    kind: 'answer',
+    title: 'Palpitações: Quando se Preocupar | Dr. Vandui Cardiologista',
+    description:
+      'Entenda quando palpitações merecem avaliação com cardiologista, sinais de alerta e quando procurar urgência.',
+    keywords:
+      'palpitações quando se preocupar, coração acelerado, batimento irregular, palpitação cardiologista, arritmia sintomas',
+    h1: 'Palpitações: quando se preocupar',
+    eyebrow: 'Resposta rápida sobre palpitações',
+    intro:
+      'Palpitação é a percepção de batimentos acelerados, fortes ou irregulares. Nem todo episódio é grave, mas alguns padrões exigem avaliação cardiológica ou urgência.',
+    ctaLabel: 'Agendar avaliação de palpitações',
+    whatsappText: 'Olá Dr. Vandui, estou com palpitações e gostaria de avaliação cardiológica.',
+    highlights: authorityProof,
+    sections: [
+      {
+        heading: 'Sinais de alerta',
+        body:
+          'Preocupe-se quando a palpitação vem com dor no peito, falta de ar, tontura, desmaio, suor frio, batimento muito acelerado e sustentado, ou quando aparece durante esforço físico.',
+        bullets: ['Dor no peito', 'Falta de ar', 'Tontura ou desmaio', 'Batimento irregular e persistente'],
+      },
+      {
+        heading: 'Quando marcar cardiologista',
+        body:
+          'Marque consulta se os episódios são recorrentes, atrapalham atividades, acordam durante a noite, aparecem com exercício ou ocorrem em pacientes com hipertensão, doença cardíaca prévia ou histórico familiar relevante.',
+      },
+      {
+        heading: 'O que pode estar por trás',
+        body:
+          'Cafeína, ansiedade, sono ruim, anemia, alterações hormonais, medicamentos e arritmias podem causar palpitações. A avaliação clínica ajuda a diferenciar causas benignas de quadros que precisam investigação.',
+      },
+      {
+        heading: 'Quando procurar urgência',
+        body:
+          'Procure urgência se a palpitação for intensa, sustentada ou associada a dor no peito, falta de ar importante, desmaio, fraqueza ou mal-estar intenso.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Palpitação sempre é arritmia?',
+        answer:
+          'Não. Pode ter causas benignas, mas episódios recorrentes, intensos ou associados a sinais de alerta devem ser avaliados.',
+      },
+      {
+        question: 'Coração acelerado por ansiedade precisa de cardiologista?',
+        answer:
+          'Pode precisar quando há dúvida diagnóstica, sintomas fortes, fatores de risco ou episódios repetidos. A avaliação ajuda a separar ansiedade de arritmia ou outras causas.',
+      },
+      {
+        question: 'Qual exame avalia palpitações?',
+        answer:
+          'Depende da frequência. Eletrocardiograma, Holter, exames laboratoriais e ecocardiograma podem ser considerados conforme o caso.',
+      },
+    ],
+    relatedSlugs: ['palpitacoes-e-arritmias', 'dor-no-peito-quando-procurar-ajuda', 'consulta-com-cardiologista'],
+  },
+  {
+    slug: 'pressao-alta-quando-procurar-ajuda',
+    kind: 'answer',
+    title: 'Pressão Alta: Quando Procurar Ajuda | Cardiologista',
+    description:
+      'Saiba quando pressão alta precisa de cardiologista, quais sinais exigem urgência e como organizar o acompanhamento.',
+    keywords:
+      'pressão alta quando procurar ajuda, pressão alta cardiologista, hipertensão sintomas, pressão alta urgência',
+    h1: 'Pressão alta: quando procurar ajuda',
+    eyebrow: 'Hipertensão sem improviso',
+    intro:
+      'Uma medida isolada alta não conta a história inteira. O risco aumenta quando a pressão se repete elevada, vem com sintomas ou aparece em pacientes com outros fatores cardiovasculares.',
+    ctaLabel: 'Agendar avaliação da pressão',
+    whatsappText: 'Olá Dr. Vandui, estou com pressão alta e gostaria de orientação cardiológica.',
+    highlights: authorityProof,
+    sections: [
+      {
+        heading: 'Quando procurar cardiologista',
+        body:
+          'Procure avaliação quando a pressão se mantém elevada em medições repetidas, quando há diabetes, doença renal, colesterol alto, sobrepeso, tabagismo, histórico familiar ou necessidade de ajustar medicação.',
+        bullets: ['Medições repetidamente altas', 'Diabetes ou doença renal', 'Colesterol alto', 'Dúvida sobre tratamento atual'],
+      },
+      {
+        heading: 'Quando é urgência',
+        body:
+          'Dor no peito, falta de ar, confusão mental, alteração visual súbita, fraqueza em um lado do corpo, desmaio ou dor de cabeça muito intensa exigem avaliação imediata.',
+      },
+      {
+        heading: 'Como acompanhar com segurança',
+        body:
+          'O acompanhamento considera medidas corretas de pressão, risco global, adesão ao tratamento, efeitos colaterais, função renal, exames laboratoriais e hábitos que influenciam a pressão.',
+      },
+      {
+        heading: 'Por que não ajustar sozinho',
+        body:
+          'Aumentar, cortar ou trocar medicação sem orientação pode mascarar risco, causar efeitos colaterais ou deixar a pressão sem controle real. A decisão depende do contexto clínico.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Uma pressão alta isolada confirma hipertensão?',
+        answer:
+          'Não necessariamente. A confirmação depende de medidas repetidas, técnica correta e interpretação clínica.',
+      },
+      {
+        question: 'Quando pressão alta vira emergência?',
+        answer:
+          'Quando vem com dor no peito, falta de ar, confusão, alteração visual, fraqueza, desmaio ou dor de cabeça muito intensa.',
+      },
+      {
+        question: 'Cardiologista pode ajustar remédio de pressão?',
+        answer:
+          'Sim. O cardiologista avalia risco, exames, sintomas e resposta ao tratamento para orientar ajustes quando necessários.',
+      },
+    ],
+    relatedSlugs: ['tratamento-hipertensao', 'check-up-cardiologico', 'colesterol-alto-e-risco-cardiaco'],
+  },
+  {
+    slug: 'colesterol-alto-e-risco-cardiaco',
+    kind: 'answer',
+    title: 'Colesterol Alto e Risco Cardíaco | Cardiologista',
+    description:
+      'Colesterol alto pode aumentar risco cardiovascular. Entenda quando procurar cardiologista e como avaliar risco de forma individualizada.',
+    keywords:
+      'colesterol alto risco cardíaco, colesterol alto cardiologista, LDL alto, prevenção cardiovascular, risco de infarto',
+    h1: 'Colesterol alto e risco cardíaco',
+    eyebrow: 'Prevenção cardiovascular',
+    intro:
+      'Colesterol alto não deve ser interpretado apenas por um número isolado. O impacto depende de idade, pressão, diabetes, tabagismo, histórico familiar e risco cardiovascular global.',
+    ctaLabel: 'Agendar avaliação de risco',
+    whatsappText: 'Olá Dr. Vandui, estou com colesterol alto e gostaria de avaliar risco cardíaco.',
+    highlights: authorityProof,
+    sections: [
+      {
+        heading: 'Quando o colesterol preocupa mais',
+        body:
+          'O risco é maior quando há LDL muito elevado, diabetes, hipertensão, tabagismo, doença renal, obesidade, histórico familiar de infarto precoce ou doença cardiovascular já conhecida.',
+        bullets: ['LDL elevado', 'Histórico familiar de infarto', 'Diabetes ou hipertensão', 'Tabagismo ou doença renal'],
+      },
+      {
+        heading: 'Como o cardiologista avalia risco',
+        body:
+          'A consulta combina exames, pressão arterial, histórico pessoal e familiar, hábitos, sintomas e risco estimado. A meta de colesterol não é igual para todos os pacientes.',
+      },
+      {
+        heading: 'Tratamento não é só remédio',
+        body:
+          'Mudanças alimentares, atividade física, sono, controle de peso, cessar tabagismo e medicação quando indicada fazem parte do plano. A decisão deve considerar benefício real e segurança.',
+      },
+      {
+        heading: 'Colesterol e sintomas',
+        body:
+          'Colesterol alto geralmente não causa sintomas diretos. Por isso, prevenção e acompanhamento são importantes antes que apareçam eventos como infarto ou AVC.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Colesterol alto dá sintoma?',
+        answer:
+          'Na maioria das vezes, não. O risco costuma ser silencioso e precisa ser avaliado por exames e fatores clínicos.',
+      },
+      {
+        question: 'Todo colesterol alto precisa de remédio?',
+        answer:
+          'Não. A decisão depende do nível de colesterol, risco cardiovascular global, histórico familiar e doenças associadas.',
+      },
+      {
+        question: 'Cardiologista trata colesterol alto?',
+        answer:
+          'Sim. O cardiologista avalia risco cardiovascular e define metas de controle conforme o perfil do paciente.',
+      },
+    ],
+    relatedSlugs: ['check-up-cardiologico', 'tratamento-hipertensao', 'consulta-com-cardiologista'],
+  },
+  {
+    slug: 'cardiologista-ou-clinico-geral',
+    kind: 'answer',
+    title: 'Cardiologista ou Clínico Geral | Quando Procurar Cada Um',
+    description:
+      'Entenda quando procurar cardiologista ou clínico geral para sintomas, prevenção, pressão alta, check-up e risco cardiovascular.',
+    keywords:
+      'cardiologista ou clinico geral, quando procurar cardiologista, clinico medico ou cardiologista, consulta cardiologica',
+    h1: 'Cardiologista ou clínico geral?',
+    eyebrow: 'Escolha correta da consulta',
+    intro:
+      'Clínico geral e cardiologista podem atuar de forma complementar. A escolha depende do sintoma, do risco cardiovascular e do objetivo da consulta.',
+    ctaLabel: 'Agendar avaliação cardiológica',
+    whatsappText: 'Olá Dr. Vandui, tenho dúvida se preciso de cardiologista e gostaria de agendar avaliação.',
+    highlights: authorityProof,
+    sections: [
+      {
+        heading: 'Quando começar pelo clínico geral',
+        body:
+          'O clínico geral é uma boa porta de entrada para sintomas inespecíficos, acompanhamento global de saúde, revisão inicial de exames e queixas que ainda não apontam claramente para um sistema específico.',
+        bullets: ['Queixas gerais', 'Revisão ampla de saúde', 'Sintomas inespecíficos', 'Coordenação de cuidados'],
+      },
+      {
+        heading: 'Quando procurar cardiologista',
+        body:
+          'Procure cardiologista quando há dor no peito, falta de ar aos esforços, palpitações, desmaio, pressão alta, colesterol elevado, diabetes, histórico familiar de infarto ou necessidade de risco cirúrgico.',
+        bullets: ['Dor no peito', 'Palpitações', 'Hipertensão ou colesterol alto', 'Risco cirúrgico cardiológico'],
+      },
+      {
+        heading: 'Como evitar consulta perdida',
+        body:
+          'Leve exames, lista de medicamentos e histórico familiar. Se a dúvida principal envolve risco cardíaco, sintomas cardiovasculares ou prevenção, a avaliação cardiológica tende a ser mais direcionada.',
+      },
+      {
+        heading: 'Integração entre especialidades',
+        body:
+          'O melhor cuidado não depende de competição entre especialidades, mas de direcionamento correto. O cardiologista avalia risco e sintomas cardiovasculares; o clínico ajuda a integrar o cuidado global.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Posso ir direto ao cardiologista?',
+        answer:
+          'Sim, especialmente se houver sintomas cardiovasculares, fatores de risco ou necessidade de prevenção cardíaca direcionada.',
+      },
+      {
+        question: 'Clínico geral também trata pressão alta?',
+        answer:
+          'Sim, mas o cardiologista pode ser mais indicado quando há risco cardiovascular elevado, dificuldade de controle, sintomas ou dúvidas sobre exames e medicação.',
+      },
+      {
+        question: 'Quem devo procurar para check-up cardíaco?',
+        answer:
+          'Para uma avaliação focada em risco cardiovascular, pressão, colesterol, sintomas e prevenção cardíaca, procure cardiologista.',
+      },
+    ],
+    relatedSlugs: ['consulta-com-cardiologista', 'check-up-cardiologico', 'cardiologista-vila-mariana'],
   },
 ]
 

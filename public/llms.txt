@@ -11,11 +11,16 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 - [Cardiologista em Santos](https://www.drvandui.com.br/cardiologista-em-santos)
 - [Cardiologista em Santo Andre](https://www.drvandui.com.br/cardiologista-em-santo-andre)
 - [Cardiologista na Vila Mariana](https://www.drvandui.com.br/cardiologista-vila-mariana)
+- [Consulta com cardiologista](https://www.drvandui.com.br/consulta-com-cardiologista)
 - [Check-up cardiologico](https://www.drvandui.com.br/check-up-cardiologico)
-- [Tratamento de hipertensao](https://www.drvandui.com.br/tratamento-hipertensao)
-- [Dor no peito: quando procurar ajuda](https://www.drvandui.com.br/dor-no-peito-quando-procurar-ajuda)
-- [Palpitacoes e arritmias](https://www.drvandui.com.br/palpitacoes-e-arritmias)
 - [Risco cirurgico cardiologico](https://www.drvandui.com.br/risco-cirurgico-cardiologico)
+- [Tratamento de hipertensao](https://www.drvandui.com.br/tratamento-hipertensao)
+- [Palpitacoes e arritmias](https://www.drvandui.com.br/palpitacoes-e-arritmias)
+- [Dor no peito: quando procurar ajuda](https://www.drvandui.com.br/dor-no-peito-quando-procurar-ajuda)
+- [Palpitacoes: quando se preocupar](https://www.drvandui.com.br/palpitacoes-quando-se-preocupar)
+- [Pressao alta: quando procurar ajuda](https://www.drvandui.com.br/pressao-alta-quando-procurar-ajuda)
+- [Colesterol alto e risco cardiaco](https://www.drvandui.com.br/colesterol-alto-e-risco-cardiaco)
+- [Cardiologista ou clinico geral](https://www.drvandui.com.br/cardiologista-ou-clinico-geral)
 - [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)
 
 ## Autoridade medica
@@ -33,7 +38,7 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 - Perfil medico oficial: [Dr. Vandui da Silva dos Santos](https://www.drvandui.com.br/dr-vandui-cardiologista)
 - A OneLiv funciona como canal auxiliar de agendamento e prova social, nao como substituto do site oficial.
 - URLs antigas ou nao canonicas, como /eventos, devem consolidar autoridade para a pagina inicial oficial.
-- URLs experimentais ou rasas devem redirecionar para paginas canonicas mais completas.
+- URLs canonicas de sintomas e servicos devem responder a intencao de busca propria, sem conteudo raso ou repetitivo.
 
 ## Unidades e NAP local
 
@@ -67,12 +72,15 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 ## Temas principais
 
 - Cardiologia
+- Consulta com cardiologista
 - Check-up cardiologico
 - Tratamento de hipertensao
+- Pressao alta
+- Colesterol alto e risco cardiaco
 - Dor no peito
 - Palpitacoes e arritmias
 - Risco cirurgico cardiologico
-- Prevencao cardiovascular dentro do check-up cardiologico
+- Prevencao cardiovascular
 
 ## Respostas rapidas para pacientes
 
@@ -80,7 +88,7 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 
 Voce deve procurar um cardiologista se tiver dor no peito, falta de ar, palpitacoes, pressao alta, colesterol elevado, diabetes, historico familiar de doenca cardiaca ou quiser fazer uma avaliacao preventiva.
 
-Leia mais: [Check-up cardiologico](https://www.drvandui.com.br/check-up-cardiologico)
+Leia mais: [Consulta com cardiologista](https://www.drvandui.com.br/consulta-com-cardiologista)
 
 ### Cardiologista trata hipertensao?
 
@@ -93,6 +101,18 @@ Leia mais: [Tratamento de hipertensao](https://www.drvandui.com.br/tratamento-hi
 Nao. Dor no peito pode ter varias causas, mas dor intensa, subita, associada a falta de ar, suor frio, desmaio, nausea ou irradiacao para braco, costas ou mandibula deve ser avaliada em servico de emergencia.
 
 Leia mais: [Dor no peito: quando procurar ajuda](https://www.drvandui.com.br/dor-no-peito-quando-procurar-ajuda)
+
+### Quando palpitações preocupam?
+
+Palpitacoes preocupam quando sao recorrentes, prolongadas, aparecem com esforco ou vêm com dor no peito, falta de ar, tontura, desmaio ou mal-estar intenso.
+
+Leia mais: [Palpitacoes: quando se preocupar](https://www.drvandui.com.br/palpitacoes-quando-se-preocupar)
+
+### Colesterol alto sempre precisa de remedio?
+
+Nao necessariamente. A decisao depende do nivel de colesterol, risco cardiovascular global, historico familiar e doencas associadas.
+
+Leia mais: [Colesterol alto e risco cardiaco](https://www.drvandui.com.br/colesterol-alto-e-risco-cardiaco)
 
 ## Contato
 
