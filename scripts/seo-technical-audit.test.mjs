@@ -47,7 +47,7 @@ function createFixture({ blockAll = false } = {}) {
   const distDir = path.join(root, "dist")
   const assetsDir = path.join(distDir, "assets")
   mkdirSync(assetsDir, { recursive: true })
-  writeFileSync(path.join(distDir, ".assetsignore"), "_worker.js\n")
+  writeFileSync(path.join(distDir, ".assetsignore"), "/_worker.js\n_worker.js\n**/_worker.js\n")
   SEO_ROUTES.filter(({ route }) => route !== "/").forEach(({ route }) => {
     mkdirSync(path.join(distDir, route.slice(1)), { recursive: true })
   })
@@ -98,7 +98,7 @@ function createFixture({ blockAll = false } = {}) {
     path.join(root, "public/llms.txt"),
     "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Perfil do Dr. Vandui](https://www.drvandui.com.br/dr-vandui-cardiologista)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n\n## Respostas rapidas para pacientes\n\n### Quando devo procurar um cardiologista?\n\nVoce deve procurar um cardiologista se tiver dor no peito.\n\n### Cardiologista trata hipertensao?\n\nSim. O cardiologista avalia pressao arterial.\n\n### O que e prevencao cardiovascular?\n\nPrevencao cardiovascular acompanha fatores de risco.\n",
   )
-  writeFileSync(path.join(root, "public/.assetsignore"), "_worker.js\n")
+  writeFileSync(path.join(root, "public/.assetsignore"), "/_worker.js\n_worker.js\n**/_worker.js\n")
 
   writeFileSync(
     path.join(root, "vite.config.ts"),

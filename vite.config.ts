@@ -351,7 +351,7 @@ function staticRouteFallbackPlugin() {
       const indexPath = path.join(distDir, 'index.html')
 
       mkdirSync(distDir, { recursive: true })
-      writeFileSync(path.join(distDir, '.assetsignore'), '_worker.js\n')
+      writeFileSync(path.join(distDir, '.assetsignore'), '/_worker.js\n_worker.js\n**/_worker.js\n')
 
       if (!existsSync(indexPath)) {
         return
