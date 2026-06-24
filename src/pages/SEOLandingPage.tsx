@@ -15,8 +15,17 @@ function whatsappHref(page: SeoLandingPage) {
   return `https://wa.me/5511976170971?text=${encodeURIComponent(page.whatsappText)}`
 }
 
+function mapsHref(page: SeoLandingPage) {
+  if (!page.location) {
+    return ''
+  }
+
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(page.location.mapQuery)}`
+}
+
 function buildSchemas(page: SeoLandingPage) {
   const url = `${SITE_BASE_URL}/${page.slug}`
+  const mapUrl = page.location ? mapsHref(page) : null
   const breadcrumb = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -93,6 +102,8 @@ function buildSchemas(page: SeoLandingPage) {
         telephone: '+55-11-97617-0971',
         priceRange: '$$',
         medicalSpecialty: 'Cardiology',
+        hasMap: mapUrl,
+        areaServed: page.location.region,
         address: {
           '@type': 'PostalAddress',
           streetAddress: page.location.address,
@@ -148,6 +159,7 @@ export function SEOLandingPage() {
   const relatedPages = page.relatedSlugs
     .map((slug) => getSeoLandingPageBySlug(slug))
     .filter((item): item is SeoLandingPage => Boolean(item))
+  const localMapHref = mapsHref(page)
 
   if (isMissingPage) {
     return <Navigate to="/" replace />
@@ -293,6 +305,17 @@ export function SEOLandingPage() {
                           <p className="text-sm text-[#555]">{page.location.region}</p>
                         </div>
                       </div>
+                      <a
+                        href={localMapHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-event="click_maps"
+                        data-page={page.slug}
+                        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--color-cyan-light)] bg-[#f0f9fa] px-4 py-3 text-sm font-bold text-[var(--color-teal)] transition-colors hover:bg-[var(--color-cyan-light)]"
+                      >
+                        Abrir no Google Maps
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
                     </div>
                     <iframe
                       title={`Mapa da unidade ${page.location.name}`}

@@ -36,11 +36,13 @@ function createFixture({ blockAll = false } = {}) {
   const distDir = path.join(root, "dist")
   const assetsDir = path.join(distDir, "assets")
   mkdirSync(assetsDir, { recursive: true })
+  writeFileSync(path.join(distDir, ".assetsignore"), "_worker.js\n")
   SEO_ROUTES.filter(({ route }) => route !== "/").forEach(({ route }) => {
     mkdirSync(path.join(distDir, route.slice(1)), { recursive: true })
   })
   mkdirSync(path.join(root, "public"), { recursive: true })
   mkdirSync(path.join(root, "src"), { recursive: true })
+  mkdirSync(path.join(root, "src/pages"), { recursive: true })
 
   const robots = blockAll
     ? `User-agent: *\nDisallow: /\nSitemap: https://www.drvandui.com.br/sitemap.xml\n`
@@ -152,8 +154,24 @@ function createFixture({ blockAll = false } = {}) {
             ? ["Physician", "BreadcrumbList", "FAQPage", "MedicalBusiness"]
             : ["Physician", "BreadcrumbList", "FAQPage", "Article"]
 
-    writeFileSync(path.join(root, file), baseHtml(canonical, route.slice(1), schemaTypes))
+    const html = baseHtml(canonical, route.slice(1), schemaTypes)
+    const routeHtml = [
+      "/cardiologista-em-santos",
+      "/cardiologista-em-santo-andre",
+      "/cardiologista-vila-mariana",
+    ].includes(route)
+      ? html.replace(
+          "</head>",
+          '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","hasMap":"https://www.google.com/maps/search/?api=1&query=fixture","areaServed":"Fixture"}</script></head>',
+        )
+      : html
+
+    writeFileSync(path.join(root, file), routeHtml)
   })
+  writeFileSync(
+    path.join(root, "src/pages/SEOLandingPage.tsx"),
+    '<a href="https://www.google.com/maps/search/?api=1&query=fixture" data-event="click_maps">Abrir no Google Maps</a><iframe loading="lazy"></iframe>',
+  )
   writeFileSync(
     path.join(assetsDir, "app.js"),
     "window.dispatchEvent(new Event('dr-vandui-prerender-ready'));\n/* dr-vandui-prerender-ready */",

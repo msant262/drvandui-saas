@@ -97,6 +97,8 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
   ]
 
   if (page.location) {
+    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(page.location.mapQuery)}`
+
     schemas.push({
       '@context': 'https://schema.org',
       '@type': 'MedicalBusiness',
@@ -105,6 +107,8 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
       telephone: '+55-11-97617-0971',
       priceRange: '$$',
       medicalSpecialty: 'Cardiology',
+      hasMap: mapUrl,
+      areaServed: page.location.region,
       address: {
         '@type': 'PostalAddress',
         streetAddress: page.location.address,
@@ -271,6 +275,9 @@ function staticRouteFallbackPlugin() {
     closeBundle() {
       const distDir = path.resolve(__dirname, 'dist')
       const indexPath = path.join(distDir, 'index.html')
+
+      mkdirSync(distDir, { recursive: true })
+      writeFileSync(path.join(distDir, '.assetsignore'), '_worker.js\n')
 
       if (!existsSync(indexPath)) {
         return

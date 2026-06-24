@@ -339,8 +339,10 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
 
   const publicWorker = read(root, "public/_worker.js")
   fail(errors, "public/_worker.js nao existe como asset publico no wrangler deploy", !publicWorker)
-  const assetsIgnore = read(root, "public/.assetsignore")
-  fail(errors, "public/.assetsignore impede upload acidental de _worker.js em dist", /^_worker\.js$/m.test(assetsIgnore))
+  const publicAssetsIgnore = read(root, "public/.assetsignore")
+  fail(errors, "public/.assetsignore documenta exclusao de _worker.js", /^_worker\.js$/m.test(publicAssetsIgnore))
+  const distAssetsIgnore = read(root, "dist/.assetsignore")
+  fail(errors, "dist/.assetsignore impede upload acidental de _worker.js pelo Wrangler", /^_worker\.js$/m.test(distAssetsIgnore))
 
   const worker = read(root, "src/worker.js")
   fail(errors, "src/worker.js existe para canonicalizacao de host no Cloudflare Workers", Boolean(worker))
@@ -448,7 +450,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   for (const { route, file } of SEO_ROUTES) {
     fail(errors, `Build gerou ${file} para ${route}`, existsSync(path.resolve(root, file)))
   }
-  fail(errors, "Build nao publica _worker.js como asset em dist", !existsSync(path.resolve(root, "dist/_worker.js")))
+  fail(errors, "Build publica dist/.assetsignore para bloquear _worker.js", /^_worker\.js$/m.test(read(root, "dist/.assetsignore")))
 
   for (const route of SEO_LANDING_PATHS) {
     const file = `dist/${route.slice(1)}/index.html`
@@ -466,6 +468,8 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
 
     if (SEO_LOCAL_PATHS.includes(route)) {
       fail(errors, `${route}: inclui JSON-LD MedicalBusiness`, hasJsonLdType(html, "MedicalBusiness"))
+      fail(errors, `${route}: schema local inclui hasMap`, /"hasMap"\s*:\s*"https:\/\/www\.google\.com\/maps\/search\/\?api=1&query=/i.test(html))
+      fail(errors, `${route}: schema local inclui areaServed`, /"areaServed"\s*:/i.test(html))
     }
 
     if (SEO_SERVICE_PATHS.includes(route) || SEO_ANSWER_PATHS.includes(route)) {
@@ -476,6 +480,14 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   const jsAssetInfo = checkJsAssets(root)
   fail(errors, `Nenhum asset JS de build acima de 500KB no bundle (atual: ${jsAssetInfo?.heavy?.length ?? 0})`, jsAssetInfo && jsAssetInfo.heavy.length === 0)
   fail(errors, "bundle contém evento de sinal para prerender", containsPrerenderEvent(root))
+
+  const seoLandingSource = read(root, "src/pages/SEOLandingPage.tsx")
+  if (seoLandingSource) {
+    fail(errors, "Páginas locais possuem CTA Abrir no Google Maps", /Abrir no Google Maps/i.test(seoLandingSource))
+    fail(errors, "Páginas locais usam URL rastreável do Google Maps", /google\.com\/maps\/search\/\?api=1&query=/i.test(seoLandingSource))
+    fail(errors, "Páginas locais anotam clique de mapa para conversão", /data-event=["']click_maps["']/i.test(seoLandingSource))
+    fail(errors, "Páginas locais carregam mapa incorporado com lazy loading", /<iframe[\s\S]*loading=["']lazy["']/i.test(seoLandingSource))
+  }
 
   return {
     passed: errors.length === 0,
