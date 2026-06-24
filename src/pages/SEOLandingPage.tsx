@@ -23,6 +23,9 @@ function mapsHref(page: SeoLandingPage) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(page.location.mapQuery)}`
 }
 
+const PHYSICIAN_ENTITY_ID = `${SITE_BASE_URL}/#physician`
+const MEDICAL_PRACTICE_ENTITY_ID = `${SITE_BASE_URL}/#medical-practice`
+
 function buildSchemas(page: SeoLandingPage) {
   const url = `${SITE_BASE_URL}/${page.slug}`
   const mapUrl = page.location ? mapsHref(page) : null
@@ -38,8 +41,10 @@ function buildSchemas(page: SeoLandingPage) {
   const physician = {
     '@context': 'https://schema.org',
     '@type': 'Physician',
+    '@id': PHYSICIAN_ENTITY_ID,
     name: 'Dr. Vandui da Silva dos Santos',
-    url,
+    url: `${SITE_BASE_URL}/`,
+    mainEntityOfPage: `${SITE_BASE_URL}/`,
     image: `${SITE_BASE_URL}/hero-doctor.jpg`,
     description:
       'Médico Cardiologista, CRM-SP 210328 e RQE Cardiologia 146567, com formação pela UFTM, Hospital Ipiranga e Instituto Dante Pazzanese de Cardiologia.',
@@ -104,6 +109,11 @@ function buildSchemas(page: SeoLandingPage) {
         medicalSpecialty: 'Cardiology',
         hasMap: mapUrl,
         areaServed: page.location.region,
+        employee: {
+          '@type': 'Physician',
+          '@id': PHYSICIAN_ENTITY_ID,
+          name: 'Dr. Vandui da Silva dos Santos',
+        },
         address: {
           '@type': 'PostalAddress',
           streetAddress: page.location.address,
@@ -122,11 +132,23 @@ function buildSchemas(page: SeoLandingPage) {
           headline: page.h1,
           description: page.description,
           author: {
-            '@type': 'Person',
+            '@type': 'Physician',
+            '@id': PHYSICIAN_ENTITY_ID,
+            name: 'Dr. Vandui da Silva dos Santos',
+          },
+          reviewedBy: {
+            '@type': 'Physician',
+            '@id': PHYSICIAN_ENTITY_ID,
+            name: 'Dr. Vandui da Silva dos Santos',
+          },
+          about: {
+            '@type': 'Physician',
+            '@id': PHYSICIAN_ENTITY_ID,
             name: 'Dr. Vandui da Silva dos Santos',
           },
           publisher: {
-            '@type': 'Organization',
+            '@type': 'MedicalBusiness',
+            '@id': MEDICAL_PRACTICE_ENTITY_ID,
             name: 'Dr. Vandui — Cardiologista',
           },
           mainEntityOfPage: url,

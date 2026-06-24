@@ -113,10 +113,17 @@ function createFixture({ blockAll = false } = {}) {
   const baseHtml = (canonical, title, schemaTypes) => {
     const normalizedSchemaTypes = Array.isArray(schemaTypes) ? schemaTypes : [schemaTypes]
     const schemaScripts = normalizedSchemaTypes
-      .map(
-        (schemaType) =>
-          `<script type="application/ld+json">{"@context":"https://schema.org","@type":"${schemaType}"}</script>`,
-      )
+      .map((schemaType) => {
+        if (schemaType === "Article") {
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","author":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"},"reviewedBy":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+        }
+
+        if (schemaType === "MedicalBusiness") {
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","employee":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+        }
+
+        return `<script type="application/ld+json">{"@context":"https://schema.org","@type":"${schemaType}"}</script>`
+      })
       .join("")
     const noscriptLinks = SEO_ROUTES.filter(({ route }) =>
       [

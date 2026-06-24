@@ -418,6 +418,9 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   if (indexHtml) {
     fail(errors, "index.html (build) inclui JSON-LD Physician", hasJsonLdType(indexHtml, "Physician"))
     fail(errors, "index.html (build) inclui JSON-LD MedicalBusiness", hasJsonLdType(indexHtml, "MedicalBusiness"))
+    fail(errors, "index.html (build) consolida Physician com @id estavel", /"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(indexHtml))
+    fail(errors, "index.html (build) usa canonical home como url do Physician", /"url"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/"/i.test(indexHtml))
+    fail(errors, "index.html (build) conecta MedicalBusiness ao Physician", /"employee"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(indexHtml))
     fail(errors, "index.html (build) explicita CRM-SP 210328", /CRM-SP[\s\S]{0,80}210328/i.test(indexHtml))
     fail(errors, "index.html (build) explicita RQE Cardiologia 146567", /RQE Cardiologia[\s\S]{0,80}146567/i.test(indexHtml))
     fail(errors, "index.html (build) explicita formação UFTM, Hospital Ipiranga e Dante Pazzanese", /UFTM[\s\S]*Hospital Ipiranga[\s\S]*Dante Pazzanese/i.test(indexHtml))
@@ -460,6 +463,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     }
 
     fail(errors, `${route}: inclui JSON-LD Physician`, hasJsonLdType(html, "Physician"))
+    fail(errors, `${route}: consolida Physician com @id estavel`, /"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
     fail(errors, `${route}: inclui JSON-LD BreadcrumbList`, hasJsonLdType(html, "BreadcrumbList"))
     fail(errors, `${route}: inclui JSON-LD FAQPage`, hasJsonLdType(html, "FAQPage"))
     fail(errors, `${route}: explicita CRM-SP 210328`, /CRM-SP[\s\S]{0,80}210328/i.test(html))
@@ -470,10 +474,13 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
       fail(errors, `${route}: inclui JSON-LD MedicalBusiness`, hasJsonLdType(html, "MedicalBusiness"))
       fail(errors, `${route}: schema local inclui hasMap`, /"hasMap"\s*:\s*"https:\/\/www\.google\.com\/maps\/search\/\?api=1&query=/i.test(html))
       fail(errors, `${route}: schema local inclui areaServed`, /"areaServed"\s*:/i.test(html))
+      fail(errors, `${route}: schema local conecta MedicalBusiness ao Physician`, /"employee"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
     }
 
     if (SEO_SERVICE_PATHS.includes(route) || SEO_ANSWER_PATHS.includes(route)) {
       fail(errors, `${route}: inclui JSON-LD Article`, hasJsonLdType(html, "Article"))
+      fail(errors, `${route}: Article identifica Dr. Vandui como autor`, /"author"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
+      fail(errors, `${route}: Article identifica Dr. Vandui como revisor medico`, /"reviewedBy"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
     }
   }
 

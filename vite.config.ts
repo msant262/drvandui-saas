@@ -17,6 +17,8 @@ const enableBrowserPrerender =
   process.env.SKIP_BROWSER_PRERENDER !== '1' &&
   process.env.CF_PAGES !== '1' &&
   (process.env.ENABLE_BROWSER_PRERENDER === '1' || process.platform === 'darwin' || Boolean(process.env.PUPPETEER_EXECUTABLE_PATH))
+const PHYSICIAN_ENTITY_ID = `${SITE_BASE_URL}/#physician`
+const MEDICAL_PRACTICE_ENTITY_ID = `${SITE_BASE_URL}/#medical-practice`
 
 type StaticRouteFallback = {
   route: string
@@ -41,8 +43,10 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
     {
       '@context': 'https://schema.org',
       '@type': 'Physician',
+      '@id': PHYSICIAN_ENTITY_ID,
       name: 'Dr. Vandui da Silva dos Santos',
-      url,
+      url: `${SITE_BASE_URL}/`,
+      mainEntityOfPage: `${SITE_BASE_URL}/`,
       image: `${SITE_BASE_URL}/hero-doctor.jpg`,
       description:
         'Médico Cardiologista, CRM-SP 210328 e RQE Cardiologia 146567, com formação pela UFTM, Hospital Ipiranga e Instituto Dante Pazzanese de Cardiologia.',
@@ -109,6 +113,11 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
       medicalSpecialty: 'Cardiology',
       hasMap: mapUrl,
       areaServed: page.location.region,
+      employee: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
       address: {
         '@type': 'PostalAddress',
         streetAddress: page.location.address,
@@ -126,11 +135,23 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
       headline: page.h1,
       description: page.description,
       author: {
-        '@type': 'Person',
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      reviewedBy: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      about: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
         name: 'Dr. Vandui da Silva dos Santos',
       },
       publisher: {
-        '@type': 'Organization',
+        '@type': 'MedicalBusiness',
+        '@id': MEDICAL_PRACTICE_ENTITY_ID,
         name: 'Dr. Vandui — Cardiologista',
       },
       mainEntityOfPage: url,
