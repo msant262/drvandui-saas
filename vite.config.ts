@@ -19,6 +19,7 @@ const enableBrowserPrerender =
   (process.env.ENABLE_BROWSER_PRERENDER === '1' || process.platform === 'darwin' || Boolean(process.env.PUPPETEER_EXECUTABLE_PATH))
 const PHYSICIAN_ENTITY_ID = `${SITE_BASE_URL}/#physician`
 const MEDICAL_PRACTICE_ENTITY_ID = `${SITE_BASE_URL}/#medical-practice`
+const CONTENT_LAST_MODIFIED = '2026-06-24'
 
 type StaticRouteFallback = {
   route: string
@@ -163,6 +164,8 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
       '@type': 'Article',
       headline: page.h1,
       description: page.description,
+      datePublished: CONTENT_LAST_MODIFIED,
+      dateModified: CONTENT_LAST_MODIFIED,
       author: {
         '@type': 'Physician',
         '@id': PHYSICIAN_ENTITY_ID,
@@ -193,6 +196,8 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
       '@type': 'ProfilePage',
       name: page.h1,
       url,
+      datePublished: CONTENT_LAST_MODIFIED,
+      dateModified: CONTENT_LAST_MODIFIED,
       mainEntity: {
         '@type': 'Physician',
         '@id': PHYSICIAN_ENTITY_ID,

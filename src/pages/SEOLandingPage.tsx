@@ -25,6 +25,7 @@ function mapsHref(page: SeoLandingPage) {
 
 const PHYSICIAN_ENTITY_ID = `${SITE_BASE_URL}/#physician`
 const MEDICAL_PRACTICE_ENTITY_ID = `${SITE_BASE_URL}/#medical-practice`
+const CONTENT_LAST_MODIFIED = '2026-06-24'
 
 function buildSchemas(page: SeoLandingPage) {
   const url = `${SITE_BASE_URL}/${page.slug}`
@@ -160,6 +161,8 @@ function buildSchemas(page: SeoLandingPage) {
           '@type': 'Article',
           headline: page.h1,
           description: page.description,
+          datePublished: CONTENT_LAST_MODIFIED,
+          dateModified: CONTENT_LAST_MODIFIED,
           author: {
             '@type': 'Physician',
             '@id': PHYSICIAN_ENTITY_ID,
@@ -191,6 +194,8 @@ function buildSchemas(page: SeoLandingPage) {
           '@type': 'ProfilePage',
           name: page.h1,
           url,
+          datePublished: CONTENT_LAST_MODIFIED,
+          dateModified: CONTENT_LAST_MODIFIED,
           mainEntity: {
             '@type': 'Physician',
             '@id': PHYSICIAN_ENTITY_ID,

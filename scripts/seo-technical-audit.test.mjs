@@ -126,7 +126,7 @@ function createFixture({ blockAll = false } = {}) {
     const schemaScripts = normalizedSchemaTypes
       .map((schemaType) => {
         if (schemaType === "Article") {
-          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","author":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"},"reviewedBy":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"},"reviewedBy":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
         }
 
         if (schemaType === "MedicalBusiness") {
@@ -134,7 +134,7 @@ function createFixture({ blockAll = false } = {}) {
         }
 
         if (schemaType === "ProfilePage") {
-          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","datePublished":"2026-06-24","dateModified":"2026-06-24","mainEntity":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
         }
 
         return `<script type="application/ld+json">{"@context":"https://schema.org","@type":"${schemaType}"}</script>`

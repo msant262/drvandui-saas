@@ -498,6 +498,8 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
 
     if (SEO_PROFILE_PATHS.includes(route) || SEO_SERVICE_PATHS.includes(route) || SEO_ANSWER_PATHS.includes(route)) {
       fail(errors, `${route}: inclui JSON-LD Article`, hasJsonLdType(html, "Article"))
+      fail(errors, `${route}: Article inclui datePublished`, /"@type"\s*:\s*"Article"[\s\S]*"datePublished"\s*:\s*"\d{4}-\d{2}-\d{2}"/i.test(html))
+      fail(errors, `${route}: Article inclui dateModified`, /"@type"\s*:\s*"Article"[\s\S]*"dateModified"\s*:\s*"\d{4}-\d{2}-\d{2}"/i.test(html))
       fail(errors, `${route}: Article identifica Dr. Vandui como autor`, /"author"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
       fail(errors, `${route}: Article identifica Dr. Vandui como revisor medico`, /"reviewedBy"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
     }
@@ -505,6 +507,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     if (SEO_PROFILE_PATHS.includes(route)) {
       fail(errors, `${route}: inclui JSON-LD ProfilePage`, hasJsonLdType(html, "ProfilePage"))
       fail(errors, `${route}: ProfilePage aponta mainEntity para Physician`, /"@type"\s*:\s*"ProfilePage"[\s\S]*"mainEntity"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
+      fail(errors, `${route}: ProfilePage inclui dateModified`, /"@type"\s*:\s*"ProfilePage"[\s\S]*"dateModified"\s*:\s*"\d{4}-\d{2}-\d{2}"/i.test(html))
     }
   }
 
