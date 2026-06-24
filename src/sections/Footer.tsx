@@ -6,6 +6,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   const localPages = seoLandingPages.filter((page) => page.kind === 'local');
   const servicePages = seoLandingPages.filter((page) => page.kind === 'service').slice(0, 6);
+  const answerPages = seoLandingPages.filter((page) => page.kind === 'answer');
 
   return (
     <footer style={{ backgroundColor: 'var(--color-teal)' }} className="text-white">
@@ -107,7 +108,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="section-padding grid gap-5 py-5 md:grid-cols-2">
+        <div className="section-padding grid gap-5 py-5 lg:grid-cols-3">
           <nav aria-label="Paginas locais">
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
               Atendimento local
@@ -141,6 +142,23 @@ export function Footer() {
               ))}
             </div>
           </nav>
+
+          <nav aria-label="Perguntas frequentes de cardiologia">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
+              Perguntas comuns
+            </p>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              {answerPages.map((page) => (
+                <Link
+                  key={page.slug}
+                  to={`/${page.slug}`}
+                  className="text-xs font-medium text-white/80 transition-colors hover:text-white"
+                >
+                  {page.h1}
+                </Link>
+              ))}
+            </div>
+          </nav>
         </div>
       </div>
 
@@ -148,7 +166,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="section-padding py-3 flex flex-col sm:flex-row items-center justify-between gap-1">
           <p className="text-white/40 text-[11px]">
-            &copy; {currentYear} Dr. Vandui da Silva dos Santos · CRM-SP
+            &copy; {currentYear} Dr. Vandui da Silva dos Santos · CRM-SP 210328
           </p>
           <p className="text-white/30 text-[11px]">
             Cardiologista em Santos, Santo André e Vila Mariana

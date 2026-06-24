@@ -8,12 +8,12 @@ const APP_BASE_URL = "https://www.drvandui.com.br"
 const SEO_LOCAL_PATHS = [
   "/cardiologista-em-santos",
   "/cardiologista-em-santo-andre",
-  "/cardiologista-vila-mariana",
+  "/cardiologista-na-vila-mariana",
 ]
 const SEO_SERVICE_PATHS = [
   "/consulta-com-cardiologista",
   "/check-up-cardiologico",
-  "/risco-cirurgico-cardiologico",
+  "/avaliacao-de-risco-cirurgico",
   "/tratamento-hipertensao",
   "/palpitacoes-arritmia",
   "/dor-no-peito-quando-procurar-cardiologista",
@@ -21,7 +21,23 @@ const SEO_SERVICE_PATHS = [
   "/prevencao-cardiovascular",
   "/clinica-medica",
 ]
-const SEO_LANDING_PATHS = [...SEO_LOCAL_PATHS, ...SEO_SERVICE_PATHS]
+const SEO_ANSWER_PATHS = [
+  "/palpitacoes-quando-se-preocupar",
+  "/pressao-alta-quando-procurar-ajuda",
+  "/colesterol-alto-e-risco-cardiaco",
+  "/cardiologista-ou-clinico-geral",
+]
+const SEO_REDIRECTS = [
+  { from: "/eventos", to: "/", status: 301 },
+  { from: "/eventos/*", to: "/", status: 301 },
+  { from: "/cardiologista-vila-mariana", to: "/cardiologista-na-vila-mariana", status: 301 },
+  { from: "/risco-cirurgico-cardiologico", to: "/avaliacao-de-risco-cirurgico", status: 301 },
+  { from: "/avaliacao-risco-cirurgico", to: "/avaliacao-de-risco-cirurgico", status: 301 },
+  { from: "/dor-no-peito", to: "/dor-no-peito-quando-procurar-cardiologista", status: 301 },
+  { from: "/colesterol-alto", to: "/colesterol-alto-cardiologista", status: 301 },
+  { from: "/pressao-alta", to: "/tratamento-hipertensao", status: 301 },
+]
+const SEO_LANDING_PATHS = [...SEO_LOCAL_PATHS, ...SEO_SERVICE_PATHS, ...SEO_ANSWER_PATHS]
 
 export const SEO_ROUTES = [
   { route: "/", file: "dist/index.html", canonical: `${APP_BASE_URL}/` },
@@ -272,6 +288,10 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   const redirects = read(root, "public/_redirects")
   if (redirects) {
     fail(errors, "_redirects usa apenas URLs relativas aceitas pelo Cloudflare", !/(^|\s)https?:\/\//im.test(redirects))
+    SEO_REDIRECTS.forEach(({ from, to, status }) => {
+      const redirectRegex = new RegExp(`${escapeRegExp(from)}\\s+${escapeRegExp(to)}\\s+${status}`, "i")
+      fail(errors, `_redirects canonicaliza alias ${from} -> ${to}`, redirectRegex.test(redirects))
+    })
     SEO_ROUTES.filter(({ route }) => route !== "/").forEach(({ route }) => {
       const slug = route.slice(1)
       const routeRegex = new RegExp(`${escapeRegExp(route)}\\s+/${escapeRegExp(slug)}/index\\.html\\s+200`, "i")
@@ -338,7 +358,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
       fail(errors, `${route}: inclui JSON-LD MedicalBusiness`, hasJsonLdType(html, "MedicalBusiness"))
     }
 
-    if (SEO_SERVICE_PATHS.includes(route)) {
+    if (SEO_SERVICE_PATHS.includes(route) || SEO_ANSWER_PATHS.includes(route)) {
       fail(errors, `${route}: inclui JSON-LD Article`, hasJsonLdType(html, "Article"))
     }
   }

@@ -44,11 +44,13 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
       name: 'Dr. Vandui da Silva dos Santos',
       url,
       image: `${SITE_BASE_URL}/hero-doctor.jpg`,
+      identifier: 'CRM-SP 210328',
       telephone: '+55-11-97617-0971',
       email: 'contato@drvandui.com.br',
-      medicalSpecialty: ['Cardiovascular', 'InternalMedicine'],
+      medicalSpecialty: ['Cardiology', 'InternalMedicine'],
       areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
       sameAs: [
+        'https://oneliv.com.br/profissional/vandui-santos',
         'https://instagram.com/vanduisantos.cardio',
         'https://www.linkedin.com/in/vandui-santos-181225137/',
       ],
@@ -86,7 +88,7 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
     })
   }
 
-  if (page.kind === 'service') {
+  if (page.kind !== 'local') {
     schemas.push({
       '@context': 'https://schema.org',
       '@type': 'Article',

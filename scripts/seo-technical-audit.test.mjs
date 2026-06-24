@@ -52,7 +52,15 @@ function createFixture({ blockAll = false } = {}) {
   )
   writeFileSync(
     path.join(root, "public/_redirects"),
-    SEO_ROUTES.filter(({ route }) => route !== "/")
+    "/eventos / 301\n" +
+      "/eventos/* / 301\n" +
+      "/cardiologista-vila-mariana /cardiologista-na-vila-mariana 301\n" +
+      "/risco-cirurgico-cardiologico /avaliacao-de-risco-cirurgico 301\n" +
+      "/avaliacao-risco-cirurgico /avaliacao-de-risco-cirurgico 301\n" +
+      "/dor-no-peito /dor-no-peito-quando-procurar-cardiologista 301\n" +
+      "/colesterol-alto /colesterol-alto-cardiologista 301\n" +
+      "/pressao-alta /tratamento-hipertensao 301\n" +
+      SEO_ROUTES.filter(({ route }) => route !== "/")
         .map(({ route }) => `${route} ${route}/index.html 200`)
         .join("\n"),
   )
@@ -96,7 +104,11 @@ function createFixture({ blockAll = false } = {}) {
         ? ["BreadcrumbList"]
         : route === "/contato"
           ? ["FAQPage", "BreadcrumbList"]
-          : route.startsWith("/cardiologista-")
+          : [
+                "/cardiologista-em-santos",
+                "/cardiologista-em-santo-andre",
+                "/cardiologista-na-vila-mariana",
+              ].includes(route)
             ? ["Physician", "BreadcrumbList", "FAQPage", "MedicalBusiness"]
             : ["Physician", "BreadcrumbList", "FAQPage", "Article"]
 

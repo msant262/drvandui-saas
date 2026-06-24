@@ -199,7 +199,7 @@ export function Home() {
   usePageSEO({
     title: 'Cardiologista em Santos, Santo André e Vila Mariana — Dr. Vandui',
     description:
-      'Dr. Vandui da Silva dos Santos — Médico Cardiologista com residência no Instituto Dante Pazzanese. Atendimento humanizado focado em Cardiologia e Clínica Médica. Agende sua consulta hoje.',
+      'Dr. Vandui da Silva dos Santos, CRM-SP 210328 — Médico Cardiologista com residência no Instituto Dante Pazzanese. Cardiologia e Clínica Médica em Santos, Santo André e Vila Mariana.',
     canonical: '/',
     keywords:
       'cardiologista santos, cardiologista santo andré, cardiologista são paulo, Dr. Vandui, clínica médica, prevenção cardiovascular, cardiologia, doenças crônicas',

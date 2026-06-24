@@ -9,17 +9,28 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 - [Contato e agendamento](https://www.drvandui.com.br/contato)
 - [Cardiologista em Santos](https://www.drvandui.com.br/cardiologista-em-santos)
 - [Cardiologista em Santo Andre](https://www.drvandui.com.br/cardiologista-em-santo-andre)
-- [Cardiologista na Vila Mariana](https://www.drvandui.com.br/cardiologista-vila-mariana)
+- [Cardiologista na Vila Mariana](https://www.drvandui.com.br/cardiologista-na-vila-mariana)
 - [Consulta com cardiologista](https://www.drvandui.com.br/consulta-com-cardiologista)
 - [Check-up cardiologico](https://www.drvandui.com.br/check-up-cardiologico)
-- [Risco cirurgico cardiologico](https://www.drvandui.com.br/risco-cirurgico-cardiologico)
+- [Avaliacao de risco cirurgico](https://www.drvandui.com.br/avaliacao-de-risco-cirurgico)
 - [Tratamento de hipertensao](https://www.drvandui.com.br/tratamento-hipertensao)
 - [Palpitacoes e arritmia](https://www.drvandui.com.br/palpitacoes-arritmia)
 - [Dor no peito: quando procurar cardiologista](https://www.drvandui.com.br/dor-no-peito-quando-procurar-cardiologista)
 - [Colesterol alto e risco cardiovascular](https://www.drvandui.com.br/colesterol-alto-cardiologista)
 - [Prevencao cardiovascular](https://www.drvandui.com.br/prevencao-cardiovascular)
 - [Clinica medica](https://www.drvandui.com.br/clinica-medica)
+- [Palpitacoes: quando se preocupar](https://www.drvandui.com.br/palpitacoes-quando-se-preocupar)
+- [Pressao alta: quando procurar ajuda](https://www.drvandui.com.br/pressao-alta-quando-procurar-ajuda)
+- [Colesterol alto e risco cardiaco](https://www.drvandui.com.br/colesterol-alto-e-risco-cardiaco)
+- [Cardiologista ou clinico geral](https://www.drvandui.com.br/cardiologista-ou-clinico-geral)
 - [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)
+
+## Autoridade medica
+
+- Nome: Dr. Vandui da Silva dos Santos
+- CRM-SP: 210328
+- Formacao: Instituto Dante Pazzanese de Cardiologia
+- Atendimento: Santos, Santo Andre e Vila Mariana
 
 ## Temas principais
 
@@ -27,8 +38,10 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 - Prevencao cardiovascular
 - Clinica medica
 - Hipertensao arterial
-- Arritmias
-- Insuficiencia cardiaca
+- Arritmias e palpitacoes
+- Dor no peito
+- Colesterol alto
+- Risco cirurgico cardiologico
 - Check-up cardiologico
 
 ## Contato
@@ -36,3 +49,4 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 - Site: [drvandui.com.br](https://www.drvandui.com.br/)
 - E-mail: [contato@drvandui.com.br](mailto:contato@drvandui.com.br)
 - WhatsApp: [Agendar consulta](https://wa.me/5511976170971)
+- Oneliv: [Agendamento online](https://oneliv.com.br/profissional/vandui-santos)

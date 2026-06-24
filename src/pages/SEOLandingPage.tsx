@@ -32,11 +32,13 @@ function buildSchemas(page: SeoLandingPage) {
     name: 'Dr. Vandui da Silva dos Santos',
     url,
     image: `${SITE_BASE_URL}/hero-doctor.jpg`,
+    identifier: 'CRM-SP 210328',
     telephone: '+55-11-97617-0971',
     email: 'contato@drvandui.com.br',
-    medicalSpecialty: ['Cardiovascular', 'InternalMedicine'],
+    medicalSpecialty: ['Cardiology', 'InternalMedicine'],
     areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
     sameAs: [
+      'https://oneliv.com.br/profissional/vandui-santos',
       'https://instagram.com/vanduisantos.cardio',
       'https://www.linkedin.com/in/vandui-santos-181225137/',
     ],
@@ -75,7 +77,7 @@ function buildSchemas(page: SeoLandingPage) {
     : null
 
   const article =
-    page.kind === 'service'
+    page.kind !== 'local'
       ? {
           '@context': 'https://schema.org',
           '@type': 'Article',
@@ -113,7 +115,7 @@ export function SEOLandingPage() {
     description: page.description,
     canonical: `/${page.slug}`,
     keywords: page.keywords,
-    ogType: page.kind === 'service' ? 'article' : 'website',
+    ogType: page.kind === 'local' ? 'website' : 'article',
   })
 
   const relatedPages = page.relatedSlugs
@@ -214,6 +216,23 @@ export function SEOLandingPage() {
               </div>
 
               <aside className="space-y-5">
+                <div className="rounded-3xl border border-[var(--color-cyan-light)] bg-white p-6 shadow-sm">
+                  <h2 className="text-lg font-bold text-[var(--color-teal)]">Autoridade médica</h2>
+                  <div className="mt-4 space-y-3 text-sm leading-relaxed text-[#555]">
+                    <p>
+                      <strong className="text-[var(--color-teal)]">Dr. Vandui da Silva dos Santos</strong>
+                    </p>
+                    <p>Médico cardiologista e clínico médico</p>
+                    <p>
+                      <strong>CRM-SP 210328</strong>
+                    </p>
+                    <p>Formação no Instituto Dante Pazzanese de Cardiologia.</p>
+                    <p className="rounded-2xl bg-[#f0f9fa] p-3 text-xs text-[var(--color-teal)]">
+                      Conteúdo educativo. Sintomas intensos, súbitos ou progressivos devem ser avaliados em serviço de urgência.
+                    </p>
+                  </div>
+                </div>
+
                 <div className="rounded-3xl bg-[var(--color-teal)] p-6 text-white shadow-xl">
                   <Phone className="mb-4 h-7 w-7 text-emerald-200" />
                   <h2 className="text-xl font-bold text-white">Agendamento</h2>
