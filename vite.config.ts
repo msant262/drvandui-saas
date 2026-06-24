@@ -1,5 +1,5 @@
 import path from "path"
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs"
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "fs"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 import { createRequire } from "module"
@@ -20,6 +20,29 @@ const enableBrowserPrerender =
 const PHYSICIAN_ENTITY_ID = `${SITE_BASE_URL}/#physician`
 const MEDICAL_PRACTICE_ENTITY_ID = `${SITE_BASE_URL}/#medical-practice`
 const CONTENT_LAST_MODIFIED = '2026-06-24'
+const CONTACT_LOCATIONS = [
+  {
+    city: 'Santos',
+    address: 'Av. Ana Costa, 228 - 20º e 21° pavimentos',
+    area: 'Gonzaga, Santos - SP',
+    postalCode: '11060-003',
+    mapQuery: 'Av. Ana Costa, 228, Gonzaga, Santos - SP',
+  },
+  {
+    city: 'Santo André',
+    address: 'Av. Portugal, 1285 - 2º e 3º pavimento',
+    area: 'Centro, Santo André - SP',
+    postalCode: '09040-011',
+    mapQuery: 'Av. Portugal, 1285, Centro, Santo André - SP',
+  },
+  {
+    city: 'Vila Mariana',
+    address: 'R. Domingos de Morais, 2781 - 14° Andar',
+    area: 'Vila Mariana, São Paulo - SP',
+    postalCode: '04035-001',
+    mapQuery: 'R. Domingos de Morais, 2781, Vila Mariana, São Paulo - SP',
+  },
+]
 
 type StaticRouteFallback = {
   route: string
@@ -28,11 +51,34 @@ type StaticRouteFallback = {
   keywords: string
   canonical: string
   schemas: Array<Record<string, unknown>>
+  contentHtml?: string
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 }
 
 function buildLandingPageSchemas(page: SeoLandingPage) {
   const url = `${SITE_BASE_URL}/${page.slug}`
   const schemas: Array<Record<string, unknown>> = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${SITE_BASE_URL}/#website`,
+      name: 'Dr. Vandui — Cardiologista',
+      url: `${SITE_BASE_URL}/`,
+      inLanguage: 'pt-BR',
+      publisher: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+    },
     {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
@@ -118,6 +164,29 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
     },
     {
       '@context': 'https://schema.org',
+      '@type': 'MedicalBusiness',
+      '@id': MEDICAL_PRACTICE_ENTITY_ID,
+      name: 'Dr. Vandui — Cardiologista',
+      url: `${SITE_BASE_URL}/`,
+      image: `${SITE_BASE_URL}/hero-doctor.jpg`,
+      telephone: '+55-11-97617-0971',
+      email: 'contato@drvandui.com.br',
+      priceRange: '$$',
+      medicalSpecialty: ['Cardiology', 'InternalMedicine'],
+      areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
+      employee: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      sameAs: [
+        'https://oneliv.com.br/profissional/vandui-santos',
+        'https://instagram.com/vanduisantos.cardio',
+        'https://www.linkedin.com/in/vandui-santos-181225137/',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: page.faqs.map((item) => ({
         '@type': 'Question',
@@ -153,6 +222,7 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
         streetAddress: page.location.address,
         addressLocality: page.location.name === 'Vila Mariana' ? 'São Paulo' : page.location.name,
         addressRegion: 'SP',
+        postalCode: page.location.postalCode,
         addressCountry: 'BR',
       },
     })
@@ -214,6 +284,216 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
   return schemas
 }
 
+function buildContactPageSchemas() {
+  const contactUrl = `${SITE_BASE_URL}/contato`
+
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${SITE_BASE_URL}/#website`,
+      name: 'Dr. Vandui — Cardiologista',
+      url: `${SITE_BASE_URL}/`,
+      inLanguage: 'pt-BR',
+      publisher: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Como posso agendar uma consulta?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'A unidade de Santo André tem agendamento online pela plataforma Oneliv. Para Santos e Vila Mariana, fale pelo WhatsApp (11) 9 7617-0971.',
+          },
+        },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
+        { '@type': 'ListItem', position: 2, name: 'Contato', item: contactUrl },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Physician',
+      '@id': PHYSICIAN_ENTITY_ID,
+      name: 'Dr. Vandui da Silva dos Santos',
+      url: `${SITE_BASE_URL}/`,
+      telephone: '+55-11-97617-0971',
+      email: 'contato@drvandui.com.br',
+      medicalSpecialty: ['Cardiology', 'InternalMedicine'],
+      identifier: [
+        {
+          '@type': 'PropertyValue',
+          propertyID: 'CRM-SP',
+          value: '210328',
+        },
+        {
+          '@type': 'PropertyValue',
+          propertyID: 'RQE Cardiologia',
+          value: '146567',
+        },
+      ],
+      hasCredential: [
+        {
+          '@type': 'EducationalOccupationalCredential',
+          name: 'CRM-SP 210328',
+          credentialCategory: 'Registro profissional médico',
+        },
+        {
+          '@type': 'EducationalOccupationalCredential',
+          name: 'RQE Cardiologia 146567',
+          credentialCategory: 'Registro de Qualificação de Especialista em Cardiologia',
+        },
+      ],
+      areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'MedicalBusiness',
+      '@id': MEDICAL_PRACTICE_ENTITY_ID,
+      name: 'Dr. Vandui — Cardiologista',
+      url: `${SITE_BASE_URL}/`,
+      image: `${SITE_BASE_URL}/hero-doctor.jpg`,
+      telephone: '+55-11-97617-0971',
+      email: 'contato@drvandui.com.br',
+      priceRange: '$$',
+      medicalSpecialty: ['Cardiology', 'InternalMedicine'],
+      areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
+      employee: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      sameAs: [
+        'https://oneliv.com.br/profissional/vandui-santos',
+        'https://instagram.com/vanduisantos.cardio',
+        'https://www.linkedin.com/in/vandui-santos-181225137/',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      '@id': `${contactUrl}#contact-page`,
+      url: contactUrl,
+      name: 'Contato e agendamento - Dr. Vandui',
+      description:
+        'Canais oficiais para agendar consulta cardiológica particular com o Dr. Vandui em Santos, Santo André e Vila Mariana.',
+      about: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'Agendamento de consulta cardiológica',
+        telephone: '+55-11-97617-0971',
+        email: 'contato@drvandui.com.br',
+        areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
+        availableLanguage: ['Portuguese'],
+      },
+    },
+    ...CONTACT_LOCATIONS.map((location) => ({
+      '@context': 'https://schema.org',
+      '@type': 'MedicalBusiness',
+      '@id': `${contactUrl}#unidade-${location.city.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-')}`,
+      name: `Dr. Vandui - Cardiologista em ${location.city}`,
+      url: contactUrl,
+      telephone: '+55-11-97617-0971',
+      email: 'contato@drvandui.com.br',
+      priceRange: '$$',
+      medicalSpecialty: 'Cardiology',
+      hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.mapQuery)}`,
+      areaServed: location.area,
+      employee: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: location.address,
+        addressLocality: location.city === 'Vila Mariana' ? 'São Paulo' : location.city,
+        addressRegion: 'SP',
+        postalCode: location.postalCode,
+        addressCountry: 'BR',
+      },
+    })),
+  ]
+}
+
+function buildLandingPageStaticContent(page: SeoLandingPage) {
+  const url = `${SITE_BASE_URL}/${page.slug}`
+  const relatedLinks = page.relatedSlugs
+    .map((slug) => seoLandingPages.find((item) => item.slug === slug))
+    .filter((item): item is SeoLandingPage => Boolean(item))
+    .map((item) => `<li><a href="/${escapeHtml(item.slug)}">${escapeHtml(item.h1)}</a></li>`)
+    .join('')
+  const locationBlock = page.location
+    ? `<section>
+        <h2>Atendimento em ${escapeHtml(page.location.name)}</h2>
+        <p>${escapeHtml(page.location.address)} - ${escapeHtml(page.location.region)} - CEP ${escapeHtml(page.location.postalCode)}</p>
+        <p><a href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(page.location.mapQuery)}">Abrir no Google Maps</a></p>
+      </section>`
+    : ''
+
+  return `<main data-static-seo-route="${escapeHtml(page.slug)}">
+    <article>
+      <p>${escapeHtml(page.eyebrow)}</p>
+      <h1>${escapeHtml(page.h1)}</h1>
+      <p>${escapeHtml(page.intro)}</p>
+      <section>
+        <h2>Autoridade médica</h2>
+        <p>Dr. Vandui da Silva dos Santos, Médico Cardiologista, CRM-SP 210328 e RQE Cardiologia 146567.</p>
+        <p>Formação pela UFTM, Hospital Ipiranga e Instituto Dante Pazzanese de Cardiologia.</p>
+        <p>Atendimento em Santos, Santo André e Vila Mariana.</p>
+        <p><a href="https://oneliv.com.br/profissional/vandui-santos">Agenda e prova social na OneLiv</a></p>
+      </section>
+      ${locationBlock}
+      <section>
+        <h2>Respostas diretas para pacientes</h2>
+        ${page.faqs
+          .slice(0, 3)
+          .map(
+            (faq) => `<section>
+              <h3>${escapeHtml(faq.question)}</h3>
+              <p>${escapeHtml(faq.answer)}</p>
+            </section>`,
+          )
+          .join('')}
+      </section>
+      ${page.sections
+        .map(
+          (section) => `<section>
+            <h2>${escapeHtml(section.heading)}</h2>
+            <p>${escapeHtml(section.body)}</p>
+            ${
+              section.bullets
+                ? `<ul>${section.bullets.map((bullet) => `<li>${escapeHtml(bullet)}</li>`).join('')}</ul>`
+                : ''
+            }
+          </section>`,
+        )
+        .join('')}
+      <section>
+        <h2>Páginas relacionadas</h2>
+        <ul>${relatedLinks}</ul>
+      </section>
+      <p><a href="${url}">${url}</a></p>
+    </article>
+  </main>`
+}
+
 const baseStaticRouteFallbacks: StaticRouteFallback[] = [
   {
     route: 'especialidades',
@@ -242,30 +522,7 @@ const baseStaticRouteFallbacks: StaticRouteFallback[] = [
     keywords:
       'agendar consulta cardiologista, cardiologista santos, cardiologista santo andré, cardiologista vila mariana, contato Dr. Vandui',
     canonical: 'https://www.drvandui.com.br/contato',
-    schemas: [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: 'Como posso agendar uma consulta?',
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: 'A unidade de Santo André tem agendamento online pela plataforma Oneliv. Para Santos e Vila Mariana, fale pelo WhatsApp (11) 9 7617-0971.',
-            },
-          },
-        ],
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
-          { '@type': 'ListItem', position: 2, name: 'Contato', item: 'https://www.drvandui.com.br/contato' },
-        ],
-      },
-    ],
+    schemas: buildContactPageSchemas(),
   },
 ]
 
@@ -276,6 +533,7 @@ const seoStaticRouteFallbacks: StaticRouteFallback[] = seoLandingPages.map((page
   keywords: page.keywords,
   canonical: `${SITE_BASE_URL}/${page.slug}`,
   schemas: buildLandingPageSchemas(page),
+  contentHtml: buildLandingPageStaticContent(page),
 }))
 
 const staticRouteFallbacks = [...baseStaticRouteFallbacks, ...seoStaticRouteFallbacks]
@@ -340,7 +598,13 @@ function applyRouteHead(html: string, route: StaticRouteFallback) {
     `<meta name="twitter:description" content="${route.description}" />`,
   )
 
-  return updated.replace('</head>', `${schemaMarkup}\n</head>`)
+  const withSchema = updated.replace('</head>', `${schemaMarkup}\n</head>`)
+
+  if (route.contentHtml) {
+    return withSchema.replace('</body>', `${route.contentHtml}\n</body>`)
+  }
+
+  return withSchema
 }
 
 function staticRouteFallbackPlugin() {
@@ -351,7 +615,8 @@ function staticRouteFallbackPlugin() {
       const indexPath = path.join(distDir, 'index.html')
 
       mkdirSync(distDir, { recursive: true })
-      writeFileSync(path.join(distDir, '.assetsignore'), '/_worker.js\n_worker.js\n**/_worker.js\n')
+      rmSync(path.join(distDir, '_worker.js'), { recursive: true, force: true })
+      writeFileSync(path.join(distDir, '.assetsignore'), '_worker.js\n')
 
       if (!existsSync(indexPath)) {
         return

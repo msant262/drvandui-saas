@@ -115,6 +115,44 @@ function buildSchemas(page: SeoLandingPage) {
     ],
   }
 
+  const medicalPractice = {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalBusiness',
+    '@id': MEDICAL_PRACTICE_ENTITY_ID,
+    name: 'Dr. Vandui — Cardiologista',
+    url: `${SITE_BASE_URL}/`,
+    image: `${SITE_BASE_URL}/hero-doctor.jpg`,
+    telephone: '+55-11-97617-0971',
+    email: 'contato@drvandui.com.br',
+    priceRange: '$$',
+    medicalSpecialty: ['Cardiology', 'InternalMedicine'],
+    areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
+    employee: {
+      '@type': 'Physician',
+      '@id': PHYSICIAN_ENTITY_ID,
+      name: 'Dr. Vandui da Silva dos Santos',
+    },
+    sameAs: [
+      'https://oneliv.com.br/profissional/vandui-santos',
+      'https://instagram.com/vanduisantos.cardio',
+      'https://www.linkedin.com/in/vandui-santos-181225137/',
+    ],
+  }
+
+  const website = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE_BASE_URL}/#website`,
+    name: 'Dr. Vandui — Cardiologista',
+    url: `${SITE_BASE_URL}/`,
+    inLanguage: 'pt-BR',
+    publisher: {
+      '@type': 'Physician',
+      '@id': PHYSICIAN_ENTITY_ID,
+      name: 'Dr. Vandui da Silva dos Santos',
+    },
+  }
+
   const faq = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -149,6 +187,7 @@ function buildSchemas(page: SeoLandingPage) {
           streetAddress: page.location.address,
           addressLocality: page.location.name === 'Vila Mariana' ? 'São Paulo' : page.location.name,
           addressRegion: 'SP',
+          postalCode: page.location.postalCode,
           addressCountry: 'BR',
         },
       }
@@ -210,8 +249,10 @@ function buildSchemas(page: SeoLandingPage) {
       : null
 
   return [
+    { id: `schema-${page.slug}-website`, data: website },
     { id: `schema-${page.slug}-breadcrumb`, data: breadcrumb },
     { id: `schema-${page.slug}-physician`, data: physician },
+    { id: `schema-${page.slug}-medical-practice`, data: medicalPractice },
     { id: `schema-${page.slug}-faq`, data: faq },
     ...(localBusiness ? [{ id: `schema-${page.slug}-medical-business`, data: localBusiness }] : []),
     ...(article ? [{ id: `schema-${page.slug}-article`, data: article }] : []),
@@ -297,6 +338,30 @@ export function SEOLandingPage() {
           </div>
         </section>
 
+        <section className="py-14 bg-white">
+          <div className="section-padding">
+            <div className="max-w-3xl">
+              <span className="text-sm font-bold uppercase tracking-[0.2em] text-[var(--color-emerald)]">
+                AEO / respostas objetivas
+              </span>
+              <h2 className="mt-3 text-2xl font-bold text-[var(--color-teal)] sm:text-3xl">
+                Respostas diretas para pacientes
+              </h2>
+              <p className="mt-3 text-base leading-relaxed text-[#555]">
+                Blocos curtos para ajudar pacientes, Google e mecanismos de IA a entenderem rapidamente a indicação da página.
+              </p>
+            </div>
+            <div className="mt-7 grid gap-4 md:grid-cols-3">
+              {page.faqs.slice(0, 3).map((faq) => (
+                <article key={faq.question} className="rounded-2xl border border-gray-100 bg-[#f8fcfc] p-5">
+                  <h3 className="text-base font-bold text-[var(--color-teal)]">{faq.question}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[#555]">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="py-16">
           <div className="section-padding">
             <div className="grid gap-10 lg:grid-cols-[1fr_380px]">
@@ -346,6 +411,17 @@ export function SEOLandingPage() {
                       <strong>RQE Cardiologia 146567</strong>
                     </p>
                     <p>Formação no Instituto Dante Pazzanese de Cardiologia, Hospital Ipiranga e UFTM.</p>
+                    <a
+                      href="https://oneliv.com.br/profissional/vandui-santos"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-event="click_agendamento"
+                      data-page={page.slug}
+                      className="inline-flex items-center gap-2 rounded-xl border border-[var(--color-cyan-light)] px-3 py-2 text-xs font-bold text-[var(--color-teal)] transition-colors hover:bg-[#f0f9fa]"
+                    >
+                      Ver agenda e prova social na OneLiv
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </a>
                     <p className="rounded-2xl bg-[#f0f9fa] p-3 text-xs text-[var(--color-teal)]">
                       Conteúdo educativo. Sintomas intensos, súbitos ou progressivos devem ser avaliados em serviço de urgência.
                     </p>
@@ -380,6 +456,7 @@ export function SEOLandingPage() {
                           <h2 className="font-bold text-[var(--color-teal)]">{page.location.name}</h2>
                           <p className="mt-1 text-sm text-[#555]">{page.location.address}</p>
                           <p className="text-sm text-[#555]">{page.location.region}</p>
+                          <p className="text-sm text-[#555]">CEP {page.location.postalCode}</p>
                         </div>
                       </div>
                       <a

@@ -19,12 +19,24 @@ const canonicalWorkerSource =
   'const ROOT_HOST = "drvandui.com.br"\n' +
   'const CANONICAL_HOST = "www.drvandui.com.br"\n\n' +
   'const CANONICAL_PATH_REDIRECTS = new Map([["/pressao-alta", "/tratamento-hipertensao"], ["/dor-no-peito", "/dor-no-peito-quando-procurar-ajuda"]])\n\n' +
-  "function redirectToCanonical(url, pathname) {\n" +
+  "function redirectToCanonical(url, pathname, shouldDeindex = false) {\n" +
   "  url.hostname = CANONICAL_HOST\n" +
   '  url.protocol = "https:"\n' +
   "  url.pathname = pathname\n" +
   '  url.search = ""\n' +
-  "  return Response.redirect(url.toString(), 301)\n" +
+  "  const canonicalUrl = url.toString()\n" +
+  "  const headers = {\n" +
+  "    Location: canonicalUrl,\n" +
+  '    Link: `<${canonicalUrl}>; rel="canonical"`,' + "\n" +
+  '    "Cache-Control": "public, max-age=86400",' + "\n" +
+  "  }\n" +
+  "  if (shouldDeindex) {\n" +
+  '    headers["X-Robots-Tag"] = "noindex, follow"\n' +
+  "  }\n" +
+  "  return new Response(null, {\n" +
+  "    status: 301,\n" +
+  "    headers,\n" +
+  "  })\n" +
   "}\n\n" +
   "function getCanonicalPath(pathname) {\n" +
   '  if (pathname === "/eventos" || pathname.startsWith("/eventos/")) return "/"\n' +
@@ -35,7 +47,7 @@ const canonicalWorkerSource =
   "    const url = new URL(request.url)\n\n" +
   "    const canonicalPath = getCanonicalPath(url.pathname)\n\n" +
   "    if (url.hostname === ROOT_HOST || canonicalPath !== url.pathname) {\n" +
-  "      return redirectToCanonical(url, canonicalPath)\n" +
+  "      return redirectToCanonical(url, canonicalPath, canonicalPath !== url.pathname)\n" +
   "    }\n\n" +
   "    return env.ASSETS.fetch(request)\n" +
   "  },\n" +
@@ -47,7 +59,7 @@ function createFixture({ blockAll = false } = {}) {
   const distDir = path.join(root, "dist")
   const assetsDir = path.join(distDir, "assets")
   mkdirSync(assetsDir, { recursive: true })
-  writeFileSync(path.join(distDir, ".assetsignore"), "/_worker.js\n_worker.js\n**/_worker.js\n")
+  writeFileSync(path.join(distDir, ".assetsignore"), "_worker.js\n")
   SEO_ROUTES.filter(({ route }) => route !== "/").forEach(({ route }) => {
     mkdirSync(path.join(distDir, route.slice(1)), { recursive: true })
   })
@@ -96,9 +108,9 @@ function createFixture({ blockAll = false } = {}) {
   )
   writeFileSync(
     path.join(root, "public/llms.txt"),
-    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Perfil do Dr. Vandui](https://www.drvandui.com.br/dr-vandui-cardiologista)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n\n## Respostas rapidas para pacientes\n\n### Quando devo procurar um cardiologista?\n\nVoce deve procurar um cardiologista se tiver dor no peito.\n\n### Cardiologista trata hipertensao?\n\nSim. O cardiologista avalia pressao arterial.\n\n### O que e prevencao cardiovascular?\n\nPrevencao cardiovascular acompanha fatores de risco.\n",
+    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Perfil do Dr. Vandui](https://www.drvandui.com.br/dr-vandui-cardiologista)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n\n## Entidade oficial\n\n- Fonte principal: [www.drvandui.com.br](https://www.drvandui.com.br/)\n- A OneLiv funciona como canal auxiliar de agendamento e prova social, nao como substituto do site oficial.\n- URLs antigas ou nao canonicas, como /eventos, devem consolidar autoridade para a pagina inicial oficial.\n\n## Unidades e NAP local\n\n- Av. Ana Costa, 228\n- CEP: 11060-003\n- Av. Portugal, 1285\n- CEP: 09040-011\n- R. Domingos de Morais, 2781\n- CEP: 04035-001\n\n## Respostas rapidas para pacientes\n\n### Quando devo procurar um cardiologista?\n\nVoce deve procurar um cardiologista se tiver dor no peito.\n\n### Cardiologista trata hipertensao?\n\nSim. O cardiologista avalia pressao arterial.\n\n### O que e prevencao cardiovascular?\n\nPrevencao cardiovascular acompanha fatores de risco.\n",
   )
-  writeFileSync(path.join(root, "public/.assetsignore"), "/_worker.js\n_worker.js\n**/_worker.js\n")
+  writeFileSync(path.join(root, "public/.assetsignore"), "_worker.js\n")
 
   writeFileSync(
     path.join(root, "vite.config.ts"),
@@ -106,6 +118,7 @@ function createFixture({ blockAll = false } = {}) {
       "const seoLandingPages = []\\n" +
       "const staticRouteFallbacks = []\\n" +
       "const browserPrerenderRoutes = []\\n" +
+      "function buildLandingPageStaticContent() { return '<main data-static-seo-route=\"fixture\"><h1>Fixture</h1><h2>Respostas diretas para pacientes</h2><a href=\"https://oneliv.com.br/profissional/vandui-santos\">OneLiv</a></main>' }\\n" +
       "export default defineConfig({\\n" +
       "  plugins: [\\n" +
       "    {\\n" +
@@ -130,7 +143,11 @@ function createFixture({ blockAll = false } = {}) {
         }
 
         if (schemaType === "MedicalBusiness") {
-          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","employee":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","hasMap":"https://www.google.com/maps/search/?api=1&query=fixture","areaServed":"Fixture","address":{"@type":"PostalAddress","postalCode":"11060-003"},"employee":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+        }
+
+        if (schemaType === "ContactPage") {
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"ContactPage","contactPoint":{"@type":"ContactPoint","contactType":"Agendamento de consulta cardiológica"}}</script>'
         }
 
         if (schemaType === "ProfilePage") {
@@ -159,7 +176,7 @@ function createFixture({ blockAll = false } = {}) {
       .map(({ route }) => `<li><a href="${route}">${route}</a></li>`)
       .join("")
 
-    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      <meta name="description" content="CRM-SP 210328 e RQE Cardiologia 146567">\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Physician","@id":"https://www.drvandui.com.br/#physician","url":"https://www.drvandui.com.br/","hasCredential":[{"name":"CRM-SP 210328"},{"name":"RQE Cardiologia 146567"}],"knowsAbout":["Cardiologia","Prevenção cardiovascular"],"alumniOf":[{"name":"Universidade Federal do Triângulo Mineiro (UFTM)"},{"name":"Hospital Ipiranga"},{"name":"Instituto Dante Pazzanese de Cardiologia"}]}</script>\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quando devo procurar um cardiologista?"},{"@type":"Question","name":"Cardiologista trata hipertensão?"},{"@type":"Question","name":"O que é prevenção cardiovascular?"}]}</script>\n      ${schemaScripts}\n    </head><body>CRM-SP 210328 RQE Cardiologia 146567 UFTM Hospital Ipiranga Instituto Dante Pazzanese de Cardiologia Quando devo procurar um cardiologista? Cardiologista trata hipertensão? O que é prevenção cardiovascular?<noscript><ul>${noscriptLinks}</ul></noscript></body></html>`
+    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      <meta name="description" content="CRM-SP 210328 e RQE Cardiologia 146567">\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Physician","@id":"https://www.drvandui.com.br/#physician","url":"https://www.drvandui.com.br/","hasCredential":[{"name":"CRM-SP 210328"},{"name":"RQE Cardiologia 146567"}],"knowsAbout":["Cardiologia","Prevenção cardiovascular"],"alumniOf":[{"name":"Universidade Federal do Triângulo Mineiro (UFTM)"},{"name":"Hospital Ipiranga"},{"name":"Instituto Dante Pazzanese de Cardiologia"}]}</script>\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quando devo procurar um cardiologista?"},{"@type":"Question","name":"Cardiologista trata hipertensão?"},{"@type":"Question","name":"O que é prevenção cardiovascular?"}]}</script>\n      ${schemaScripts}\n    </head><body><main data-static-seo-route="fixture"><h1>${title}</h1><h2>Respostas diretas para pacientes</h2><a href="https://oneliv.com.br/profissional/vandui-santos">OneLiv</a></main>CRM-SP 210328 RQE Cardiologia 146567 UFTM Hospital Ipiranga Instituto Dante Pazzanese de Cardiologia Quando devo procurar um cardiologista? Cardiologista trata hipertensão? O que é prevenção cardiovascular?<noscript><ul>${noscriptLinks}</ul></noscript></body></html>`
   }
 
   writeFileSync(path.join(distDir, "index.html"), baseHtml("https://www.drvandui.com.br/", "Home", ["Physician", "MedicalBusiness"]))
@@ -168,7 +185,7 @@ function createFixture({ blockAll = false } = {}) {
       route === "/especialidades"
         ? ["BreadcrumbList"]
         : route === "/contato"
-          ? ["FAQPage", "BreadcrumbList"]
+          ? ["FAQPage", "BreadcrumbList", "Physician", "ContactPage", "MedicalBusiness"]
           : route === "/dr-vandui-cardiologista"
             ? ["Physician", "BreadcrumbList", "FAQPage", "Article", "ProfilePage"]
             : [
@@ -180,22 +197,27 @@ function createFixture({ blockAll = false } = {}) {
             : ["Physician", "BreadcrumbList", "FAQPage", "Article"]
 
     const html = baseHtml(canonical, route.slice(1), schemaTypes)
-    const routeHtml = [
-      "/cardiologista-em-santos",
-      "/cardiologista-em-santo-andre",
-      "/cardiologista-vila-mariana",
-    ].includes(route)
+    const routeHtml = route === "/contato"
       ? html.replace(
-          "</head>",
-          '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","hasMap":"https://www.google.com/maps/search/?api=1&query=fixture","areaServed":"Fixture"}</script></head>',
+          "</body>",
+          "Av. Ana Costa, 228 Av. Portugal, 1285 R. Domingos de Morais, 2781</body>",
         )
-      : html
+      : [
+          "/cardiologista-em-santos",
+          "/cardiologista-em-santo-andre",
+          "/cardiologista-vila-mariana",
+        ].includes(route)
+        ? html.replace(
+            "</head>",
+            '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","hasMap":"https://www.google.com/maps/search/?api=1&query=fixture","areaServed":"Fixture","address":{"@type":"PostalAddress","postalCode":"11060-003"}}</script></head>',
+          )
+        : html
 
     writeFileSync(path.join(root, file), routeHtml)
   })
   writeFileSync(
     path.join(root, "src/pages/SEOLandingPage.tsx"),
-    '<a href="https://www.google.com/maps/search/?api=1&query=fixture" data-event="click_maps">Abrir no Google Maps</a><iframe loading="lazy"></iframe>',
+    '<h2>Respostas diretas para pacientes</h2><a href="https://www.google.com/maps/search/?api=1&query=fixture" data-event="click_maps">Abrir no Google Maps</a><a href="https://oneliv.com.br/profissional/vandui-santos" data-event="click_agendamento">OneLiv</a><iframe loading="lazy"></iframe>',
   )
   writeFileSync(
     path.join(assetsDir, "app.js"),

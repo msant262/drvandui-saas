@@ -149,6 +149,92 @@ const breadcrumbSchema = {
   ],
 }
 
+const physicianContactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Physician',
+  '@id': 'https://www.drvandui.com.br/#physician',
+  name: 'Dr. Vandui da Silva dos Santos',
+  url: 'https://www.drvandui.com.br/',
+  telephone: '+55-11-97617-0971',
+  email: 'contato@drvandui.com.br',
+  medicalSpecialty: ['Cardiology', 'InternalMedicine'],
+  identifier: [
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'CRM-SP',
+      value: '210328',
+    },
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'RQE Cardiologia',
+      value: '146567',
+    },
+  ],
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'CRM-SP 210328',
+      credentialCategory: 'Registro profissional médico',
+    },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'RQE Cardiologia 146567',
+      credentialCategory: 'Registro de Qualificação de Especialista em Cardiologia',
+    },
+  ],
+  areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
+}
+
+const contactPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  '@id': 'https://www.drvandui.com.br/contato#contact-page',
+  url: 'https://www.drvandui.com.br/contato',
+  name: 'Contato e agendamento - Dr. Vandui',
+  description:
+    'Canais oficiais para agendar consulta cardiológica particular com o Dr. Vandui em Santos, Santo André e Vila Mariana.',
+  about: {
+    '@type': 'Physician',
+    '@id': 'https://www.drvandui.com.br/#physician',
+    name: 'Dr. Vandui da Silva dos Santos',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Agendamento de consulta cardiológica',
+    telephone: '+55-11-97617-0971',
+    email: 'contato@drvandui.com.br',
+    areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
+    availableLanguage: ['Portuguese'],
+  },
+}
+
+const medicalBusinessSchemas = enderecos.map((unidade) => ({
+  '@context': 'https://schema.org',
+  '@type': 'MedicalBusiness',
+  '@id': `https://www.drvandui.com.br/contato#unidade-${unidade.cidade.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-')}`,
+  name: `Dr. Vandui - Cardiologista em ${unidade.cidade}`,
+  url: 'https://www.drvandui.com.br/contato',
+  telephone: '+55-11-97617-0971',
+  email: 'contato@drvandui.com.br',
+  priceRange: '$$',
+  medicalSpecialty: 'Cardiology',
+  hasMap: unidade.mapLink,
+  areaServed: unidade.bairro,
+  employee: {
+    '@type': 'Physician',
+    '@id': 'https://www.drvandui.com.br/#physician',
+    name: 'Dr. Vandui da Silva dos Santos',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: unidade.endereco,
+    addressLocality: unidade.cidade === 'Vila Mariana' ? 'São Paulo' : unidade.cidade,
+    addressRegion: 'SP',
+    postalCode: unidade.cep,
+    addressCountry: 'BR',
+  },
+}))
+
 export function Contato() {
   usePageSEO({
     title: 'Contato — Cardiologista em Santos, Santo André e Vila Mariana',
@@ -237,6 +323,11 @@ export function Contato() {
     <>
       <JsonLdScript id="schema-contato-faq" data={faqSchema} />
       <JsonLdScript id="schema-contato-breadcrumb" data={breadcrumbSchema} />
+      <JsonLdScript id="schema-contato-physician" data={physicianContactSchema} />
+      <JsonLdScript id="schema-contato-page" data={contactPageSchema} />
+      {medicalBusinessSchemas.map((schema, index) => (
+        <JsonLdScript key={schema['@id']} id={`schema-contato-unidade-${index}`} data={schema} />
+      ))}
       <motion.main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

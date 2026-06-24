@@ -11,13 +11,27 @@ const CANONICAL_PATH_REDIRECTS = new Map([
   ["/pressao-alta", "/tratamento-hipertensao"],
 ])
 
-function redirectToCanonical(url, pathname) {
+function redirectToCanonical(url, pathname, shouldDeindex = false) {
   url.hostname = CANONICAL_HOST
   url.protocol = "https:"
   url.pathname = pathname
   url.search = ""
 
-  return Response.redirect(url.toString(), 301)
+  const canonicalUrl = url.toString()
+  const headers = {
+    Location: canonicalUrl,
+    Link: `<${canonicalUrl}>; rel="canonical"`,
+    "Cache-Control": "public, max-age=86400",
+  }
+
+  if (shouldDeindex) {
+    headers["X-Robots-Tag"] = "noindex, follow"
+  }
+
+  return new Response(null, {
+    status: 301,
+    headers,
+  })
 }
 
 function getCanonicalPath(pathname) {
@@ -34,7 +48,7 @@ export default {
     const canonicalPath = getCanonicalPath(url.pathname)
 
     if (url.hostname === ROOT_HOST || canonicalPath !== url.pathname) {
-      return redirectToCanonical(url, canonicalPath)
+      return redirectToCanonical(url, canonicalPath, canonicalPath !== url.pathname)
     }
 
     return env.ASSETS.fetch(request)

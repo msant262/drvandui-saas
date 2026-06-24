@@ -17,6 +17,7 @@ export type SeoLandingPage = {
     name: string
     address: string
     region: string
+    postalCode: string
     mapQuery: string
   }
   highlights: string[]
@@ -75,6 +76,7 @@ export const seoLandingPages: SeoLandingPage[] = [
       name: 'Santos',
       address: 'Av. Ana Costa, 228 - 20º e 21° pavimentos',
       region: 'Gonzaga, Santos - SP',
+      postalCode: '11060-003',
       mapQuery: 'Av. Ana Costa, 228, Gonzaga, Santos, SP',
     },
     highlights: sharedProof,
@@ -112,6 +114,7 @@ export const seoLandingPages: SeoLandingPage[] = [
       name: 'Santo André',
       address: 'Av. Portugal, 1285 - 2º e 3º pavimento',
       region: 'Centro, Santo André - SP',
+      postalCode: '09040-011',
       mapQuery: 'Av. Portugal, 1285, Centro, Santo André, SP',
     },
     highlights: sharedProof,
@@ -149,6 +152,7 @@ export const seoLandingPages: SeoLandingPage[] = [
       name: 'Vila Mariana',
       address: 'R. Domingos de Morais, 2781 - 14° Andar',
       region: 'Vila Mariana, São Paulo - SP',
+      postalCode: '04035-001',
       mapQuery: 'Rua Domingos de Morais, 2781, Vila Mariana, São Paulo, SP',
     },
     highlights: sharedProof,

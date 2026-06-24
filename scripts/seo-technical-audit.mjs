@@ -280,6 +280,19 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "llms.txt linka página oficial de perfil médico", /https:\/\/www\.drvandui\.com\.br\/dr-vandui-cardiologista/i.test(llms))
     fail(errors, "llms.txt explicita CRM-SP 210328", /CRM-SP:\s*210328/i.test(llms))
     fail(errors, "llms.txt explicita RQE Cardiologia 146567", /RQE Cardiologia:\s*146567/i.test(llms))
+    fail(errors, "llms.txt define site oficial como fonte principal da entidade", /Fonte principal:\s*\[www\.drvandui\.com\.br\]/i.test(llms))
+    fail(errors, "llms.txt posiciona OneLiv como canal auxiliar", /OneLiv funciona como canal auxiliar de agendamento e prova social/i.test(llms))
+    fail(errors, "llms.txt orienta consolidacao de URLs antigas", /\/eventos[\s\S]*consolidar autoridade/i.test(llms))
+    ;[
+      "Av. Ana Costa, 228",
+      "CEP: 11060-003",
+      "Av. Portugal, 1285",
+      "CEP: 09040-011",
+      "R. Domingos de Morais, 2781",
+      "CEP: 04035-001",
+    ].forEach((localSignal) => {
+      fail(errors, `llms.txt inclui NAP local: ${localSignal}`, llms.includes(localSignal))
+    })
     fail(errors, "llms.txt inclui respostas rápidas AEO", /## Respostas rapidas para pacientes/i.test(llms))
     ;[
       "Quando devo procurar um cardiologista?",
@@ -350,27 +363,29 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   fail(
     errors,
     "public/.assetsignore documenta exclusao defensiva de _worker.js",
-    /^\/_worker\.js$/m.test(publicAssetsIgnore) &&
-      /^_worker\.js$/m.test(publicAssetsIgnore) &&
-      /^\*\*\/_worker\.js$/m.test(publicAssetsIgnore)
+    /^_worker\.js$/m.test(publicAssetsIgnore)
   )
   const distAssetsIgnore = read(root, "dist/.assetsignore")
   fail(
     errors,
     "dist/.assetsignore impede upload acidental de _worker.js pelo Wrangler",
-    /^\/_worker\.js$/m.test(distAssetsIgnore) &&
-      /^_worker\.js$/m.test(distAssetsIgnore) &&
-      /^\*\*\/_worker\.js$/m.test(distAssetsIgnore)
+    /^_worker\.js$/m.test(distAssetsIgnore)
   )
+  const distWorker = read(root, "dist/_worker.js")
+  fail(errors, "dist/_worker.js nao e publicado como asset no wrangler deploy", !distWorker)
 
   const worker = read(root, "src/worker.js")
   fail(errors, "src/worker.js existe para canonicalizacao de host no Cloudflare Workers", Boolean(worker))
   if (worker) {
     fail(errors, "src/worker.js reconhece host raiz drvandui.com.br", /ROOT_HOST\s*=\s*["']drvandui\.com\.br["']/i.test(worker))
     fail(errors, "src/worker.js define host canonico www.drvandui.com.br", /CANONICAL_HOST\s*=\s*["']www\.drvandui\.com\.br["']/i.test(worker))
-    fail(errors, "src/worker.js emite redirect 301 para host canonico", /Response\.redirect\([\s\S]*,\s*301\)/i.test(worker))
+    fail(errors, "src/worker.js emite redirect 301 para host canonico", /status\s*:\s*301/i.test(worker))
+    fail(errors, "src/worker.js adiciona Location no redirect canonico", /Location\s*:\s*canonicalUrl/i.test(worker))
+    fail(errors, "src/worker.js adiciona Link rel canonical no redirect", /rel=["']canonical["']/i.test(worker))
+    fail(errors, "src/worker.js aplica noindex somente a aliases antigos", /shouldDeindex\s*=\s*false[\s\S]*if\s*\(\s*shouldDeindex\s*\)[\s\S]*X-Robots-Tag["']?\]\s*=\s*["']noindex,\s*follow["']/i.test(worker))
+    fail(errors, "src/worker.js cacheia redirects canonicos", /Cache-Control["']?\s*:\s*["']public,\s*max-age=86400["']/i.test(worker))
     fail(errors, "src/worker.js canonicaliza /eventos antes dos assets", /pathname\s*===\s*["']\/eventos["'][\s\S]*startsWith\(["']\/eventos\/["']\)/i.test(worker))
-    fail(errors, "src/worker.js calcula path canonico antes de redirecionar host", /const\s+canonicalPath\s*=\s*getCanonicalPath\(url\.pathname\)[\s\S]*url\.hostname\s*===\s*ROOT_HOST\s*\|\|\s*canonicalPath\s*!==\s*url\.pathname[\s\S]*redirectToCanonical\(url,\s*canonicalPath\)/i.test(worker))
+    fail(errors, "src/worker.js calcula path canonico antes de redirecionar host", /const\s+canonicalPath\s*=\s*getCanonicalPath\(url\.pathname\)[\s\S]*url\.hostname\s*===\s*ROOT_HOST\s*\|\|\s*canonicalPath\s*!==\s*url\.pathname[\s\S]*redirectToCanonical\(url,\s*canonicalPath,\s*canonicalPath\s*!==\s*url\.pathname\)/i.test(worker))
     fail(errors, "src/worker.js canonicaliza alias /pressao-alta", /["']\/pressao-alta["']\s*,\s*["']\/tratamento-hipertensao["']/i.test(worker))
     fail(errors, "src/worker.js canonicaliza alias /dor-no-peito", /["']\/dor-no-peito["']\s*,\s*["']\/dor-no-peito-quando-procurar-ajuda["']/i.test(worker))
     fail(errors, "src/worker.js remove query string de URLs canonicas antigas", /url\.search\s*=\s*["']["']/i.test(worker))
@@ -386,6 +401,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
         viteConfig.includes("staticRouteFallbacks") &&
         viteConfig.includes("browserPrerenderRoutes")
     )
+    fail(errors, "vite.config.ts gera conteudo HTML crawlavel para landing pages SEO", /buildLandingPageStaticContent/i.test(viteConfig))
   }
 
   const appSource = read(root, "src/App.tsx")
@@ -477,12 +493,33 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   if (contatoHtml) {
     fail(errors, "Contato (build) inclui JSON-LD FAQPage", hasJsonLdType(contatoHtml, "FAQPage"))
     fail(errors, "Contato (build) inclui JSON-LD BreadcrumbList", hasJsonLdType(contatoHtml, "BreadcrumbList"))
+    fail(errors, "Contato (build) inclui JSON-LD ContactPage", hasJsonLdType(contatoHtml, "ContactPage"))
+    fail(errors, "Contato (build) inclui JSON-LD Physician", hasJsonLdType(contatoHtml, "Physician"))
+    fail(errors, "Contato (build) inclui JSON-LD MedicalBusiness", hasJsonLdType(contatoHtml, "MedicalBusiness"))
+    fail(errors, "Contato (build) explicita CRM-SP 210328 no schema", /CRM-SP[\s\S]{0,120}210328/i.test(contatoHtml))
+    fail(errors, "Contato (build) explicita RQE Cardiologia 146567 no schema", /RQE Cardiologia[\s\S]{0,120}146567/i.test(contatoHtml))
+    fail(errors, "Contato (build) possui ContactPoint de agendamento", /"@type"\s*:\s*"ContactPoint"[\s\S]*Agendamento de consulta cardiológica/i.test(contatoHtml))
+    fail(errors, "Contato (build) publica schema local com Google Maps", /"hasMap"\s*:\s*"https:\/\/www\.google\.com\/maps\/search\/\?api=1&query=/i.test(contatoHtml))
+    ;[
+      "Av. Ana Costa, 228",
+      "Av. Portugal, 1285",
+      "R. Domingos de Morais, 2781",
+    ].forEach((address) => {
+      fail(errors, `Contato (build) inclui endereco local: ${address}`, contatoHtml.includes(address))
+    })
   }
 
   for (const { route, file } of SEO_ROUTES) {
     fail(errors, `Build gerou ${file} para ${route}`, existsSync(path.resolve(root, file)))
   }
-  fail(errors, "Build publica dist/.assetsignore para bloquear _worker.js", /^_worker\.js$/m.test(read(root, "dist/.assetsignore")))
+  const distAssetsIgnoreBuild = read(root, "dist/.assetsignore")
+  fail(
+    errors,
+    "Build publica dist/.assetsignore para bloquear _worker.js",
+    /^_worker\.js$/m.test(distAssetsIgnoreBuild)
+  )
+  const distWorkerBuild = read(root, "dist/_worker.js")
+  fail(errors, "Build nao publica dist/_worker.js como asset", !distWorkerBuild)
 
   for (const route of SEO_LANDING_PATHS) {
     const file = `dist/${route.slice(1)}/index.html`
@@ -500,11 +537,16 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, `${route}: explicita CRM-SP 210328`, /CRM-SP[\s\S]{0,80}210328/i.test(html))
     fail(errors, `${route}: explicita RQE Cardiologia 146567`, /RQE Cardiologia[\s\S]{0,80}146567/i.test(html))
     fail(errors, `${route}: explicita formação médica no HTML`, /UFTM[\s\S]*Hospital Ipiranga[\s\S]*Dante Pazzanese/i.test(html))
+    fail(errors, `${route}: possui conteudo inicial crawlavel`, /data-static-seo-route=|Respostas diretas para pacientes/i.test(html))
+    fail(errors, `${route}: possui H1 visivel no HTML inicial`, /<h1>[\s\S]*<\/h1>/i.test(html))
+    fail(errors, `${route}: possui bloco AEO de respostas diretas`, /Respostas diretas para pacientes/i.test(html))
+    fail(errors, `${route}: linka OneLiv como reforco externo auxiliar`, /https:\/\/oneliv\.com\.br\/profissional\/vandui-santos/i.test(html))
 
     if (SEO_LOCAL_PATHS.includes(route)) {
       fail(errors, `${route}: inclui JSON-LD MedicalBusiness`, hasJsonLdType(html, "MedicalBusiness"))
       fail(errors, `${route}: schema local inclui hasMap`, /"hasMap"\s*:\s*"https:\/\/www\.google\.com\/maps\/search\/\?api=1&query=/i.test(html))
       fail(errors, `${route}: schema local inclui areaServed`, /"areaServed"\s*:/i.test(html))
+      fail(errors, `${route}: schema local inclui CEP`, /"postalCode"\s*:\s*"\d{5}-\d{3}"/i.test(html))
       fail(errors, `${route}: schema local conecta MedicalBusiness ao Physician`, /"employee"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
     }
 
@@ -533,6 +575,9 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "Páginas locais usam URL rastreável do Google Maps", /google\.com\/maps\/search\/\?api=1&query=/i.test(seoLandingSource))
     fail(errors, "Páginas locais anotam clique de mapa para conversão", /data-event=["']click_maps["']/i.test(seoLandingSource))
     fail(errors, "Páginas locais carregam mapa incorporado com lazy loading", /<iframe[\s\S]*loading=["']lazy["']/i.test(seoLandingSource))
+    fail(errors, "Páginas SEO linkam OneLiv como agendamento e prova social", /oneliv\.com\.br\/profissional\/vandui-santos/i.test(seoLandingSource))
+    fail(errors, "Páginas SEO anotam clique de agendamento OneLiv", /data-event=["']click_agendamento["']/i.test(seoLandingSource))
+    fail(errors, "Páginas SEO exibem respostas diretas AEO no app", /Respostas diretas para pacientes/i.test(seoLandingSource))
   }
 
   return {

@@ -35,6 +35,42 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 - Formacao: Instituto Dante Pazzanese de Cardiologia, Hospital Ipiranga e Universidade Federal do Triangulo Mineiro (UFTM)
 - Atendimento: Santos, Santo Andre e Vila Mariana
 
+## Entidade oficial
+
+- Fonte principal: [www.drvandui.com.br](https://www.drvandui.com.br/)
+- Perfil medico oficial: [Dr. Vandui da Silva dos Santos](https://www.drvandui.com.br/dr-vandui-cardiologista)
+- A OneLiv funciona como canal auxiliar de agendamento e prova social, nao como substituto do site oficial.
+- URLs antigas ou nao canonicas, como /eventos, devem consolidar autoridade para a pagina inicial oficial.
+
+## Unidades e NAP local
+
+### Santos
+
+- Pagina local: [Cardiologista em Santos](https://www.drvandui.com.br/cardiologista-em-santos)
+- Endereco: Av. Ana Costa, 228 - 20o e 21o pavimentos
+- Bairro/cidade: Gonzaga, Santos - SP
+- CEP: 11060-003
+- Especialidade principal: Cardiologia
+- Agendamento: WhatsApp (11) 97617-0971
+
+### Santo Andre
+
+- Pagina local: [Cardiologista em Santo Andre](https://www.drvandui.com.br/cardiologista-em-santo-andre)
+- Endereco: Av. Portugal, 1285 - 2o e 3o pavimento
+- Bairro/cidade: Centro, Santo Andre - SP
+- CEP: 09040-011
+- Especialidade principal: Cardiologia
+- Agendamento: OneLiv e WhatsApp (11) 97617-0971
+
+### Vila Mariana
+
+- Pagina local: [Cardiologista na Vila Mariana](https://www.drvandui.com.br/cardiologista-vila-mariana)
+- Endereco: R. Domingos de Morais, 2781 - 14o Andar
+- Bairro/cidade: Vila Mariana, Sao Paulo - SP
+- CEP: 04035-001
+- Especialidade principal: Cardiologia
+- Agendamento: WhatsApp (11) 97617-0971
+
 ## Temas principais
 
 - Cardiologia
