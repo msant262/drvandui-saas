@@ -83,7 +83,7 @@ function createFixture({ blockAll = false } = {}) {
   )
   writeFileSync(
     path.join(root, "public/llms.txt"),
-    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n",
+    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n\n## Respostas rapidas para pacientes\n\n### Quando devo procurar um cardiologista?\n\nVoce deve procurar um cardiologista se tiver dor no peito.\n\n### Cardiologista trata hipertensao?\n\nSim. O cardiologista avalia pressao arterial.\n\n### O que e prevencao cardiovascular?\n\nPrevencao cardiovascular acompanha fatores de risco.\n",
   )
   writeFileSync(path.join(root, "public/.assetsignore"), "_worker.js\n")
 
@@ -117,7 +117,7 @@ function createFixture({ blockAll = false } = {}) {
       )
       .join("")
 
-    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      <meta name="description" content="CRM-SP 210328 e RQE Cardiologia 146567">\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Physician","alumniOf":[{"name":"Universidade Federal do Triângulo Mineiro (UFTM)"},{"name":"Hospital Ipiranga"},{"name":"Instituto Dante Pazzanese de Cardiologia"}]}</script>\n      ${schemaScripts}\n    </head><body>CRM-SP 210328 RQE Cardiologia 146567 UFTM Hospital Ipiranga Instituto Dante Pazzanese de Cardiologia</body></html>`
+    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      <meta name="description" content="CRM-SP 210328 e RQE Cardiologia 146567">\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Physician","alumniOf":[{"name":"Universidade Federal do Triângulo Mineiro (UFTM)"},{"name":"Hospital Ipiranga"},{"name":"Instituto Dante Pazzanese de Cardiologia"}]}</script>\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quando devo procurar um cardiologista?"},{"@type":"Question","name":"Cardiologista trata hipertensão?"},{"@type":"Question","name":"O que é prevenção cardiovascular?"}]}</script>\n      ${schemaScripts}\n    </head><body>CRM-SP 210328 RQE Cardiologia 146567 UFTM Hospital Ipiranga Instituto Dante Pazzanese de Cardiologia Quando devo procurar um cardiologista? Cardiologista trata hipertensão? O que é prevenção cardiovascular?</body></html>`
   }
 
   writeFileSync(path.join(distDir, "index.html"), baseHtml("https://www.drvandui.com.br/", "Home", ["Physician", "MedicalBusiness"]))

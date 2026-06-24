@@ -269,6 +269,14 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "llms.txt contém links Markdown", /\[[^\]]+\]\(https:\/\/[^)]+\)/m.test(llms))
     fail(errors, "llms.txt explicita CRM-SP 210328", /CRM-SP:\s*210328/i.test(llms))
     fail(errors, "llms.txt explicita RQE Cardiologia 146567", /RQE Cardiologia:\s*146567/i.test(llms))
+    fail(errors, "llms.txt inclui respostas rápidas AEO", /## Respostas rapidas para pacientes/i.test(llms))
+    ;[
+      "Quando devo procurar um cardiologista?",
+      "Cardiologista trata hipertensao?",
+      "O que e prevencao cardiovascular?",
+    ].forEach((question) => {
+      fail(errors, `llms.txt responde: ${question}`, llms.includes(question))
+    })
   }
 
   const headers = read(root, "public/_headers")
@@ -374,6 +382,14 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "Home possui seção Formação e Experiência", /Formação e Experiência/i.test(authoritySources))
     fail(errors, "Home detalha UFTM, Hospital Ipiranga e Instituto Dante Pazzanese", /UFTM[\s\S]*Hospital Ipiranga[\s\S]*Instituto Dante Pazzanese/i.test(authoritySources))
     fail(errors, "Home apresenta Dr. Vandui como Médico Cardiologista com CRM e RQE", /Médico Cardiologista[\s\S]{0,120}CRM-SP\s*210328[\s\S]{0,120}RQE Cardiologia\s*146567/i.test(authoritySources))
+    fail(errors, "Home possui bloco de perguntas rápidas AEO", /Perguntas rápidas[\s\S]*Respostas diretas sobre cardiologia/i.test(authoritySources))
+    ;[
+      "Quando devo procurar um cardiologista?",
+      "Cardiologista trata hipertensão?",
+      "O que é prevenção cardiovascular?",
+    ].forEach((question) => {
+      fail(errors, `Home responde AEO: ${question}`, authoritySources.includes(question))
+    })
   }
 
   for (const { route, file, canonical } of SEO_ROUTES) {
@@ -396,6 +412,14 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "index.html (build) explicita RQE Cardiologia 146567", /RQE Cardiologia[\s\S]{0,80}146567/i.test(indexHtml))
     fail(errors, "index.html (build) explicita formação UFTM, Hospital Ipiranga e Dante Pazzanese", /UFTM[\s\S]*Hospital Ipiranga[\s\S]*Dante Pazzanese/i.test(indexHtml))
     fail(errors, "index.html (build) inclui alumniOf no JSON-LD Physician", /"alumniOf"\s*:/i.test(indexHtml))
+    fail(errors, "index.html (build) inclui JSON-LD FAQPage da home", hasJsonLdType(indexHtml, "FAQPage"))
+    ;[
+      "Quando devo procurar um cardiologista?",
+      "Cardiologista trata hipertensão?",
+      "O que é prevenção cardiovascular?",
+    ].forEach((question) => {
+      fail(errors, `index.html (build) expõe resposta AEO: ${question}`, indexHtml.includes(question))
+    })
   }
 
   const espHtml = read(root, "dist/especialidades/index.html")

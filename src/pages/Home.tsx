@@ -149,6 +149,30 @@ const healthyHabits = [
   }
 ];
 
+const quickAnswers = [
+  {
+    question: 'Quando devo procurar um cardiologista?',
+    answer:
+      'Você deve procurar um cardiologista se tiver dor no peito, falta de ar, palpitações, pressão alta, colesterol elevado, diabetes, histórico familiar de doença cardíaca ou quiser fazer uma avaliação preventiva.',
+    link: '/consulta-com-cardiologista',
+    linkLabel: 'Ver consulta cardiológica',
+  },
+  {
+    question: 'Cardiologista trata hipertensão?',
+    answer:
+      'Sim. O cardiologista avalia pressão arterial, fatores de risco, exames, histórico familiar e pode orientar tratamento e acompanhamento para reduzir risco cardiovascular.',
+    link: '/tratamento-hipertensao',
+    linkLabel: 'Ver tratamento de hipertensão',
+  },
+  {
+    question: 'O que é prevenção cardiovascular?',
+    answer:
+      'Prevenção cardiovascular é o acompanhamento de fatores como pressão, colesterol, diabetes, tabagismo, sedentarismo, alimentação e histórico familiar para reduzir o risco de infarto, AVC e outras doenças cardíacas.',
+    link: '/prevencao-cardiovascular',
+    linkLabel: 'Ver prevenção cardiovascular',
+  },
+];
+
 const institutions = [
   {
     name: 'Universidade Federal do Triângulo Mineiro (UFTM)',
@@ -657,6 +681,43 @@ export function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── RESPOSTAS RÁPIDAS AEO/GEO ── */}
+      <section className="py-24 bg-white border-t border-gray-100">
+        <div className="section-padding">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-14">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4" style={{ backgroundColor: 'var(--color-mint)', color: 'var(--color-emerald)' }}>
+                Perguntas rápidas
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                Respostas diretas sobre cardiologia
+              </h2>
+              <p className="text-lg text-[#666] max-w-2xl mx-auto">
+                Blocos curtos para orientar pacientes e ajudar mecanismos de busca a entenderem quando a avaliação cardiológica faz sentido.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-6">
+              {quickAnswers.map((item) => (
+                <article key={item.question} className="bg-[#f0f9fa] rounded-[28px] p-8 border border-[var(--color-cyan-light)] shadow-sm">
+                  <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center mb-6 shadow-sm">
+                    <CheckCircle2 className="w-6 h-6 text-[var(--color-emerald)]" />
+                  </div>
+                  <h3 className="font-bold text-xl mb-4" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                    {item.question}
+                  </h3>
+                  <p className="text-[#555] text-[15px] leading-relaxed mb-6">{item.answer}</p>
+                  <Link to={item.link} className="inline-flex items-center gap-2 text-sm font-bold text-[var(--color-teal)] hover:text-[var(--color-emerald)] transition-colors">
+                    {item.linkLabel}
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </article>
+              ))}
             </div>
           </div>
         </div>
