@@ -85,7 +85,7 @@ function createFixture({ blockAll = false } = {}) {
   )
   writeFileSync(
     path.join(root, "public/llms.txt"),
-    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n\n## Respostas rapidas para pacientes\n\n### Quando devo procurar um cardiologista?\n\nVoce deve procurar um cardiologista se tiver dor no peito.\n\n### Cardiologista trata hipertensao?\n\nSim. O cardiologista avalia pressao arterial.\n\n### O que e prevencao cardiovascular?\n\nPrevencao cardiovascular acompanha fatores de risco.\n",
+    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Perfil do Dr. Vandui](https://www.drvandui.com.br/dr-vandui-cardiologista)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n\n## Respostas rapidas para pacientes\n\n### Quando devo procurar um cardiologista?\n\nVoce deve procurar um cardiologista se tiver dor no peito.\n\n### Cardiologista trata hipertensao?\n\nSim. O cardiologista avalia pressao arterial.\n\n### O que e prevencao cardiovascular?\n\nPrevencao cardiovascular acompanha fatores de risco.\n",
   )
   writeFileSync(path.join(root, "public/.assetsignore"), "_worker.js\n")
 
@@ -130,6 +130,7 @@ function createFixture({ blockAll = false } = {}) {
         "/cardiologista-em-santos",
         "/cardiologista-em-santo-andre",
         "/cardiologista-vila-mariana",
+        "/dr-vandui-cardiologista",
         "/consulta-com-cardiologista",
         "/check-up-cardiologico",
         "/risco-cirurgico-cardiologico",

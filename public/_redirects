@@ -13,6 +13,7 @@
 # Serve prerendered HTML directly (SSG path)
 /especialidades /especialidades/index.html 200
 /contato /contato/index.html 200
+/dr-vandui-cardiologista /dr-vandui-cardiologista/index.html 200
 /cardiologista-em-santos /cardiologista-em-santos/index.html 200
 /cardiologista-em-santo-andre /cardiologista-em-santo-andre/index.html 200
 /cardiologista-vila-mariana /cardiologista-vila-mariana/index.html 200

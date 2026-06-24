@@ -21,6 +21,9 @@ const SEO_SERVICE_PATHS = [
   "/prevencao-cardiovascular",
   "/clinica-medica",
 ]
+const SEO_PROFILE_PATHS = [
+  "/dr-vandui-cardiologista",
+]
 const SEO_ANSWER_PATHS = [
   "/palpitacoes-quando-se-preocupar",
   "/pressao-alta-quando-procurar-ajuda",
@@ -40,8 +43,9 @@ const SEO_REDIRECTS = [
   { from: "/pressao-alta", to: "/tratamento-hipertensao", status: 301 },
 ]
 const NON_CANONICAL_PATHS = SEO_REDIRECTS.map(({ from }) => from.replace("/*", ""))
-const SEO_LANDING_PATHS = [...SEO_LOCAL_PATHS, ...SEO_SERVICE_PATHS, ...SEO_ANSWER_PATHS]
+const SEO_LANDING_PATHS = [...SEO_PROFILE_PATHS, ...SEO_LOCAL_PATHS, ...SEO_SERVICE_PATHS, ...SEO_ANSWER_PATHS]
 const SEO_PRIORITY_INTERNAL_LINK_PATHS = [
+  ...SEO_PROFILE_PATHS,
   ...SEO_LOCAL_PATHS,
   ...SEO_SERVICE_PATHS.filter((route) => route !== "/clinica-medica"),
 ]
@@ -271,6 +275,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   if (llms) {
     fail(errors, "llms.txt possui H1 obrigatório", /^#\s+\S+/m.test(llms))
     fail(errors, "llms.txt contém links Markdown", /\[[^\]]+\]\(https:\/\/[^)]+\)/m.test(llms))
+    fail(errors, "llms.txt linka página oficial de perfil médico", /https:\/\/www\.drvandui\.com\.br\/dr-vandui-cardiologista/i.test(llms))
     fail(errors, "llms.txt explicita CRM-SP 210328", /CRM-SP:\s*210328/i.test(llms))
     fail(errors, "llms.txt explicita RQE Cardiologia 146567", /RQE Cardiologia:\s*146567/i.test(llms))
     fail(errors, "llms.txt inclui respostas rápidas AEO", /## Respostas rapidas para pacientes/i.test(llms))
@@ -388,6 +393,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "Home possui seção Formação e Experiência", /Formação e Experiência/i.test(authoritySources))
     fail(errors, "Home detalha UFTM, Hospital Ipiranga e Instituto Dante Pazzanese", /UFTM[\s\S]*Hospital Ipiranga[\s\S]*Instituto Dante Pazzanese/i.test(authoritySources))
     fail(errors, "Home apresenta Dr. Vandui como Médico Cardiologista com CRM e RQE", /Médico Cardiologista[\s\S]{0,120}CRM-SP\s*210328[\s\S]{0,120}RQE Cardiologia\s*146567/i.test(authoritySources))
+    fail(errors, "Site possui página dedicada de perfil médico do Dr. Vandui", /dr-vandui-cardiologista/i.test(read(root, "src/data/seoLandingPages.ts") ?? ""))
     fail(errors, "Home possui bloco de perguntas rápidas AEO", /Perguntas rápidas[\s\S]*Respostas diretas sobre cardiologia/i.test(authoritySources))
     ;[
       "Quando devo procurar um cardiologista?",
@@ -477,7 +483,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
       fail(errors, `${route}: schema local conecta MedicalBusiness ao Physician`, /"employee"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
     }
 
-    if (SEO_SERVICE_PATHS.includes(route) || SEO_ANSWER_PATHS.includes(route)) {
+    if (SEO_PROFILE_PATHS.includes(route) || SEO_SERVICE_PATHS.includes(route) || SEO_ANSWER_PATHS.includes(route)) {
       fail(errors, `${route}: inclui JSON-LD Article`, hasJsonLdType(html, "Article"))
       fail(errors, `${route}: Article identifica Dr. Vandui como autor`, /"author"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
       fail(errors, `${route}: Article identifica Dr. Vandui como revisor medico`, /"reviewedBy"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))

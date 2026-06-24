@@ -1,6 +1,6 @@
 export const SITE_BASE_URL = 'https://www.drvandui.com.br'
 
-export type SeoLandingPageKind = 'local' | 'service' | 'answer'
+export type SeoLandingPageKind = 'local' | 'profile' | 'service' | 'answer'
 
 export type SeoLandingPage = {
   slug: string
@@ -167,6 +167,63 @@ export const seoLandingPages: SeoLandingPage[] = [
     ],
     faqs: localFaqs('Vila Mariana'),
     relatedSlugs: ['dor-no-peito-quando-procurar-ajuda', 'colesterol-alto', 'clinica-medica'],
+  },
+  {
+    slug: 'dr-vandui-cardiologista',
+    kind: 'profile',
+    title: 'Dr. Vandui da Silva dos Santos | Cardiologista CRM-SP 210328',
+    description:
+      'Conheça o Dr. Vandui da Silva dos Santos, Médico Cardiologista CRM-SP 210328 e RQE Cardiologia 146567, com formação pela UFTM, Hospital Ipiranga e Instituto Dante Pazzanese.',
+    keywords:
+      'Dr Vandui, Vandui Santos cardiologista, CRM-SP 210328, RQE Cardiologia 146567, cardiologista Dante Pazzanese',
+    h1: 'Dr. Vandui da Silva dos Santos',
+    eyebrow: 'Médico Cardiologista',
+    intro:
+      'Médico Cardiologista, CRM-SP 210328 e RQE Cardiologia 146567, com formação pela UFTM, Hospital Ipiranga e Instituto Dante Pazzanese de Cardiologia. Atendimento em Santos, Santo André e Vila Mariana.',
+    ctaLabel: 'Agendar consulta com Dr. Vandui',
+    whatsappText: 'Olá Dr. Vandui, gostaria de agendar uma consulta cardiológica.',
+    highlights: [
+      'Médico Cardiologista com RQE Cardiologia 146567',
+      'CRM-SP 210328 exibido no site oficial',
+      'Formação pela UFTM, Hospital Ipiranga e Instituto Dante Pazzanese',
+    ],
+    sections: [
+      {
+        heading: 'Formação e experiência médica',
+        body:
+          'A trajetória médica inclui formação pela Universidade Federal do Triângulo Mineiro, treinamento hospitalar no Hospital Ipiranga e especialização em Cardiologia no Instituto Dante Pazzanese de Cardiologia.',
+        bullets: ['Universidade Federal do Triângulo Mineiro (UFTM)', 'Hospital Ipiranga', 'Instituto Dante Pazzanese de Cardiologia'],
+      },
+      {
+        heading: 'Credenciais profissionais',
+        body:
+          'O site oficial centraliza as credenciais do médico: Dr. Vandui da Silva dos Santos, Médico Cardiologista, CRM-SP 210328 e RQE Cardiologia 146567.',
+        bullets: ['CRM-SP 210328', 'RQE Cardiologia 146567', 'Atuação em Cardiologia, Clínica Médica e prevenção cardiovascular'],
+      },
+      {
+        heading: 'Como a consulta é conduzida',
+        body:
+          'A consulta prioriza diagnóstico claro, revisão de fatores de risco, avaliação de exames e definição de um plano de acompanhamento para sintomas, hipertensão, colesterol, arritmias, check-up e prevenção cardiovascular.',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Qual é o CRM do Dr. Vandui?',
+        answer:
+          'O CRM do Dr. Vandui da Silva dos Santos é CRM-SP 210328, informação exibida no site oficial junto das demais credenciais profissionais.',
+      },
+      {
+        question: 'Qual é o RQE de Cardiologia do Dr. Vandui?',
+        answer:
+          'O registro de qualificação de especialista informado no site oficial é RQE Cardiologia 146567.',
+      },
+      {
+        question: 'Onde o Dr. Vandui atende?',
+        answer:
+          'O atendimento é organizado para Santos, Santo André e Vila Mariana, com páginas locais específicas no site oficial para cada região.',
+      },
+    ],
+    relatedSlugs: ['cardiologista-em-santos', 'cardiologista-em-santo-andre', 'cardiologista-vila-mariana'],
   },
   {
     slug: 'consulta-com-cardiologista',

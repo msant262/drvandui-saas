@@ -4,6 +4,7 @@ import { Menu, X, HeartPulse, Phone, Instagram, CalendarDays, MessageCircle, Arr
 
 const navLinks = [
   { path: '/', label: 'Início' },
+  { path: '/dr-vandui-cardiologista', label: 'Dr. Vandui' },
   { path: '/especialidades', label: 'Especialidades' },
   { path: '/contato', label: 'Contato' },
 ];

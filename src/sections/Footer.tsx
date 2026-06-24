@@ -64,6 +64,7 @@ export function Footer() {
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-1.5 lg:mx-8">
             {[
               { path: '/', label: 'Início' },
+              { path: '/dr-vandui-cardiologista', label: 'Dr. Vandui' },
               { path: '/especialidades', label: 'Especialidades' },
               { path: '/contato', label: 'Contato' },
             ].map((link) => (
