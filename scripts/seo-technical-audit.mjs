@@ -271,16 +271,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
 
   const redirects = read(root, "public/_redirects")
   if (redirects) {
-    fail(
-      errors,
-      "_redirects força canonical www para apex HTTPS",
-      /https:\/\/drvandui\.com\.br\/\*\s+https:\/\/www\.drvandui\.com\.br\/:splat\s+301/i.test(redirects)
-    )
-    fail(
-      errors,
-      "_redirects força HTTPS para www",
-      /http:\/\/www\.drvandui\.com\.br\/\*\s+https:\/\/www\.drvandui\.com\.br\/:splat\s+301/i.test(redirects)
-    )
+    fail(errors, "_redirects usa apenas URLs relativas aceitas pelo Cloudflare", !/(^|\s)https?:\/\//im.test(redirects))
     SEO_ROUTES.filter(({ route }) => route !== "/").forEach(({ route }) => {
       const slug = route.slice(1)
       const routeRegex = new RegExp(`${escapeRegExp(route)}\\s+/${escapeRegExp(slug)}/index\\.html\\s+200`, "i")

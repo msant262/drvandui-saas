@@ -52,10 +52,7 @@ function createFixture({ blockAll = false } = {}) {
   )
   writeFileSync(
     path.join(root, "public/_redirects"),
-    "https://drvandui.com.br/* https://www.drvandui.com.br/:splat 301\n" +
-      "http://drvandui.com.br/* https://www.drvandui.com.br/:splat 301\n" +
-      "http://www.drvandui.com.br/* https://www.drvandui.com.br/:splat 301\n" +
-      SEO_ROUTES.filter(({ route }) => route !== "/")
+    SEO_ROUTES.filter(({ route }) => route !== "/")
         .map(({ route }) => `${route} ${route}/index.html 200`)
         .join("\n"),
   )
