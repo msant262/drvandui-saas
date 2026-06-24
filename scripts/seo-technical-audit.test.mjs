@@ -85,6 +85,7 @@ function createFixture({ blockAll = false } = {}) {
     path.join(root, "public/llms.txt"),
     "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n",
   )
+  writeFileSync(path.join(root, "public/.assetsignore"), "_worker.js\n")
 
   writeFileSync(
     path.join(root, "vite.config.ts"),

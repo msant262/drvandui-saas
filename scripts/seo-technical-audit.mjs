@@ -327,6 +327,8 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
 
   const publicWorker = read(root, "public/_worker.js")
   fail(errors, "public/_worker.js nao existe como asset publico no wrangler deploy", !publicWorker)
+  const assetsIgnore = read(root, "public/.assetsignore")
+  fail(errors, "public/.assetsignore impede upload acidental de _worker.js em dist", /^_worker\.js$/m.test(assetsIgnore))
 
   const worker = read(root, "src/worker.js")
   fail(errors, "src/worker.js existe para canonicalizacao de host no Cloudflare Workers", Boolean(worker))
