@@ -40,6 +40,7 @@ function createFixture({ blockAll = false } = {}) {
     mkdirSync(path.join(distDir, route.slice(1)), { recursive: true })
   })
   mkdirSync(path.join(root, "public"), { recursive: true })
+  mkdirSync(path.join(root, "src"), { recursive: true })
 
   const robots = blockAll
     ? `User-agent: *\nDisallow: /\nSitemap: https://www.drvandui.com.br/sitemap.xml\n`
@@ -80,7 +81,6 @@ function createFixture({ blockAll = false } = {}) {
         .map(({ route }) => `${route} ${route}/index.html 200`)
         .join("\n"),
   )
-  writeFileSync(path.join(root, "public/_worker.js"), canonicalWorkerSource)
   writeFileSync(
     path.join(root, "public/llms.txt"),
     "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n",
@@ -101,6 +101,11 @@ function createFixture({ blockAll = false } = {}) {
       "  ],\\n" +
       "})",
   )
+  writeFileSync(
+    path.join(root, "wrangler.toml"),
+    'name = "drvandui-saas"\ncompatibility_date = "2024-01-01"\nmain = "src/worker.js"\n\n[assets]\ndirectory = "./dist"\nnot_found_handling = "single-page-application"\n',
+  )
+  writeFileSync(path.join(root, "src/worker.js"), canonicalWorkerSource)
 
   const baseHtml = (canonical, title, schemaTypes) => {
     const normalizedSchemaTypes = Array.isArray(schemaTypes) ? schemaTypes : [schemaTypes]
@@ -135,7 +140,6 @@ function createFixture({ blockAll = false } = {}) {
     path.join(assetsDir, "app.js"),
     "window.dispatchEvent(new Event('dr-vandui-prerender-ready'));\n/* dr-vandui-prerender-ready */",
   )
-  writeFileSync(path.join(distDir, "_worker.js"), canonicalWorkerSource)
 
   return root
 }

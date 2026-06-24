@@ -307,13 +307,22 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     })
   }
 
-  const worker = read(root, "public/_worker.js")
-  fail(errors, "_worker.js existe para canonicalizacao de host no Cloudflare Pages", Boolean(worker))
+  const wranglerConfig = read(root, "wrangler.toml")
+  if (wranglerConfig) {
+    fail(errors, "wrangler.toml define Worker entrypoint para redirect canonico", /main\s*=\s*["']src\/worker\.js["']/i.test(wranglerConfig))
+    fail(errors, "wrangler.toml mantem assets em ./dist", /directory\s*=\s*["']\.\/dist["']/i.test(wranglerConfig))
+  }
+
+  const publicWorker = read(root, "public/_worker.js")
+  fail(errors, "public/_worker.js nao existe como asset publico no wrangler deploy", !publicWorker)
+
+  const worker = read(root, "src/worker.js")
+  fail(errors, "src/worker.js existe para canonicalizacao de host no Cloudflare Workers", Boolean(worker))
   if (worker) {
-    fail(errors, "_worker.js reconhece host raiz drvandui.com.br", /ROOT_HOST\s*=\s*["']drvandui\.com\.br["']/i.test(worker))
-    fail(errors, "_worker.js define host canonico www.drvandui.com.br", /CANONICAL_HOST\s*=\s*["']www\.drvandui\.com\.br["']/i.test(worker))
-    fail(errors, "_worker.js emite redirect 301 para host canonico", /Response\.redirect\([\s\S]*,\s*301\)/i.test(worker))
-    fail(errors, "_worker.js preserva entrega de assets pelo Cloudflare", /env\.ASSETS\.fetch\(request\)/i.test(worker))
+    fail(errors, "src/worker.js reconhece host raiz drvandui.com.br", /ROOT_HOST\s*=\s*["']drvandui\.com\.br["']/i.test(worker))
+    fail(errors, "src/worker.js define host canonico www.drvandui.com.br", /CANONICAL_HOST\s*=\s*["']www\.drvandui\.com\.br["']/i.test(worker))
+    fail(errors, "src/worker.js emite redirect 301 para host canonico", /Response\.redirect\([\s\S]*,\s*301\)/i.test(worker))
+    fail(errors, "src/worker.js preserva entrega de assets pelo Cloudflare", /env\.ASSETS\.fetch\(request\)/i.test(worker))
   }
 
   const viteConfig = read(root, "vite.config.ts")
@@ -384,7 +393,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   for (const { route, file } of SEO_ROUTES) {
     fail(errors, `Build gerou ${file} para ${route}`, existsSync(path.resolve(root, file)))
   }
-  fail(errors, "Build gerou dist/_worker.js para redirect canonico de host", existsSync(path.resolve(root, "dist/_worker.js")))
+  fail(errors, "Build nao publica _worker.js como asset em dist", !existsSync(path.resolve(root, "dist/_worker.js")))
 
   for (const route of SEO_LANDING_PATHS) {
     const file = `dist/${route.slice(1)}/index.html`
