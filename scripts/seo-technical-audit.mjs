@@ -356,6 +356,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "src/worker.js define host canonico www.drvandui.com.br", /CANONICAL_HOST\s*=\s*["']www\.drvandui\.com\.br["']/i.test(worker))
     fail(errors, "src/worker.js emite redirect 301 para host canonico", /Response\.redirect\([\s\S]*,\s*301\)/i.test(worker))
     fail(errors, "src/worker.js canonicaliza /eventos antes dos assets", /pathname\s*===\s*["']\/eventos["'][\s\S]*startsWith\(["']\/eventos\/["']\)/i.test(worker))
+    fail(errors, "src/worker.js calcula path canonico antes de redirecionar host", /const\s+canonicalPath\s*=\s*getCanonicalPath\(url\.pathname\)[\s\S]*url\.hostname\s*===\s*ROOT_HOST\s*\|\|\s*canonicalPath\s*!==\s*url\.pathname[\s\S]*redirectToCanonical\(url,\s*canonicalPath\)/i.test(worker))
     fail(errors, "src/worker.js canonicaliza alias /pressao-alta", /["']\/pressao-alta["']\s*,\s*["']\/tratamento-hipertensao["']/i.test(worker))
     fail(errors, "src/worker.js canonicaliza alias /dor-no-peito", /["']\/dor-no-peito["']\s*,\s*["']\/dor-no-peito-quando-procurar-ajuda["']/i.test(worker))
     fail(errors, "src/worker.js remove query string de URLs canonicas antigas", /url\.search\s*=\s*["']["']/i.test(worker))

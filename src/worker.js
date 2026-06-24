@@ -20,20 +20,20 @@ function redirectToCanonical(url, pathname) {
   return Response.redirect(url.toString(), 301)
 }
 
+function getCanonicalPath(pathname) {
+  if (pathname === "/eventos" || pathname.startsWith("/eventos/")) {
+    return "/"
+  }
+
+  return CANONICAL_PATH_REDIRECTS.get(pathname) ?? pathname
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
+    const canonicalPath = getCanonicalPath(url.pathname)
 
-    if (url.hostname === ROOT_HOST) {
-      return redirectToCanonical(url, url.pathname)
-    }
-
-    if (url.pathname === "/eventos" || url.pathname.startsWith("/eventos/")) {
-      return redirectToCanonical(url, "/")
-    }
-
-    const canonicalPath = CANONICAL_PATH_REDIRECTS.get(url.pathname)
-    if (canonicalPath) {
+    if (url.hostname === ROOT_HOST || canonicalPath !== url.pathname) {
       return redirectToCanonical(url, canonicalPath)
     }
 

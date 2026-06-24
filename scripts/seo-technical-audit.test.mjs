@@ -26,17 +26,15 @@ const canonicalWorkerSource =
   '  url.search = ""\n' +
   "  return Response.redirect(url.toString(), 301)\n" +
   "}\n\n" +
+  "function getCanonicalPath(pathname) {\n" +
+  '  if (pathname === "/eventos" || pathname.startsWith("/eventos/")) return "/"\n' +
+  "  return CANONICAL_PATH_REDIRECTS.get(pathname) ?? pathname\n" +
+  "}\n\n" +
   "export default {\n" +
   "  async fetch(request, env) {\n" +
   "    const url = new URL(request.url)\n\n" +
-  "    if (url.hostname === ROOT_HOST) {\n" +
-  "      return redirectToCanonical(url, url.pathname)\n" +
-  "    }\n\n" +
-  '    if (url.pathname === "/eventos" || url.pathname.startsWith("/eventos/")) {\n' +
-  '      return redirectToCanonical(url, "/")\n' +
-  "    }\n\n" +
-  "    const canonicalPath = CANONICAL_PATH_REDIRECTS.get(url.pathname)\n" +
-  "    if (canonicalPath) {\n" +
+  "    const canonicalPath = getCanonicalPath(url.pathname)\n\n" +
+  "    if (url.hostname === ROOT_HOST || canonicalPath !== url.pathname) {\n" +
   "      return redirectToCanonical(url, canonicalPath)\n" +
   "    }\n\n" +
   "    return env.ASSETS.fetch(request)\n" +
