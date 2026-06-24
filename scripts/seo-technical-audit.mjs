@@ -371,6 +371,9 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "Home/header/footer exibem CRM-SP 210328", /CRM-SP\s*210328/i.test(authoritySources))
     fail(errors, "Home/header/footer exibem RQE 146567", /RQE(?:\s+Cardiologia)?\s*146567/i.test(authoritySources))
     fail(errors, "Home reforça formação completa", /Dante Pazzanese[\s\S]*Hospital Ipiranga[\s\S]*UFTM/i.test(authoritySources))
+    fail(errors, "Home possui seção Formação e Experiência", /Formação e Experiência/i.test(authoritySources))
+    fail(errors, "Home detalha UFTM, Hospital Ipiranga e Instituto Dante Pazzanese", /UFTM[\s\S]*Hospital Ipiranga[\s\S]*Instituto Dante Pazzanese/i.test(authoritySources))
+    fail(errors, "Home apresenta Dr. Vandui como Médico Cardiologista com CRM e RQE", /Médico Cardiologista[\s\S]{0,120}CRM-SP\s*210328[\s\S]{0,120}RQE Cardiologia\s*146567/i.test(authoritySources))
   }
 
   for (const { route, file, canonical } of SEO_ROUTES) {
@@ -391,6 +394,8 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "index.html (build) inclui JSON-LD MedicalBusiness", hasJsonLdType(indexHtml, "MedicalBusiness"))
     fail(errors, "index.html (build) explicita CRM-SP 210328", /CRM-SP[\s\S]{0,80}210328/i.test(indexHtml))
     fail(errors, "index.html (build) explicita RQE Cardiologia 146567", /RQE Cardiologia[\s\S]{0,80}146567/i.test(indexHtml))
+    fail(errors, "index.html (build) explicita formação UFTM, Hospital Ipiranga e Dante Pazzanese", /UFTM[\s\S]*Hospital Ipiranga[\s\S]*Dante Pazzanese/i.test(indexHtml))
+    fail(errors, "index.html (build) inclui alumniOf no JSON-LD Physician", /"alumniOf"\s*:/i.test(indexHtml))
   }
 
   const espHtml = read(root, "dist/especialidades/index.html")
@@ -421,6 +426,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, `${route}: inclui JSON-LD FAQPage`, hasJsonLdType(html, "FAQPage"))
     fail(errors, `${route}: explicita CRM-SP 210328`, /CRM-SP[\s\S]{0,80}210328/i.test(html))
     fail(errors, `${route}: explicita RQE Cardiologia 146567`, /RQE Cardiologia[\s\S]{0,80}146567/i.test(html))
+    fail(errors, `${route}: explicita formação médica no HTML`, /UFTM[\s\S]*Hospital Ipiranga[\s\S]*Dante Pazzanese/i.test(html))
 
     if (SEO_LOCAL_PATHS.includes(route)) {
       fail(errors, `${route}: inclui JSON-LD MedicalBusiness`, hasJsonLdType(html, "MedicalBusiness"))

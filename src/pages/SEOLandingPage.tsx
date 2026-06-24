@@ -32,6 +32,8 @@ function buildSchemas(page: SeoLandingPage) {
     name: 'Dr. Vandui da Silva dos Santos',
     url,
     image: `${SITE_BASE_URL}/hero-doctor.jpg`,
+    description:
+      'Médico Cardiologista, CRM-SP 210328 e RQE Cardiologia 146567, com formação pela UFTM, Hospital Ipiranga e Instituto Dante Pazzanese de Cardiologia.',
     identifier: [
       {
         '@type': 'PropertyValue',
@@ -48,6 +50,20 @@ function buildSchemas(page: SeoLandingPage) {
     email: 'contato@drvandui.com.br',
     medicalSpecialty: ['Cardiology', 'InternalMedicine'],
     areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
+    alumniOf: [
+      {
+        '@type': 'EducationalOrganization',
+        name: 'Universidade Federal do Triângulo Mineiro (UFTM)',
+      },
+      {
+        '@type': 'Hospital',
+        name: 'Hospital Ipiranga',
+      },
+      {
+        '@type': 'Hospital',
+        name: 'Instituto Dante Pazzanese de Cardiologia',
+      },
+    ],
     sameAs: [
       'https://oneliv.com.br/profissional/vandui-santos',
       'https://instagram.com/vanduisantos.cardio',

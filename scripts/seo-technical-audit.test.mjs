@@ -117,7 +117,7 @@ function createFixture({ blockAll = false } = {}) {
       )
       .join("")
 
-    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      <meta name="description" content="CRM-SP 210328 e RQE Cardiologia 146567">\n      ${schemaScripts}\n    </head><body>CRM-SP 210328 RQE Cardiologia 146567</body></html>`
+    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      <meta name="description" content="CRM-SP 210328 e RQE Cardiologia 146567">\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Physician","alumniOf":[{"name":"Universidade Federal do Triângulo Mineiro (UFTM)"},{"name":"Hospital Ipiranga"},{"name":"Instituto Dante Pazzanese de Cardiologia"}]}</script>\n      ${schemaScripts}\n    </head><body>CRM-SP 210328 RQE Cardiologia 146567 UFTM Hospital Ipiranga Instituto Dante Pazzanese de Cardiologia</body></html>`
   }
 
   writeFileSync(path.join(distDir, "index.html"), baseHtml("https://www.drvandui.com.br/", "Home", ["Physician", "MedicalBusiness"]))

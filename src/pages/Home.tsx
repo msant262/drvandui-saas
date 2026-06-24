@@ -33,6 +33,7 @@ import {
   Globe,
   Trophy,
   ShieldCheck,
+  MapPin,
 } from 'lucide-react';
 
 const stats = [
@@ -150,13 +151,49 @@ const healthyHabits = [
 
 const institutions = [
   {
-    name: 'Instituto Dante Pazzanese',
+    name: 'Universidade Federal do Triângulo Mineiro (UFTM)',
+    role: 'Graduação em Medicina',
+    period: 'Formação médica',
+    highlight: 'Base médica sólida para avaliação clínica, raciocínio diagnóstico e cuidado integral do paciente adulto.',
+    badge: 'Graduação',
+    stats: ['Medicina', 'Formação clínica'],
+    color: 'from-blue-500 to-indigo-600',
+  },
+  {
+    name: 'Hospital Ipiranga',
+    role: 'Residência em Clínica Médica',
+    period: 'Formação hospitalar',
+    highlight: 'Treinamento em clínica médica para condução de pacientes complexos, doenças crônicas e cuidado longitudinal.',
+    badge: 'Clínica Médica',
+    stats: ['Paciente adulto', 'Doenças crônicas'],
+    color: 'from-emerald-500 to-teal-600',
+  },
+  {
+    name: 'Instituto Dante Pazzanese de Cardiologia',
     role: 'Residência em Cardiologia',
     period: '2024 – 2026',
     highlight: 'Um dos maiores centros de cardiologia da América Latina, focado em alta complexidade e pesquisa de ponta.',
-    badge: 'Referência',
-    stats: ['+ de 350 leitos', '40.000+ cirurgias/ano'],
+    badge: 'Cardiologia',
+    stats: ['Alta complexidade', 'Prevenção cardiovascular'],
     color: 'from-rose-500 to-pink-600',
+  },
+];
+
+const credentialHighlights = [
+  {
+    icon: ShieldCheck,
+    title: 'Credenciais oficiais',
+    description: 'CRM-SP 210328 e RQE Cardiologia 146567 aparecem no site oficial, no rodapé, nas páginas locais e nos dados estruturados.',
+  },
+  {
+    icon: Stethoscope,
+    title: 'Experiência clínica integrada',
+    description: 'Atuação em Cardiologia, Clínica Médica, Prevenção Cardiovascular e acompanhamento de hipertensão, colesterol, arritmias e doenças crônicas.',
+  },
+  {
+    icon: MapPin,
+    title: 'Atendimento local consistente',
+    description: 'Consultas em Santos, Santo André e Vila Mariana, com páginas locais dedicadas, endereço, CTA e FAQ por região.',
   },
 ];
 
@@ -625,7 +662,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── FORMAÇÃO & PESQUISA ── */}
+      {/* ── FORMAÇÃO & EXPERIÊNCIA ── */}
       <section className="py-24" style={{ backgroundColor: 'var(--color-white-blue)' }}>
         <div className="section-padding">
           <div className="max-w-6xl mx-auto">
@@ -635,8 +672,11 @@ export function Home() {
                 Trajetória e Atualização
               </span>
               <h2 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
-                Formação e Ciência
+                Formação e Experiência
               </h2>
+              <p className="text-lg text-[#555] max-w-3xl mx-auto leading-relaxed">
+                Dr. Vandui da Silva dos Santos é Médico Cardiologista, CRM-SP 210328 e RQE Cardiologia 146567, com formação pela UFTM, Hospital Ipiranga e Instituto Dante Pazzanese de Cardiologia.
+              </p>
             </div>
 
             <div className="grid xl:grid-cols-2 gap-12">
@@ -645,7 +685,7 @@ export function Home() {
               <div>
                 <h3 className="text-2xl font-bold mb-8 flex items-center gap-3" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
                   <Building2 className="w-6 h-6 text-[var(--color-emerald)]" />
-                  Instituição
+                  Formação médica
                 </h3>
 
                 <div className="space-y-6">
@@ -674,32 +714,53 @@ export function Home() {
                 </div>
               </div>
 
-              {/* Atualização CIÊNCIA */}
+              {/* Experiência e credenciais */}
               <div>
                 <h3 className="text-2xl font-bold mb-8 flex items-center gap-3" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
-                  <TrendingUp className="w-6 h-6 text-[var(--color-emerald)]" />
-                  Atualidades Científicas
+                  <ShieldCheck className="w-6 h-6 text-[var(--color-emerald)]" />
+                  Credenciais e experiência clínica
                 </h3>
 
                 <div className="space-y-4">
-                  {research2025.map((r) => (
-                    <div key={r.title} className="bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex items-start gap-5">
+                  {credentialHighlights.map((item) => (
+                    <div key={item.title} className="bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex items-start gap-5">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-cyan-light)' }}>
-                        <r.icon className="w-6 h-6" style={{ color: 'var(--color-teal)' }} />
+                        <item.icon className="w-6 h-6" style={{ color: 'var(--color-teal)' }} />
                       </div>
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md ${r.tagColor}`}>{r.source}</span>
-                          <span className="text-xs text-[#888] font-bold">{r.year}</span>
-                        </div>
-                        <h4 className="text-[16px] font-bold text-[#222] mb-2" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>{r.title}</h4>
-                        <p className="text-[14px] text-[#555] leading-relaxed">{r.summary}</p>
+                        <h4 className="text-[16px] font-bold text-[#222] mb-2" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>{item.title}</h4>
+                        <p className="text-[14px] text-[#555] leading-relaxed">{item.description}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
+            </div>
+
+            <div className="mt-14">
+              <h3 className="text-2xl font-bold mb-8 flex items-center gap-3" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                <TrendingUp className="w-6 h-6 text-[var(--color-emerald)]" />
+                Atualização científica contínua
+              </h3>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                {research2025.map((r) => (
+                  <div key={r.title} className="bg-white p-6 rounded-[24px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow flex items-start gap-5">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-cyan-light)' }}>
+                      <r.icon className="w-6 h-6" style={{ color: 'var(--color-teal)' }} />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2 flex-wrap">
+                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md ${r.tagColor}`}>{r.source}</span>
+                        <span className="text-xs text-[#888] font-bold">{r.year}</span>
+                      </div>
+                      <h4 className="text-[16px] font-bold text-[#222] mb-2" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>{r.title}</h4>
+                      <p className="text-[14px] text-[#555] leading-relaxed">{r.summary}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
