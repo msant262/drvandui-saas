@@ -5,6 +5,7 @@ import { Navigation } from './sections/Navigation';
 import { Footer } from './sections/Footer';
 import { ScrollUpButton } from './components/ScrollUpButton';
 import { OnelivFloatingCTA } from './components/OnelivFloatingCTA';
+import { seoLandingPages } from './data/seoLandingPages';
 import './App.css';
 
 const Home = lazy(() => import('./pages/Home').then((module) => ({ default: module.Home })))
@@ -12,6 +13,9 @@ const Especialidades = lazy(() =>
   import('./pages/Especialidades').then((module) => ({ default: module.Especialidades }))
 )
 const Contato = lazy(() => import('./pages/Contato').then((module) => ({ default: module.Contato })))
+const SEOLandingPage = lazy(() =>
+  import('./pages/SEOLandingPage').then((module) => ({ default: module.SEOLandingPage }))
+)
 
 // Componente para fazer scroll ao topo quando a rota muda
 function ScrollToTop() {
@@ -39,6 +43,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/especialidades" element={<Especialidades />} />
             <Route path="/contato" element={<Contato />} />
+            {seoLandingPages.map((page) => (
+              <Route key={page.slug} path={`/${page.slug}`} element={<SEOLandingPage />} />
+            ))}
           </Routes>
         </Suspense>
         <Footer />

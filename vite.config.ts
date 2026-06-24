@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 import { createRequire } from "module"
 import { inspectAttr } from 'kimi-plugin-inspect-react'
+import { SITE_BASE_URL, seoLandingPages, type SeoLandingPage } from "./src/data/seoLandingPages"
 const require = createRequire(import.meta.url)
 const vitePrerender = require('vite-plugin-prerender')
 
@@ -17,7 +18,96 @@ const enableBrowserPrerender =
   process.env.CF_PAGES !== '1' &&
   (process.env.ENABLE_BROWSER_PRERENDER === '1' || process.platform === 'darwin' || Boolean(process.env.PUPPETEER_EXECUTABLE_PATH))
 
-const staticRouteFallbacks = [
+type StaticRouteFallback = {
+  route: string
+  title: string
+  description: string
+  keywords: string
+  canonical: string
+  schemas: Array<Record<string, unknown>>
+}
+
+function buildLandingPageSchemas(page: SeoLandingPage) {
+  const url = `${SITE_BASE_URL}/${page.slug}`
+  const schemas: Array<Record<string, unknown>> = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Início', item: `${SITE_BASE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: page.h1, item: url },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Physician',
+      name: 'Dr. Vandui da Silva dos Santos',
+      url,
+      image: `${SITE_BASE_URL}/hero-doctor.jpg`,
+      telephone: '+55-11-97617-0971',
+      email: 'contato@drvandui.com.br',
+      medicalSpecialty: ['Cardiovascular', 'InternalMedicine'],
+      areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
+      sameAs: [
+        'https://instagram.com/vanduisantos.cardio',
+        'https://www.linkedin.com/in/vandui-santos-181225137/',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: page.faqs.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+  ]
+
+  if (page.location) {
+    schemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'MedicalBusiness',
+      name: `${page.h1} — Dr. Vandui`,
+      url,
+      telephone: '+55-11-97617-0971',
+      priceRange: '$$',
+      medicalSpecialty: 'Cardiovascular',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: page.location.address,
+        addressLocality: page.location.name === 'Vila Mariana' ? 'São Paulo' : page.location.name,
+        addressRegion: 'SP',
+        addressCountry: 'BR',
+      },
+    })
+  }
+
+  if (page.kind === 'service') {
+    schemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: page.h1,
+      description: page.description,
+      author: {
+        '@type': 'Person',
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Dr. Vandui — Cardiologista',
+      },
+      mainEntityOfPage: url,
+    })
+  }
+
+  return schemas
+}
+
+const baseStaticRouteFallbacks: StaticRouteFallback[] = [
   {
     route: 'especialidades',
     title: 'Especialidades — Cardiologia e Clínica Médica em Santos, Santo André e Vila Mariana',
@@ -72,11 +162,30 @@ const staticRouteFallbacks = [
   },
 ]
 
+const seoStaticRouteFallbacks: StaticRouteFallback[] = seoLandingPages.map((page) => ({
+  route: page.slug,
+  title: page.title,
+  description: page.description,
+  keywords: page.keywords,
+  canonical: `${SITE_BASE_URL}/${page.slug}`,
+  schemas: buildLandingPageSchemas(page),
+}))
+
+const staticRouteFallbacks = [...baseStaticRouteFallbacks, ...seoStaticRouteFallbacks]
+const browserPrerenderRoutes = [
+  '/',
+  '/especialidades',
+  '/especialidades/',
+  '/contato',
+  '/contato/',
+  ...seoLandingPages.flatMap((page) => [`/${page.slug}`, `/${page.slug}/`]),
+]
+
 function replaceHeadTag(html: string, pattern: RegExp, replacement: string) {
   return pattern.test(html) ? html.replace(pattern, replacement) : html.replace('</head>', `${replacement}\n</head>`)
 }
 
-function applyRouteHead(html: string, route: (typeof staticRouteFallbacks)[number]) {
+function applyRouteHead(html: string, route: StaticRouteFallback) {
   const schemaMarkup = route.schemas
     .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema)}</script>`)
     .join('\n')
@@ -158,7 +267,7 @@ function staticRouteFallbackPlugin() {
 const browserPrerenderPlugin = enableBrowserPrerender
   ? vitePrerender({
       staticDir: path.resolve(__dirname, 'dist'),
-      routes: ['/', '/especialidades', '/especialidades/', '/contato', '/contato/'],
+      routes: browserPrerenderRoutes,
       renderer: new Renderer({
         renderAfterDocumentEvent: 'dr-vandui-prerender-ready',
         skipThirdPartyRequests: true,

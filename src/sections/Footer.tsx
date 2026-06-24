@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { HeartPulse, MapPin, Phone, Mail, Linkedin, MessageCircle, Instagram } from 'lucide-react';
+import { seoLandingPages } from '@/data/seoLandingPages';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const localPages = seoLandingPages.filter((page) => page.kind === 'local');
+  const servicePages = seoLandingPages.filter((page) => page.kind === 'service').slice(0, 6);
 
   return (
     <footer style={{ backgroundColor: 'var(--color-teal)' }} className="text-white">
@@ -100,6 +103,44 @@ export function Footer() {
             </span>
 
           </div>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="section-padding grid gap-5 py-5 md:grid-cols-2">
+          <nav aria-label="Paginas locais">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
+              Atendimento local
+            </p>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              {localPages.map((page) => (
+                <Link
+                  key={page.slug}
+                  to={`/${page.slug}`}
+                  className="text-xs font-medium text-white/80 transition-colors hover:text-white"
+                >
+                  {page.h1}
+                </Link>
+              ))}
+            </div>
+          </nav>
+
+          <nav aria-label="Servicos cardiologicos">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
+              Servicos e sintomas
+            </p>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              {servicePages.map((page) => (
+                <Link
+                  key={page.slug}
+                  to={`/${page.slug}`}
+                  className="text-xs font-medium text-white/80 transition-colors hover:text-white"
+                >
+                  {page.h1}
+                </Link>
+              ))}
+            </div>
+          </nav>
         </div>
       </div>
 

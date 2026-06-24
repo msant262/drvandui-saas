@@ -11,6 +11,7 @@ import {
   wildcardIndexationEnabled,
   hasJsonLdType,
   runSeoChecks,
+  SEO_ROUTES,
 } from "./seo-technical-audit.mjs"
 
 const root = process.cwd()
@@ -21,8 +22,9 @@ function createFixture({ blockAll = false } = {}) {
   const distDir = path.join(root, "dist")
   const assetsDir = path.join(distDir, "assets")
   mkdirSync(assetsDir, { recursive: true })
-  mkdirSync(path.join(distDir, "especialidades"), { recursive: true })
-  mkdirSync(path.join(distDir, "contato"), { recursive: true })
+  SEO_ROUTES.filter(({ route }) => route !== "/").forEach(({ route }) => {
+    mkdirSync(path.join(distDir, route.slice(1)), { recursive: true })
+  })
   mkdirSync(path.join(root, "public"), { recursive: true })
 
   const robots = blockAll
@@ -32,7 +34,9 @@ function createFixture({ blockAll = false } = {}) {
   writeFileSync(path.join(root, "public/robots.txt"), robots)
   writeFileSync(
     path.join(root, "public/sitemap.xml"),
-    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n  <url><loc>https://www.drvandui.com.br/</loc></url>\n  <url><loc>https://www.drvandui.com.br/especialidades</loc></url>\n  <url><loc>https://www.drvandui.com.br/contato</loc></url>\n</urlset>",
+    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n" +
+      SEO_ROUTES.map(({ canonical }) => `  <url><loc>${canonical}</loc></url>`).join("\n") +
+      "\n</urlset>",
   )
   writeFileSync(
     path.join(root, "public/_headers"),
@@ -46,7 +50,15 @@ function createFixture({ blockAll = false } = {}) {
       "Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-src https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests\n" +
       "X-Robots-Tag: all\n\n/assets/*\nCache-Control: public, max-age=31536000, immutable\n\n/404.html\nX-Robots-Tag: noindex, nofollow",
   )
-  writeFileSync(path.join(root, "public/_redirects"), "/especialidades /especialidades/index.html 200\n/contato /contato/index.html 200")
+  writeFileSync(
+    path.join(root, "public/_redirects"),
+    "https://drvandui.com.br/* https://www.drvandui.com.br/:splat 301\n" +
+      "http://drvandui.com.br/* https://www.drvandui.com.br/:splat 301\n" +
+      "http://www.drvandui.com.br/* https://www.drvandui.com.br/:splat 301\n" +
+      SEO_ROUTES.filter(({ route }) => route !== "/")
+        .map(({ route }) => `${route} ${route}/index.html 200`)
+        .join("\n"),
+  )
   writeFileSync(
     path.join(root, "public/llms.txt"),
     "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n",
@@ -54,7 +66,10 @@ function createFixture({ blockAll = false } = {}) {
 
   writeFileSync(
     path.join(root, "vite.config.ts"),
-    "import { defineConfig } from 'vite'\\n" +
+      "import { defineConfig } from 'vite'\\n" +
+      "const seoLandingPages = []\\n" +
+      "const staticRouteFallbacks = []\\n" +
+      "const browserPrerenderRoutes = []\\n" +
       "export default defineConfig({\\n" +
       "  plugins: [\\n" +
       "    {\\n" +
@@ -78,14 +93,18 @@ function createFixture({ blockAll = false } = {}) {
   }
 
   writeFileSync(path.join(distDir, "index.html"), baseHtml("https://www.drvandui.com.br/", "Home", ["Physician", "MedicalBusiness"]))
-  writeFileSync(
-    path.join(distDir, "especialidades/index.html"),
-    baseHtml("https://www.drvandui.com.br/especialidades", "Especialidades", "BreadcrumbList"),
-  )
-  writeFileSync(
-    path.join(distDir, "contato/index.html"),
-    baseHtml("https://www.drvandui.com.br/contato", "Contato", ["FAQPage", "BreadcrumbList"]),
-  )
+  SEO_ROUTES.filter(({ route }) => route !== "/").forEach(({ route, file, canonical }) => {
+    const schemaTypes =
+      route === "/especialidades"
+        ? ["BreadcrumbList"]
+        : route === "/contato"
+          ? ["FAQPage", "BreadcrumbList"]
+          : route.startsWith("/cardiologista-")
+            ? ["Physician", "BreadcrumbList", "FAQPage", "MedicalBusiness"]
+            : ["Physician", "BreadcrumbList", "FAQPage", "Article"]
+
+    writeFileSync(path.join(root, file), baseHtml(canonical, route.slice(1), schemaTypes))
+  })
   writeFileSync(
     path.join(assetsDir, "app.js"),
     "window.dispatchEvent(new Event('dr-vandui-prerender-ready'));\n/* dr-vandui-prerender-ready */",

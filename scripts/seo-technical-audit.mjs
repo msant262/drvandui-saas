@@ -5,10 +5,33 @@ import { fileURLToPath } from "node:url"
 
 const DEFAULT_ROOT = process.cwd()
 const APP_BASE_URL = "https://www.drvandui.com.br"
-const SEO_ROUTES = [
+const SEO_LOCAL_PATHS = [
+  "/cardiologista-em-santos",
+  "/cardiologista-em-santo-andre",
+  "/cardiologista-vila-mariana",
+]
+const SEO_SERVICE_PATHS = [
+  "/consulta-com-cardiologista",
+  "/check-up-cardiologico",
+  "/risco-cirurgico-cardiologico",
+  "/tratamento-hipertensao",
+  "/palpitacoes-arritmia",
+  "/dor-no-peito-quando-procurar-cardiologista",
+  "/colesterol-alto-cardiologista",
+  "/prevencao-cardiovascular",
+  "/clinica-medica",
+]
+const SEO_LANDING_PATHS = [...SEO_LOCAL_PATHS, ...SEO_SERVICE_PATHS]
+
+export const SEO_ROUTES = [
   { route: "/", file: "dist/index.html", canonical: `${APP_BASE_URL}/` },
   { route: "/especialidades", file: "dist/especialidades/index.html", canonical: `${APP_BASE_URL}/especialidades` },
   { route: "/contato", file: "dist/contato/index.html", canonical: `${APP_BASE_URL}/contato` },
+  ...SEO_LANDING_PATHS.map((route) => ({
+    route,
+    file: `dist/${route.slice(1)}/index.html`,
+    canonical: `${APP_BASE_URL}${route}`,
+  })),
 ]
 
 export function readTextFile(filePath) {
@@ -157,6 +180,10 @@ function assertInSitemap(locs, url, errors, messagePrefix) {
   fail(errors, `${messagePrefix}: ${url}`, locs.includes(url))
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+}
+
 function checkJsAssets(projectRoot, maxBytes = 500 * 1024) {
   const assetsDir = path.resolve(projectRoot, "dist/assets")
   if (!existsSync(assetsDir)) {
@@ -207,14 +234,10 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   const sitemap = read(root, "public/sitemap.xml")
   if (sitemap) {
     const locs = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1].trim())
-    const expectedUrls = [
-      `${APP_BASE_URL}/`,
-      `${APP_BASE_URL}/especialidades`,
-      `${APP_BASE_URL}/contato`,
-    ]
+    const expectedUrls = SEO_ROUTES.map((route) => route.canonical)
 
     fail(errors, "sitemap.xml contém estrutura <urlset>", /<urlset[\s\S]*?>/m.test(sitemap))
-    fail(errors, "sitemap.xml inclui pelo menos 3 URLs", locs.length >= expectedUrls.length)
+    fail(errors, `sitemap.xml inclui pelo menos ${expectedUrls.length} URLs`, locs.length >= expectedUrls.length)
     expectedUrls.forEach((url) => assertInSitemap(locs, url, errors, "sitemap.xml contém URL esperada"))
   }
 
@@ -248,17 +271,31 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
 
   const redirects = read(root, "public/_redirects")
   if (redirects) {
-    fail(errors, "_redirects cobre rota /especialidades", /\/especialidades\s+\/especialidades\/index\.html\s+200/i.test(redirects))
-    fail(errors, "_redirects cobre rota /contato", /\/contato\s+\/contato\/index\.html\s+200/i.test(redirects))
-    fail(errors, "_redirects mantém rotas públicas principais", redirects.includes("/contato") && redirects.includes("/especialidades"))
+    fail(
+      errors,
+      "_redirects força canonical www para apex HTTPS",
+      /https:\/\/drvandui\.com\.br\/\*\s+https:\/\/www\.drvandui\.com\.br\/:splat\s+301/i.test(redirects)
+    )
+    fail(
+      errors,
+      "_redirects força HTTPS para www",
+      /http:\/\/www\.drvandui\.com\.br\/\*\s+https:\/\/www\.drvandui\.com\.br\/:splat\s+301/i.test(redirects)
+    )
+    SEO_ROUTES.filter(({ route }) => route !== "/").forEach(({ route }) => {
+      const slug = route.slice(1)
+      const routeRegex = new RegExp(`${escapeRegExp(route)}\\s+/${escapeRegExp(slug)}/index\\.html\\s+200`, "i")
+      fail(errors, `_redirects cobre rota ${route}`, routeRegex.test(redirects))
+    })
   }
 
   const viteConfig = read(root, "vite.config.ts")
   if (viteConfig) {
     fail(
       errors,
-      "vite.config.ts possui prerender das rotas críticas",
-      /routes:\s*\[[\s\S]*'\/',?([\s\S]*'\/especialidades'[\s\S]*'\/contato')/m.test(viteConfig)
+      "vite.config.ts possui fallback estático das rotas SEO",
+      viteConfig.includes("seoLandingPages") &&
+        viteConfig.includes("staticRouteFallbacks") &&
+        viteConfig.includes("browserPrerenderRoutes")
     )
   }
 
@@ -291,9 +328,29 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "Contato (build) inclui JSON-LD BreadcrumbList", hasJsonLdType(contatoHtml, "BreadcrumbList"))
   }
 
-  fail(errors, "Build gerou dist/index.html", existsSync(path.resolve(root, "dist/index.html")))
-  fail(errors, "Build gerou dist/contato/index.html", existsSync(path.resolve(root, "dist/contato/index.html")))
-  fail(errors, "Build gerou dist/especialidades/index.html", existsSync(path.resolve(root, "dist/especialidades/index.html")))
+  for (const { route, file } of SEO_ROUTES) {
+    fail(errors, `Build gerou ${file} para ${route}`, existsSync(path.resolve(root, file)))
+  }
+
+  for (const route of SEO_LANDING_PATHS) {
+    const file = `dist/${route.slice(1)}/index.html`
+    const html = read(root, file)
+    if (!html) {
+      continue
+    }
+
+    fail(errors, `${route}: inclui JSON-LD Physician`, hasJsonLdType(html, "Physician"))
+    fail(errors, `${route}: inclui JSON-LD BreadcrumbList`, hasJsonLdType(html, "BreadcrumbList"))
+    fail(errors, `${route}: inclui JSON-LD FAQPage`, hasJsonLdType(html, "FAQPage"))
+
+    if (SEO_LOCAL_PATHS.includes(route)) {
+      fail(errors, `${route}: inclui JSON-LD MedicalBusiness`, hasJsonLdType(html, "MedicalBusiness"))
+    }
+
+    if (SEO_SERVICE_PATHS.includes(route)) {
+      fail(errors, `${route}: inclui JSON-LD Article`, hasJsonLdType(html, "Article"))
+    }
+  }
 
   const jsAssetInfo = checkJsAssets(root)
   fail(errors, `Nenhum asset JS de build acima de 500KB no bundle (atual: ${jsAssetInfo?.heavy?.length ?? 0})`, jsAssetInfo && jsAssetInfo.heavy.length === 0)

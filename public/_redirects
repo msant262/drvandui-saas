@@ -1,3 +1,20 @@
+# Canonical domain
+https://drvandui.com.br/* https://www.drvandui.com.br/:splat 301
+http://drvandui.com.br/* https://www.drvandui.com.br/:splat 301
+http://www.drvandui.com.br/* https://www.drvandui.com.br/:splat 301
+
 # Serve prerendered HTML directly (SSG path)
 /especialidades /especialidades/index.html 200
 /contato /contato/index.html 200
+/cardiologista-em-santos /cardiologista-em-santos/index.html 200
+/cardiologista-em-santo-andre /cardiologista-em-santo-andre/index.html 200
+/cardiologista-vila-mariana /cardiologista-vila-mariana/index.html 200
+/consulta-com-cardiologista /consulta-com-cardiologista/index.html 200
+/check-up-cardiologico /check-up-cardiologico/index.html 200
+/risco-cirurgico-cardiologico /risco-cirurgico-cardiologico/index.html 200
+/tratamento-hipertensao /tratamento-hipertensao/index.html 200
+/palpitacoes-arritmia /palpitacoes-arritmia/index.html 200
+/dor-no-peito-quando-procurar-cardiologista /dor-no-peito-quando-procurar-cardiologista/index.html 200
+/colesterol-alto-cardiologista /colesterol-alto-cardiologista/index.html 200
+/prevencao-cardiovascular /prevencao-cardiovascular/index.html 200
+/clinica-medica /clinica-medica/index.html 200
