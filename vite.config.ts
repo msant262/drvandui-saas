@@ -1,4 +1,5 @@
 import path from "path"
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 import { createRequire } from "module"
@@ -11,14 +12,151 @@ const enableInspectAttrs = process.env.NODE_ENV !== 'production'
 const puppeteerExecutablePath =
   process.env.PUPPETEER_EXECUTABLE_PATH ??
   (process.platform === 'darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : undefined)
+const enableBrowserPrerender =
+  process.env.SKIP_BROWSER_PRERENDER !== '1' &&
+  process.env.CF_PAGES !== '1' &&
+  (process.env.ENABLE_BROWSER_PRERENDER === '1' || process.platform === 'darwin' || Boolean(process.env.PUPPETEER_EXECUTABLE_PATH))
 
-// https://vite.dev/config/
-export default defineConfig({
-  base: '/',
-  plugins: [
-    enableInspectAttrs && inspectAttr(),
-    react(),
-      vitePrerender({
+const staticRouteFallbacks = [
+  {
+    route: 'especialidades',
+    title: 'Especialidades — Cardiologia e Clínica Médica em Santos, Santo André e Vila Mariana',
+    description:
+      'Cardiologia, Prevenção Cardiovascular, Clínica Médica e manejo de Doenças Crônicas com Dr. Vandui. Atendimento em Santos, Santo André e Vila Mariana.',
+    keywords:
+      'cardiologia santos, cardiologia santo andré, cardiologia vila mariana, prevenção cardiovascular, clínica médica, doenças crônicas, hipertensão, holter, MAPA, ecocardiograma',
+    canonical: 'https://www.drvandui.com.br/especialidades',
+    schemas: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
+          { '@type': 'ListItem', position: 2, name: 'Especialidades', item: 'https://www.drvandui.com.br/especialidades' },
+        ],
+      },
+    ],
+  },
+  {
+    route: 'contato',
+    title: 'Contato — Cardiologista em Santos, Santo André e Vila Mariana',
+    description:
+      'Agende sua consulta com o Dr. Vandui — Cardiologia, Prevenção Cardiovascular e Clínica Médica em Santos, Santo André e Vila Mariana. WhatsApp e agendamento online.',
+    keywords:
+      'agendar consulta cardiologista, cardiologista santos, cardiologista santo andré, cardiologista vila mariana, contato Dr. Vandui',
+    canonical: 'https://www.drvandui.com.br/contato',
+    schemas: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'Como posso agendar uma consulta?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'A unidade de Santo André tem agendamento online pela plataforma Oneliv. Para Santos e Vila Mariana, fale pelo WhatsApp (11) 9 7617-0971.',
+            },
+          },
+        ],
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://www.drvandui.com.br/' },
+          { '@type': 'ListItem', position: 2, name: 'Contato', item: 'https://www.drvandui.com.br/contato' },
+        ],
+      },
+    ],
+  },
+]
+
+function replaceHeadTag(html: string, pattern: RegExp, replacement: string) {
+  return pattern.test(html) ? html.replace(pattern, replacement) : html.replace('</head>', `${replacement}\n</head>`)
+}
+
+function applyRouteHead(html: string, route: (typeof staticRouteFallbacks)[number]) {
+  const schemaMarkup = route.schemas
+    .map((schema) => `<script type="application/ld+json">${JSON.stringify(schema)}</script>`)
+    .join('\n')
+
+  let updated = html
+  updated = replaceHeadTag(updated, /<title>[\s\S]*?<\/title>/i, `<title>${route.title}</title>`)
+  updated = replaceHeadTag(
+    updated,
+    /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i,
+    `<meta name="description" content="${route.description}" />`,
+  )
+  updated = replaceHeadTag(
+    updated,
+    /<meta\s+name="keywords"\s+content="[^"]*"\s*\/?>/i,
+    `<meta name="keywords" content="${route.keywords}" />`,
+  )
+  updated = replaceHeadTag(
+    updated,
+    /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
+    `<link rel="canonical" href="${route.canonical}" />`,
+  )
+  updated = replaceHeadTag(
+    updated,
+    /<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/i,
+    `<meta property="og:url" content="${route.canonical}" />`,
+  )
+  updated = replaceHeadTag(
+    updated,
+    /<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/i,
+    `<meta property="og:title" content="${route.title}" />`,
+  )
+  updated = replaceHeadTag(
+    updated,
+    /<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/i,
+    `<meta property="og:description" content="${route.description}" />`,
+  )
+  updated = replaceHeadTag(
+    updated,
+    /<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/i,
+    `<meta name="twitter:title" content="${route.title}" />`,
+  )
+  updated = replaceHeadTag(
+    updated,
+    /<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/i,
+    `<meta name="twitter:description" content="${route.description}" />`,
+  )
+
+  return updated.replace('</head>', `${schemaMarkup}\n</head>`)
+}
+
+function staticRouteFallbackPlugin() {
+  return {
+    name: 'static-route-fallbacks',
+    closeBundle() {
+      const distDir = path.resolve(__dirname, 'dist')
+      const indexPath = path.join(distDir, 'index.html')
+
+      if (!existsSync(indexPath)) {
+        return
+      }
+
+      const indexHtml = readFileSync(indexPath, 'utf8')
+
+      for (const route of staticRouteFallbacks) {
+        const outputDir = path.join(distDir, route.route)
+        const outputPath = path.join(outputDir, 'index.html')
+
+        if (existsSync(outputPath)) {
+          continue
+        }
+
+        mkdirSync(outputDir, { recursive: true })
+        writeFileSync(outputPath, applyRouteHead(indexHtml, route))
+      }
+    },
+  }
+}
+
+const browserPrerenderPlugin = enableBrowserPrerender
+  ? vitePrerender({
       staticDir: path.resolve(__dirname, 'dist'),
       routes: ['/', '/especialidades', '/especialidades/', '/contato', '/contato/'],
       renderer: new Renderer({
@@ -33,7 +171,17 @@ export default defineConfig({
         keepClosingSlash: true,
         sortAttributes: true,
       },
-    }),
+    })
+  : null
+
+// https://vite.dev/config/
+export default defineConfig({
+  base: '/',
+  plugins: [
+    enableInspectAttrs && inspectAttr(),
+    react(),
+    browserPrerenderPlugin,
+    staticRouteFallbackPlugin(),
   ],
   resolve: {
     alias: {
