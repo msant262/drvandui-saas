@@ -15,6 +15,20 @@ import {
 } from "./seo-technical-audit.mjs"
 
 const root = process.cwd()
+const canonicalWorkerSource =
+  'const ROOT_HOST = "drvandui.com.br"\n' +
+  'const CANONICAL_HOST = "www.drvandui.com.br"\n\n' +
+  "export default {\n" +
+  "  async fetch(request, env) {\n" +
+  "    const url = new URL(request.url)\n\n" +
+  "    if (url.hostname === ROOT_HOST) {\n" +
+  "      url.hostname = CANONICAL_HOST\n" +
+  '      url.protocol = "https:"\n' +
+  "      return Response.redirect(url.toString(), 301)\n" +
+  "    }\n\n" +
+  "    return env.ASSETS.fetch(request)\n" +
+  "  },\n" +
+  "}\n"
 
 function createFixture({ blockAll = false } = {}) {
   const root = mkdtempSync(path.join(tmpdir(), "seo-audit-fixture-"))
@@ -66,6 +80,7 @@ function createFixture({ blockAll = false } = {}) {
         .map(({ route }) => `${route} ${route}/index.html 200`)
         .join("\n"),
   )
+  writeFileSync(path.join(root, "public/_worker.js"), canonicalWorkerSource)
   writeFileSync(
     path.join(root, "public/llms.txt"),
     "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n",
@@ -120,6 +135,7 @@ function createFixture({ blockAll = false } = {}) {
     path.join(assetsDir, "app.js"),
     "window.dispatchEvent(new Event('dr-vandui-prerender-ready'));\n/* dr-vandui-prerender-ready */",
   )
+  writeFileSync(path.join(distDir, "_worker.js"), canonicalWorkerSource)
 
   return root
 }

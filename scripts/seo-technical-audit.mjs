@@ -307,6 +307,15 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     })
   }
 
+  const worker = read(root, "public/_worker.js")
+  fail(errors, "_worker.js existe para canonicalizacao de host no Cloudflare Pages", Boolean(worker))
+  if (worker) {
+    fail(errors, "_worker.js reconhece host raiz drvandui.com.br", /ROOT_HOST\s*=\s*["']drvandui\.com\.br["']/i.test(worker))
+    fail(errors, "_worker.js define host canonico www.drvandui.com.br", /CANONICAL_HOST\s*=\s*["']www\.drvandui\.com\.br["']/i.test(worker))
+    fail(errors, "_worker.js emite redirect 301 para host canonico", /Response\.redirect\([\s\S]*,\s*301\)/i.test(worker))
+    fail(errors, "_worker.js preserva entrega de assets pelo Cloudflare", /env\.ASSETS\.fetch\(request\)/i.test(worker))
+  }
+
   const viteConfig = read(root, "vite.config.ts")
   if (viteConfig) {
     fail(
@@ -375,6 +384,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   for (const { route, file } of SEO_ROUTES) {
     fail(errors, `Build gerou ${file} para ${route}`, existsSync(path.resolve(root, file)))
   }
+  fail(errors, "Build gerou dist/_worker.js para redirect canonico de host", existsSync(path.resolve(root, "dist/_worker.js")))
 
   for (const route of SEO_LANDING_PATHS) {
     const file = `dist/${route.slice(1)}/index.html`
