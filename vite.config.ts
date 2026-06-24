@@ -8,6 +8,9 @@ const vitePrerender = require('vite-plugin-prerender')
 
 const Renderer = vitePrerender.PuppeteerRenderer
 const enableInspectAttrs = process.env.NODE_ENV !== 'production'
+const puppeteerExecutablePath =
+  process.env.PUPPETEER_EXECUTABLE_PATH ??
+  (process.platform === 'darwin' ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' : undefined)
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -21,7 +24,7 @@ export default defineConfig({
       renderer: new Renderer({
         renderAfterDocumentEvent: 'dr-vandui-prerender-ready',
         skipThirdPartyRequests: true,
-        executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+        ...(puppeteerExecutablePath ? { executablePath: puppeteerExecutablePath } : {}),
       }),
       minify: {
         collapseBooleanAttributes: true,
