@@ -588,7 +588,7 @@ export function Home() {
                       <habit.icon className="w-7 h-7 text-[var(--color-emerald)]" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-[var(--color-teal)] text-lg mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>{habit.title}</h4>
+                      <h3 className="font-bold text-[var(--color-teal)] text-lg mb-1" style={{ fontFamily: 'Poppins, sans-serif' }}>{habit.title}</h3>
                       <p className="text-[#555] text-[15px] leading-relaxed">{habit.description}</p>
                     </div>
                   </div>
@@ -602,6 +602,9 @@ export function Home() {
                   src="/photos/habitos-cardiologia.jpg"
                   alt="Hábitos saudáveis para a saúde cardiovascular — alimentação, exercício e sono"
                   loading="lazy"
+                  decoding="async"
+                  width={669}
+                  height={1000}
                   className="w-full rounded-[28px] object-cover aspect-[4/5] opacity-90 hover:opacity-100 transition-opacity"
                 />
                 <div className="absolute top-8 -left-8 bg-white py-4 px-6 rounded-2xl shadow-xl flex items-center gap-4 border border-gray-100">
@@ -726,6 +729,10 @@ export function Home() {
                 <img
                   src="/formal.jpg"
                   alt="Dr. Vandui — Cardiologista formado pelo Instituto Dante Pazzanese de Cardiologia"
+                  loading="lazy"
+                  decoding="async"
+                  width={707}
+                  height={1061}
                   className="relative w-full rounded-[2rem] shadow-xl object-cover aspect-[4/5]"
                 />
                 {/* Badge 10+ no canto inferior direito */}
@@ -759,9 +766,9 @@ export function Home() {
                         <diff.icon className="w-5 h-5" style={{ color: 'var(--color-teal)' }} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-[15px] mb-0.5" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                        <h3 className="font-bold text-[15px] mb-0.5" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
                           {diff.title}
-                        </h4>
+                        </h3>
                         <p className="text-[#666] text-sm leading-relaxed">{diff.description}</p>
                       </div>
                     </div>

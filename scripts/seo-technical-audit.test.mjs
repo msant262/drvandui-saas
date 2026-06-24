@@ -43,10 +43,14 @@ function createFixture({ blockAll = false } = {}) {
       "Permissions-Policy: camera=(), microphone=(), geolocation=()\n" +
       "Cross-Origin-Opener-Policy: same-origin\n" +
       "Cross-Origin-Resource-Policy: same-origin\n" +
-      "Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-src https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests\n" +
+      "Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-src https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests\n" +
       "X-Robots-Tag: all\n\n/assets/*\nCache-Control: public, max-age=31536000, immutable\n\n/404.html\nX-Robots-Tag: noindex, nofollow",
   )
   writeFileSync(path.join(root, "public/_redirects"), "/especialidades /especialidades/index.html 200\n/contato /contato/index.html 200")
+  writeFileSync(
+    path.join(root, "public/llms.txt"),
+    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n",
+  )
 
   writeFileSync(
     path.join(root, "vite.config.ts"),

@@ -218,6 +218,12 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     expectedUrls.forEach((url) => assertInSitemap(locs, url, errors, "sitemap.xml contém URL esperada"))
   }
 
+  const llms = read(root, "public/llms.txt")
+  if (llms) {
+    fail(errors, "llms.txt possui H1 obrigatório", /^#\s+\S+/m.test(llms))
+    fail(errors, "llms.txt contém links Markdown", /\[[^\]]+\]\(https:\/\/[^)]+\)/m.test(llms))
+  }
+
   const headers = read(root, "public/_headers")
   if (headers) {
     const requiredHeaders = [

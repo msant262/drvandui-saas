@@ -40,6 +40,7 @@ export function Navigation() {
             {/* Logo */}
               <Link
                 to="/"
+                aria-label="Página inicial do Dr. Vandui, Cardiologia e Clínica Médica"
                 className="flex items-center gap-3 group"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -53,13 +54,13 @@ export function Navigation() {
                 />
               </div>
               <div className="hidden sm:block">
-                <h1
+                <span
                   className={`font-bold text-lg leading-tight transition-colors ${useScrolledStyle ? 'text-[var(--color-teal)]' : 'text-white'
                     }`}
                   style={{ fontFamily: 'Poppins, sans-serif' }}
                 >
                   Dr. Vandui
-                </h1>
+                </span>
                 <p
                   className={`text-xs transition-colors ${useScrolledStyle ? 'text-[var(--color-emerald)]' : 'text-white/80'
                     }`}
@@ -158,6 +159,7 @@ export function Navigation() {
                 <span className="font-semibold text-[var(--color-teal)]">Menu</span>
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
+                  aria-label="Fechar menu"
                   className="p-2 rounded-lg hover:bg-gray-100 text-[var(--color-teal)]"
                 >
                   <X className="w-5 h-5" />
