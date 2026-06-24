@@ -261,10 +261,12 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   const sitemap = read(root, "public/sitemap.xml")
   if (sitemap) {
     const locs = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1].trim())
+    const urlEntries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => match[1])
     const expectedUrls = SEO_ROUTES.map((route) => route.canonical)
 
     fail(errors, "sitemap.xml contém estrutura <urlset>", /<urlset[\s\S]*?>/m.test(sitemap))
     fail(errors, `sitemap.xml inclui pelo menos ${expectedUrls.length} URLs`, locs.length >= expectedUrls.length)
+    fail(errors, "sitemap.xml informa lastmod em todas as URLs", urlEntries.length > 0 && urlEntries.every((entry) => /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/i.test(entry)))
     expectedUrls.forEach((url) => assertInSitemap(locs, url, errors, "sitemap.xml contém URL esperada"))
     NON_CANONICAL_PATHS.forEach((route) => {
       fail(errors, `sitemap.xml não inclui alias não-canônico ${route}`, !locs.includes(`${APP_BASE_URL}${route}`))
