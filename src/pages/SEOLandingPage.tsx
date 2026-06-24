@@ -60,9 +60,38 @@ function buildSchemas(page: SeoLandingPage) {
         value: '146567',
       },
     ],
+    hasCredential: [
+      {
+        '@type': 'EducationalOccupationalCredential',
+        name: 'CRM-SP 210328',
+        credentialCategory: 'Registro profissional médico',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'Conselho Regional de Medicina do Estado de São Paulo',
+        },
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        name: 'RQE Cardiologia 146567',
+        credentialCategory: 'Registro de Qualificação de Especialista em Cardiologia',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'Conselho Regional de Medicina do Estado de São Paulo',
+        },
+      },
+    ],
     telephone: '+55-11-97617-0971',
     email: 'contato@drvandui.com.br',
     medicalSpecialty: ['Cardiology', 'InternalMedicine'],
+    knowsAbout: [
+      'Cardiologia',
+      'Prevenção cardiovascular',
+      'Clínica médica',
+      'Hipertensão arterial',
+      'Arritmias e palpitações',
+      'Check-up cardiológico',
+      'Risco cirúrgico cardiológico',
+    ],
     areaServed: ['Santos, SP', 'Santo André, SP', 'Vila Mariana, São Paulo, SP'],
     alumniOf: [
       {
