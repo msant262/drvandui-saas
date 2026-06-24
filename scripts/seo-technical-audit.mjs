@@ -355,6 +355,10 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "src/worker.js reconhece host raiz drvandui.com.br", /ROOT_HOST\s*=\s*["']drvandui\.com\.br["']/i.test(worker))
     fail(errors, "src/worker.js define host canonico www.drvandui.com.br", /CANONICAL_HOST\s*=\s*["']www\.drvandui\.com\.br["']/i.test(worker))
     fail(errors, "src/worker.js emite redirect 301 para host canonico", /Response\.redirect\([\s\S]*,\s*301\)/i.test(worker))
+    fail(errors, "src/worker.js canonicaliza /eventos antes dos assets", /pathname\s*===\s*["']\/eventos["'][\s\S]*startsWith\(["']\/eventos\/["']\)/i.test(worker))
+    fail(errors, "src/worker.js canonicaliza alias /pressao-alta", /["']\/pressao-alta["']\s*,\s*["']\/tratamento-hipertensao["']/i.test(worker))
+    fail(errors, "src/worker.js canonicaliza alias /dor-no-peito", /["']\/dor-no-peito["']\s*,\s*["']\/dor-no-peito-quando-procurar-ajuda["']/i.test(worker))
+    fail(errors, "src/worker.js remove query string de URLs canonicas antigas", /url\.search\s*=\s*["']["']/i.test(worker))
     fail(errors, "src/worker.js preserva entrega de assets pelo Cloudflare", /env\.ASSETS\.fetch\(request\)/i.test(worker))
   }
 

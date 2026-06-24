@@ -18,13 +18,26 @@ const root = process.cwd()
 const canonicalWorkerSource =
   'const ROOT_HOST = "drvandui.com.br"\n' +
   'const CANONICAL_HOST = "www.drvandui.com.br"\n\n' +
+  'const CANONICAL_PATH_REDIRECTS = new Map([["/pressao-alta", "/tratamento-hipertensao"], ["/dor-no-peito", "/dor-no-peito-quando-procurar-ajuda"]])\n\n' +
+  "function redirectToCanonical(url, pathname) {\n" +
+  "  url.hostname = CANONICAL_HOST\n" +
+  '  url.protocol = "https:"\n' +
+  "  url.pathname = pathname\n" +
+  '  url.search = ""\n' +
+  "  return Response.redirect(url.toString(), 301)\n" +
+  "}\n\n" +
   "export default {\n" +
   "  async fetch(request, env) {\n" +
   "    const url = new URL(request.url)\n\n" +
   "    if (url.hostname === ROOT_HOST) {\n" +
-  "      url.hostname = CANONICAL_HOST\n" +
-  '      url.protocol = "https:"\n' +
-  "      return Response.redirect(url.toString(), 301)\n" +
+  "      return redirectToCanonical(url, url.pathname)\n" +
+  "    }\n\n" +
+  '    if (url.pathname === "/eventos" || url.pathname.startsWith("/eventos/")) {\n' +
+  '      return redirectToCanonical(url, "/")\n' +
+  "    }\n\n" +
+  "    const canonicalPath = CANONICAL_PATH_REDIRECTS.get(url.pathname)\n" +
+  "    if (canonicalPath) {\n" +
+  "      return redirectToCanonical(url, canonicalPath)\n" +
   "    }\n\n" +
   "    return env.ASSETS.fetch(request)\n" +
   "  },\n" +
