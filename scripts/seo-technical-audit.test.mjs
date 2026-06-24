@@ -133,6 +133,10 @@ function createFixture({ blockAll = false } = {}) {
           return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","employee":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
         }
 
+        if (schemaType === "ProfilePage") {
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+        }
+
         return `<script type="application/ld+json">{"@context":"https://schema.org","@type":"${schemaType}"}</script>`
       })
       .join("")
@@ -165,7 +169,9 @@ function createFixture({ blockAll = false } = {}) {
         ? ["BreadcrumbList"]
         : route === "/contato"
           ? ["FAQPage", "BreadcrumbList"]
-          : [
+          : route === "/dr-vandui-cardiologista"
+            ? ["Physician", "BreadcrumbList", "FAQPage", "Article", "ProfilePage"]
+            : [
                 "/cardiologista-em-santos",
                 "/cardiologista-em-santo-andre",
                 "/cardiologista-vila-mariana",

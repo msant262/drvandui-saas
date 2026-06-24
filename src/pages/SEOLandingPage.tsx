@@ -184,12 +184,33 @@ function buildSchemas(page: SeoLandingPage) {
         }
       : null
 
+  const profilePage =
+    page.kind === 'profile'
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'ProfilePage',
+          name: page.h1,
+          url,
+          mainEntity: {
+            '@type': 'Physician',
+            '@id': PHYSICIAN_ENTITY_ID,
+            name: 'Dr. Vandui da Silva dos Santos',
+          },
+          about: {
+            '@type': 'Physician',
+            '@id': PHYSICIAN_ENTITY_ID,
+            name: 'Dr. Vandui da Silva dos Santos',
+          },
+        }
+      : null
+
   return [
     { id: `schema-${page.slug}-breadcrumb`, data: breadcrumb },
     { id: `schema-${page.slug}-physician`, data: physician },
     { id: `schema-${page.slug}-faq`, data: faq },
     ...(localBusiness ? [{ id: `schema-${page.slug}-medical-business`, data: localBusiness }] : []),
     ...(article ? [{ id: `schema-${page.slug}-article`, data: article }] : []),
+    ...(profilePage ? [{ id: `schema-${page.slug}-profile-page`, data: profilePage }] : []),
   ]
 }
 

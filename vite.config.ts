@@ -187,6 +187,25 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
     })
   }
 
+  if (page.kind === 'profile') {
+    schemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      name: page.h1,
+      url,
+      mainEntity: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      about: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+    })
+  }
+
   return schemas
 }
 

@@ -501,6 +501,11 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
       fail(errors, `${route}: Article identifica Dr. Vandui como autor`, /"author"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
       fail(errors, `${route}: Article identifica Dr. Vandui como revisor medico`, /"reviewedBy"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
     }
+
+    if (SEO_PROFILE_PATHS.includes(route)) {
+      fail(errors, `${route}: inclui JSON-LD ProfilePage`, hasJsonLdType(html, "ProfilePage"))
+      fail(errors, `${route}: ProfilePage aponta mainEntity para Physician`, /"@type"\s*:\s*"ProfilePage"[\s\S]*"mainEntity"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
+    }
   }
 
   const jsAssetInfo = checkJsAssets(root)
