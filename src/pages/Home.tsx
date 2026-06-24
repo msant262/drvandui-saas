@@ -173,6 +173,67 @@ const quickAnswers = [
   },
 ];
 
+const localSeoLinks = [
+  {
+    path: '/cardiologista-em-santos',
+    title: 'Cardiologista em Santos',
+    description: 'Atendimento cardiológico em Santos, com endereço na Av. Ana Costa e foco em check-up, prevenção, hipertensão e arritmias.',
+  },
+  {
+    path: '/cardiologista-em-santo-andre',
+    title: 'Cardiologista em Santo André',
+    description: 'Consulta cardiológica em Santo André para prevenção cardiovascular, doenças crônicas e acompanhamento com CTA de agendamento.',
+  },
+  {
+    path: '/cardiologista-vila-mariana',
+    title: 'Cardiologista na Vila Mariana',
+    description: 'Atendimento na Vila Mariana para avaliação cardiovascular, consulta particular e plano preventivo baseado em evidências.',
+  },
+];
+
+const serviceSeoLinks = [
+  {
+    path: '/consulta-com-cardiologista',
+    title: 'Consulta com cardiologista',
+    icon: Stethoscope,
+  },
+  {
+    path: '/check-up-cardiologico',
+    title: 'Check-up cardiológico',
+    icon: CheckCircle2,
+  },
+  {
+    path: '/tratamento-hipertensao',
+    title: 'Tratamento de hipertensão',
+    icon: ActivitySquare,
+  },
+  {
+    path: '/prevencao-cardiovascular',
+    title: 'Prevenção cardiovascular',
+    icon: ShieldCheck,
+  },
+  {
+    path: '/palpitacoes-e-arritmias',
+    title: 'Palpitações e arritmias',
+    icon: Activity,
+  },
+  {
+    path: '/colesterol-alto',
+    title: 'Colesterol alto',
+    icon: TestTubes,
+  },
+  {
+    path: '/risco-cirurgico-cardiologico',
+    title: 'Risco cirúrgico cardiológico',
+    icon: Shield,
+  },
+  {
+    path: '/dor-no-peito-quando-procurar-ajuda',
+    title: 'Dor no peito',
+    icon: AlertTriangle,
+  },
+];
+
 const institutions = [
   {
     name: 'Universidade Federal do Triângulo Mineiro (UFTM)',
@@ -460,6 +521,90 @@ export function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── HUB SEO LOCAL E SERVIÇOS ── */}
+      <section className="py-24 bg-white border-t border-gray-100">
+        <div className="section-padding">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-14">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-4" style={{ backgroundColor: 'var(--color-cyan-light)', color: 'var(--color-teal)' }}>
+                Guia de atendimento
+              </span>
+              <h2 className="text-4xl sm:text-5xl font-bold mb-4" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                Encontre a consulta certa
+              </h2>
+              <p className="text-lg text-[#666] max-w-3xl mx-auto">
+                A home distribui autoridade para páginas locais e páginas de serviço, ajudando pacientes e mecanismos de busca a encontrarem o conteúdo mais específico.
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-[1.05fr_1.4fr] gap-8">
+              <div className="rounded-[32px] bg-[#f0f9fa] p-8 border border-[var(--color-cyan-light)]">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-sm">
+                    <MapPin className="w-6 h-6 text-[var(--color-teal)]" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-emerald)]">SEO local</p>
+                    <h3 className="font-bold text-2xl" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                      Atendimento por região
+                    </h3>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  {localSeoLinks.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className="group block rounded-2xl bg-white p-5 border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <h4 className="font-bold text-lg mb-2" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                            {item.title}
+                          </h4>
+                          <p className="text-sm text-[#666] leading-relaxed">{item.description}</p>
+                        </div>
+                        <ArrowRight className="w-5 h-5 text-[var(--color-emerald)] shrink-0 transition-transform group-hover:translate-x-1" />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-[32px] bg-white p-8 border border-gray-100 shadow-sm">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm" style={{ backgroundColor: 'var(--color-cyan-light)' }}>
+                    <HeartPulse className="w-6 h-6 text-[var(--color-teal)]" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--color-emerald)]">Serviços e sintomas</p>
+                    <h3 className="font-bold text-2xl" style={{ color: 'var(--color-teal)', fontFamily: 'Poppins, sans-serif' }}>
+                      Páginas por intenção de busca
+                    </h3>
+                  </div>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {serviceSeoLinks.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className="group flex items-center gap-4 rounded-2xl border border-gray-100 bg-[#f8fbfc] p-5 transition-all hover:bg-[#f0f9fa] hover:shadow-md"
+                    >
+                      <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm shrink-0">
+                        <item.icon className="w-5 h-5 text-[var(--color-teal)]" />
+                      </div>
+                      <span className="font-bold text-sm leading-snug text-[var(--color-teal)] group-hover:text-[var(--color-emerald)] transition-colors">
+                        {item.title}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

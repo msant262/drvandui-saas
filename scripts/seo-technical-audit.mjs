@@ -41,6 +41,10 @@ const SEO_REDIRECTS = [
 ]
 const NON_CANONICAL_PATHS = SEO_REDIRECTS.map(({ from }) => from.replace("/*", ""))
 const SEO_LANDING_PATHS = [...SEO_LOCAL_PATHS, ...SEO_SERVICE_PATHS, ...SEO_ANSWER_PATHS]
+const SEO_PRIORITY_INTERNAL_LINK_PATHS = [
+  ...SEO_LOCAL_PATHS,
+  ...SEO_SERVICE_PATHS.filter((route) => route !== "/clinica-medica"),
+]
 
 export const SEO_ROUTES = [
   { route: "/", file: "dist/index.html", canonical: `${APP_BASE_URL}/` },
@@ -390,6 +394,10 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     ].forEach((question) => {
       fail(errors, `Home responde AEO: ${question}`, authoritySources.includes(question))
     })
+    fail(errors, "Home possui hub de links internos SEO", /Encontre a consulta certa[\s\S]*Páginas por intenção de busca/i.test(authoritySources))
+    SEO_PRIORITY_INTERNAL_LINK_PATHS.forEach((route) => {
+      fail(errors, `Home linka rota estratégica ${route}`, authoritySources.includes(route))
+    })
   }
 
   for (const { route, file, canonical } of SEO_ROUTES) {
@@ -419,6 +427,10 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
       "O que é prevenção cardiovascular?",
     ].forEach((question) => {
       fail(errors, `index.html (build) expõe resposta AEO: ${question}`, indexHtml.includes(question))
+    })
+    fail(errors, "index.html (build) inclui fallback noscript crawlável", /<noscript>[\s\S]*<\/noscript>/i.test(indexHtml))
+    SEO_PRIORITY_INTERNAL_LINK_PATHS.forEach((route) => {
+      fail(errors, `index.html noscript linka rota estratégica ${route}`, new RegExp(`<a\\s+href=["']${escapeRegExp(route)}["']`, "i").test(indexHtml))
     })
   }
 
