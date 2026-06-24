@@ -64,7 +64,7 @@ const localFaqs = (city: string) => [
   },
 ]
 
-export const seoLandingPages: SeoLandingPage[] = [
+const seoLandingPagesBase: SeoLandingPage[] = [
   {
     slug: 'cardiologista-em-santos',
     kind: 'local',
@@ -849,6 +849,420 @@ export const seoLandingPages: SeoLandingPage[] = [
     relatedSlugs: ['consulta-com-cardiologista', 'check-up-cardiologico', 'cardiologista-vila-mariana'],
   },
 ]
+
+
+const copyOverrides: Record<string, Partial<SeoLandingPage>> = {
+  'cardiologista-em-santos': {
+    description:
+      'Cardiologista em Santos para avaliação de dor no peito, palpitações, pressão alta, colesterol, check-up e prevenção cardiovascular. CRM-SP 210328.',
+    intro:
+      'Atendimento cardiológico em Santos para quem precisa investigar sintomas, revisar exames ou cuidar de fatores de risco com orientação médica clara.',
+    sections: [
+      {
+        heading: 'Quando procurar atendimento em Santos',
+        body:
+          'Procure avaliação se você sente dor no peito, falta de ar, palpitações, cansaço fora do habitual, pressão alta, colesterol alterado ou tem histórico familiar de infarto, AVC ou morte súbita.',
+        bullets: ['Dor no peito ou falta de ar', 'Palpitações ou batimentos irregulares', 'Pressão alta ou colesterol alterado', 'Histórico familiar cardiovascular'],
+      },
+      {
+        heading: 'O que a consulta organiza',
+        body:
+          'A avaliação reúne sintomas, exame físico, pressão arterial, medicamentos em uso, exames anteriores e fatores de risco. Com isso, fica mais claro o que precisa ser acompanhado, tratado ou investigado.',
+      },
+      {
+        heading: 'Unidade em Santos',
+        body:
+          'O atendimento em Santos fica na Av. Ana Costa, no Gonzaga, com localização prática para pacientes da Baixada Santista. Leve exames recentes, receitas e uma lista dos sintomas que motivaram a consulta.',
+        bullets: ['Av. Ana Costa, 228', 'Gonzaga, Santos - SP', 'CEP 11060-003'],
+      },
+      {
+        heading: 'Quando não esperar consulta',
+        body: emergencyNotice,
+      },
+    ],
+  },
+  'cardiologista-em-santo-andre': {
+    description:
+      'Cardiologista em Santo André para avaliação de sintomas, prevenção cardiovascular, hipertensão, colesterol, check-up e risco cirúrgico. CRM-SP 210328.',
+    intro:
+      'Consulta cardiológica em Santo André para pacientes do ABC que precisam entender sintomas, controlar riscos ou se preparar para procedimentos com segurança.',
+    sections: [
+      {
+        heading: 'Motivos comuns para consulta no ABC',
+        body:
+          'Pressão alta, palpitações, dor no peito, colesterol alterado, diabetes, cansaço aos esforços e avaliação antes de cirurgia estão entre os motivos mais frequentes para procurar cardiologista.',
+        bullets: ['Hipertensão arterial', 'Palpitações e arritmias', 'Dor no peito', 'Avaliação pré-operatória'],
+      },
+      {
+        heading: 'Consulta com objetivo definido',
+        body:
+          'A consulta busca responder perguntas práticas: o sintoma parece cardíaco? O tratamento atual está adequado? Há risco cardiovascular aumentado? Algum exame realmente muda a conduta?',
+      },
+      {
+        heading: 'Unidade em Santo André',
+        body:
+          'O atendimento fica na Av. Portugal, no Centro de Santo André. A localização facilita o acesso para pacientes da região do ABC que buscam acompanhamento cardiológico presencial.',
+        bullets: ['Av. Portugal, 1285', 'Centro, Santo André - SP', 'CEP 09040-011'],
+      },
+      {
+        heading: 'Quando buscar urgência',
+        body: emergencyNotice,
+      },
+    ],
+  },
+  'cardiologista-vila-mariana': {
+    description:
+      'Cardiologista na Vila Mariana para consulta, check-up, hipertensão, colesterol, palpitações, dor no peito e prevenção cardiovascular.',
+    intro:
+      'Atendimento cardiológico na Vila Mariana para investigar sintomas, revisar exames e acompanhar pressão, colesterol e risco cardiovascular em adultos.',
+    sections: [
+      {
+        heading: 'Quando marcar consulta na Vila Mariana',
+        body:
+          'A consulta é indicada para dor no peito, palpitações, falta de ar aos esforços, pressão alta, colesterol alterado, diabetes, histórico familiar ou dúvidas sobre exames cardíacos.',
+        bullets: ['Check-up cardiológico', 'Controle de pressão e colesterol', 'Investigação de sintomas', 'Prevenção cardiovascular'],
+      },
+      {
+        heading: 'Avaliação sem excesso de exames',
+        body:
+          'A decisão sobre exames parte da história clínica, exame físico e risco individual. O objetivo é evitar tanto atraso diagnóstico quanto pedidos automáticos que não mudam a conduta.',
+      },
+      {
+        heading: 'Unidade na Vila Mariana',
+        body:
+          'O atendimento fica na Rua Domingos de Morais, próximo a uma das regiões mais acessíveis da zona sul de São Paulo.',
+        bullets: ['R. Domingos de Morais, 2781', 'Vila Mariana, São Paulo - SP', 'CEP 04035-001'],
+      },
+      {
+        heading: 'Quando procurar emergência',
+        body: emergencyNotice,
+      },
+    ],
+  },
+  'dr-vandui-cardiologista': {
+    intro:
+      'Perfil oficial do Dr. Vandui da Silva dos Santos, médico cardiologista com CRM-SP 210328 e RQE Cardiologia 146567. Esta página centraliza credenciais, formação e áreas de atendimento.',
+    ctaLabel: 'Agendar consulta cardiológica',
+    sections: [
+      {
+        heading: 'Credenciais profissionais',
+        body:
+          'Dr. Vandui da Silva dos Santos é Médico Cardiologista, CRM-SP 210328 e RQE Cardiologia 146567. O site mantém essas informações visíveis para facilitar conferência e reduzir dependência de perfis externos.',
+        bullets: ['Médico Cardiologista', 'CRM-SP 210328', 'RQE Cardiologia 146567'],
+      },
+      {
+        heading: 'Formação médica',
+        body:
+          'A formação inclui Universidade Federal do Triângulo Mineiro, Hospital Ipiranga e Instituto Dante Pazzanese de Cardiologia.',
+        bullets: ['UFTM', 'Hospital Ipiranga', 'Instituto Dante Pazzanese de Cardiologia'],
+      },
+      {
+        heading: 'Principais áreas de cuidado',
+        body:
+          'O atendimento envolve cardiologia clínica, check-up, hipertensão, colesterol, palpitações, dor no peito, risco cirúrgico e prevenção cardiovascular.',
+      },
+      {
+        heading: 'Locais de atendimento',
+        body:
+          'As consultas são organizadas para Santos, Santo André e Vila Mariana, com páginas locais específicas para endereço, região e orientação de agendamento.',
+      },
+    ],
+  },
+  'consulta-com-cardiologista': {
+    description:
+      'Consulta com cardiologista para investigar sintomas, revisar exames, avaliar pressão, colesterol, palpitações, dor no peito e risco cardiovascular.',
+    intro:
+      'A consulta cardiológica ajuda a transformar sintomas soltos, exames e dúvidas em um plano de cuidado: o que observar, o que tratar e quando investigar melhor.',
+    sections: [
+      {
+        heading: 'Quando a consulta faz sentido',
+        body:
+          'Marque avaliação se você tem dor no peito, falta de ar, palpitações, pressão alta, colesterol alterado, diabetes, histórico familiar de doença cardíaca ou vai passar por cirurgia.',
+        bullets: ['Sintomas cardiovasculares', 'Fatores de risco', 'Exames alterados', 'Avaliação antes de cirurgia'],
+      },
+      {
+        heading: 'O que acontece na consulta',
+        body:
+          'O atendimento revisa sua história, mede pressão, avalia medicamentos, examina sintomas e interpreta exames anteriores. A partir disso, o médico define se há necessidade de acompanhamento, tratamento ou novos exames.',
+      },
+      {
+        heading: 'Como chegar melhor preparado',
+        body:
+          'Leve exames recentes, receitas, lista de medicamentos, alergias e uma descrição simples dos sintomas: quando começaram, quanto duram, o que piora e o que melhora.',
+        bullets: ['Exames e receitas', 'Lista de medicamentos', 'Histórico familiar', 'Descrição dos sintomas'],
+      },
+      {
+        heading: 'Quando não esperar consulta',
+        body: emergencyNotice,
+      },
+    ],
+    faqs: [
+      {
+        question: 'Preciso ter sintomas para ir ao cardiologista?',
+        answer:
+          'Não. A consulta também pode ser preventiva, principalmente em pessoas com pressão alta, colesterol alterado, diabetes, tabagismo ou histórico familiar.',
+      },
+      {
+        question: 'O cardiologista sempre pede exames?',
+        answer:
+          'Não. Exames são indicados quando ajudam a esclarecer sintomas, medir risco ou definir conduta. A consulta começa pela história clínica e exame físico.',
+      },
+      {
+        question: 'Quando a consulta deve virar urgência?',
+        answer:
+          'Dor no peito forte, falta de ar importante, desmaio, suor frio ou perda de força devem ser avaliados em serviço de urgência.',
+      },
+    ],
+  },
+  'check-up-cardiologico': {
+    intro:
+      'Check-up cardiológico é uma avaliação de risco. Ele ajuda a identificar pressão, colesterol, diabetes, histórico familiar e hábitos que podem exigir acompanhamento.',
+    sections: [
+      {
+        heading: 'Quem deve considerar o check-up',
+        body:
+          'Adultos com pressão alta, colesterol alterado, diabetes, tabagismo, obesidade, sedentarismo, histórico familiar de infarto ou AVC, ou sintomas aos esforços podem se beneficiar da avaliação.',
+        bullets: ['Pressão alta', 'Colesterol ou diabetes', 'Histórico familiar', 'Sintomas ao esforço'],
+      },
+      {
+        heading: 'O que o check-up deve responder',
+        body:
+          'A consulta estima risco cardiovascular, revisa exames, mede pressão, avalia hábitos e define se há necessidade de metas, mudanças no tratamento ou exames complementares.',
+      },
+      {
+        heading: 'Exames não são automáticos',
+        body:
+          'Eletrocardiograma, ecocardiograma, teste ergométrico, Holter, MAPA ou exames laboratoriais podem ser úteis, mas a indicação depende da idade, sintomas e risco individual.',
+      },
+      {
+        heading: 'Prevenção realista',
+        body:
+          'O check-up não promete risco zero. Ele ajuda a encontrar fatores modificáveis e acompanhar metas de pressão, colesterol, glicemia, peso, sono e atividade física.',
+      },
+    ],
+  },
+  'tratamento-hipertensao': {
+    intro:
+      'Hipertensão precisa de confirmação, acompanhamento e metas possíveis. O objetivo é controlar a pressão e reduzir risco cardiovascular sem ajustes improvisados.',
+    sections: [
+      {
+        heading: 'Quando procurar ajuda para pressão alta',
+        body:
+          'Procure avaliação quando a pressão se mantém elevada em medidas repetidas, quando há sintomas, diabetes, doença renal, colesterol alto, sobrepeso, tabagismo ou dúvida sobre remédios.',
+        bullets: ['Pressão repetidamente elevada', 'Sintomas ou mal-estar', 'Doenças associadas', 'Dúvida sobre medicação'],
+      },
+      {
+        heading: 'Como o acompanhamento é feito',
+        body:
+          'O acompanhamento considera medidas corretas da pressão, risco cardiovascular, função renal, exames laboratoriais, efeitos colaterais, adesão ao tratamento e hábitos que interferem no controle.',
+      },
+      {
+        heading: 'Tratamento vai além do remédio',
+        body:
+          'Medicação pode ser necessária, mas sono, sal, peso, atividade física, álcool, tabagismo, estresse e apneia do sono também influenciam a pressão.',
+      },
+      {
+        heading: 'Sinais de urgência',
+        body:
+          'Pressão alta com dor no peito, falta de ar, confusão, alteração visual, fraqueza, desmaio ou dor de cabeça muito intensa exige avaliação imediata.',
+      },
+    ],
+  },
+  'dor-no-peito-quando-procurar-ajuda': {
+    intro:
+      'Dor no peito não deve ser normalizada. Algumas dores pedem emergência; outras precisam de consulta para entender se há risco cardíaco.',
+    sections: [
+      {
+        heading: 'Sinais de alerta',
+        body:
+          'Dor forte, súbita, em aperto, associada a falta de ar, suor frio, náusea, desmaio, mal-estar intenso ou irradiação para braço, costas, pescoço ou mandíbula deve ser avaliada em emergência.',
+        bullets: ['Dor forte ou súbita', 'Falta de ar', 'Suor frio ou náusea', 'Irradiação para braço, costas ou mandíbula'],
+      },
+      {
+        heading: 'Quando marcar consulta',
+        body:
+          'Marque cardiologista se a dor é recorrente, aparece no esforço, melhora ao parar, vem com palpitações ou ocorre em quem tem pressão alta, colesterol, diabetes ou histórico familiar.',
+      },
+      {
+        heading: 'O que a consulta investiga',
+        body:
+          'A avaliação analisa características da dor, fatores de risco, exame físico, eletrocardiograma e exames complementares quando mudam a conduta.',
+      },
+      {
+        heading: 'Não espere se estiver acontecendo agora',
+        body: emergencyNotice,
+      },
+    ],
+  },
+  'palpitacoes-e-arritmias': {
+    intro:
+      'Palpitações são a percepção de batimentos fortes, acelerados ou irregulares. A avaliação ajuda a separar episódios benignos de arritmias que precisam investigação.',
+    sections: [
+      {
+        heading: 'Quando palpitações merecem atenção',
+        body:
+          'Procure avaliação se os episódios são repetidos, prolongados, aparecem no esforço, acordam à noite ou vêm com dor no peito, falta de ar, tontura ou desmaio.',
+        bullets: ['Episódios frequentes', 'Batimento irregular', 'Tontura ou desmaio', 'Dor no peito ou falta de ar'],
+      },
+      {
+        heading: 'Possíveis causas',
+        body:
+          'Cafeína, ansiedade, sono ruim, anemia, alterações hormonais, alguns medicamentos e arritmias podem causar palpitações. O contexto clínico define o grau de preocupação.',
+      },
+      {
+        heading: 'Exames possíveis',
+        body:
+          'Eletrocardiograma, Holter, exames laboratoriais e ecocardiograma podem ser considerados conforme frequência dos sintomas, risco e achados da consulta.',
+      },
+      {
+        heading: 'Quando é urgência',
+        body:
+          'Palpitação com dor no peito, falta de ar intensa, desmaio, fraqueza, suor frio ou batimento muito acelerado e sustentado deve ser avaliada em urgência.',
+      },
+    ],
+  },
+  'risco-cirurgico-cardiologico': {
+    intro:
+      'A avaliação de risco cirúrgico cardiológico estima segurança cardiovascular antes de cirurgias e procedimentos, especialmente em pacientes com fatores de risco ou sintomas.',
+    sections: [
+      {
+        heading: 'Quando é indicado',
+        body:
+          'A avaliação é comum antes de cirurgias eletivas, principalmente em pacientes com hipertensão, diabetes, doença cardíaca prévia, idade avançada, sintomas cardiovasculares ou procedimentos de maior porte.',
+        bullets: ['Cirurgia eletiva', 'Hipertensão ou diabetes', 'Doença cardíaca prévia', 'Sintomas cardiovasculares'],
+      },
+      {
+        heading: 'O que levar',
+        body:
+          'Leve pedido do cirurgião, exames pré-operatórios, lista de medicamentos, relatórios anteriores, alergias e informações sobre doenças já diagnosticadas.',
+      },
+      {
+        heading: 'O objetivo da avaliação',
+        body:
+          'A consulta estima risco, identifica instabilidades, orienta ajuste de medicamentos e define se algum exame adicional é necessário antes do procedimento.',
+      },
+      {
+        heading: 'Quando a cirurgia pode precisar esperar',
+        body:
+          'Dor no peito recente, falta de ar importante, arritmia sintomática ou descompensação clínica podem exigir investigação antes da liberação.',
+      },
+    ],
+  },
+  'palpitacoes-quando-se-preocupar': {
+    intro:
+      'Palpitação isolada nem sempre é grave. O ponto é reconhecer quando o padrão muda, se repete ou aparece junto de sintomas que exigem avaliação.',
+    sections: [
+      {
+        heading: 'Quando se preocupar',
+        body:
+          'Preocupe-se quando a palpitação é frequente, dura muitos minutos, aparece no esforço, vem com batimento irregular ou acompanha dor no peito, falta de ar, tontura ou desmaio.',
+        bullets: ['Episódios repetidos', 'Duração prolongada', 'Sintomas associados', 'Histórico cardíaco'],
+      },
+      {
+        heading: 'Quando marcar consulta',
+        body:
+          'Marque cardiologista se os episódios voltam, atrapalham a rotina, surgem à noite ou ocorrem em quem tem pressão alta, doença cardíaca prévia ou histórico familiar relevante.',
+      },
+      {
+        heading: 'O que pode causar palpitação',
+        body:
+          'Sono ruim, ansiedade, cafeína, anemia, alterações hormonais, medicamentos e arritmias podem estar envolvidos. A consulta ajuda a decidir o que investigar.',
+      },
+      {
+        heading: 'Quando procurar urgência',
+        body:
+          'Procure urgência se houver dor no peito, falta de ar importante, desmaio, fraqueza, suor frio ou batimento muito acelerado e sustentado.',
+      },
+    ],
+  },
+  'pressao-alta-quando-procurar-ajuda': {
+    intro:
+      'Pressão alta merece atenção quando se repete, vem com sintomas ou aparece em quem já tem outros fatores de risco cardiovascular.',
+    sections: [
+      {
+        heading: 'Quando procurar ajuda',
+        body:
+          'Procure avaliação quando a pressão fica alta em medidas repetidas, quando há diabetes, doença renal, colesterol alto, sobrepeso, tabagismo, histórico familiar ou dúvida sobre tratamento.',
+        bullets: ['Medidas repetidas elevadas', 'Risco cardiovascular associado', 'Sintomas', 'Tratamento difícil de ajustar'],
+      },
+      {
+        heading: 'Quando é emergência',
+        body:
+          'Pressão alta com dor no peito, falta de ar, confusão, alteração visual, fraqueza em um lado do corpo, desmaio ou dor de cabeça muito intensa exige pronto atendimento.',
+      },
+      {
+        heading: 'Como acompanhar melhor',
+        body:
+          'O acompanhamento avalia técnica de medida, exames, função renal, risco cardiovascular, resposta aos remédios e hábitos que interferem na pressão.',
+      },
+      {
+        heading: 'Não ajuste remédio sozinho',
+        body:
+          'Mudar dose, cortar ou trocar remédio sem orientação pode causar efeito colateral ou deixar a pressão sem controle real. A decisão depende do contexto clínico.',
+      },
+    ],
+  },
+  'colesterol-alto-e-risco-cardiaco': {
+    intro:
+      'Colesterol alto é importante porque aumenta risco cardiovascular ao longo do tempo. A decisão sobre tratamento depende do risco global, não só de um número no exame.',
+    sections: [
+      {
+        heading: 'Quando o colesterol preocupa mais',
+        body:
+          'O risco costuma ser maior quando há LDL elevado, hipertensão, diabetes, tabagismo, doença renal, obesidade, histórico familiar de infarto precoce ou doença cardiovascular conhecida.',
+        bullets: ['LDL alto', 'Pressão alta ou diabetes', 'Tabagismo', 'Histórico familiar de infarto precoce'],
+      },
+      {
+        heading: 'Como o risco é avaliado',
+        body:
+          'A consulta combina idade, pressão, exames, histórico familiar, doenças associadas, hábitos e sintomas. Por isso, a meta de colesterol não é igual para todos.',
+      },
+      {
+        heading: 'Tratamento com critério',
+        body:
+          'Mudanças alimentares, atividade física, controle de peso, parar de fumar e medicação quando indicada podem fazer parte do plano. A decisão deve considerar benefício e segurança.',
+      },
+      {
+        heading: 'Por que não esperar sintomas',
+        body:
+          'Colesterol alto geralmente não causa sintomas. O acompanhamento serve justamente para agir antes de eventos como infarto ou AVC.',
+      },
+    ],
+  },
+  'cardiologista-ou-clinico-geral': {
+    intro:
+      'Clínico geral e cardiologista não competem: eles se complementam. A melhor escolha depende do sintoma, do risco cardiovascular e da pergunta que você precisa responder.',
+    sections: [
+      {
+        heading: 'Quando começar pelo clínico geral',
+        body:
+          'O clínico geral é uma boa porta de entrada para queixas amplas, revisão geral de saúde, sintomas pouco definidos e acompanhamento de condições que envolvem vários sistemas.',
+        bullets: ['Queixas gerais', 'Revisão ampla de saúde', 'Sintomas pouco específicos', 'Coordenação do cuidado'],
+      },
+      {
+        heading: 'Quando procurar cardiologista',
+        body:
+          'Procure cardiologista quando a dúvida envolve dor no peito, falta de ar aos esforços, palpitações, desmaio, pressão alta, colesterol, diabetes, risco cirúrgico ou histórico familiar cardíaco.',
+        bullets: ['Dor no peito', 'Palpitações', 'Pressão alta ou colesterol', 'Risco cirúrgico'],
+      },
+      {
+        heading: 'Como decidir sem perder tempo',
+        body:
+          'Se a principal preocupação é coração, pressão, colesterol, arritmia, dor no peito ou prevenção cardiovascular, a consulta cardiológica tende a ser mais direta.',
+      },
+      {
+        heading: 'O que levar para qualquer consulta',
+        body:
+          'Exames recentes, lista de medicamentos, histórico familiar e uma descrição objetiva dos sintomas ajudam tanto o clínico quanto o cardiologista.',
+      },
+    ],
+  },
+}
+
+export const seoLandingPages: SeoLandingPage[] = seoLandingPagesBase.map((page) => ({
+  ...page,
+  ...(copyOverrides[page.slug] ?? {}),
+}))
 
 export function getSeoLandingPageBySlug(slug: string) {
   return seoLandingPages.find((page) => page.slug === slug)
