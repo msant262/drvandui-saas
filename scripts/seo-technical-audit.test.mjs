@@ -103,7 +103,7 @@ function createFixture({ blockAll = false } = {}) {
   )
   writeFileSync(
     path.join(root, "wrangler.toml"),
-    'name = "drvandui-saas"\ncompatibility_date = "2024-01-01"\nmain = "src/worker.js"\n\n[assets]\ndirectory = "./dist"\nnot_found_handling = "single-page-application"\n',
+    'name = "drvandui-saas"\ncompatibility_date = "2024-01-01"\nmain = "src/worker.js"\n\n[[routes]]\npattern = "www.drvandui.com.br"\ncustom_domain = true\n\n[[routes]]\npattern = "drvandui.com.br"\ncustom_domain = true\n\n[assets]\ndirectory = "./dist"\nnot_found_handling = "single-page-application"\n',
   )
   writeFileSync(path.join(root, "src/worker.js"), canonicalWorkerSource)
 

@@ -2,6 +2,14 @@ name = "drvandui-saas"
 compatibility_date = "2024-01-01"
 main = "src/worker.js"
 
+[[routes]]
+pattern = "www.drvandui.com.br"
+custom_domain = true
+
+[[routes]]
+pattern = "drvandui.com.br"
+custom_domain = true
+
 [assets]
 directory = "./dist"
 not_found_handling = "single-page-application"

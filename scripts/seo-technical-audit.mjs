@@ -310,6 +310,16 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   const wranglerConfig = read(root, "wrangler.toml")
   if (wranglerConfig) {
     fail(errors, "wrangler.toml define Worker entrypoint para redirect canonico", /main\s*=\s*["']src\/worker\.js["']/i.test(wranglerConfig))
+    fail(
+      errors,
+      "wrangler.toml roteia www.drvandui.com.br para o Worker",
+      /pattern\s*=\s*["']www\.drvandui\.com\.br["'][\s\S]*?custom_domain\s*=\s*true/i.test(wranglerConfig)
+    )
+    fail(
+      errors,
+      "wrangler.toml roteia drvandui.com.br para o Worker",
+      /pattern\s*=\s*["']drvandui\.com\.br["'][\s\S]*?custom_domain\s*=\s*true/i.test(wranglerConfig)
+    )
     fail(errors, "wrangler.toml mantem assets em ./dist", /directory\s*=\s*["']\.\/dist["']/i.test(wranglerConfig))
   }
 
