@@ -32,7 +32,18 @@ function buildSchemas(page: SeoLandingPage) {
     name: 'Dr. Vandui da Silva dos Santos',
     url,
     image: `${SITE_BASE_URL}/hero-doctor.jpg`,
-    identifier: 'CRM-SP 210328',
+    identifier: [
+      {
+        '@type': 'PropertyValue',
+        propertyID: 'CRM-SP',
+        value: '210328',
+      },
+      {
+        '@type': 'PropertyValue',
+        propertyID: 'RQE Cardiologia',
+        value: '146567',
+      },
+    ],
     telephone: '+55-11-97617-0971',
     email: 'contato@drvandui.com.br',
     medicalSpecialty: ['Cardiology', 'InternalMedicine'],
@@ -65,7 +76,7 @@ function buildSchemas(page: SeoLandingPage) {
         url,
         telephone: '+55-11-97617-0971',
         priceRange: '$$',
-        medicalSpecialty: 'Cardiovascular',
+        medicalSpecialty: 'Cardiology',
         address: {
           '@type': 'PostalAddress',
           streetAddress: page.location.address,
@@ -222,11 +233,14 @@ export function SEOLandingPage() {
                     <p>
                       <strong className="text-[var(--color-teal)]">Dr. Vandui da Silva dos Santos</strong>
                     </p>
-                    <p>Médico cardiologista e clínico médico</p>
+                    <p>Médico Cardiologista</p>
                     <p>
                       <strong>CRM-SP 210328</strong>
                     </p>
-                    <p>Formação no Instituto Dante Pazzanese de Cardiologia.</p>
+                    <p>
+                      <strong>RQE Cardiologia 146567</strong>
+                    </p>
+                    <p>Formação no Instituto Dante Pazzanese de Cardiologia, Hospital Ipiranga e UFTM.</p>
                     <p className="rounded-2xl bg-[#f0f9fa] p-3 text-xs text-[var(--color-teal)]">
                       Conteúdo educativo. Sintomas intensos, súbitos ou progressivos devem ser avaliados em serviço de urgência.
                     </p>

@@ -8,16 +8,16 @@ const APP_BASE_URL = "https://www.drvandui.com.br"
 const SEO_LOCAL_PATHS = [
   "/cardiologista-em-santos",
   "/cardiologista-em-santo-andre",
-  "/cardiologista-na-vila-mariana",
+  "/cardiologista-vila-mariana",
 ]
 const SEO_SERVICE_PATHS = [
   "/consulta-com-cardiologista",
   "/check-up-cardiologico",
-  "/avaliacao-de-risco-cirurgico",
+  "/risco-cirurgico-cardiologico",
   "/tratamento-hipertensao",
-  "/palpitacoes-arritmia",
-  "/dor-no-peito-quando-procurar-cardiologista",
-  "/colesterol-alto-cardiologista",
+  "/palpitacoes-e-arritmias",
+  "/dor-no-peito-quando-procurar-ajuda",
+  "/colesterol-alto",
   "/prevencao-cardiovascular",
   "/clinica-medica",
 ]
@@ -30,13 +30,16 @@ const SEO_ANSWER_PATHS = [
 const SEO_REDIRECTS = [
   { from: "/eventos", to: "/", status: 301 },
   { from: "/eventos/*", to: "/", status: 301 },
-  { from: "/cardiologista-vila-mariana", to: "/cardiologista-na-vila-mariana", status: 301 },
-  { from: "/risco-cirurgico-cardiologico", to: "/avaliacao-de-risco-cirurgico", status: 301 },
-  { from: "/avaliacao-risco-cirurgico", to: "/avaliacao-de-risco-cirurgico", status: 301 },
-  { from: "/dor-no-peito", to: "/dor-no-peito-quando-procurar-cardiologista", status: 301 },
-  { from: "/colesterol-alto", to: "/colesterol-alto-cardiologista", status: 301 },
+  { from: "/cardiologista-na-vila-mariana", to: "/cardiologista-vila-mariana", status: 301 },
+  { from: "/avaliacao-de-risco-cirurgico", to: "/risco-cirurgico-cardiologico", status: 301 },
+  { from: "/avaliacao-risco-cirurgico", to: "/risco-cirurgico-cardiologico", status: 301 },
+  { from: "/palpitacoes-arritmia", to: "/palpitacoes-e-arritmias", status: 301 },
+  { from: "/dor-no-peito", to: "/dor-no-peito-quando-procurar-ajuda", status: 301 },
+  { from: "/dor-no-peito-quando-procurar-cardiologista", to: "/dor-no-peito-quando-procurar-ajuda", status: 301 },
+  { from: "/colesterol-alto-cardiologista", to: "/colesterol-alto", status: 301 },
   { from: "/pressao-alta", to: "/tratamento-hipertensao", status: 301 },
 ]
+const NON_CANONICAL_PATHS = SEO_REDIRECTS.map(({ from }) => from.replace("/*", ""))
 const SEO_LANDING_PATHS = [...SEO_LOCAL_PATHS, ...SEO_SERVICE_PATHS, ...SEO_ANSWER_PATHS]
 
 export const SEO_ROUTES = [
@@ -255,12 +258,17 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "sitemap.xml contém estrutura <urlset>", /<urlset[\s\S]*?>/m.test(sitemap))
     fail(errors, `sitemap.xml inclui pelo menos ${expectedUrls.length} URLs`, locs.length >= expectedUrls.length)
     expectedUrls.forEach((url) => assertInSitemap(locs, url, errors, "sitemap.xml contém URL esperada"))
+    NON_CANONICAL_PATHS.forEach((route) => {
+      fail(errors, `sitemap.xml não inclui alias não-canônico ${route}`, !locs.includes(`${APP_BASE_URL}${route}`))
+    })
   }
 
   const llms = read(root, "public/llms.txt")
   if (llms) {
     fail(errors, "llms.txt possui H1 obrigatório", /^#\s+\S+/m.test(llms))
     fail(errors, "llms.txt contém links Markdown", /\[[^\]]+\]\(https:\/\/[^)]+\)/m.test(llms))
+    fail(errors, "llms.txt explicita CRM-SP 210328", /CRM-SP:\s*210328/i.test(llms))
+    fail(errors, "llms.txt explicita RQE Cardiologia 146567", /RQE Cardiologia:\s*146567/i.test(llms))
   }
 
   const headers = read(root, "public/_headers")
@@ -310,6 +318,29 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     )
   }
 
+  const appSource = read(root, "src/App.tsx")
+  if (appSource) {
+    ;[
+      "click_whatsapp",
+      "click_agendamento",
+      "click_phone",
+      "click_email",
+      "click_maps",
+      "submit_contact_form",
+    ].forEach((eventName) => fail(errors, `App rastreia evento de conversão ${eventName}`, appSource.includes(eventName)))
+  }
+
+  const authoritySources = [
+    read(root, "src/pages/Home.tsx"),
+    read(root, "src/sections/Navigation.tsx"),
+    read(root, "src/sections/Footer.tsx"),
+  ].filter(Boolean).join("\n")
+  if (authoritySources) {
+    fail(errors, "Home/header/footer exibem CRM-SP 210328", /CRM-SP\s*210328/i.test(authoritySources))
+    fail(errors, "Home/header/footer exibem RQE 146567", /RQE(?:\s+Cardiologia)?\s*146567/i.test(authoritySources))
+    fail(errors, "Home reforça formação completa", /Dante Pazzanese[\s\S]*Hospital Ipiranga[\s\S]*UFTM/i.test(authoritySources))
+  }
+
   for (const { route, file, canonical } of SEO_ROUTES) {
     const html = read(root, file)
     if (!html) {
@@ -326,6 +357,8 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   if (indexHtml) {
     fail(errors, "index.html (build) inclui JSON-LD Physician", hasJsonLdType(indexHtml, "Physician"))
     fail(errors, "index.html (build) inclui JSON-LD MedicalBusiness", hasJsonLdType(indexHtml, "MedicalBusiness"))
+    fail(errors, "index.html (build) explicita CRM-SP 210328", /CRM-SP[\s\S]{0,80}210328/i.test(indexHtml))
+    fail(errors, "index.html (build) explicita RQE Cardiologia 146567", /RQE Cardiologia[\s\S]{0,80}146567/i.test(indexHtml))
   }
 
   const espHtml = read(root, "dist/especialidades/index.html")
@@ -353,6 +386,8 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, `${route}: inclui JSON-LD Physician`, hasJsonLdType(html, "Physician"))
     fail(errors, `${route}: inclui JSON-LD BreadcrumbList`, hasJsonLdType(html, "BreadcrumbList"))
     fail(errors, `${route}: inclui JSON-LD FAQPage`, hasJsonLdType(html, "FAQPage"))
+    fail(errors, `${route}: explicita CRM-SP 210328`, /CRM-SP[\s\S]{0,80}210328/i.test(html))
+    fail(errors, `${route}: explicita RQE Cardiologia 146567`, /RQE Cardiologia[\s\S]{0,80}146567/i.test(html))
 
     if (SEO_LOCAL_PATHS.includes(route)) {
       fail(errors, `${route}: inclui JSON-LD MedicalBusiness`, hasJsonLdType(html, "MedicalBusiness"))

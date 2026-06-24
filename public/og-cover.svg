@@ -38,5 +38,5 @@
   <!-- Footer -->
   <line x1="80" y1="540" x2="1120" y2="540" stroke="rgba(255,255,255,0.12)"/>
   <text x="80" y="580" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" fill="rgba(255,255,255,0.75)">drvandui.com.br</text>
-  <text x="1120" y="580" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" fill="rgba(255,255,255,0.75)">CRM-SP · Cardiologia</text>
+  <text x="1120" y="580" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="500" fill="rgba(255,255,255,0.75)">CRM-SP 210328 · RQE 146567</text>
 </svg>

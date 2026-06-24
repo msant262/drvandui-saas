@@ -65,7 +65,7 @@ export function Navigation() {
                   className={`text-xs transition-colors ${useScrolledStyle ? 'text-[var(--color-emerald)]' : 'text-white/80'
                     }`}
                 >
-                  Cardiologia & Clínica Médica
+                  CRM-SP 210328 · RQE 146567
                 </p>
               </div>
             </Link>

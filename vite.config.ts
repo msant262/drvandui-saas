@@ -44,7 +44,18 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
       name: 'Dr. Vandui da Silva dos Santos',
       url,
       image: `${SITE_BASE_URL}/hero-doctor.jpg`,
-      identifier: 'CRM-SP 210328',
+      identifier: [
+        {
+          '@type': 'PropertyValue',
+          propertyID: 'CRM-SP',
+          value: '210328',
+        },
+        {
+          '@type': 'PropertyValue',
+          propertyID: 'RQE Cardiologia',
+          value: '146567',
+        },
+      ],
       telephone: '+55-11-97617-0971',
       email: 'contato@drvandui.com.br',
       medicalSpecialty: ['Cardiology', 'InternalMedicine'],
@@ -77,7 +88,7 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
       url,
       telephone: '+55-11-97617-0971',
       priceRange: '$$',
-      medicalSpecialty: 'Cardiovascular',
+      medicalSpecialty: 'Cardiology',
       address: {
         '@type': 'PostalAddress',
         streetAddress: page.location.address,

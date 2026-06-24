@@ -199,7 +199,7 @@ export function Home() {
   usePageSEO({
     title: 'Cardiologista em Santos, Santo André e Vila Mariana — Dr. Vandui',
     description:
-      'Dr. Vandui da Silva dos Santos, CRM-SP 210328 — Médico Cardiologista com residência no Instituto Dante Pazzanese. Cardiologia e Clínica Médica em Santos, Santo André e Vila Mariana.',
+      'Dr. Vandui da Silva dos Santos, CRM-SP 210328 e RQE Cardiologia 146567 — Médico Cardiologista com formação no Dante Pazzanese, Hospital Ipiranga e UFTM.',
     canonical: '/',
     keywords:
       'cardiologista santos, cardiologista santo andré, cardiologista são paulo, Dr. Vandui, clínica médica, prevenção cardiovascular, cardiologia, doenças crônicas',
@@ -246,12 +246,15 @@ export function Home() {
               <p className="text-xl sm:text-2xl font-light mb-8 text-white/80 max-w-2xl leading-relaxed">
                 Cardiologia e Clínica Médica com diagnóstico preciso, prevenção real e acompanhamento próximo — em todas as fases da vida.
               </p>
+              <p className="max-w-2xl text-sm sm:text-base font-semibold text-emerald-200/95">
+                CRM-SP 210328 · RQE Cardiologia 146567 · Formação no Instituto Dante Pazzanese, Hospital Ipiranga e UFTM.
+              </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-5 mt-10">
                 <a
                   href="https://oneliv.com.br/profissional/vandui-santos"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   className="group relative inline-flex items-center justify-center gap-3 px-8 py-5 rounded-2xl font-bold bg-white text-[var(--color-teal)] overflow-hidden transition-all hover:scale-[1.02] shadow-[0_0_40px_rgba(255,255,255,0.15)] hover:shadow-[0_0_60px_rgba(255,255,255,0.25)] text-lg"
                 >
                   <CalendarDays className="w-5 h-5 transition-transform group-hover:rotate-12" />
@@ -748,7 +751,7 @@ export function Home() {
                   Escolhi a medicina por um desejo profundo de cuidar das pessoas — promovendo qualidade de vida e fazendo diferença real na trajetória de cada paciente.
                 </p>
                 <p className="text-[16px] text-[#555] leading-relaxed mb-7 pb-7 border-b border-gray-100">
-                  Como cardiologista, conheço os medos que um diagnóstico cardíaco traz. Me preparei nas melhores instituições para estar ao seu lado nesses momentos.{' '}
+                  Como cardiologista, conheço os medos que um diagnóstico cardíaco traz. Me preparei no Instituto Dante Pazzanese de Cardiologia, Hospital Ipiranga e UFTM para estar ao seu lado nesses momentos.{' '}
                   <span className="font-semibold" style={{ color: 'var(--color-teal)' }}>Vejo meus pacientes como parceiros — somos um time.</span>
                 </p>
 
@@ -822,7 +825,7 @@ export function Home() {
               <a
                 href="https://oneliv.com.br/profissional/vandui-santos"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-3 px-8 py-5 bg-white rounded-2xl font-bold transition-all hover:-translate-y-1 hover:shadow-2xl text-[16px]"
                 style={{ color: 'var(--color-teal)' }}
               >

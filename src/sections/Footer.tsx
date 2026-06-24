@@ -25,7 +25,7 @@ export function Footer() {
                 <span className="font-bold text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
                   Dr. Vandui
                 </span>
-                <span className="text-[10px] text-white/60">Cardiologia & Clínica Médica</span>
+                <span className="text-[10px] text-white/60">CRM-SP 210328 · RQE 146567</span>
               </div>
             </Link>
             {/* Redes sociais — alinhadas ao centro do ícone */}
@@ -166,7 +166,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="section-padding py-3 flex flex-col sm:flex-row items-center justify-between gap-1">
           <p className="text-white/40 text-[11px]">
-            &copy; {currentYear} Dr. Vandui da Silva dos Santos · CRM-SP 210328
+            &copy; {currentYear} Dr. Vandui da Silva dos Santos · CRM-SP 210328 · RQE Cardiologia 146567
           </p>
           <p className="text-white/30 text-[11px]">
             Cardiologista em Santos, Santo André e Vila Mariana

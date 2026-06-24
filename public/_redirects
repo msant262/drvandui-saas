@@ -1,11 +1,13 @@
 # Canonical route aliases (relative only; Cloudflare rejects absolute URLs here)
 /eventos / 301
 /eventos/* / 301
-/cardiologista-vila-mariana /cardiologista-na-vila-mariana 301
-/risco-cirurgico-cardiologico /avaliacao-de-risco-cirurgico 301
-/avaliacao-risco-cirurgico /avaliacao-de-risco-cirurgico 301
-/dor-no-peito /dor-no-peito-quando-procurar-cardiologista 301
-/colesterol-alto /colesterol-alto-cardiologista 301
+/cardiologista-na-vila-mariana /cardiologista-vila-mariana 301
+/avaliacao-de-risco-cirurgico /risco-cirurgico-cardiologico 301
+/avaliacao-risco-cirurgico /risco-cirurgico-cardiologico 301
+/palpitacoes-arritmia /palpitacoes-e-arritmias 301
+/dor-no-peito /dor-no-peito-quando-procurar-ajuda 301
+/dor-no-peito-quando-procurar-cardiologista /dor-no-peito-quando-procurar-ajuda 301
+/colesterol-alto-cardiologista /colesterol-alto 301
 /pressao-alta /tratamento-hipertensao 301
 
 # Serve prerendered HTML directly (SSG path)
@@ -13,14 +15,14 @@
 /contato /contato/index.html 200
 /cardiologista-em-santos /cardiologista-em-santos/index.html 200
 /cardiologista-em-santo-andre /cardiologista-em-santo-andre/index.html 200
-/cardiologista-na-vila-mariana /cardiologista-na-vila-mariana/index.html 200
+/cardiologista-vila-mariana /cardiologista-vila-mariana/index.html 200
 /consulta-com-cardiologista /consulta-com-cardiologista/index.html 200
 /check-up-cardiologico /check-up-cardiologico/index.html 200
-/avaliacao-de-risco-cirurgico /avaliacao-de-risco-cirurgico/index.html 200
+/risco-cirurgico-cardiologico /risco-cirurgico-cardiologico/index.html 200
 /tratamento-hipertensao /tratamento-hipertensao/index.html 200
-/palpitacoes-arritmia /palpitacoes-arritmia/index.html 200
-/dor-no-peito-quando-procurar-cardiologista /dor-no-peito-quando-procurar-cardiologista/index.html 200
-/colesterol-alto-cardiologista /colesterol-alto-cardiologista/index.html 200
+/palpitacoes-e-arritmias /palpitacoes-e-arritmias/index.html 200
+/dor-no-peito-quando-procurar-ajuda /dor-no-peito-quando-procurar-ajuda/index.html 200
+/colesterol-alto /colesterol-alto/index.html 200
 /prevencao-cardiovascular /prevencao-cardiovascular/index.html 200
 /clinica-medica /clinica-medica/index.html 200
 /palpitacoes-quando-se-preocupar /palpitacoes-quando-se-preocupar/index.html 200

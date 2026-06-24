@@ -33,8 +33,8 @@ export type SeoLandingPage = {
 }
 
 const sharedProof = [
-  'CRM-SP 210328',
-  'Formação no Instituto Dante Pazzanese de Cardiologia',
+  'CRM-SP 210328 e RQE Cardiologia 146567',
+  'Formação: Instituto Dante Pazzanese, Hospital Ipiranga e UFTM',
   'Consulta com foco em diagnóstico, prevenção e plano de acompanhamento',
 ]
 
@@ -60,7 +60,7 @@ export const seoLandingPages: SeoLandingPage[] = [
   {
     slug: 'cardiologista-em-santos',
     kind: 'local',
-    title: 'Cardiologista em Santos — Dr. Vandui',
+    title: 'Cardiologista em Santos | Dr. Vandui Santos',
     description:
       'Cardiologista em Santos para avaliação cardiovascular, hipertensão, check-up, arritmias e prevenção. Atendimento particular com Dr. Vandui.',
     keywords:
@@ -97,7 +97,7 @@ export const seoLandingPages: SeoLandingPage[] = [
   {
     slug: 'cardiologista-em-santo-andre',
     kind: 'local',
-    title: 'Cardiologista em Santo André — Dr. Vandui',
+    title: 'Cardiologista em Santo André | Dr. Vandui Santos',
     description:
       'Cardiologista em Santo André para consulta, prevenção cardiovascular, hipertensão, arritmias, check-up e avaliação de risco.',
     keywords:
@@ -129,12 +129,12 @@ export const seoLandingPages: SeoLandingPage[] = [
       },
     ],
     faqs: localFaqs('Santo André'),
-    relatedSlugs: ['palpitacoes-arritmia', 'avaliacao-de-risco-cirurgico', 'prevencao-cardiovascular'],
+    relatedSlugs: ['palpitacoes-e-arritmias', 'risco-cirurgico-cardiologico', 'prevencao-cardiovascular'],
   },
   {
-    slug: 'cardiologista-na-vila-mariana',
+    slug: 'cardiologista-vila-mariana',
     kind: 'local',
-    title: 'Cardiologista na Vila Mariana — Dr. Vandui',
+    title: 'Cardiologista na Vila Mariana | Dr. Vandui Santos',
     description:
       'Cardiologista na Vila Mariana para prevenção, check-up, hipertensão, colesterol alto, arritmias e acompanhamento cardiovascular.',
     keywords:
@@ -166,7 +166,7 @@ export const seoLandingPages: SeoLandingPage[] = [
       },
     ],
     faqs: localFaqs('Vila Mariana'),
-    relatedSlugs: ['dor-no-peito-quando-procurar-cardiologista', 'colesterol-alto-cardiologista', 'clinica-medica'],
+    relatedSlugs: ['dor-no-peito-quando-procurar-ajuda', 'colesterol-alto', 'clinica-medica'],
   },
   {
     slug: 'consulta-com-cardiologista',
@@ -207,7 +207,7 @@ export const seoLandingPages: SeoLandingPage[] = [
           'Depende da história clínica. Eletrocardiograma, exames laboratoriais, Holter, MAPA, teste ergométrico e ecocardiograma podem ser considerados.',
       },
     ],
-    relatedSlugs: ['check-up-cardiologico', 'dor-no-peito-quando-procurar-cardiologista', 'cardiologista-em-santos'],
+    relatedSlugs: ['check-up-cardiologico', 'dor-no-peito-quando-procurar-ajuda', 'cardiologista-em-santos'],
   },
   {
     slug: 'check-up-cardiologico',
@@ -248,16 +248,16 @@ export const seoLandingPages: SeoLandingPage[] = [
           'Ele não elimina risco, mas ajuda a identificar fatores modificáveis e orientar medidas de prevenção baseadas no perfil do paciente.',
       },
     ],
-    relatedSlugs: ['prevencao-cardiovascular', 'colesterol-alto-cardiologista', 'cardiologista-em-santo-andre'],
+    relatedSlugs: ['prevencao-cardiovascular', 'colesterol-alto', 'cardiologista-em-santo-andre'],
   },
   {
-    slug: 'avaliacao-de-risco-cirurgico',
+    slug: 'risco-cirurgico-cardiologico',
     kind: 'service',
-    title: 'Avaliação de Risco Cirúrgico — Cardiologista',
+    title: 'Risco Cirúrgico Cardiológico — Avaliação Pré-operatória',
     description:
       'Avaliação de risco cirúrgico cardiológico para pacientes que precisam de liberação e orientação cardiovascular antes de procedimentos.',
-    keywords: 'avaliação de risco cirúrgico, risco cirúrgico cardiológico, avaliação pré-operatória cardiologista, liberação cardiológica',
-    h1: 'Avaliação de risco cirúrgico',
+    keywords: 'risco cirúrgico cardiológico, avaliação de risco cirúrgico, avaliação pré-operatória cardiologista, liberação cardiológica',
+    h1: 'Risco cirúrgico cardiológico',
     eyebrow: 'Avaliação pré-operatória',
     intro:
       'A avaliação pré-operatória estima risco cardiovascular, revisa medicações e ajuda a reduzir complicações antes de cirurgias e procedimentos.',
@@ -332,13 +332,13 @@ export const seoLandingPages: SeoLandingPage[] = [
     relatedSlugs: ['check-up-cardiologico', 'prevencao-cardiovascular', 'cardiologista-em-santo-andre'],
   },
   {
-    slug: 'palpitacoes-arritmia',
+    slug: 'palpitacoes-e-arritmias',
     kind: 'service',
-    title: 'Palpitações e Arritmia — Quando Procurar Cardiologista',
+    title: 'Palpitações e Arritmias — Quando Procurar Cardiologista',
     description:
       'Avaliação de palpitações, batimentos irregulares e suspeita de arritmia com cardiologista. Entenda sinais de alerta.',
     keywords: 'palpitações, arritmia cardiologista, coração acelerado, batimento irregular',
-    h1: 'Palpitações e arritmia',
+    h1: 'Palpitações e arritmias',
     eyebrow: 'Ritmo cardíaco',
     intro:
       'Palpitações podem ter causas benignas, mas também podem indicar arritmias que precisam de avaliação, especialmente quando surgem com tontura, dor no peito ou desmaio.',
@@ -369,16 +369,16 @@ export const seoLandingPages: SeoLandingPage[] = [
           'Quando vem com dor no peito, falta de ar intensa, desmaio, fraqueza importante ou batimento muito acelerado e sustentado.',
       },
     ],
-    relatedSlugs: ['consulta-com-cardiologista', 'dor-no-peito-quando-procurar-cardiologista', 'cardiologista-na-vila-mariana'],
+    relatedSlugs: ['consulta-com-cardiologista', 'dor-no-peito-quando-procurar-ajuda', 'cardiologista-vila-mariana'],
   },
   {
-    slug: 'dor-no-peito-quando-procurar-cardiologista',
+    slug: 'dor-no-peito-quando-procurar-ajuda',
     kind: 'service',
-    title: 'Dor no Peito — Quando Procurar Cardiologista',
+    title: 'Dor no Peito — Quando Procurar Ajuda',
     description:
       'Dor no peito pode ter origem cardíaca. Saiba sinais de alerta e quando procurar emergência ou cardiologista.',
     keywords: 'dor no peito cardiologista, dor torácica, quando procurar cardiologista, sintomas infarto',
-    h1: 'Dor no peito: quando procurar cardiologista',
+    h1: 'Dor no peito: quando procurar ajuda',
     eyebrow: 'Sintoma de alerta',
     intro:
       'Dor no peito precisa ser interpretada pelo contexto. Algumas situações pedem emergência imediata; outras exigem consulta cardiológica para investigação planejada.',
@@ -409,16 +409,16 @@ export const seoLandingPages: SeoLandingPage[] = [
           'Não. Dor intensa, súbita ou com falta de ar, suor frio, desmaio ou irradiação deve ser avaliada em emergência.',
       },
     ],
-    relatedSlugs: ['avaliacao-de-risco-cirurgico', 'palpitacoes-arritmia', 'cardiologista-em-santos'],
+    relatedSlugs: ['risco-cirurgico-cardiologico', 'palpitacoes-e-arritmias', 'cardiologista-em-santos'],
   },
   {
-    slug: 'colesterol-alto-cardiologista',
+    slug: 'colesterol-alto',
     kind: 'service',
-    title: 'Colesterol Alto — Cardiologista e Prevenção Cardiovascular',
+    title: 'Colesterol Alto — Risco Cardiovascular e Cardiologista',
     description:
       'Avaliação e acompanhamento de colesterol alto para reduzir risco cardiovascular com plano individualizado.',
-    keywords: 'colesterol alto cardiologista, tratar colesterol alto, dislipidemia, prevenção cardiovascular colesterol',
-    h1: 'Colesterol alto e risco cardiovascular',
+    keywords: 'colesterol alto, colesterol alto cardiologista, tratar colesterol alto, dislipidemia, prevenção cardiovascular colesterol',
+    h1: 'Colesterol alto',
     eyebrow: 'Dislipidemia',
     intro:
       'Colesterol alto pode ser silencioso por anos. A avaliação cardiológica ajuda a estimar risco global e definir quando dieta, exercício e medicação são necessários.',
@@ -449,7 +449,7 @@ export const seoLandingPages: SeoLandingPage[] = [
           'Não. A decisão depende do risco cardiovascular global e das metas adequadas para cada paciente.',
       },
     ],
-    relatedSlugs: ['prevencao-cardiovascular', 'check-up-cardiologico', 'cardiologista-na-vila-mariana'],
+    relatedSlugs: ['prevencao-cardiovascular', 'check-up-cardiologico', 'cardiologista-vila-mariana'],
   },
   {
     slug: 'prevencao-cardiovascular',
@@ -489,7 +489,7 @@ export const seoLandingPages: SeoLandingPage[] = [
           'Depende do histórico familiar, pressão, colesterol, tabagismo, obesidade e sintomas. Risco pode começar cedo.',
       },
     ],
-    relatedSlugs: ['tratamento-hipertensao', 'colesterol-alto-cardiologista', 'cardiologista-em-santo-andre'],
+    relatedSlugs: ['tratamento-hipertensao', 'colesterol-alto', 'cardiologista-em-santo-andre'],
   },
   {
     slug: 'clinica-medica',
@@ -530,7 +530,7 @@ export const seoLandingPages: SeoLandingPage[] = [
           'Sim. Exames antigos ajudam a entender evolução e evitam repetir solicitações sem necessidade.',
       },
     ],
-    relatedSlugs: ['consulta-com-cardiologista', 'check-up-cardiologico', 'cardiologista-na-vila-mariana'],
+    relatedSlugs: ['consulta-com-cardiologista', 'check-up-cardiologico', 'cardiologista-vila-mariana'],
   },
   {
     slug: 'palpitacoes-quando-se-preocupar',
@@ -571,7 +571,7 @@ export const seoLandingPages: SeoLandingPage[] = [
           'Depende da frequência dos sintomas. Eletrocardiograma, Holter, exames laboratoriais e ecocardiograma podem ser indicados conforme a história clínica.',
       },
     ],
-    relatedSlugs: ['palpitacoes-arritmia', 'consulta-com-cardiologista', 'cardiologista-na-vila-mariana'],
+    relatedSlugs: ['palpitacoes-e-arritmias', 'consulta-com-cardiologista', 'cardiologista-vila-mariana'],
   },
   {
     slug: 'pressao-alta-quando-procurar-ajuda',
@@ -651,7 +651,7 @@ export const seoLandingPages: SeoLandingPage[] = [
           'Mudanças de hábito são importantes, mas algumas pessoas precisam de medicação conforme risco cardiovascular, níveis de LDL e histórico clínico.',
       },
     ],
-    relatedSlugs: ['colesterol-alto-cardiologista', 'prevencao-cardiovascular', 'check-up-cardiologico'],
+    relatedSlugs: ['colesterol-alto', 'prevencao-cardiovascular', 'check-up-cardiologico'],
   },
   {
     slug: 'cardiologista-ou-clinico-geral',

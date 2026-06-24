@@ -54,11 +54,13 @@ function createFixture({ blockAll = false } = {}) {
     path.join(root, "public/_redirects"),
     "/eventos / 301\n" +
       "/eventos/* / 301\n" +
-      "/cardiologista-vila-mariana /cardiologista-na-vila-mariana 301\n" +
-      "/risco-cirurgico-cardiologico /avaliacao-de-risco-cirurgico 301\n" +
-      "/avaliacao-risco-cirurgico /avaliacao-de-risco-cirurgico 301\n" +
-      "/dor-no-peito /dor-no-peito-quando-procurar-cardiologista 301\n" +
-      "/colesterol-alto /colesterol-alto-cardiologista 301\n" +
+      "/cardiologista-na-vila-mariana /cardiologista-vila-mariana 301\n" +
+      "/avaliacao-de-risco-cirurgico /risco-cirurgico-cardiologico 301\n" +
+      "/avaliacao-risco-cirurgico /risco-cirurgico-cardiologico 301\n" +
+      "/palpitacoes-arritmia /palpitacoes-e-arritmias 301\n" +
+      "/dor-no-peito /dor-no-peito-quando-procurar-ajuda 301\n" +
+      "/dor-no-peito-quando-procurar-cardiologista /dor-no-peito-quando-procurar-ajuda 301\n" +
+      "/colesterol-alto-cardiologista /colesterol-alto 301\n" +
       "/pressao-alta /tratamento-hipertensao 301\n" +
       SEO_ROUTES.filter(({ route }) => route !== "/")
         .map(({ route }) => `${route} ${route}/index.html 200`)
@@ -66,7 +68,7 @@ function createFixture({ blockAll = false } = {}) {
   )
   writeFileSync(
     path.join(root, "public/llms.txt"),
-    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n",
+    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n",
   )
 
   writeFileSync(
@@ -94,7 +96,7 @@ function createFixture({ blockAll = false } = {}) {
       )
       .join("")
 
-    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      ${schemaScripts}\n    </head><body></body></html>`
+    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      <meta name="description" content="CRM-SP 210328 e RQE Cardiologia 146567">\n      ${schemaScripts}\n    </head><body>CRM-SP 210328 RQE Cardiologia 146567</body></html>`
   }
 
   writeFileSync(path.join(distDir, "index.html"), baseHtml("https://www.drvandui.com.br/", "Home", ["Physician", "MedicalBusiness"]))
@@ -107,7 +109,7 @@ function createFixture({ blockAll = false } = {}) {
           : [
                 "/cardiologista-em-santos",
                 "/cardiologista-em-santo-andre",
-                "/cardiologista-na-vila-mariana",
+                "/cardiologista-vila-mariana",
               ].includes(route)
             ? ["Physician", "BreadcrumbList", "FAQPage", "MedicalBusiness"]
             : ["Physician", "BreadcrumbList", "FAQPage", "Article"]
