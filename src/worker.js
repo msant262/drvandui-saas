@@ -7,8 +7,16 @@ const CANONICAL_PATH_REDIRECTS = new Map([
   ["/palpitacoes-arritmia", "/palpitacoes-e-arritmias"],
   ["/dor-no-peito", "/dor-no-peito-quando-procurar-ajuda"],
   ["/dor-no-peito-quando-procurar-cardiologista", "/dor-no-peito-quando-procurar-ajuda"],
-  ["/colesterol-alto-cardiologista", "/colesterol-alto"],
+  ["/colesterol-alto-cardiologista", "/check-up-cardiologico"],
   ["/pressao-alta", "/tratamento-hipertensao"],
+  ["/consulta-com-cardiologista", "/contato"],
+  ["/colesterol-alto", "/check-up-cardiologico"],
+  ["/prevencao-cardiovascular", "/check-up-cardiologico"],
+  ["/clinica-medica", "/especialidades"],
+  ["/palpitacoes-quando-se-preocupar", "/palpitacoes-e-arritmias"],
+  ["/pressao-alta-quando-procurar-ajuda", "/tratamento-hipertensao"],
+  ["/colesterol-alto-e-risco-cardiaco", "/check-up-cardiologico"],
+  ["/cardiologista-ou-clinico-geral", "/especialidades"],
 ])
 
 function redirectToCanonical(url, pathname, shouldDeindex = false) {

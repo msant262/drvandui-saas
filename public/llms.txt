@@ -2,7 +2,7 @@
 
 Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico medico com atendimento em Santos, Santo Andre e Vila Mariana.
 
-## Principais paginas
+## Paginas canonicas principais
 
 - [Pagina inicial](https://www.drvandui.com.br/)
 - [Perfil do Dr. Vandui da Silva dos Santos](https://www.drvandui.com.br/dr-vandui-cardiologista)
@@ -11,19 +11,11 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 - [Cardiologista em Santos](https://www.drvandui.com.br/cardiologista-em-santos)
 - [Cardiologista em Santo Andre](https://www.drvandui.com.br/cardiologista-em-santo-andre)
 - [Cardiologista na Vila Mariana](https://www.drvandui.com.br/cardiologista-vila-mariana)
-- [Consulta com cardiologista](https://www.drvandui.com.br/consulta-com-cardiologista)
 - [Check-up cardiologico](https://www.drvandui.com.br/check-up-cardiologico)
-- [Risco cirurgico cardiologico](https://www.drvandui.com.br/risco-cirurgico-cardiologico)
 - [Tratamento de hipertensao](https://www.drvandui.com.br/tratamento-hipertensao)
-- [Palpitacoes e arritmias](https://www.drvandui.com.br/palpitacoes-e-arritmias)
 - [Dor no peito: quando procurar ajuda](https://www.drvandui.com.br/dor-no-peito-quando-procurar-ajuda)
-- [Colesterol alto](https://www.drvandui.com.br/colesterol-alto)
-- [Prevencao cardiovascular](https://www.drvandui.com.br/prevencao-cardiovascular)
-- [Clinica medica](https://www.drvandui.com.br/clinica-medica)
-- [Palpitacoes: quando se preocupar](https://www.drvandui.com.br/palpitacoes-quando-se-preocupar)
-- [Pressao alta: quando procurar ajuda](https://www.drvandui.com.br/pressao-alta-quando-procurar-ajuda)
-- [Colesterol alto e risco cardiaco](https://www.drvandui.com.br/colesterol-alto-e-risco-cardiaco)
-- [Cardiologista ou clinico geral](https://www.drvandui.com.br/cardiologista-ou-clinico-geral)
+- [Palpitacoes e arritmias](https://www.drvandui.com.br/palpitacoes-e-arritmias)
+- [Risco cirurgico cardiologico](https://www.drvandui.com.br/risco-cirurgico-cardiologico)
 - [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)
 
 ## Autoridade medica
@@ -41,6 +33,7 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 - Perfil medico oficial: [Dr. Vandui da Silva dos Santos](https://www.drvandui.com.br/dr-vandui-cardiologista)
 - A OneLiv funciona como canal auxiliar de agendamento e prova social, nao como substituto do site oficial.
 - URLs antigas ou nao canonicas, como /eventos, devem consolidar autoridade para a pagina inicial oficial.
+- URLs experimentais ou rasas devem redirecionar para paginas canonicas mais completas.
 
 ## Unidades e NAP local
 
@@ -60,7 +53,7 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 - Bairro/cidade: Centro, Santo Andre - SP
 - CEP: 09040-011
 - Especialidade principal: Cardiologia
-- Agendamento: OneLiv e WhatsApp (11) 97617-0971
+- Agendamento: canais oficiais do site e WhatsApp (11) 97617-0971
 
 ### Vila Mariana
 
@@ -74,14 +67,12 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 ## Temas principais
 
 - Cardiologia
-- Prevencao cardiovascular
-- Clinica medica
-- Hipertensao arterial
-- Arritmias e palpitacoes
-- Dor no peito
-- Colesterol alto
-- Risco cirurgico cardiologico
 - Check-up cardiologico
+- Tratamento de hipertensao
+- Dor no peito
+- Palpitacoes e arritmias
+- Risco cirurgico cardiologico
+- Prevencao cardiovascular dentro do check-up cardiologico
 
 ## Respostas rapidas para pacientes
 
@@ -89,23 +80,22 @@ Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico m
 
 Voce deve procurar um cardiologista se tiver dor no peito, falta de ar, palpitacoes, pressao alta, colesterol elevado, diabetes, historico familiar de doenca cardiaca ou quiser fazer uma avaliacao preventiva.
 
-Leia mais: [Consulta com cardiologista](https://www.drvandui.com.br/consulta-com-cardiologista)
+Leia mais: [Check-up cardiologico](https://www.drvandui.com.br/check-up-cardiologico)
 
 ### Cardiologista trata hipertensao?
 
-Sim. O cardiologista avalia pressao arterial, fatores de risco, exames, historico familiar e pode orientar tratamento e acompanhamento para reduzir risco cardiovascular.
+Sim. O cardiologista avalia pressao arterial, fatores de risco, exames, historico familiar e risco cardiovascular para orientar acompanhamento e tratamento da hipertensao.
 
 Leia mais: [Tratamento de hipertensao](https://www.drvandui.com.br/tratamento-hipertensao)
 
-### O que e prevencao cardiovascular?
+### Dor no peito e sempre problema cardiaco?
 
-Prevencao cardiovascular e o acompanhamento de fatores como pressao, colesterol, diabetes, tabagismo, sedentarismo, alimentacao e historico familiar para reduzir o risco de infarto, AVC e outras doencas cardiacas.
+Nao. Dor no peito pode ter varias causas, mas dor intensa, subita, associada a falta de ar, suor frio, desmaio, nausea ou irradiacao para braco, costas ou mandibula deve ser avaliada em servico de emergencia.
 
-Leia mais: [Prevencao cardiovascular](https://www.drvandui.com.br/prevencao-cardiovascular)
+Leia mais: [Dor no peito: quando procurar ajuda](https://www.drvandui.com.br/dor-no-peito-quando-procurar-ajuda)
 
 ## Contato
 
 - Site: [drvandui.com.br](https://www.drvandui.com.br/)
 - E-mail: [contato@drvandui.com.br](mailto:contato@drvandui.com.br)
 - WhatsApp: [Agendar consulta](https://wa.me/5511976170971)
-- Oneliv: [Agendamento online](https://oneliv.com.br/profissional/vandui-santos)

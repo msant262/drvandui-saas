@@ -11,24 +11,16 @@ const SEO_LOCAL_PATHS = [
   "/cardiologista-vila-mariana",
 ]
 const SEO_SERVICE_PATHS = [
-  "/consulta-com-cardiologista",
   "/check-up-cardiologico",
   "/risco-cirurgico-cardiologico",
   "/tratamento-hipertensao",
   "/palpitacoes-e-arritmias",
   "/dor-no-peito-quando-procurar-ajuda",
-  "/colesterol-alto",
-  "/prevencao-cardiovascular",
-  "/clinica-medica",
 ]
 const SEO_PROFILE_PATHS = [
   "/dr-vandui-cardiologista",
 ]
 const SEO_ANSWER_PATHS = [
-  "/palpitacoes-quando-se-preocupar",
-  "/pressao-alta-quando-procurar-ajuda",
-  "/colesterol-alto-e-risco-cardiaco",
-  "/cardiologista-ou-clinico-geral",
 ]
 const SEO_REDIRECTS = [
   { from: "/eventos", to: "/", status: 301 },
@@ -39,8 +31,16 @@ const SEO_REDIRECTS = [
   { from: "/palpitacoes-arritmia", to: "/palpitacoes-e-arritmias", status: 301 },
   { from: "/dor-no-peito", to: "/dor-no-peito-quando-procurar-ajuda", status: 301 },
   { from: "/dor-no-peito-quando-procurar-cardiologista", to: "/dor-no-peito-quando-procurar-ajuda", status: 301 },
-  { from: "/colesterol-alto-cardiologista", to: "/colesterol-alto", status: 301 },
+  { from: "/colesterol-alto-cardiologista", to: "/check-up-cardiologico", status: 301 },
   { from: "/pressao-alta", to: "/tratamento-hipertensao", status: 301 },
+  { from: "/consulta-com-cardiologista", to: "/contato", status: 301 },
+  { from: "/colesterol-alto", to: "/check-up-cardiologico", status: 301 },
+  { from: "/prevencao-cardiovascular", to: "/check-up-cardiologico", status: 301 },
+  { from: "/clinica-medica", to: "/especialidades", status: 301 },
+  { from: "/palpitacoes-quando-se-preocupar", to: "/palpitacoes-e-arritmias", status: 301 },
+  { from: "/pressao-alta-quando-procurar-ajuda", to: "/tratamento-hipertensao", status: 301 },
+  { from: "/colesterol-alto-e-risco-cardiaco", to: "/check-up-cardiologico", status: 301 },
+  { from: "/cardiologista-ou-clinico-geral", to: "/especialidades", status: 301 },
 ]
 const NON_CANONICAL_PATHS = SEO_REDIRECTS.map(({ from }) => from.replace("/*", ""))
 const SEO_LANDING_PATHS = [...SEO_PROFILE_PATHS, ...SEO_LOCAL_PATHS, ...SEO_SERVICE_PATHS, ...SEO_ANSWER_PATHS]
@@ -297,7 +297,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     ;[
       "Quando devo procurar um cardiologista?",
       "Cardiologista trata hipertensao?",
-      "O que e prevencao cardiovascular?",
+      "Dor no peito e sempre problema cardiaco?",
     ].forEach((question) => {
       fail(errors, `llms.txt responde: ${question}`, llms.includes(question))
     })
@@ -388,6 +388,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "src/worker.js calcula path canonico antes de redirecionar host", /const\s+canonicalPath\s*=\s*getCanonicalPath\(url\.pathname\)[\s\S]*url\.hostname\s*===\s*ROOT_HOST\s*\|\|\s*canonicalPath\s*!==\s*url\.pathname[\s\S]*redirectToCanonical\(url,\s*canonicalPath,\s*canonicalPath\s*!==\s*url\.pathname\)/i.test(worker))
     fail(errors, "src/worker.js canonicaliza alias /pressao-alta", /["']\/pressao-alta["']\s*,\s*["']\/tratamento-hipertensao["']/i.test(worker))
     fail(errors, "src/worker.js canonicaliza alias /dor-no-peito", /["']\/dor-no-peito["']\s*,\s*["']\/dor-no-peito-quando-procurar-ajuda["']/i.test(worker))
+    fail(errors, "src/worker.js redireciona paginas rasas para canonicas fortes", /["']\/consulta-com-cardiologista["']\s*,\s*["']\/contato["'][\s\S]*["']\/prevencao-cardiovascular["']\s*,\s*["']\/check-up-cardiologico["']/i.test(worker))
     fail(errors, "src/worker.js remove query string de URLs canonicas antigas", /url\.search\s*=\s*["']["']/i.test(worker))
     fail(errors, "src/worker.js preserva entrega de assets pelo Cloudflare", /env\.ASSETS\.fetch\(request\)/i.test(worker))
   }
@@ -458,8 +459,12 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
   const indexHtml = read(root, "dist/index.html")
   if (indexHtml) {
     fail(errors, "index.html (build) inclui JSON-LD Physician", hasJsonLdType(indexHtml, "Physician"))
+    fail(errors, "index.html (build) inclui JSON-LD Person da entidade medica", hasJsonLdType(indexHtml, "Person"))
+    fail(errors, "index.html (build) inclui JSON-LD WebSite", hasJsonLdType(indexHtml, "WebSite"))
     fail(errors, "index.html (build) inclui JSON-LD MedicalBusiness", hasJsonLdType(indexHtml, "MedicalBusiness"))
     fail(errors, "index.html (build) consolida Physician com @id estavel", /"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(indexHtml))
+    fail(errors, "index.html (build) consolida MedicalBusiness com @id estavel", /"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#medical-practice"/i.test(indexHtml))
+    fail(errors, "index.html (build) conecta WebSite ao Physician", /"@type"\s*:\s*"WebSite"[\s\S]*"publisher"\s*:\s*\{[\s\S]{0,180}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(indexHtml))
     fail(errors, "index.html (build) usa canonical home como url do Physician", /"url"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/"/i.test(indexHtml))
     fail(errors, "index.html (build) conecta MedicalBusiness ao Physician", /"employee"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(indexHtml))
     fail(errors, "index.html (build) inclui hasCredential no Physician", /"hasCredential"\s*:\s*\[/i.test(indexHtml))
@@ -494,6 +499,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "Contato (build) inclui JSON-LD FAQPage", hasJsonLdType(contatoHtml, "FAQPage"))
     fail(errors, "Contato (build) inclui JSON-LD BreadcrumbList", hasJsonLdType(contatoHtml, "BreadcrumbList"))
     fail(errors, "Contato (build) inclui JSON-LD ContactPage", hasJsonLdType(contatoHtml, "ContactPage"))
+    fail(errors, "Contato (build) inclui JSON-LD Person", hasJsonLdType(contatoHtml, "Person"))
     fail(errors, "Contato (build) inclui JSON-LD Physician", hasJsonLdType(contatoHtml, "Physician"))
     fail(errors, "Contato (build) inclui JSON-LD MedicalBusiness", hasJsonLdType(contatoHtml, "MedicalBusiness"))
     fail(errors, "Contato (build) explicita CRM-SP 210328 no schema", /CRM-SP[\s\S]{0,120}210328/i.test(contatoHtml))
@@ -529,7 +535,13 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     }
 
     fail(errors, `${route}: inclui JSON-LD Physician`, hasJsonLdType(html, "Physician"))
+    fail(errors, `${route}: inclui JSON-LD Person`, hasJsonLdType(html, "Person"))
+    fail(errors, `${route}: inclui JSON-LD WebSite`, hasJsonLdType(html, "WebSite"))
+    fail(errors, `${route}: inclui JSON-LD MedicalWebPage`, hasJsonLdType(html, "MedicalWebPage"))
     fail(errors, `${route}: consolida Physician com @id estavel`, /"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
+    fail(errors, `${route}: consolida MedicalBusiness principal com @id estavel`, /"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#medical-practice"/i.test(html))
+    fail(errors, `${route}: MedicalWebPage pertence ao WebSite oficial`, /"@type"\s*:\s*"MedicalWebPage"[\s\S]*"isPartOf"\s*:\s*\{[\s\S]{0,180}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#website"/i.test(html))
+    fail(errors, `${route}: MedicalWebPage possui revisao medica`, /"@type"\s*:\s*"MedicalWebPage"[\s\S]*"lastReviewed"\s*:\s*"\d{4}-\d{2}-\d{2}"/i.test(html))
     fail(errors, `${route}: inclui hasCredential no Physician`, /"hasCredential"\s*:\s*\[/i.test(html))
     fail(errors, `${route}: inclui knowsAbout no Physician`, /"knowsAbout"\s*:\s*\[/i.test(html))
     fail(errors, `${route}: inclui JSON-LD BreadcrumbList`, hasJsonLdType(html, "BreadcrumbList"))
@@ -540,6 +552,9 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, `${route}: possui conteudo inicial crawlavel`, /data-static-seo-route=|Respostas diretas para pacientes/i.test(html))
     fail(errors, `${route}: possui H1 visivel no HTML inicial`, /<h1>[\s\S]*<\/h1>/i.test(html))
     fail(errors, `${route}: possui bloco AEO de respostas diretas`, /Respostas diretas para pacientes/i.test(html))
+    fail(errors, `${route}: entrega corpo especifico no root estatico`, /<div\s+id=["']root["'][^>]*>[\s\S]*data-static-seo-route=/i.test(html))
+    fail(errors, `${route}: informa revisão médica e atualização`, /Revisão médica[\s\S]*Última atualização/i.test(html))
+    fail(errors, `${route}: reforça orientação de urgência em conteúdo médico`, /Sintomas intensos[\s\S]*serviço de urgência/i.test(html))
     fail(errors, `${route}: linka OneLiv como reforco externo auxiliar`, /https:\/\/oneliv\.com\.br\/profissional\/vandui-santos/i.test(html))
 
     if (SEO_LOCAL_PATHS.includes(route)) {
@@ -554,6 +569,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
       fail(errors, `${route}: inclui JSON-LD Article`, hasJsonLdType(html, "Article"))
       fail(errors, `${route}: Article inclui datePublished`, /"@type"\s*:\s*"Article"[\s\S]*"datePublished"\s*:\s*"\d{4}-\d{2}-\d{2}"/i.test(html))
       fail(errors, `${route}: Article inclui dateModified`, /"@type"\s*:\s*"Article"[\s\S]*"dateModified"\s*:\s*"\d{4}-\d{2}-\d{2}"/i.test(html))
+      fail(errors, `${route}: Article inclui lastReviewed`, /"@type"\s*:\s*"Article"[\s\S]*"lastReviewed"\s*:\s*"\d{4}-\d{2}-\d{2}"/i.test(html))
       fail(errors, `${route}: Article identifica Dr. Vandui como autor`, /"author"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
       fail(errors, `${route}: Article identifica Dr. Vandui como revisor medico`, /"reviewedBy"\s*:\s*\{[\s\S]{0,160}"@id"\s*:\s*"https:\/\/www\.drvandui\.com\.br\/#physician"/i.test(html))
     }
@@ -578,6 +594,7 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "Páginas SEO linkam OneLiv como agendamento e prova social", /oneliv\.com\.br\/profissional\/vandui-santos/i.test(seoLandingSource))
     fail(errors, "Páginas SEO anotam clique de agendamento OneLiv", /data-event=["']click_agendamento["']/i.test(seoLandingSource))
     fail(errors, "Páginas SEO exibem respostas diretas AEO no app", /Respostas diretas para pacientes/i.test(seoLandingSource))
+    fail(errors, "Páginas SEO nao exibem mapa programatico repetitivo", !/Mapa de intenção para encontrar a consulta certa/i.test(seoLandingSource))
   }
 
   return {

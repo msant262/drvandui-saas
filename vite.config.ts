@@ -81,11 +81,72 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
     },
     {
       '@context': 'https://schema.org',
+      '@type': 'Person',
+      '@id': PHYSICIAN_ENTITY_ID,
+      name: 'Dr. Vandui da Silva dos Santos',
+      honorificPrefix: 'Dr.',
+      jobTitle: 'Médico Cardiologista',
+      url: `${SITE_BASE_URL}/dr-vandui-cardiologista`,
+      image: `${SITE_BASE_URL}/hero-doctor.jpg`,
+      worksFor: {
+        '@type': 'MedicalBusiness',
+        '@id': MEDICAL_PRACTICE_ENTITY_ID,
+        name: 'Dr. Vandui — Cardiologista',
+      },
+      sameAs: [
+        'https://oneliv.com.br/profissional/vandui-santos',
+        'https://instagram.com/vanduisantos.cardio',
+        'https://www.linkedin.com/in/vandui-santos-181225137/',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Início', item: `${SITE_BASE_URL}/` },
         { '@type': 'ListItem', position: 2, name: page.h1, item: url },
       ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'MedicalWebPage',
+      '@id': `${url}#webpage`,
+      url,
+      name: page.h1,
+      headline: page.h1,
+      description: page.description,
+      inLanguage: 'pt-BR',
+      datePublished: CONTENT_LAST_MODIFIED,
+      dateModified: CONTENT_LAST_MODIFIED,
+      lastReviewed: CONTENT_LAST_MODIFIED,
+      isPartOf: {
+        '@type': 'WebSite',
+        '@id': `${SITE_BASE_URL}/#website`,
+        name: 'Dr. Vandui — Cardiologista',
+      },
+      author: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      reviewedBy: {
+        '@type': 'Physician',
+        '@id': PHYSICIAN_ENTITY_ID,
+        name: 'Dr. Vandui da Silva dos Santos',
+      },
+      publisher: {
+        '@type': 'MedicalBusiness',
+        '@id': MEDICAL_PRACTICE_ENTITY_ID,
+        name: 'Dr. Vandui — Cardiologista',
+      },
+      about: {
+        '@type': 'MedicalCondition',
+        name: page.h1,
+      },
+      medicalAudience: {
+        '@type': 'MedicalAudience',
+        audienceType: 'Pacientes adultos',
+      },
     },
     {
       '@context': 'https://schema.org',
@@ -231,14 +292,15 @@ function buildLandingPageSchemas(page: SeoLandingPage) {
   if (page.kind !== 'local') {
     schemas.push({
       '@context': 'https://schema.org',
-      '@type': 'Article',
-      headline: page.h1,
-      description: page.description,
-      datePublished: CONTENT_LAST_MODIFIED,
-      dateModified: CONTENT_LAST_MODIFIED,
-      author: {
-        '@type': 'Physician',
-        '@id': PHYSICIAN_ENTITY_ID,
+        '@type': 'Article',
+        headline: page.h1,
+        description: page.description,
+        datePublished: CONTENT_LAST_MODIFIED,
+        dateModified: CONTENT_LAST_MODIFIED,
+        lastReviewed: CONTENT_LAST_MODIFIED,
+        author: {
+          '@type': 'Physician',
+          '@id': PHYSICIAN_ENTITY_ID,
         name: 'Dr. Vandui da Silva dos Santos',
       },
       reviewedBy: {
@@ -300,6 +362,26 @@ function buildContactPageSchemas() {
         '@id': PHYSICIAN_ENTITY_ID,
         name: 'Dr. Vandui da Silva dos Santos',
       },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      '@id': PHYSICIAN_ENTITY_ID,
+      name: 'Dr. Vandui da Silva dos Santos',
+      honorificPrefix: 'Dr.',
+      jobTitle: 'Médico Cardiologista',
+      url: `${SITE_BASE_URL}/dr-vandui-cardiologista`,
+      image: `${SITE_BASE_URL}/hero-doctor.jpg`,
+      worksFor: {
+        '@type': 'MedicalBusiness',
+        '@id': MEDICAL_PRACTICE_ENTITY_ID,
+        name: 'Dr. Vandui — Cardiologista',
+      },
+      sameAs: [
+        'https://oneliv.com.br/profissional/vandui-santos',
+        'https://instagram.com/vanduisantos.cardio',
+        'https://www.linkedin.com/in/vandui-santos-181225137/',
+      ],
     },
     {
       '@context': 'https://schema.org',
@@ -457,6 +539,8 @@ function buildLandingPageStaticContent(page: SeoLandingPage) {
         <p>Dr. Vandui da Silva dos Santos, Médico Cardiologista, CRM-SP 210328 e RQE Cardiologia 146567.</p>
         <p>Formação pela UFTM, Hospital Ipiranga e Instituto Dante Pazzanese de Cardiologia.</p>
         <p>Atendimento em Santos, Santo André e Vila Mariana.</p>
+        <p>Revisão médica: conteúdo revisado pelo Dr. Vandui da Silva dos Santos. Última atualização: 24 de junho de 2026.</p>
+        <p>Conteúdo educativo. Sintomas intensos, súbitos ou progressivos devem ser avaliados em serviço de urgência.</p>
         <p><a href="https://oneliv.com.br/profissional/vandui-santos">Agenda e prova social na OneLiv</a></p>
       </section>
       ${locationBlock}
@@ -601,6 +685,15 @@ function applyRouteHead(html: string, route: StaticRouteFallback) {
   const withSchema = updated.replace('</head>', `${schemaMarkup}\n</head>`)
 
   if (route.contentHtml) {
+    const withRootContent = withSchema.replace(
+      /<div\s+id=["']root["']\s*><\/div>/i,
+      `<div id="root">${route.contentHtml}</div>`,
+    )
+
+    if (withRootContent !== withSchema) {
+      return withRootContent
+    }
+
     return withSchema.replace('</body>', `${route.contentHtml}\n</body>`)
   }
 

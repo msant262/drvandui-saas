@@ -18,7 +18,7 @@ const root = process.cwd()
 const canonicalWorkerSource =
   'const ROOT_HOST = "drvandui.com.br"\n' +
   'const CANONICAL_HOST = "www.drvandui.com.br"\n\n' +
-  'const CANONICAL_PATH_REDIRECTS = new Map([["/pressao-alta", "/tratamento-hipertensao"], ["/dor-no-peito", "/dor-no-peito-quando-procurar-ajuda"]])\n\n' +
+  'const CANONICAL_PATH_REDIRECTS = new Map([["/pressao-alta", "/tratamento-hipertensao"], ["/dor-no-peito", "/dor-no-peito-quando-procurar-ajuda"], ["/consulta-com-cardiologista", "/contato"], ["/prevencao-cardiovascular", "/check-up-cardiologico"]])\n\n' +
   "function redirectToCanonical(url, pathname, shouldDeindex = false) {\n" +
   "  url.hostname = CANONICAL_HOST\n" +
   '  url.protocol = "https:"\n' +
@@ -100,15 +100,23 @@ function createFixture({ blockAll = false } = {}) {
       "/palpitacoes-arritmia /palpitacoes-e-arritmias 301\n" +
       "/dor-no-peito /dor-no-peito-quando-procurar-ajuda 301\n" +
       "/dor-no-peito-quando-procurar-cardiologista /dor-no-peito-quando-procurar-ajuda 301\n" +
-      "/colesterol-alto-cardiologista /colesterol-alto 301\n" +
+      "/colesterol-alto-cardiologista /check-up-cardiologico 301\n" +
       "/pressao-alta /tratamento-hipertensao 301\n" +
+      "/consulta-com-cardiologista /contato 301\n" +
+      "/colesterol-alto /check-up-cardiologico 301\n" +
+      "/prevencao-cardiovascular /check-up-cardiologico 301\n" +
+      "/clinica-medica /especialidades 301\n" +
+      "/palpitacoes-quando-se-preocupar /palpitacoes-e-arritmias 301\n" +
+      "/pressao-alta-quando-procurar-ajuda /tratamento-hipertensao 301\n" +
+      "/colesterol-alto-e-risco-cardiaco /check-up-cardiologico 301\n" +
+      "/cardiologista-ou-clinico-geral /especialidades 301\n" +
       SEO_ROUTES.filter(({ route }) => route !== "/")
         .map(({ route }) => `${route} ${route}/index.html 200`)
         .join("\n"),
   )
   writeFileSync(
     path.join(root, "public/llms.txt"),
-    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Perfil do Dr. Vandui](https://www.drvandui.com.br/dr-vandui-cardiologista)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n\n## Entidade oficial\n\n- Fonte principal: [www.drvandui.com.br](https://www.drvandui.com.br/)\n- A OneLiv funciona como canal auxiliar de agendamento e prova social, nao como substituto do site oficial.\n- URLs antigas ou nao canonicas, como /eventos, devem consolidar autoridade para a pagina inicial oficial.\n\n## Unidades e NAP local\n\n- Av. Ana Costa, 228\n- CEP: 11060-003\n- Av. Portugal, 1285\n- CEP: 09040-011\n- R. Domingos de Morais, 2781\n- CEP: 04035-001\n\n## Respostas rapidas para pacientes\n\n### Quando devo procurar um cardiologista?\n\nVoce deve procurar um cardiologista se tiver dor no peito.\n\n### Cardiologista trata hipertensao?\n\nSim. O cardiologista avalia pressao arterial.\n\n### O que e prevencao cardiovascular?\n\nPrevencao cardiovascular acompanha fatores de risco.\n",
+    "# Dr. Vandui\n\n- [Pagina inicial](https://www.drvandui.com.br/)\n- [Perfil do Dr. Vandui](https://www.drvandui.com.br/dr-vandui-cardiologista)\n- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)\n\n- CRM-SP: 210328\n- RQE Cardiologia: 146567\n\n## Entidade oficial\n\n- Fonte principal: [www.drvandui.com.br](https://www.drvandui.com.br/)\n- A OneLiv funciona como canal auxiliar de agendamento e prova social, nao como substituto do site oficial.\n- URLs antigas ou nao canonicas, como /eventos, devem consolidar autoridade para a pagina inicial oficial.\n\n## Unidades e NAP local\n\n- Av. Ana Costa, 228\n- CEP: 11060-003\n- Av. Portugal, 1285\n- CEP: 09040-011\n- R. Domingos de Morais, 2781\n- CEP: 04035-001\n\n## Respostas rapidas para pacientes\n\n### Quando devo procurar um cardiologista?\n\nVoce deve procurar um cardiologista se tiver dor no peito.\n\n### Cardiologista trata hipertensao?\n\nSim. O cardiologista avalia pressao arterial.\n\n### Dor no peito e sempre problema cardiaco?\n\nNao. Dor no peito pode ter varias causas.\n",
   )
   writeFileSync(path.join(root, "public/.assetsignore"), "_worker.js\n")
 
@@ -139,11 +147,19 @@ function createFixture({ blockAll = false } = {}) {
     const schemaScripts = normalizedSchemaTypes
       .map((schemaType) => {
         if (schemaType === "Article") {
-          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"},"reviewedBy":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","datePublished":"2026-06-24","dateModified":"2026-06-24","lastReviewed":"2026-06-24","author":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"},"reviewedBy":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
         }
 
         if (schemaType === "MedicalBusiness") {
-          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","hasMap":"https://www.google.com/maps/search/?api=1&query=fixture","areaServed":"Fixture","address":{"@type":"PostalAddress","postalCode":"11060-003"},"employee":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalBusiness","@id":"https://www.drvandui.com.br/#medical-practice","hasMap":"https://www.google.com/maps/search/?api=1&query=fixture","areaServed":"Fixture","address":{"@type":"PostalAddress","postalCode":"11060-003"},"employee":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+        }
+
+        if (schemaType === "MedicalWebPage") {
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalWebPage","lastReviewed":"2026-06-24","isPartOf":{"@type":"WebSite","@id":"https://www.drvandui.com.br/#website"},"author":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"},"reviewedBy":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>'
+        }
+
+        if (schemaType === "ItemList") {
+          return '<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","url":"https://www.drvandui.com.br/cardiologista-em-santos"},{"@type":"ListItem","url":"https://www.drvandui.com.br/check-up-cardiologico"},{"@type":"ListItem","url":"https://www.drvandui.com.br/palpitacoes-quando-se-preocupar"}]}</script>'
         }
 
         if (schemaType === "ContactPage") {
@@ -176,7 +192,7 @@ function createFixture({ blockAll = false } = {}) {
       .map(({ route }) => `<li><a href="${route}">${route}</a></li>`)
       .join("")
 
-    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      <meta name="description" content="CRM-SP 210328 e RQE Cardiologia 146567">\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Physician","@id":"https://www.drvandui.com.br/#physician","url":"https://www.drvandui.com.br/","hasCredential":[{"name":"CRM-SP 210328"},{"name":"RQE Cardiologia 146567"}],"knowsAbout":["Cardiologia","Prevenção cardiovascular"],"alumniOf":[{"name":"Universidade Federal do Triângulo Mineiro (UFTM)"},{"name":"Hospital Ipiranga"},{"name":"Instituto Dante Pazzanese de Cardiologia"}]}</script>\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quando devo procurar um cardiologista?"},{"@type":"Question","name":"Cardiologista trata hipertensão?"},{"@type":"Question","name":"O que é prevenção cardiovascular?"}]}</script>\n      ${schemaScripts}\n    </head><body><main data-static-seo-route="fixture"><h1>${title}</h1><h2>Respostas diretas para pacientes</h2><a href="https://oneliv.com.br/profissional/vandui-santos">OneLiv</a></main>CRM-SP 210328 RQE Cardiologia 146567 UFTM Hospital Ipiranga Instituto Dante Pazzanese de Cardiologia Quando devo procurar um cardiologista? Cardiologista trata hipertensão? O que é prevenção cardiovascular?<noscript><ul>${noscriptLinks}</ul></noscript></body></html>`
+    return `<!doctype html><html><head>\n      <meta charset="UTF-8"/>\n      <title>${title}</title>\n      <meta name="robots" content="index,follow"/>\n      <link rel="canonical" href="${canonical}">\n      <meta name="description" content="CRM-SP 210328 e RQE Cardiologia 146567">\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://www.drvandui.com.br/#website","publisher":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://www.drvandui.com.br/#physician","worksFor":{"@type":"MedicalBusiness","@id":"https://www.drvandui.com.br/#medical-practice"}}</script>\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"MedicalWebPage","lastReviewed":"2026-06-24","isPartOf":{"@type":"WebSite","@id":"https://www.drvandui.com.br/#website"},"author":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"},"reviewedBy":{"@type":"Physician","@id":"https://www.drvandui.com.br/#physician"}}</script>\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"Physician","@id":"https://www.drvandui.com.br/#physician","url":"https://www.drvandui.com.br/","hasCredential":[{"name":"CRM-SP 210328"},{"name":"RQE Cardiologia 146567"}],"knowsAbout":["Cardiologia","Prevenção cardiovascular"],"alumniOf":[{"name":"Universidade Federal do Triângulo Mineiro (UFTM)"},{"name":"Hospital Ipiranga"},{"name":"Instituto Dante Pazzanese de Cardiologia"}]}</script>\n      <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quando devo procurar um cardiologista?"},{"@type":"Question","name":"Cardiologista trata hipertensão?"},{"@type":"Question","name":"Dor no peito é sempre problema cardíaco?"}]}</script>\n      ${schemaScripts}\n    </head><body><div id="root"><main data-static-seo-route="fixture"><h1>${title}</h1><h2>Respostas diretas para pacientes</h2><a href="https://oneliv.com.br/profissional/vandui-santos">OneLiv</a></main>CRM-SP 210328 RQE Cardiologia 146567 UFTM Hospital Ipiranga Instituto Dante Pazzanese de Cardiologia Revisão médica: conteúdo revisado pelo Dr. Vandui da Silva dos Santos. Última atualização: 24 de junho de 2026. Sintomas intensos, súbitos ou progressivos devem ser avaliados em serviço de urgência. Quando devo procurar um cardiologista? Cardiologista trata hipertensão? Dor no peito é sempre problema cardíaco?</div><noscript><ul>${noscriptLinks}</ul></noscript></body></html>`
   }
 
   writeFileSync(path.join(distDir, "index.html"), baseHtml("https://www.drvandui.com.br/", "Home", ["Physician", "MedicalBusiness"]))
@@ -185,16 +201,16 @@ function createFixture({ blockAll = false } = {}) {
       route === "/especialidades"
         ? ["BreadcrumbList"]
         : route === "/contato"
-          ? ["FAQPage", "BreadcrumbList", "Physician", "ContactPage", "MedicalBusiness"]
+          ? ["FAQPage", "BreadcrumbList", "Physician", "ContactPage", "MedicalBusiness", "ItemList"]
           : route === "/dr-vandui-cardiologista"
-            ? ["Physician", "BreadcrumbList", "FAQPage", "Article", "ProfilePage"]
+            ? ["Physician", "BreadcrumbList", "FAQPage", "Article", "ProfilePage", "ItemList"]
             : [
                 "/cardiologista-em-santos",
                 "/cardiologista-em-santo-andre",
                 "/cardiologista-vila-mariana",
               ].includes(route)
-            ? ["Physician", "BreadcrumbList", "FAQPage", "MedicalBusiness"]
-            : ["Physician", "BreadcrumbList", "FAQPage", "Article"]
+            ? ["Physician", "BreadcrumbList", "FAQPage", "MedicalBusiness", "ItemList"]
+            : ["Physician", "BreadcrumbList", "FAQPage", "Article", "ItemList"]
 
     const html = baseHtml(canonical, route.slice(1), schemaTypes)
     const routeHtml = route === "/contato"
