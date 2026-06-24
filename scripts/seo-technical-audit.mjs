@@ -321,6 +321,8 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
       /pattern\s*=\s*["']drvandui\.com\.br["'][\s\S]*?custom_domain\s*=\s*true/i.test(wranglerConfig)
     )
     fail(errors, "wrangler.toml mantem assets em ./dist", /directory\s*=\s*["']\.\/dist["']/i.test(wranglerConfig))
+    fail(errors, "wrangler.toml expoe assets como binding ASSETS", /binding\s*=\s*["']ASSETS["']/i.test(wranglerConfig))
+    fail(errors, "wrangler.toml executa Worker antes dos assets para canonicalizacao", /run_worker_first\s*=\s*true/i.test(wranglerConfig))
   }
 
   const publicWorker = read(root, "public/_worker.js")
