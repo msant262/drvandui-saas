@@ -1,0 +1,26 @@
+# Dr. Vandui
+
+Site oficial do Dr. Vandui da Silva dos Santos, medico cardiologista e clinico medico com atendimento em Santos, Santo Andre e Vila Mariana.
+
+## Principais paginas
+
+- [Pagina inicial](https://www.drvandui.com.br/)
+- [Especialidades medicas](https://www.drvandui.com.br/especialidades)
+- [Contato e agendamento](https://www.drvandui.com.br/contato)
+- [Sitemap XML](https://www.drvandui.com.br/sitemap.xml)
+
+## Temas principais
+
+- Cardiologia
+- Prevencao cardiovascular
+- Clinica medica
+- Hipertensao arterial
+- Arritmias
+- Insuficiencia cardiaca
+- Check-up cardiologico
+
+## Contato
+
+- Site: [drvandui.com.br](https://www.drvandui.com.br/)
+- E-mail: [contato@drvandui.com.br](mailto:contato@drvandui.com.br)
+- WhatsApp: [Agendar consulta](https://wa.me/5511976170971)

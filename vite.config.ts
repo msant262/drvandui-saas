@@ -7,12 +7,13 @@ const require = createRequire(import.meta.url)
 const vitePrerender = require('vite-plugin-prerender')
 
 const Renderer = vitePrerender.PuppeteerRenderer
+const enableInspectAttrs = process.env.NODE_ENV !== 'production'
 
 // https://vite.dev/config/
 export default defineConfig({
   base: '/',
   plugins: [
-    inspectAttr(),
+    enableInspectAttrs && inspectAttr(),
     react(),
       vitePrerender({
       staticDir: path.resolve(__dirname, 'dist'),

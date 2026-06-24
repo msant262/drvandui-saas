@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, HeartPulse, Phone, Instagram, CalendarDays, MessageCircle, ArrowRight } from 'lucide-react';
 
 const navLinks = [
@@ -30,10 +29,7 @@ export function Navigation() {
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${useScrolledStyle
             ? 'bg-white/95 backdrop-blur-lg shadow-lg py-3'
             : 'bg-transparent py-6'
@@ -47,16 +43,15 @@ export function Navigation() {
                 className="flex items-center gap-3 group"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${useScrolledStyle ? 'bg-[var(--color-teal)]' : 'bg-white'
+              <div
+                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-transform transition-colors group-hover:scale-105 ${useScrolledStyle ? 'bg-[var(--color-teal)]' : 'bg-white'
                   }`}
               >
                 <HeartPulse
                   className={`w-6 h-6 transition-colors ${useScrolledStyle ? 'text-white' : 'text-[var(--color-teal)]'
                     }`}
                 />
-              </motion.div>
+              </div>
               <div className="hidden sm:block">
                 <h1
                   className={`font-bold text-lg leading-tight transition-colors ${useScrolledStyle ? 'text-[var(--color-teal)]' : 'text-white'
@@ -87,14 +82,12 @@ export function Navigation() {
                       : useScrolledStyle
                         ? 'text-[#666] hover:text-[var(--color-teal)]'
                         : 'text-white/80 hover:text-white'
-                    }`}
+                  }`}
                 >
                   {location.pathname === link.path && (
-                    <motion.span
-                      layoutId="navIndicator"
-                      className={`absolute inset-0 rounded-full ${useScrolledStyle ? 'bg-[var(--color-cyan-light)]' : 'bg-white/20'
+                    <span
+                      className={`absolute inset-0 rounded-full transition-colors ${useScrolledStyle ? 'bg-[var(--color-cyan-light)]' : 'bg-white/20'
                         }`}
-                      transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                     />
                   )}
                   <span className="relative z-10">{link.label}</span>
@@ -134,6 +127,7 @@ export function Navigation() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
               className={`lg:hidden p-2 rounded-xl transition-colors ${useScrolledStyle
                   ? 'text-[var(--color-teal)] hover:bg-gray-100'
                   : 'text-white hover:bg-white/20'
@@ -147,28 +141,17 @@ export function Navigation() {
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden"
-          >
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden animate-fade-in">
             <div
               className="absolute inset-0 bg-black/50 backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 h-full w-72 bg-white shadow-2xl overflow-y-auto"
+            <div
+              className="absolute right-0 top-0 h-full w-72 bg-white shadow-2xl overflow-y-auto animate-slide-in-right"
             >
               {/* Close button */}
               <div className="flex items-center justify-between p-4 border-b border-gray-100">
@@ -183,13 +166,8 @@ export function Navigation() {
 
               <div className="p-4">
                 <nav className="flex flex-col gap-1">
-                  {navLinks.map((link, index) => (
-                    <motion.div
-                      key={link.path}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
+                  {navLinks.map((link) => (
+                    <div key={link.path}>
                       <Link
                         to={link.path}
                         onClick={() => setIsMobileMenuOpen(false)}
@@ -200,7 +178,7 @@ export function Navigation() {
                       >
                         {link.label}
                       </Link>
-                    </motion.div>
+                    </div>
                   ))}
                 </nav>
                 <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">
@@ -244,10 +222,9 @@ export function Navigation() {
                   </a>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
+        </div>
+      )}
     </>
   );
 }

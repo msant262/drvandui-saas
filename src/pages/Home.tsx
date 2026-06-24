@@ -322,8 +322,15 @@ export function Home() {
               <div className="relative animate-float z-20 w-full max-w-[22rem] lg:max-w-md mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 rounded-[40px] blur-2xl transform scale-110" />
                 <img
-                  src="/hero-doctor.jpg"
+                  src="/hero-doctor-768.jpg"
+                  srcSet="/hero-doctor-480.jpg 480w, /hero-doctor-768.jpg 768w, /hero-doctor.jpg 1066w"
+                  sizes="(min-width: 1024px) 28rem, 22rem"
+                  width={1066}
+                  height={1600}
                   alt="Dr. Vandui da Silva dos Santos — Cardiologista em Santos, Santo André e Vila Mariana"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                   className="relative w-full rounded-[40px] shadow-2xl border border-white/10"
                 />
 
