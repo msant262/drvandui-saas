@@ -382,10 +382,10 @@ export function runSeoChecks(root = DEFAULT_ROOT) {
     fail(errors, "src/worker.js emite redirect 301 para host canonico", /status\s*:\s*301/i.test(worker))
     fail(errors, "src/worker.js adiciona Location no redirect canonico", /Location\s*:\s*canonicalUrl/i.test(worker))
     fail(errors, "src/worker.js adiciona Link rel canonical no redirect", /rel=["']canonical["']/i.test(worker))
-    fail(errors, "src/worker.js aplica noindex somente a aliases antigos", /shouldDeindex\s*=\s*false[\s\S]*if\s*\(\s*shouldDeindex\s*\)[\s\S]*X-Robots-Tag["']?\]\s*=\s*["']noindex,\s*follow["']/i.test(worker))
+    fail(errors, "src/worker.js não emite noindex em redirects canônicos", !/X-Robots-Tag[\s\S]*noindex/i.test(worker))
     fail(errors, "src/worker.js cacheia redirects canonicos", /Cache-Control["']?\s*:\s*["']public,\s*max-age=86400["']/i.test(worker))
     fail(errors, "src/worker.js canonicaliza /eventos antes dos assets", /pathname\s*===\s*["']\/eventos["'][\s\S]*startsWith\(["']\/eventos\/["']\)/i.test(worker))
-    fail(errors, "src/worker.js calcula path canonico antes de redirecionar host", /const\s+canonicalPath\s*=\s*getCanonicalPath\(url\.pathname\)[\s\S]*url\.hostname\s*===\s*ROOT_HOST\s*\|\|\s*canonicalPath\s*!==\s*url\.pathname[\s\S]*redirectToCanonical\(url,\s*canonicalPath,\s*canonicalPath\s*!==\s*url\.pathname\)/i.test(worker))
+    fail(errors, "src/worker.js calcula path canonico antes de redirecionar host", /const\s+canonicalPath\s*=\s*getCanonicalPath\(url\.pathname\)[\s\S]*url\.hostname\s*===\s*ROOT_HOST\s*\|\|\s*canonicalPath\s*!==\s*url\.pathname[\s\S]*redirectToCanonical\(url,\s*canonicalPath\)/i.test(worker))
     fail(errors, "src/worker.js canonicaliza alias /pressao-alta", /["']\/pressao-alta["']\s*,\s*["']\/pressao-alta-quando-procurar-ajuda["']/i.test(worker))
     fail(errors, "src/worker.js canonicaliza alias /dor-no-peito", /["']\/dor-no-peito["']\s*,\s*["']\/dor-no-peito-quando-procurar-ajuda["']/i.test(worker))
     fail(

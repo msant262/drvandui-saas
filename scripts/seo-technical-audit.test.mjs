@@ -19,7 +19,7 @@ const canonicalWorkerSource =
   'const ROOT_HOST = "drvandui.com.br"\n' +
   'const CANONICAL_HOST = "www.drvandui.com.br"\n\n' +
   'const CANONICAL_PATH_REDIRECTS = new Map([["/pressao-alta", "/tratamento-hipertensao"], ["/dor-no-peito", "/dor-no-peito-quando-procurar-ajuda"], ["/consulta-com-cardiologista", "/contato"], ["/prevencao-cardiovascular", "/check-up-cardiologico"]])\n\n' +
-  "function redirectToCanonical(url, pathname, shouldDeindex = false) {\n" +
+  "function redirectToCanonical(url, pathname) {\n" +
   "  url.hostname = CANONICAL_HOST\n" +
   '  url.protocol = "https:"\n' +
   "  url.pathname = pathname\n" +
@@ -47,7 +47,7 @@ const canonicalWorkerSource =
   "    const url = new URL(request.url)\n\n" +
   "    const canonicalPath = getCanonicalPath(url.pathname)\n\n" +
   "    if (url.hostname === ROOT_HOST || canonicalPath !== url.pathname) {\n" +
-  "      return redirectToCanonical(url, canonicalPath, canonicalPath !== url.pathname)\n" +
+  "      return redirectToCanonical(url, canonicalPath)\n" +
   "    }\n\n" +
   "    return env.ASSETS.fetch(request)\n" +
   "  },\n" +
